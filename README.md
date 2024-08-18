@@ -43,7 +43,9 @@ This project provides a tool designed for developing Monitoring and Evaluation (
 
 * **Ivan Edan** - *Developer*
 
-* **Peter Saul** - *Developer* 
+* **Peter Saul** - *Developer*
+
+* **Jc Bagwisa** - *Project  Manager*
 
 =====================================
 
