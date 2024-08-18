@@ -1,88 +1,53 @@
-# Project Title
+# Pro Eva
 
-One Paragraph of project description goes here
+A Tool for Developing a Monitoring and Evaluation System with Prescriptive Analytics.
+=====================================
 
-## Getting Started
+## Overview
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project provides a tool designed for developing Monitoring and Evaluation (M&E) systems with a focus on prescriptive analytics. It integrates data from various sources to provide monitoring, customizable evaluation, and activities details. The system features reporting and visualization tools to help clients interpret data and make informed decisions. It is used for project management, program evaluation, and organizational improvement.
 
-### Prerequisites
+=====================================
 
-What things you need to install the software and how to install them
+## Features and Functionalities
 
-```
-Give examples
-```
+| **Feature**          | **Functionality**                          |
+|----------------------|--------------------------------------------|
+| **Landing Page**     | Provides an introduction and overview of the system. |
+| **Login**            | Allows users to authenticate and access their accounts. |
+| **Admin Dashboard**  | Provides administrative controls and management functionalities. |
+| **User Dashboard**   | Allows users to view and manage their personal information and activities. |
+| **Forgot Password**  | Enables users to reset their passwords if they forget them. |
+| **Account Management** | Allows admins to manage their account settings and details. |
+| **Activities Page**  | Add a project details in implementing and monitoring a project. |
+| **Monitoring Page**  | Provides monitoring of activities inside the system status and performance of the activities. |
+| **Evaluation Page**  | Allows admins to evaluate users project progress inside the system. |
+| **Reports**          | Generates various reports based on user data or system metrics. |
 
-### Installing
+=====================================
 
-A step by step series of examples that tell you how to get a development env running
+## Technical Stack
 
-Say what the step will be
+| **Category**                  | **Tools**                   |
+|-------------------------------|-----------------------------|
+| **Frontend**                  | CSS, Bootstrap, JavaScript  |
+| **Backend**                   | PHP                         |
+| **Database Server**           | MySQL                       |
+| **Version Control System**    | Git/GitHub                  |
+| **Project Management Tool**   | Jira                        |
+| **Design Tool**           | Figma                       |
 
-```
-Give the example
-```
+=====================================
 
-And repeat
+## Contributors
 
-```
-until finished
-```
+* **Ivan Edan** - *Developer*
 
-End with an example of getting some data out of the system or using it for a little demo
+* **Peter Saul** - *Developer* 
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-  
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+=====================================
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+We would like to extend our sincere gratitude to the Office of the City Planning and Development Coordinator - Santa Rosa for their invaluable support and collaboration. Their insights and assistance will significantly contributed to the success of our project. We look forward to continuing success of implementing this project.
 
