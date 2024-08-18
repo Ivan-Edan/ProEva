@@ -1,11 +1,11 @@
-# Pro Eva
+# ProEva
 
-A Tool for Developing a Monitoring and Evaluation System with Prescriptive Analytics.
+A Project Monitoring Tool for Developing a Monitoring and Evaluation System with Prescriptive Analytics.
 =====================================
 
 ## Overview
 
-This project provides a tool designed for developing Monitoring and Evaluation (M&E) systems with a focus on prescriptive analytics. It integrates data from various sources to provide monitoring, customizable evaluation, and activities details. The system features reporting and visualization tools to help clients interpret data and make informed decisions. It is used for project management, program evaluation, and organizational improvement.
+This project provides a project management tool designed for developing Monitoring and Evaluation (M&E) systems with a focus on prescriptive analytics. It integrates data from various sources to provide monitoring, customizable evaluation, and activities details. The system features reporting and visualization tools to help clients interpret data and make informed decisions. It is used for project management, program evaluation, and organizational improvement.
 
 =====================================
 
