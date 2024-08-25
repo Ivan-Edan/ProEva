@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html, body {
+    height: 100%; /* Ensure full height */
+    margin: 0; /* Remove default margins */
+    overflow: hidden; /* Prevent body scrolling */
+    font-family: Montserrat, sans-serif;
+    background-color: #D9D9D9;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 345px; /* Sidebar width */
+    width: calc(100% - 345px); /* Remaining width */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    z-index: 1000; /* Ensure it stays on top */
+    transition: left 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.hamburger-button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #2e3b4e;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it’s on top */
+    position: absolute;
+    top: 15px; /* Adjust as needed */
+    left: 15px; /* Adjust as needed */
+}
+
+.sidebar-user .hamburger-button {
+    color: white;
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+}
+
+header .hamburger-button {
+    display: none; /* Hidden by default */
+}
+
+.sidebar-user {
+    width: 345px; /* Default width */
+    height: 100vh; /* Full viewport height */
+    background-color: #2e3b4e;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease; /* Smooth transition */
+    z-index: 1000; /* Ensure it stays on top */
+    overflow: hidden;
+}
+
+.sidebar-user.hidden {
+    transform: translateX(-345px); /* Hide off-screen */
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column; /* Stack vertically */
+    margin-top: auto;
+}
+
+.logo-circle {
+    background-color: black; /* Circle background */
+    border-radius: 50%; /* Circular */
+    padding: 10px; /* Space around logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px; /* Circle size */
+    height: 125px;
+    margin-top: 50px;
+    box-sizing: border-box;
+}
+
+.logo {
+    width: 60px; /* Logo size */
+    height: 60px;
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
+.logo-text {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.logout-container {
+    width: 55%; /* Match sidebar width */
+    background-color: #2e3b4e;
+    text-align: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.logout-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.logout-container a:hover {
+    color: #ccc;
+}
+
+.main-content {
+    margin-left: 345px; /* Sidebar width */
+    padding: 80px 20px 20px;
+    transition: margin-left 0.3s ease;
+    height: 100vh;
+    overflow-y: auto;
+    width: calc(100% - 345px); /* Adjust width when sidebar is visible */
+}
+
+.sidebar-user.hidden + .main-content {
+    margin-left: 0; /* Adjust margin when sidebar is hidden */
+    width: 100%; /* Fill screen */
+}
+
+.sidebar-user.hidden + header {
+    left: 0;
+    width: 100%; /* Fill screen */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    header .hamburger-button {
+        display: block;
+    }
+    .sidebar-user .hamburger-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .sidebar-user .hamburger-button {
+        display: block;
+    }
+    header .hamburger-button {
+        display: none;
+    }
+}
+
+
+
+.nav {
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 0; /* Remove any default padding */
+    margin: 0; /* Remove any default margin */
+    flex-wrap: nowrap !important;
+}
+
+.nav-link {
+    display: block;
+    width: 100%; /* Ensure full width of the container */
+    overflow: hidden; /* Prevent overflow of child elements */
+}
+
+.nav-link.active {
+    background-color: #9DB2BF; /* Background color for active link */
+    color: white; /* Ensure the text color is white */
+    width: 345px;
+}
+
+.nav-link.active .nav-icon {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    /* Ensures the icon remains white */
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+.nav-link .nav-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    margin-top: 7px; /* Increase space above the icon */
+    margin-bottom: 7px; 
+    margin-left: 30px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+/* Ensure correct color for SVG icons */
+
+.logout-container a img,
+.logo-container img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
