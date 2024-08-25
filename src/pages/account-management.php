@@ -107,18 +107,18 @@
             </ul>
         </nav>
     </div>
-<script>
-document.getElementById("searchBar").addEventListener("input", function() {
-    const searchIcon = document.getElementById("searchIcon");
-    
-    if (this.value.length > 0) {
-        searchIcon.style.display = "none";
-    } else {
-        searchIcon.style.display = "block";
-    }
-});
+    <script>
+    document.getElementById("searchBar").addEventListener("input", function() {
+        const searchIcon = document.getElementById("searchIcon");
+        
+        if (this.value.length > 0) {
+            searchIcon.style.display = "none";
+        } else {
+            searchIcon.style.display = "block";
+        }
+    });
 
-</script>
+    </script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
