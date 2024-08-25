@@ -35,6 +35,6 @@ $pagePath = "pages/{$page}.php";
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script> <!-- Popper.js -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
-<script src="js/sidebar.js"></script>
+<script src="scripts/sidebar.js"></script>
 </body>
 </html>
