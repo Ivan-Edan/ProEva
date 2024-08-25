@@ -2,10 +2,11 @@
 session_start();
 
 // Determine which page to show
-$pages = isset($_GET['user-page']) ? basename($_GET['user-page']) : 'user-home';
+$page = isset($_GET['page']) ? basename($_GET['page']) : 'user-home';
 
 // Ensure the file exists before including it
 $pagePath = "user-page/{$page}.php";
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +36,6 @@ $pagePath = "user-page/{$page}.php";
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script> <!-- Popper.js -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
-<script src="script/user-sidebar.js"></script>
+<script src="scripts/user-sidebar.js"></script>
 </body>
 </html>
