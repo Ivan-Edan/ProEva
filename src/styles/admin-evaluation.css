@@ -1,0 +1,68 @@
+/* Sidebar styling remains the same */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #D9D9D9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh; /* Ensure body covers full viewport height */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    font-weight: normal;
+}
+
+/* Main content styling */
+
+.forms-container {
+    background-color: #FFFFFF; /* White background color for the forms container */
+    border-radius: 25px !important; /* Curved corners */
+    padding: 20px; /* Padding inside the forms container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to simulate depth */
+    border: 1px solid #ddd; /* Optional: subtle border to enhance the container look */
+}
+
+/* Card and list group styling */
+.card {
+    border-radius: 8px;
+}
+
+.card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px !important;
+    background-color: #27374D;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.heading-container {
+    background-color: #f8f9fa; /* Light background color */
+    border-radius: 15px; /* Curved corners */
+    padding: 20px; /* Padding around the heading */
+    text-align: center; /* Center the text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    margin-bottom: 20px; /* Spacing below the container */
+}
+
+.heading-container h1 {
+    margin: 0; /* Remove default margin */
+    font-weight: bold; /* Make the text bold */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .heading-container {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .heading-container {
+        padding: 10px; /* Further adjust padding for very small screens */
+    }
+}
