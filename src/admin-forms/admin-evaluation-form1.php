@@ -16,11 +16,11 @@
                     <h5>Project Details</h5>
                         <div class="form-group">
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="projectTitle">Program / Project Title</label>
                                     <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label for="month">Month</label>
                                     <select id="month" class="form-control">
                                     <option>January</option>
@@ -68,7 +68,7 @@
                                     <input type="text" class="form-control" id="fundUtilization" placeholder="Enter fund utilization">
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     <h5>Physical Accomplishment</h5>
                     <div class="form-group">
                         <div class="row">
