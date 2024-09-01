@@ -13,7 +13,7 @@ $pagePath = "pages/{$page}.php";
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!-- Updated Bootstrap CSS -->
     <link rel="stylesheet" href="styles/admin-sidebar.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
@@ -21,20 +21,18 @@ $pagePath = "pages/{$page}.php";
     <button class="hamburger-button">&#9776;</button> <!-- Hamburger icon in header -->
 </header>
 <div class="container-fluid">
-    <div class="row">
-        <?php include 'includes/components/sidebar-admin.php'; ?>
-        <main class="ml-sm-auto px-4 main-content">
-            <?php if (file_exists($pagePath)) {
-                include $pagePath;
-            } else {
-                echo "Page not found.";
-            } ?>
-        </main>
-    </div>
+    <?php include 'includes/components/sidebar-admin.php'; ?>
+    <main class="col-12 col-md-9 col-lg-10 ms-md-auto px-4 main-content"> <!-- Adjusted grid classes for Bootstrap 5 -->
+        <?php if (file_exists($pagePath)) {
+            include $pagePath;
+        } else {
+            echo "Page not found.";
+        } ?>
+    </main>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script> <!-- Popper.js -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Updated jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script> <!-- Updated Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Updated Bootstrap JS -->
 <script src="scripts/sidebar.js"></script>
 </body>
 </html>
