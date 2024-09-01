@@ -17,15 +17,9 @@ body {
 }
 
 
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Add space between the form fields */
-}
-
 .form-group {
     flex: 1 1 30%; /* Adjust this value to control how the fields align and when they wrap */
-    min-width:  225px; /* Ensure a minimum width before wrapping occurs */
+    min-width:  200px; /* Ensure a minimum width before wrapping occurs */
 }
 
 /* Apply border radius to all text fields and dropdowns */

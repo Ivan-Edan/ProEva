@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container-fluid evaluation-container">
-        <div class="container mb-4">
+        <div class="custom-container">
             <div class="heading-container mb-4">
                 <h1 class="text-primary font-weight-bold">Evaluation</h1>
             </div>
@@ -19,22 +19,25 @@
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form1.php">
-                        Report on the Status of Projects Encountering Implementation Problems
+                        REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form2.php">
-                        Project Inspection Report
+                        PROJECT INSPECTION REPORT
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form3.php">
-                        Problem Solving Sessions / Facilitation Meeting Conducted
+                        PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form4.php">
-                        Training/Workshop Conducted / Facilitated/Attended by the RPMC
+                        TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form5.php">
-                        RPMC and RDC Resolutions Related to Implementation of the RPMES
+                        RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form6.php">
-                        Key Lessons Learned from Issues Resolved and Best Practices
+                        KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
+                    </li>
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form7.php">
+                        SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
                     </li>
                 </ul>
             </div>
