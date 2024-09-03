@@ -9,17 +9,13 @@ body {
     overflow-x: hidden; /* Prevent horizontal overflow */
     font-weight: normal;
 }
-.card{
+
+.card {
     padding: 20px;
 }
-.card-header{
+
+.card-header {
     background-color: #27374D;
-}
-
-
-.form-group {
-    flex: 1 1 30%; /* Adjust this value to control how the fields align and when they wrap */
-    min-width:  200px; /* Ensure a minimum width before wrapping occurs */
 }
 
 /* Apply border radius to all text fields and dropdowns */
@@ -58,10 +54,9 @@ textarea.form-control {
     margin-top: 20px; /* Add space above the buttons */
 }
 
-
-
 h5 {
     color: #4682b4; /* Changes the color of all <h5> headings */
+    margin-bottom: 0px;
 }
 
 .form-group label {
@@ -70,4 +65,47 @@ h5 {
 
 .form-control {
     color: #27374D; /* Changes the text color within input fields */
+}
+
+/* Container for the heading and dropdown */
+.details-header {
+    display: flex;
+    justify-content: space-between; /* Space between heading and dropdown */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+/* Ensure proper alignment and width for dropdown */
+.dropdown {
+    display: flex; /* Make dropdown a flex container */
+    align-items: center; /* Center items vertically */
+}
+
+.dropdown .btn-secondary.dropdown-toggle {
+    border-radius: 25px; /* Adjust if needed */
+    background-color: #27374D;
+    /* Add a specific width to match the dropdown button */
+}
+
+.dropdown-menu {
+    padding: 0.5rem; /* Adjust padding as needed */
+    /* Set width to match the button */
+    min-width: 150px; /* Ensure this matches or exceeds the button width */
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu > li:last-child > a {
+    border-bottom: none; /* Remove bottom border from the last item */
+}
+
+
+/* Adjust the width of the dropdown to match the button */
+.dropdown-menu {
+    width: 100%; /* Full width of the dropdown container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
