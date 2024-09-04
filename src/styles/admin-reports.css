@@ -1,0 +1,171 @@
+body{
+    background-color: #F5F5F5;
+}
+
+.container-1 {
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #134B70;
+    font-size: 40px;
+    border: 1px solid #AEAEAE;
+    font-weight: bold;
+    margin-bottom: 50px;
+    height: 100px;
+}
+.container-2, .container-7 {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #27374D;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 30px !important;
+    margin-bottom: 30px;
+    height: 100px;
+}
+
+.container-3 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 350px;
+    overflow: hidden; /* Hide overflow if needed */
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.container-4 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    text-align: center; /* Centers text inside the container */
+    padding: 10px; /* Adds padding to prevent overflow */
+    overflow: hidden; /* Ensures no content overflows the container */
+}
+
+.text-graph {
+    font-weight: bolder;
+    margin-top: 1px; /* Adds some spacing between the chart and the text */
+}
+
+#chart-container {
+    width: 100%;
+    height: 350px; /* Adjust the height as needed */
+}
+
+.container-5 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    text-align: center; /* Centers text inside the container */
+    padding: 10px; /* Adds padding to prevent overflow */
+    overflow: hidden; /* Ensures no content overflows the container */
+}
+
+.container-6 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 250px;
+    overflow: hidden; /* Hide overflow if needed */
+}
+
+.card {
+    background-color: #27374D;
+    width: 700px;
+    border-radius: 30px; /* Rounded corners */
+    color: white;
+    display: flex; /* Enable flexbox for horizontal alignment */
+    padding: 15px; /* Add padding for internal spacing */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.card h5 {
+    text-align: left;
+}
+
+.card p {
+    text-align: left;
+}
+
+.container-8 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 350px;
+    overflow: hidden; /* Hide overflow if needed */
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.table {
+    width: 100%; /* Make table take full width of container */
+    table-layout: auto; /* Allow automatic table layout */
+    margin: 0; /* Remove default margin */
+    border-collapse: separate; /* Allow border radius */
+    border-spacing: 0; /* Ensure no gaps between borders */
+}
+
+.table th, .table td {
+    padding: 20px; /* Adjust padding as needed */
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.table thead th {
+    background-color: #27374D;
+    color: white;
+    font-weight: 600;
+    /* Add border radius to the first and last <th> elements */
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table td {
+    border-bottom: 0.5px solid #bebebe;
+}
+
+/* Optional: adjust the hover effect */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.download-link {
+    text-decoration: underline;
+    color: #000000;
+    cursor: pointer; 
+}
