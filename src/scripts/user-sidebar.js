@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar-user');
     const header = document.querySelector('header');
     const mainContent = document.querySelector('.main-content');
-
-    function toggleSidebar() {
-        sidebar.classList.toggle('hidden');
+    
+    function updateLayout() {
         if (sidebar.classList.contains('hidden')) {
             mainContent.style.marginLeft = '0';
             mainContent.style.width = '100%'; // Make main content take full width
@@ -20,11 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.width = 'calc(100% - 345px)'; // Adjust header width
             headerButton.style.display = 'none'; // Hide hamburger button in header
         }
+    }
 
-        // Add a slight delay to ensure the CSS changes are applied before resizing the chart
-        setTimeout(function() {
-            projectChart.resize(); // Resizes the chart after sidebar toggle
-        }, 10); // Adjust the timeout duration if needed
+    function toggleSidebar() {
+        sidebar.classList.toggle('hidden');
+        updateLayout();
     }
 
     // Add event listener for the button in the sidebar
@@ -32,4 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener for the button in the header
     headerButton.addEventListener('click', toggleSidebar);
+
+    // Initialize layout on page load based on sidebar state
+    updateLayout();
 });

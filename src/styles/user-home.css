@@ -1,0 +1,148 @@
+/* General Styling */
+
+body{
+    background-color: #D9D9D9;
+}
+
+.dashboard-container {
+    max-width: 1500px; /* Ensure content is centered and fits within max width */
+    margin: 0 auto;
+    padding: 0 15px; /* Adjust padding for small screens */
+}
+
+/* Greeting box styles */
+.greeting-box {
+    background-color: #9DB2BF;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 50px!important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%; /* Ensure the greeting box takes up full width within container */
+    box-sizing: border-box; /* Include padding in width */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+/* Greeting text styles */
+.greeting-box h2 {
+    margin: 0;
+    color: #333333;
+}
+
+.greeting-box .greeting-icon-container {
+    width: 170px; /* Adjust the width as needed */
+    height: 170px; /* Adjust the height as needed */
+    display: inline-flex;
+    align-items: left;
+    justify-content: left;
+    margin-right: 15px; /* Space between the icon and the text */
+}
+
+.greeting-icon {
+    width: 170px;           /* Adjust size of the icon */
+    height: 170px;          /* Maintain the icon's aspect ratio */
+    margin-right: 10px;    /* Space between the icon and text */
+}
+
+/* Project Stats Section */
+
+
+.stat-box {
+    background-color: #526D82;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1 1 auto;           /* Allow items to grow and shrink */
+    min-width: 200px;         /* Ensure minimum width for readability */
+    box-sizing: border-box;  /* Include padding and borders in width calculation */
+}
+
+.stat-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    width: 100%;
+}
+
+.stat-icon {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.stat-label {
+    font-size: 20px;
+    color: white;
+    margin: 0;
+    flex-grow: 1;
+    text-align:start;
+    font-weight: bold;
+}
+
+.stat-number {
+    font-size: 32px;
+    color: #75C9DE;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Projects Table Section */
+.projects-outer-box {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    min-height: 600px; /* Minimum height for larger screens */
+    max-height: calc(100vh - 60px); /* Adjust height to fit within viewport, subtract header height if needed */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+    display: flex;
+    flex-direction: column; /* Stack inner box vertically */
+}
+
+.projects-inner-box {
+    flex-grow: 1; /* Allow inner box to grow and fill the space */
+    margin: 20px; /* Add margin around inner box */
+}
+
+/* Wrapper for table header */
+.table-header th{
+    background-color: #27374D;
+    color: white;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 90px;
+    text-align:left;
+}
+
+.table td{
+    padding-left: 90px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+.table thead th:first-child {
+  border-top-left-radius: 10px; /* Top-left corner */
+  border-bottom-left-radius: 10px; /* Top-left corner */
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px; /* Top-right corner */
+  border-bottom-right-radius: 10px; /* Top-right corner */
+}
+
+
+
+
+
+
+
+
+
+
+
+
