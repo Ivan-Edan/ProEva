@@ -132,3 +132,39 @@ const projectChart = new Chart(ctx, {
         }
     },
 });
+  // Initialize Feather icons
+  feather.replace();
+
+  // Track the sorting state for each column
+  const sortingStates = {
+      progress: false,
+      'start-date': false,
+      'end-date': false
+  };
+
+  // Get all the buttons
+  const sortButtons = document.querySelectorAll('.sort-icon-btn');
+
+  sortButtons.forEach(button => {
+      button.addEventListener('click', function() {
+          // Get the column type from data attribute
+          const column = button.getAttribute('data-column');
+          const sortIcon = button.querySelector('.sort-icon');
+          
+          // Toggle the sorting state for this column
+          sortingStates[column] = !sortingStates[column];
+
+          // Update the icon based on the sorting state
+          const iconType = sortingStates[column] ? 'arrow-up' : 'arrow-down';
+          sortIcon.setAttribute('data-feather', iconType);
+
+          // Re-render the Feather icons to update the display
+          feather.replace();
+
+          // Sorting logic placeholder (replace with actual sorting logic)
+          console.log(`Sorting ${column} in ${sortingStates[column] ? 'ascending' : 'descending'} order...`);
+      });
+  });
+
+  
+ 
