@@ -22,9 +22,9 @@ body{
     color: white;
     font-size: 25px;
     font-weight: bold;
-    padding: 30px !important;
+    padding: 19px !important;
     margin-bottom: 30px;
-    height: 100px;
+    height: 80px;
 }
 
 .container-3 {
@@ -34,7 +34,7 @@ body{
     border-radius: 15px;
     margin-bottom: 20px;
     height: 350px;
-    overflow: hidden; /* Hide overflow if needed */
+    overflow: hidden; 
     padding-top: 40px;
     padding-left: 20px;
     padding-right: 20px;
@@ -49,21 +49,21 @@ body{
     height: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally */
-    justify-content: center; /* Centers items vertically */
-    text-align: center; /* Centers text inside the container */
-    padding: 10px; /* Adds padding to prevent overflow */
-    overflow: hidden; /* Ensures no content overflows the container */
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    padding: 10px; 
+    overflow: hidden; 
 }
 
 .text-graph {
     font-weight: bolder;
-    margin-top: 1px; /* Adds some spacing between the chart and the text */
+    margin-top: 1px; 
 }
 
 #chart-container {
     width: 100%;
-    height: 350px; /* Adjust the height as needed */
+    height: 350px;
 }
 
 .container-5 {
@@ -75,11 +75,11 @@ body{
     height: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally */
-    justify-content: center; /* Centers items vertically */
-    text-align: center; /* Centers text inside the container */
-    padding: 10px; /* Adds padding to prevent overflow */
-    overflow: hidden; /* Ensures no content overflows the container */
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    padding: 10px; 
+    overflow: hidden; 
 }
 
 .container-6 {
@@ -88,30 +88,56 @@ body{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin-bottom: 20px;
-    height: 250px;
-    overflow: hidden; /* Hide overflow if needed */
+    height: 270px;
+    overflow: hidden; 
 }
 
 .card {
     background-color: #27374D;
     width: 700px;
-    border-radius: 30px; /* Rounded corners */
+    border-radius: 20px; 
     color: white;
-    display: flex; /* Enable flexbox for horizontal alignment */
-    padding: 15px; /* Add padding for internal spacing */
+    display: flex; 
+    padding: 15px; 
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
 }
-
-.card h5 {
-    text-align: left;
-}
-
-.card p {
-    text-align: left;
-}
-
+.card-content {
+    display: flex;
+    align-items: center;
+  }
+  .card-content h5 {
+    margin: 0;
+    color: white;
+    font-size: 15px !important;
+    margin-right: 20px; 
+  }
+  .card-content h4 {
+    margin: 0;
+    color:  #27374D;
+    font-weight: bold;
+    font-size: 15px !important;
+    margin-right: 20px; 
+    margin-left: 40px;
+    margin-top: 10px;
+  }
+  .card-content p {
+    margin: 0;
+  }
+  .text-issue{
+    color:  #27374D;
+    font-weight: bold;
+    font-size: 15px !important;
+    margin-left: 40px;
+    margin-top: 10px;
+  }
+  .text-detail {
+    margin-top: 10px !important;
+  }
+  .text-detail-2 {
+    margin-left: 40px;
+  }
 .container-8 {
     background-color: #FFFFFF;
     border: 1px solid #AEAEAE;
@@ -119,31 +145,30 @@ body{
     border-radius: 15px;
     margin-bottom: 20px;
     height: 350px;
-    overflow: hidden; /* Hide overflow if needed */
+    overflow: hidden; 
     padding-top: 40px;
     padding-left: 20px;
     padding-right: 20px;
 }
 .table {
-    width: 100%; /* Make table take full width of container */
-    table-layout: auto; /* Allow automatic table layout */
-    margin: 0; /* Remove default margin */
-    border-collapse: separate; /* Allow border radius */
-    border-spacing: 0; /* Ensure no gaps between borders */
+    width: 100%; 
+    table-layout: auto; 
+    margin: 0; 
+    border-collapse: separate; 
+    border-spacing: 0; 
 }
 
 .table th, .table td {
-    padding: 20px; /* Adjust padding as needed */
+    padding: 20px; 
     text-align: left;
     font-size: 14px;
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: nowrap; 
 }
 
 .table thead th {
     background-color: #27374D;
     color: white;
     font-weight: 600;
-    /* Add border radius to the first and last <th> elements */
 }
 
 .table thead th:first-child {
@@ -169,3 +194,92 @@ body{
     color: #000000;
     cursor: pointer; 
 }
+.sort-icon-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-top: -10px !important;
+    display: inline-flex;
+    align-items: center;
+}
+.sort-icon {
+    color: white !important;
+    margin-top: -10px !important;
+}
+
+ /* Ensure the dropdown container is aligned to the right edge */
+ .dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    width: 100%; 
+  }
+  .dropdown-details{
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+
+  /* Style the dropdown button */
+  .dropdown .btn-secondary.dropdown-toggle {
+    border-radius: 25px;
+    background-color: #27374D;
+    width: 200px; 
+    position: relative; 
+  }
+
+  /* Hide the default dropdown icon */
+  .btn-secondary.dropdown-toggle::after {
+    display: none;
+  }
+
+  /* Style the Feather icon */
+  .icon-edge {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%); 
+  }
+
+  /* Style the dropdown menu */
+  .dropdown-menu {
+    padding: 0.5rem; 
+    min-width: 200px; 
+    width: 50px; 
+    box-sizing: border-box; 
+  }
+
+  /* Style dropdown items */
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Remove bottom border from the last item */
+  .dropdown-menu > li:last-child > a {
+    border-bottom: none;
+  }
+
+  /* General form and heading styles */
+  .form-group .btn-container {
+    text-align: right;
+    margin-top: 20px; 
+  }
+
+  h5 {
+    color: #4682b4; 
+    margin-bottom: 0px;
+  }
+
+  .form-group label {
+    color: #27374D; 
+  }
+
+  .form-control {
+    color: #27374D; 
+  }
+  .dropdown-container {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-bottom: 1rem !important; 
+  }
