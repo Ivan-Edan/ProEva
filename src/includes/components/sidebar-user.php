@@ -23,12 +23,16 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-white <?php echo ($page == 'user-MandE-forms') ? 'active' : ''; ?>" href="index-user.php?page=user-MandE-forms">
+                <img src="images/svg/check-circle.svg" alt="M&E forms Icon" class="nav-icon"> M&E Forms
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'user-reports') ? 'active' : ''; ?>" href="index-user.php?page=user-reports">
                 <img src="images/svg/folder.svg" alt="Reports Icon" class="nav-icon"> Reports
             </a>
         </li>
     </ul>
-
     <!-- Logout Button -->
     <div class="logout-container text-center mt-auto py-3">
         <a class="text-white" href="includes/logout.php"><img src="images/svg/log-out.svg" alt="Logout Icon" class="nav-icon"> Logout</a>
