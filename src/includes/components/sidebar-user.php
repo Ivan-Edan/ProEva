@@ -24,7 +24,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'user-MandE-forms') ? 'active' : ''; ?>" href="index-user.php?page=user-MandE-forms">
-                <img src="images/svg/check-circle.svg" alt="M&E forms Icon" class="nav-icon"> M&E Forms
+                <img src="images/svg/bar-chart-2.svg" alt="M&E forms Icon" class="nav-icon"> M&E Forms
             </a>
         </li>
         <li class="nav-item">

@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #D9D9D9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh; /* Ensure body covers full viewport height */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    font-weight: normal;
+}
+
+.card {
+    padding: 20px;
+}
+
+.card-header {
+    background-color: #27374D;
+}
+
+/* Apply border radius to all text fields and dropdowns */
+.form-control,
+.form-control select {
+    border-radius: 10px; /* Adjust the radius as needed */
+}
+
+label{
+    color: #27374D;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* Ensure the styling for text areas is also applied */
+textarea.form-control {
+    border-radius: 10px; /* Adjust the radius as needed */
+}
+
+/* Custom style for the submit button */
+.btn-submit {
+    background-color: #27374D; /* New background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove border */
+}
+
+.btn-submit:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Style for the buttons */
+.btn-custom {
+    border-radius: 25px; /* Border radius for the buttons */
+    width: 100px; /* Set width to 100px */
+    display: inline-block; /* Ensure buttons are inline */
+    margin-left: 10px; /* Space between buttons */
+}
+
+/* Align buttons to the right */
+.form-group .btn-container {
+    text-align: right;
+    margin-top: 20px; /* Add space above the buttons */
+}
+
+h5 {
+    color: #4682b4; /* Changes the color of all <h5> headings */
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+h6 {
+    color: #27374D; /* Changes the color of all <h5> headings */
+    font-size: 15px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.form-group label {
+    color: #27374D; /* Changes the color of the form labels */
+}
+
+.form-control {
+    color: #27374D; /* Changes the text color within input fields */
+}
+
+/* Container for the heading and dropdown */
+.details-header {
+    display: flex;
+    justify-content: space-between; /* Space between heading and dropdown */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+/* Ensure proper alignment and width for dropdown */
+.dropdown {
+    display: flex; /* Make dropdown a flex container */
+    align-items: center; /* Center items vertically */
+}
+
+.dropdown .btn-secondary.dropdown-toggle {
+    border-radius: 25px; /* Adjust if needed */
+    background-color: #27374D;
+    /* Add a specific width to match the dropdown button */
+}
+
+.dropdown-menu {
+    padding: 0.5rem; /* Adjust padding as needed */
+    /* Set width to match the button */
+    min-width: 150px; /* Ensure this matches or exceeds the button width */
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu > li:last-child > a {
+    border-bottom: none; /* Remove bottom border from the last item */
+}
+
+
+/* Adjust the width of the dropdown to match the button */
+.dropdown-menu {
+    width: 100%; /* Full width of the dropdown container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
