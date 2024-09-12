@@ -13,11 +13,15 @@
 <body>
     <div class="container-fluid dashboard-container">
         <!-- Greeting Section -->
+        <!-- Greeting Section -->
         <div class="greeting-box mb-4">
             <div class="greeting-icon-container">
                 <img src="images/illustration/welcome-icon.png" alt="Welcome Icon" class="greeting-icon">
             </div>
-            <h2>Greetings, Ivan Angelo. This is your dashboard.</h2>
+            <div class="greeting-text">
+            <h1 class="greet">Greetings, <span class="greet-2">Ivan Angelo.</span></h1>
+            <h4 class="greet-3">This is your <span class="greet-4">dashboard.</span></h4>
+        </div>
         </div>
         
         <!-- Project Stats Section -->

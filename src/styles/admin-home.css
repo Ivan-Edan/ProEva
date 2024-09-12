@@ -13,31 +13,51 @@
     padding: 20px;
     margin-bottom: 50px!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
     width: 100%; /* Ensure the greeting box takes up full width within container */
-    box-sizing: border-box; /* Include padding in width */
     display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center content horizontally */
+    align-items: center;
 }
 /* Greeting text styles */
-.greeting-box h2 {
+.greeting-text h1,
+.greeting-text h4 {
     margin: 0;
-    color: #333333;
+    margin-left: 40px !important;
+    padding: 0;
+    color: white;
 }
 
-.greeting-box .greeting-icon-container {
-    width: 200px; /* Adjust the width as needed */
-    height: 170px; /* Adjust the height as needed */
-    display: inline-flex;
-    align-items: left;
-    justify-content: left;
-    margin-right: 15px; /* Space between the icon and the text */
+.greet {
+    color: #27374D !important;
+    margin-right: 5px;
+    margin-bottom: 10px !important;
 }
+
+.greet-2 {
+    color: white;
+    margin-bottom: 10px !important;
+}
+
+.greet-3 {
+    font-size: 21px;
+    color: white;
+    margin-top: 5px;
+}
+
+.greet-4 {
+    color: #27374D;
+}
+
+/* Greeting icon container */
+.greeting-icon-container {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+/* Greeting icon styling */
 .greeting-icon {
-    width: 200px;           /* Adjust size of the icon */
-    height: 170px;          /* Maintain the icon's aspect ratio */
-    margin-right: 10px;    /* Space between the icon and text */
+    width: 150px;
+    height: 100px;
 }
 
 /* Project stats container styles */
@@ -70,7 +90,7 @@
 }
 
 .stat-icon {
-    width: 75px;
+    width: 130px;
     height: 75px;
     margin-right: 10px;
 }

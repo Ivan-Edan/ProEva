@@ -18,7 +18,10 @@
             <div class="greeting-icon-container">
                 <img src="images/illustration/welcome-icon.png" alt="Welcome Icon" class="greeting-icon">
             </div>
-            <h2>Greetings Juan Carlos. This is your dashboard</h2>
+            <div class="greeting-text">
+            <h1 class="greet">Greetings, <span class="greet-2">Juan Carlos.</span></h1>
+            <h4 class="greet-3">This is your <span class="greet-4">dashboard.</span></h4>
+        </div>
         </div>
         <!-- Project Stats Section -->
         <div class="row project-stats-container mb-4">
