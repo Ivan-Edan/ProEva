@@ -7,16 +7,21 @@
     <!-- Link to Bootstrap 5.3 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/user-home.css">
 </head>
 <body>
     <div class="container-fluid dashboard-container">
         <!-- Greeting Section -->
+        <!-- Greeting Section -->
         <div class="greeting-box mb-4">
             <div class="greeting-icon-container">
-                <img src="images/welcome-icon.svg" alt="Welcome Icon" class="greeting-icon">
+                <img src="images/illustration/welcome-icon.png" alt="Welcome Icon" class="greeting-icon">
             </div>
-            <h2>Greetings, Ivan Angelo. This is your dashboard.</h2>
+            <div class="greeting-text">
+            <h1 class="greet">Greetings, <span class="greet-2">Ivan Angelo.</span></h1>
+            <h4 class="greet-3">This is your <span class="greet-4">dashboard.</span></h4>
+        </div>
         </div>
         
         <!-- Project Stats Section -->
@@ -24,7 +29,7 @@
             <div class="col">
                 <div class="stat-box d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/done-icon.svg" alt="Tasks Done Icon" class="stat-icon">
+                        <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
                         <p class="stat-label">Number of Task Done:</p>
                         <p class="stat-number">9</p>
                     </div>
@@ -33,7 +38,7 @@
             <div class="col">
                 <div class="stat-box d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/done-icon.svg" alt="Tasks Incoming Icon" class="stat-icon">
+                        <img src="images/illustration/done-icon.png" alt="Tasks Incoming Icon" class="stat-icon">
                         <p class="stat-label">Number of Task that is Incoming:</p>
                         <p class="stat-number">2</p>
                     </div>
@@ -42,7 +47,7 @@
             <div class="col">
                 <div class="stat-box d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/done-icon.svg" alt="Tasks In Progress Icon" class="stat-icon">
+                        <img src="images/illustration/done-icon.png" alt="Tasks In Progress Icon" class="stat-icon">
                         <p class="stat-label">Number of Task On Progress:</p>
                         <p class="stat-number">1</p>
                     </div>

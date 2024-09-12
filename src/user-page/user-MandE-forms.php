@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Evaluation Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/user-evaluation.css"> <!-- Your existing custom styles -->
 </head>
 <body>

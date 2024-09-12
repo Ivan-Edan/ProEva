@@ -1,0 +1,136 @@
+body{
+    background-color: #F5F5F5;
+}
+
+.container-title {
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #134B70;
+    font-size: 40px;
+    border: 1px solid #AEAEAE;
+    font-weight: bold;
+    margin-bottom: 50px;
+    height: 100px;
+}
+.container-table {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 350px;
+    overflow: hidden; 
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.table {
+    width: 100%; 
+    table-layout: auto; 
+    margin: 0; 
+    border-collapse: separate; 
+    border-spacing: 0; 
+}
+
+.table th, .table td {
+    padding: 20px; 
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap; 
+}
+
+.table thead th {
+    background-color: #27374D;
+    color: white;
+    font-weight: 600;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table td {
+    border-bottom: 0.5px solid #bebebe;
+}
+
+/* Optional: adjust the hover effect */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.direct-link {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid black; 
+}
+.direct-link:focus, .direct-link:active {
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid black; 
+}
+
+.direct-link:hover {
+    color: inherit; 
+    border-bottom: 1px solid black; 
+}
+
+
+/* CSS for project-monitoring-chart */
+.container-1 {
+    padding: 17px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #134B70;
+    font-size: 40px;
+    border: 1px solid #AEAEAE;
+    font-weight: bold;
+    margin-bottom: 50px;
+    height: 100px;
+}
+.container-2, .container-7 {
+    text-align: center;
+    border-radius: 5px;
+    background-color: white;
+    color: #27374D;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 19px !important;
+    border: 1px solid #AEAEAE;
+    margin-bottom: 30px;
+    height: 80px;
+}
+.container-3 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 450px;
+    overflow: hidden; 
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.container-8 {
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    height: 450px;
+    overflow: hidden; 
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
