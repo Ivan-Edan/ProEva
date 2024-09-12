@@ -1,9 +1,6 @@
-/* General Styling */
 
-body{
-    background-color: #D9D9D9;
-}
 
+/* Dashboard container */
 .dashboard-container {
     max-width: 1500px; /* Ensure content is centered and fits within max width */
     margin: 0 auto;
@@ -17,35 +14,52 @@ body{
     padding: 20px;
     margin-bottom: 50px!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
     width: 100%; /* Ensure the greeting box takes up full width within container */
-    box-sizing: border-box; /* Include padding in width */
     display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center content horizontally */
+    align-items: center;
 }
-
 /* Greeting text styles */
-.greeting-box h2 {
+.greeting-text h1,
+.greeting-text h4 {
     margin: 0;
-    color: #333333;
+    margin-left: 40px !important;
+    padding: 0;
+    color: white;
 }
 
-.greeting-box .greeting-icon-container {
-    width: 170px; /* Adjust the width as needed */
-    height: 170px; /* Adjust the height as needed */
-    display: inline-flex;
-    align-items: left;
-    justify-content: left;
-    margin-right: 15px; /* Space between the icon and the text */
+.greet {
+    color: #27374D !important;
+    margin-right: 5px;
+    margin-bottom: 10px !important;
 }
 
+.greet-2 {
+    color: white;
+    margin-bottom: 10px !important;
+}
+
+.greet-3 {
+    font-size: 21px;
+    color: white;
+    margin-top: 5px;
+}
+
+.greet-4 {
+    color: #27374D;
+}
+
+/* Greeting icon container */
+.greeting-icon-container {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+/* Greeting icon styling */
 .greeting-icon {
-    width: 170px;           /* Adjust size of the icon */
-    height: 170px;          /* Maintain the icon's aspect ratio */
-    margin-right: 10px;    /* Space between the icon and text */
+    width: 150px;
+    height: 100px;
 }
-
 /* Project Stats Section */
 
 
@@ -68,8 +82,8 @@ body{
 }
 
 .stat-icon {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     margin-right: 10px;
 }
 
@@ -80,6 +94,7 @@ body{
     flex-grow: 1;
     text-align:start;
     font-weight: bold;
+    padding-right: 15px;
 }
 
 .stat-number {
@@ -135,6 +150,42 @@ body{
   border-bottom-right-radius: 10px; /* Top-right corner */
 }
 
+@media (max-width: 1160px) {
+    .project-stats-container {
+        flex-direction: column; /* Stack items vertically */
+        flex-wrap: nowrap;      /* Prevent wrapping */
+        gap: 20px;              /* Adjust gap between items */
+    }
+
+    .stat-box {
+        flex: 1 1 auto;        /* Allow items to grow and shrink */
+      /* Remove min-width constraint */
+    }
+}
+/* Media queries for responsiveness */
+@media (max-width: 770px) {
+    .project-stats-container {
+        flex-direction: column; 
+        flex-wrap: nowrap; /* Prevent wrapping on small screens */
+    }
+
+    .stat-box {
+        flex: 1 1 auto;        /* Allow items to grow and shrink */
+        max-width: none;       /* Remove max-width constraint */
+        min-width: auto;
+        margin: 10px 0;    /* Remove min-width constraint */
+    }
+}
+
+@media (max-width: 500px) {
+    .projects-outer-box {
+        height: auto; /* Allow outer container to adjust height */
+    }
+
+    .greeting-box {
+        padding: 10px;
+    }
+}
 
 
 
