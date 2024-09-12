@@ -77,27 +77,26 @@ header .hamburger-button {
 }
 
 .logo-circle {
-    background-color: black; /* Circle background */
+    background-color: #DDE6ED; /* Circle background */
     border-radius: 50%; /* Circular */
     padding: 10px; /* Space around logo */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px; /* Circle size */
-    height: 125px;
+    width: 180px; /* Circle size */
+    height: 180px;
     margin-top: 50px;
     box-sizing: border-box;
 }
 
 .logo {
-    width: 60px; /* Logo size */
-    height: 60px;
-    object-fit: contain; /* Maintain aspect ratio */
+    width: 300px; 
+    height: 200px !important;
+    filter: none !important; 
 }
 
 .logo-text {
     font-size: 40px;
-    font-weight: bold;
     margin-top: 10px;
     text-align: center;
 }

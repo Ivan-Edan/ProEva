@@ -5,7 +5,7 @@
     <!-- Sidebar content -->
     <div class="logo-container text-center mt-0">
         <div class="logo-circle mx-auto">
-            <img src="images/proeva-logo.svg" alt="ProEva Logo" class="logo">
+            <img src="images/proeva-logo.png" alt="ProEva Logo" class="logo">
         </div>
         <span class="logo-text d-block mt-2">ProEva</span>
     </div>
