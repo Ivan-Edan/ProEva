@@ -1,20 +1,22 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form5" class="d">
+    <div id="form4" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
-                RPMC and RDC Resolutions Related to Implementation of the RPMES
+                TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
             </div>
             <div class="card-body">
                 <form>
                     <div class="details-header">
-                        <h5>Information Details</h5>
+                        <h5>Title Details</h5>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="departmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Departments
@@ -30,33 +32,69 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-3">
-                            <label for="resolutionNumber">Resolution Number</label>
-                            <input type="text" class="form-control" id="resolutionNumber" placeholder="Enter resolution number">
-                        </div>
                         <div class="form-group col-md-6">
-                            <label for="resolutionTitle">Resolution Title</label>
-                            <input type="text" class="form-control" id="resolutionTitle" placeholder="Enter resolution title">
+                            <label for="trainingTitle">Title of Training/Workshop</label>
+                            <input type="text" class="form-control" id="trainingTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="year">Year</label>
                             <input type="text" class="form-control" id="year" placeholder="Enter year">
                         </div>
                     </div>
+
                     <div class="mb-3 row">
-                        <div class="form-group col-md-3">
-                            <label for="dateApproved">Date Approved</label>
-                            <input type="text" class="form-control" id="dateApproved" placeholder="Enter date approved">
+                        <div class="form-group col-md-6">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
-                        <div class="form-group col-md-9">
-                            <label for="resolutionLink">Link to the Resolution</label>
-                            <input type="text" class="form-control" id="resolutionLink" placeholder="Enter link to the resolution">
+                        <div class="form-group col-md-3">
+                            <label for="date">Date</label>
+                            <input type="text" class="form-control" id="date" placeholder="Enter date">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="conductedBy">Conducted/Facilitated/Attended</label>
+                            <input type="text" class="form-control" id="conductedBy" placeholder="Enter details">
                         </div>
                     </div>
+
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
-                            <label for="resolution">Resolution</label>
-                            <input type="text" class="form-control" id="resolution" placeholder="Enter resolution" style="height: 100px;">
+                            <label for="objective">Objective of the Training/Workshop</label>
+                            <input type="text" class="form-control" id="objective" placeholder="Enter objective" style="height: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-4">
+                            <label for="leadOffice">Lead Office/Unit</label>
+                            <input type="text" class="form-control" id="leadOffice" placeholder="Enter lead office/unit">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="participatingOffices">Participating Offices/Agencies/Organizations</label>
+                            <input type="text" class="form-control" id="participatingOffices" placeholder="Enter participating offices/agencies/organizations">
+                        </div>
+                    </div>
+
+                    <h5>Total No. of Participants</h5>
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-2">
+                            <label for="maleParticipants">Male</label>
+                            <input type="text" class="form-control" id="maleParticipants" placeholder="Enter number">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="femaleParticipants">Female</label>
+                            <input type="text" class="form-control" id="femaleParticipants" placeholder="Enter number">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="totalParticipants">Total</label>
+                            <input type="text" class="form-control" id="totalParticipants" placeholder="Enter total number">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="resultsFeedback">Results and Feedback</label>
+                            <input type="text" class="form-control" id="resultsFeedback" placeholder="Enter results and feedback" style="height: 100px;">
                         </div>
                     </div>
 
@@ -75,6 +113,7 @@
                             <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
                         </div>
                     </div>
+
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="approvedBy">Approved By</label>
@@ -101,3 +140,4 @@
     </div>
 </body>
 </html>
+

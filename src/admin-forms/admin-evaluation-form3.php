@@ -1,16 +1,18 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
-    <title>Problem Solving Sessions / Facilitation Meeting Conducted</title>
+    <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to the CSS file -->
+    <title>Project Inspection Report</title>
 </head>
 <body>
-    <div id="form3" class="d">
+    <div id="form2" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
-                Problem Solving Sessions / Facilitation Meeting Conducted
+                Project Inspection Report
             </div>
             <div class="card-body">
                 <form>
@@ -72,39 +74,56 @@
                             <label for="location">Location</label>
                             <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2">
                             <label for="IA">IA</label>
                             <input type="text" class="form-control" id="IA" placeholder="Enter IA">
                         </div>
-                    </div>
-
-                    <h5>Additional Information</h5>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-12">
-                            <label for="issueDetails">Issue Details</label>
-                            <input type="text" class="form-control" id="issueDetails" placeholder="Enter issue details" style="height: 100px;">
+                        <div class="form-group col-md-4">
+                            <label for="totalCost">Total Program/Project Cost (PHP)</label>
+                            <input type="text" class="form-control" id="totalCost" placeholder="Enter cost">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
-                            <label for="issueTypology">Issue Typology</label>
-                            <input type="text" class="form-control" id="issueTypology" placeholder="Enter issue typology">
+                            <label for="inspectionDate">Date of Project Inspection</label>
+                            <input type="text" class="form-control" id="inspectionDate" placeholder="Enter date">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="dateOfMeeting">Date of Meeting</label>
-                            <input type="text" class="form-control" id="dateOfMeeting" placeholder="Enter date of meeting">
+                            <label for="siteDetails">Details on Site(s) Inspected</label>
+                            <input type="text" class="form-control" id="siteDetails" placeholder="Enter details">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="concernedAgencies">Concerned Agencies</label>
-                            <input type="text" class="form-control" id="concernedAgencies" placeholder="Enter concerned agencies">
+                            <label for="slippage">Slippage</label>
+                            <input type="text" class="form-control" id="slippage" placeholder="Enter slippage">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
-                            <label for="agreementsReached">Agreements Reached</label>
-                            <input type="text" class="form-control" id="agreementsReached" placeholder="Enter agreements reached" style="height: 100px;">
+                            <label for="findings">Findings</label>
+                            <input type="text" class="form-control" id="findings" placeholder="Enter findings" style="height: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="issues">Issues</label>
+                            <input type="text" class="form-control" id="issues" placeholder="Enter issues" style="height: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="actionsTaken">Actions Taken</label>
+                            <input type="text" class="form-control" id="actionsTaken" placeholder="Enter actions" style="height: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="actionsToBeTaken">Actions to be Taken</label>
+                            <input type="text" class="form-control" id="actionsToBeTaken" placeholder="Enter actions" style="height: 100px;">
                         </div>
                     </div>
 

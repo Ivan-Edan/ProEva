@@ -19,25 +19,25 @@
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form1.php">
-                        REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
+                        SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form2.php">
-                        PROJECT INSPECTION REPORT
+                        REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form3.php">
-                        PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
+                        PROJECT INSPECTION REPORT
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form4.php">
-                        TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
+                        PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form5.php">
-                        RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
+                        TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form6.php">
-                        KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
+                        RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form7.php">
-                        SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
+                        KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
                     </li>
                 </ul>
             </div>
