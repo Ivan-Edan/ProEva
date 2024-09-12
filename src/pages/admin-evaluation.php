@@ -14,7 +14,7 @@
                 <h1 class="text-primary fw-bold">Evaluation</h1>
             </div>
             <div class="card shadow-sm forms-container" id="forms-list">
-                <div class="card-header bg-dark text-white">
+                <div class="card-header text-white">
                     Project Evaluation Forms
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
