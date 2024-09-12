@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +7,10 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form7" class="d">
+    <div id="form6" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
-                SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
+                Key Lessons Learned from Issues Resolved and Best Practices
             </div>
             <div class="card-body">
                 <form>
@@ -30,148 +31,64 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-8">
                             <label for="projectTitle">Program / Project Title</label>
                             <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="month">Month</label>
-                            <select id="month" class="form-control">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-1">
+                        <div class="form-group col-md-4">
                             <label for="year">Year</label>
                             <input type="text" class="form-control" id="year" placeholder="Enter year">
                         </div>
-                        <div class="form-group col-md-1">
-                            <label for="quarter">Quarter</label>
-                            <select id="quarter" class="form-control">
-                                <option>Q1</option>
-                                <option>Q2</option>
-                                <option>Q3</option>
-                                <option>Q4</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-4">
                             <label for="implementingAgency">Implementing Agency</label>
-                            <input type="text" class="form-control" id="implementingAgency" placeholder="Enter agency">
+                            <input type="text" class="form-control" id="implementingAgency" placeholder="Enter implementing agency">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="fundSource">Fund Source</label>
-                            <input type="text" class="form-control" id="fundSource" placeholder="Enter fund source">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="fundingAgency">Funding Agency</label>
-                            <input type="text" class="form-control" id="fundingAgency" placeholder="Enter funding agency">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="projectCost">Total Program/Project Cost (PHP)</label>
-                            <input type="text" class="form-control" id="projectCost" placeholder="Enter cost">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="sector">Sector</label>
-                            <input type="text" class="form-control" id="sector" placeholder="Enter sector">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="startDate">Start Date</label>
-                            <input type="text" class="form-control" id="startDate" placeholder="Enter start date">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="endDate">End Date</label>
-                            <input type="text" class="form-control" id="endDate" placeholder="Enter end date">
-                        </div>
-                    </div>
-
-                    <h5>Financial Status (in PHP exact figures)</h5>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-3">
-                            <label for="appropriations">Appropriations</label>
-                            <input type="text" class="form-control" id="appropriations" placeholder="Enter appropriations">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="allotment">Allotment</label>
-                            <input type="text" class="form-control" id="allotment" placeholder="Enter allotment">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="obligations">Obligations</label>
-                            <input type="text" class="form-control" id="obligations" placeholder="Enter obligations">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="disbursements">Disbursements</label>
-                            <input type="text" class="form-control" id="disbursements" placeholder="Enter disbursements">
-                        </div>
-                    </div>
-
+                    <h5>Problem/Issue</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
-                            <label for="fundingSupport">Funding Support (%)</label>
-                            <input type="text" class="form-control" id="fundingSupport" placeholder="Enter funding support percentage">
+                            <label for="nature">Nature</label>
+                            <input type="text" class="form-control" id="nature" placeholder="Enter nature of the problem/issue">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="fundUtilization">Fund Utilization (%)</label>
-                            <input type="text" class="form-control" id="fundUtilization" placeholder="Enter fund utilization percentage">
-                        </div>
-                    </div>
-
-                    <h5>Physical Accomplishment</h5>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-3">
-                            <label for="targetOWPA">Target OWPA to date (%)</label>
-                            <input type="text" class="form-control" id="targetOWPA" placeholder="Enter target OWPA">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="actualOWPA">Actual OWPA to date (%)</label>
-                            <input type="text" class="form-control" id="actualOWPA" placeholder="Enter actual OWPA">
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="slippage">Slippage</label>
-                            <input type="text" class="form-control" id="slippage" >
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="targetEmployment" class="form-control-plaintext text-center align-middle" style="margin-top: 24px;">Target Employment Generated</label>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="male">Male</label>
-                            <input type="text" class="form-control" id="male" style="width: 75px;">
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="female">Female</label>
-                            <input type="text" class="form-control" id="female" style="width: 75px;">
+                            <label for="details">Details</label>
+                            <input type="text" class="form-control" id="details" placeholder="Enter details">
                         </div>
                     </div>
                     <h5>Additional Details</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
-                            <label for="remarks">Remarks</label>
-                            <textarea class="form-control" id="remarks" placeholder="Enter remarks" rows="4"></textarea>
+                            <label for="strategies">Strategies/Actions Taken to Resolve the Problem/Issue</label>
+                            <input type="text" class="form-control" id="strategies" placeholder="Enter strategies/actions taken" style="height: 100px;">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="responsibleEntity">Responsible Entity/Key Actors and their Specific Assistance</label>
+                            <input type="text" class="form-control" id="responsibleEntity" placeholder="Enter responsible entity/key actors" style="height: 100px;">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="lessonsLearned">Lessons Learned and Good Practices that could be shared to the NPMC/Other PMCs</label>
+                            <input type="text" class="form-control" id="lessonsLearned" placeholder="Enter lessons learned and good practices" style="height: 100px;">
                         </div>
                     </div>
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
-                            <label for="submittedBy">Submitted By</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4">
                             <label for="designation">Designation/Office</label>
                             <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="submittedBy">Submitted By</label>
+                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="submissionDate">Date</label>
@@ -197,7 +114,6 @@
                             <button type="submit" class="btn btn-submit btn-custom">Submit</button>
                         </div>
                     </div>
-                    
                 </form>
             </div>
         </div>

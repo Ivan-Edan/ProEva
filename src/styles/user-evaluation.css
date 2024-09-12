@@ -1,5 +1,6 @@
 
 
+
 /* Main content styling */
 
 .forms-container {
@@ -14,7 +15,19 @@
 .card {
     border-radius: 8px;
 }
-
+.container-1 {
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #134B70;
+    font-size: 40px;
+    border: 1px solid #AEAEAE;
+    font-weight: bold;
+    margin-bottom: 50px;
+    height: 100px;
+}
 .card-header {
     font-size: 1.25rem;
     font-weight: bold;
@@ -29,7 +42,7 @@
     font-size: 1rem;
     padding: 15px 20px;
     text-align: center;
-    font-weight:600;
+    font-weight:200;
     color: #585858;
 }
 
