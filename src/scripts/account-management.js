@@ -68,120 +68,115 @@ document.getElementById('addAccountForm').addEventListener('submit', function(ev
     });
 });
 
+ // Handle account deletion
+ document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+    const userId = document.getElementById('userId').value; // Get user ID from the form
+    const deleteAccountModal = new bootstrap.Modal(document.getElementById('deleteAccountModal'));
 
-    // Fetch existing accounts on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('includes/fetch-accounts.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('account-table-body').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error fetching accounts:', error);
-                document.getElementById('account-table-body').innerHTML = '<tr><td colspan="7" class="text-center">Error loading accounts.</td></tr>';
-            });
+    // Show the delete confirmation modal
+    deleteAccountModal.show();
+
+    // Set up listener for confirmation
+    document.getElementById('confirmDeleteAccountBtn').addEventListener('click', function() {
+        // Send the delete request
+        fetch(`includes/delete-account.php?id=${userId}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Close the delete modal
+                deleteAccountModal.hide();
+
+                // Show the success modal
+                const successDeleteModal = new bootstrap.Modal(document.getElementById('successDeleteModal'));
+                successDeleteModal.show();
+
+                // Reload the page when the success modal is dismissed
+                successDeleteModal._element.addEventListener('hidden.bs.modal', function() {
+                    location.reload(); // Reload the page
+                });
+            } else {
+                alert('Error deleting account: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the account.');
+        });
+    });
+});
+
+// Fetch existing accounts on page load
+fetch('includes/fetch-accounts.php')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('account-table-body').innerHTML = data;
+    })
+    .catch(error => {
+        console.error('Error fetching accounts:', error);
+        document.getElementById('account-table-body').innerHTML = '<tr><td colspan="7" class="text-center">Error loading accounts.</td></tr>';
     });
 
-
-// Event listener for the edit modal
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle showing the edit modal
-    const editAccountModal = document.getElementById('editAccountModal');
-    editAccountModal.addEventListener('show.bs.modal', function(event) {
-        const button = event.relatedTarget;
-        
-        // Extract data from the attributes
-        const email = button.getAttribute('data-email');
+// Event listener for opening the edit modal
+document.getElementById('account-table-body').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('a[data-bs-toggle="modal"]')) {
+        const button = event.target;
         const id = button.getAttribute('data-id');
         const firstName = button.getAttribute('data-firstname');
         const middleName = button.getAttribute('data-middlename');
         const lastName = button.getAttribute('data-lastname');
         const suffix = button.getAttribute('data-suffix');
-        
-        // Update the modal's content
+        const email = button.getAttribute('data-email');
+
+        // Populate the modal fields
+        document.getElementById('userId').value = id;
         document.getElementById('editFirstName').value = firstName;
         document.getElementById('editMiddleName').value = middleName;
         document.getElementById('editLastName').value = lastName;
         document.getElementById('editSuffix').value = suffix;
         document.getElementById('editEmail').value = email;
 
-    });
+        // Show the modal
+        const editAccountModal = new bootstrap.Modal(document.getElementById('editAccountModal'));
+        editAccountModal.show();
+    }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    feather.replace();
+// Edit account form submission
+document.getElementById('editAccountForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const userId = document.getElementById('userId').value;
 
-    // Fetch existing accounts on page load
-    fetch('includes/fetch-accounts.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('account-table-body').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error fetching accounts:', error);
-            document.getElementById('account-table-body').innerHTML = '<tr><td colspan="7" class="text-center">Error loading accounts.</td></tr>';
-        });
+    const updatedData = {
+        firstName: document.getElementById('editFirstName').value,
+        middleName: document.getElementById('editMiddleName').value,
+        lastName: document.getElementById('editLastName').value,
+        suffix: document.getElementById('editSuffix').value,
+        email: document.getElementById('editEmail').value,
+    };
 
-    // Event listener for opening the edit modal
-    document.getElementById('account-table-body').addEventListener('click', function(event) {
-        if (event.target && event.target.matches('a[data-bs-toggle="modal"]')) {
-            const button = event.target;
-            const id = button.getAttribute('data-id');
-            const firstName = button.getAttribute('data-firstname');
-            const middleName = button.getAttribute('data-middlename');
-            const lastName = button.getAttribute('data-lastname');
-            const suffix = button.getAttribute('data-suffix');
-            const email = button.getAttribute('data-email');
+    fetch(`includes/update-account.php?id=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success modal instead of alert
+            const successModal = new bootstrap.Modal(document.getElementById('successEditModal'));
+            successModal.show();
 
-            // Populate the modal fields
-            document.getElementById('userId').value = id;
-            document.getElementById('editFirstName').value = firstName;
-            document.getElementById('editMiddleName').value = middleName;
-            document.getElementById('editLastName').value = lastName;
-            document.getElementById('editSuffix').value = suffix;
-            document.getElementById('editEmail').value = email;
-
-            // Show the modal
-            const editAccountModal = new bootstrap.Modal(document.getElementById('editAccountModal'));
-            editAccountModal.show();
+            // Optionally, reload after modal is dismissed
+            successModal._element.addEventListener('hidden.bs.modal', function() {
+                location.reload();
+            });
+        } else {
+            alert('Error updating account: ' + data.message);
         }
-    });
-
-    // Edit account form submission
-    document.getElementById('editAccountForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const userId = document.getElementById('userId').value;
-
-        const updatedData = {
-            firstName: document.getElementById('editFirstName').value,
-            middleName: document.getElementById('editMiddleName').value,
-            lastName: document.getElementById('editLastName').value,
-            suffix: document.getElementById('editSuffix').value,
-            email: document.getElementById('editEmail').value,
-        };
-
-        fetch(`includes/update-account.php?id=${userId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Show success modal instead of alert
-                const successModal = new bootstrap.Modal(document.getElementById('successEditModal'));
-                successModal.show();
-
-                // Optionally, reload after modal is dismissed
-                successModal._element.addEventListener('hidden.bs.modal', function() {
-                    location.reload();
-                });
-            } else {
-                alert('Error updating account: ' + data.message);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
+    })
+    .catch(error => console.error('Error:', error));
 });
