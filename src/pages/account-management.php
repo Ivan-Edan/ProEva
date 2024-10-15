@@ -179,12 +179,11 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAccountLabel">Success</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="images/illustration/successful.png" class="icon" alt="Success Icon">
-                    <h1>The account has been created successfully.</h1>
+                    <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                    <h5 class="text-modal">The account has been created successfully.</h5>
                 </div>
             </div>
         </div>
@@ -198,8 +197,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="images/illustration/successful.png" class="icon" alt="Success Icon">
-                <h1>The account has been edited successfully.</h1>
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The account has been edited successfully.</h5>
             </div>
         </div>
     </div>
@@ -213,27 +212,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="images/illustration/successful.png" class="icon" alt="Success Icon">
-                <h1>The account has been deleted successfully.</h1>
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The account has been deleted successfully.</h5>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Delete Account Modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade deleteModals" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this account?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" id="confirmDeleteAccountBtn" class="btn btn-danger">Delete</button>
+        <img src="images/illustration/warning.png" class="icon-modal" alt="warning Icon">
+                <h5 class="text-modal">Are you sure you want to delete this account?</h5>
+            <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="confirmDeleteAccountBtn" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>

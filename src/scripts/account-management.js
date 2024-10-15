@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add Account form submit handling
     addAccountForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Add account form logic (AJAX request, validation, etc.)
-        const addAccountModal = new bootstrap.Modal(document.getElementById('addAccountModal'));
-        addAccountModal.hide();
 
         // Reset form fields after submission
         addAccountForm.reset();
@@ -69,15 +65,35 @@ document.getElementById('addAccountForm').addEventListener('submit', function(ev
 });
 
  // Handle account deletion
- document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+document.getElementById('deleteAccountBtn').addEventListener('click', function() {
     const userId = document.getElementById('userId').value; // Get user ID from the form
     const deleteAccountModal = new bootstrap.Modal(document.getElementById('deleteAccountModal'));
 
+    const editAccountModal = bootstrap.Modal.getInstance(document.getElementById('editAccountModal'));
+    editAccountModal.hide();
+        
     // Show the delete confirmation modal
     deleteAccountModal.show();
 
-    // Set up listener for confirmation
-    document.getElementById('confirmDeleteAccountBtn').addEventListener('click', function() {
+    // Handle the Cancel button click in the delete modal
+    const cancelBtn = document.querySelector('#deleteAccountModal .btn-secondary'); // Select cancel button in delete modal
+    
+    // Remove any existing listeners before adding a new one
+    cancelBtn.removeEventListener('click', showEditAccountModal); // Ensure no duplicate listeners
+    cancelBtn.addEventListener('click', showEditAccountModal);
+
+    function showEditAccountModal() {
+        // When the cancel button is clicked, show the edit account modal again
+        editAccountModal.show();
+    }
+
+    // Remove any existing event listener for the confirm button to avoid duplicates
+    const confirmDeleteBtn = document.getElementById('confirmDeleteAccountBtn');
+    confirmDeleteBtn.removeEventListener('click', confirmDeleteAccount); // Remove existing listener
+    confirmDeleteBtn.addEventListener('click', confirmDeleteAccount); // Add the new listener
+
+    // Function to handle the delete confirmation
+    function confirmDeleteAccount() {
         // Send the delete request
         fetch(`includes/delete-account.php?id=${userId}`, {
             method: 'DELETE',
@@ -85,6 +101,7 @@ document.getElementById('addAccountForm').addEventListener('submit', function(ev
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                
                 // Close the delete modal
                 deleteAccountModal.hide();
 
@@ -104,8 +121,9 @@ document.getElementById('addAccountForm').addEventListener('submit', function(ev
             console.error('Error:', error);
             alert('An error occurred while deleting the account.');
         });
-    });
+    }
 });
+
 
 // Fetch existing accounts on page load
 fetch('includes/fetch-accounts.php')
@@ -137,9 +155,6 @@ document.getElementById('account-table-body').addEventListener('click', function
         document.getElementById('editSuffix').value = suffix;
         document.getElementById('editEmail').value = email;
 
-        // Show the modal
-        const editAccountModal = new bootstrap.Modal(document.getElementById('editAccountModal'));
-        editAccountModal.show();
     }
 });
 
@@ -166,6 +181,10 @@ document.getElementById('editAccountForm').addEventListener('submit', function(e
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+
+            const editAccountModal = bootstrap.Modal.getInstance(document.getElementById('editAccountModal'));
+            editAccountModal.hide();
+
             // Show success modal instead of alert
             const successModal = new bootstrap.Modal(document.getElementById('successEditModal'));
             successModal.show();

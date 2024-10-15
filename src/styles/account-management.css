@@ -283,3 +283,27 @@ h6 {
     color: inherit; 
     text-decoration: underline; 
 }
+.icon-modal {
+    height: 30vh;
+    width: 45vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.text-modal{
+    padding-top: -60px;
+    text-align: center;
+}
+.deleteModals{
+    border-radius: 25px;
+    padding: 50px !important;
+}
+.icon-modal-success{
+    height: 30vh;
+    width: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
