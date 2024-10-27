@@ -7,34 +7,34 @@
     <title>Physical and Financial Accomplishment Report</title>
 </head>
 <body>
-    <div id="form2" class="form-container">
+    <div id="userForm2" class="form-container">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 Physical and Financial Accomplishment Report
             </div>
             <div class="card-body">
-                <form>
+                <form id="user_form2" data-action="includes/user-submit-form2.php">
                     <h5>Project Details</h5>
                     <div class="row mb-3">
                         <div class="col-md-5">
                             <label for="projectTitle">Program / Project Title:</label>
-                            <input type="text" class="form-control" id="projectTitle">
+                            <input type="text" class="form-control" id="projectTitle" name="user_project_title_1" required>
                         </div>
                         <div class="col-md-1">
                             <label for="month">Month:</label>
-                            <input type="text" class="form-control" id="month">
+                            <input type="text" class="form-control" id="month" name="user_month_2">
                         </div>
                         <div class="col-md-1">
                             <label for="year">Year:</label>
-                            <input type="text" class="form-control" id="year">
+                            <input type="text" class="form-control" id="year" name="user_year_2">
                         </div>
                         <div class="col-md-1">
                             <label for="quarter">Quarter:</label>
-                            <input type="text" class="form-control" id="quarter">
+                            <input type="text" class="form-control" id="quarter" name="user_quarter_2">
                         </div>
                         <div class="col-md-4">
                             <label for="implementingAgency">Implementing Agency:</label>
-                            <input type="text" class="form-control" id="implementingAgency">
+                            <input type="text" class="form-control" id="implementingAgency" name="user_implementing_agency_1">
                         </div>
                     </div>
 
@@ -43,23 +43,23 @@
                     <div class="row mb-3">
                         <div class="col-md-2">
                             <label for="startDate">Start Date:</label>
-                            <input type="date" class="form-control" id="startDate">
+                            <input type="date" class="form-control" id="startDate" name="user_start_date_2">
                         </div>
                         <div class="col-md-2">
                             <label for="endDate">End Date:</label>
-                            <input type="date" class="form-control" id="endDate">
+                            <input type="date" class="form-control" id="endDate" name="user_end_date_2">
                         </div>
                         <div class="col-md-2">
                             <label for="fundSource">Fund Source:</label>
-                            <input type="text" class="form-control" id="fundSource">
+                            <input type="text" class="form-control" id="fundSource" name="user_fund_source_1">
                         </div>
                         <div class="col-md-2">
                             <label for="fundingAgency">Funding Agency:</label>
-                            <input type="text" class="form-control" id="fundingAgency">
+                            <input type="text" class="form-control" id="fundingAgency" name="user_funding_agency_1">
                         </div>
                         <div class="col-md-4">
                             <label for="totalCost">Total Program/Project Cost (PHP):</label>
-                            <input type="text" class="form-control" id="totalCost">
+                            <input type="text" class="form-control" id="totalCost"  name="user_total_cost_2">
                         </div>
                     </div>
 
@@ -67,19 +67,19 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="appropriations">Appropriations:</label>
-                            <input type="text" class="form-control" id="appropriations">
+                            <input type="text" class="form-control" id="appropriations" name="user_appropriations_2">
                         </div>
                         <div class="col-md-3">
                             <label for="allotment">Allotment:</label>
-                            <input type="text" class="form-control" id="allotment">
+                            <input type="text" class="form-control" id="allotment" name="user_allotment_2">
                         </div>
                         <div class="col-md-3">
                             <label for="obligations">Obligations:</label>
-                            <input type="text" class="form-control" id="obligations">
+                            <input type="text" class="form-control" id="obligations" name="user_obligations_2">
                         </div>
                         <div class="col-md-3">
                             <label for="disbursements">Disbursements:</label>
-                            <input type="text" class="form-control" id="disbursements">
+                            <input type="text" class="form-control" id="disbursements" name="user_disbursements_2">
                         </div>
                     </div>
 
@@ -87,19 +87,19 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="targetOWPA">Target OWPA to date (%):</label>
-                            <input type="text" class="form-control" id="targetOWPA">
+                            <input type="text" class="form-control" id="targetOWPA" name="user_target_owpa_2">
                         </div>
                         <div class="col-md-3">
                             <label for="actualOWPA">Actual OWPA to date (%):</label>
-                            <input type="text" class="form-control" id="actualOWPA">
+                            <input type="text" class="form-control" id="actualOWPA" name="user_actual_owpa_2">
                         </div>
                         <div class="col-md-2">
                             <label for="slippage">Slippage:</label>
-                            <input type="text" class="form-control" id="slippage">
+                            <input type="text" class="form-control" id="slippage" name="user_slippage_2">
                         </div>
                         <div class="col-md-4">
                             <label for="outputIndicator">Output Indicator:</label>
-                            <input type="text" class="form-control" id="outputIndicator">
+                            <input type="text" class="form-control" id="outputIndicator" name="user_output_indicator_2">
                         </div>
                     </div>
 
@@ -116,15 +116,15 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="endProjectTarget">End-of-Project Target:</label>
-                                    <input type="text" class="form-control" id="endProjectTarget">
+                                    <input type="text" class="form-control" id="endProjectTarget" name="user_end_project_target_2">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="targetToDate">Target to date:</label>
-                                    <input type="text" class="form-control" id="targetToDate">
+                                    <input type="text" class="form-control" id="targetToDate" name="user_target_to_date_2">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="actualToDate">Actual to date:</label>
-                                    <input type="text" class="form-control" id="actualToDate">
+                                    <input type="text" class="form-control" id="actualToDate" name="user_actual_to_date_2">
                                 </div>
                             </div>
                         </div>
@@ -132,11 +132,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="male">Male:</label>
-                                    <input type="text" class="form-control" id="male">
+                                    <input type="text" class="form-control" id="male" name="user_male_2">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="female">Female:</label>
-                                    <input type="text" class="form-control" id="female">
+                                    <input type="text" class="form-control" id="female" name="user_female_2">
                                 </div>
                             </div>
                         </div>
@@ -144,28 +144,29 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label for="remarks">Remarks:</label>
-                            <textarea class="form-control" id="remarks"></textarea>
+                            <textarea class="form-control" id="remarks" name="user_remarks_2"></textarea>
                         </div>
                     </div>
 
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
+                        <!--<div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By :</label>
                             <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>
+                        </div>-->
                         <div class="form-group col-md-4">
                             <label for="designation">Designation/Office :</label>
-                            <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
+                            <input type="text" class="form-control" id="designation" placeholder="Enter designation/office" name="user_designation_1">
+
                         </div>
-                        <div class="form-group col-md-4">
+                        <!--<div class="form-group col-md-4">
                             <label for="submissionDate">Date :</label>
                             <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
+                        <!--<div class="form-group col-md-4">
                             <label for="approvedBy">Approved By :</label>
                             <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
                         </div>
@@ -175,13 +176,13 @@
                         <div class="form-group col-md-4">
                             <label for="approvalDate">Date :</label>
                             <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="form-group">
                         <div class="btn-container">
-                            <button type="button" class="btn btn-secondary btn-custom" id="cancelBtn">Cancel</button>
-                            <button type="submit" class="btn btn-submit btn-custom">Submit</button>
+                            <button type="button" class="btn btn-secondary btn-custom" id="cancel_btn">Cancel</button>
+                            <button type="submit" class="btn btn-submit btn-custom" id ="submit_btn">Submit</button>
                         </div>
                     </div>
                 </form>

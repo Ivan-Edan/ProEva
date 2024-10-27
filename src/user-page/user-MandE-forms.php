@@ -17,24 +17,10 @@
                     Project Forms
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
-                    <li class="list-group-item" data-form="user-forms/user-evaluation-form1.php">
-                        INITIAL PROJECT REPORT
-                    </li>
-                </ul>
-                <ul class="list-group list-group-flush" id="form-list">
-                    <li class="list-group-item" data-form="user-forms/user-evaluation-form2.php">
-                        PHYSICAL AND FINANCIAL ACCOMPLISHMENT REPORT
-                    </li>
-                </ul>
-                <ul class="list-group list-group-flush" id="form-list">
-                    <li class="list-group-item" data-form="user-forms/user-evaluation-form3.php">
-                        PROJECT EXCEPTION REPORT
-                    </li>
-                </ul>
-                <ul class="list-group list-group-flush" id="form-list">
-                    <li class="list-group-item" data-form="user-forms/user-evaluation-form4.php">
-                        PROJECT RESULTS
-                    </li>
+                    <li class="list-group-item" data-form="user-forms/user-evaluation-form1.php">INITIAL PROJECT REPORT</li>
+                    <li class="list-group-item" data-form="user-forms/user-evaluation-form2.php">PHYSICAL AND FINANCIAL ACCOMPLISHMENT REPORT</li>
+                    <li class="list-group-item" data-form="user-forms/user-evaluation-form3.php">PROJECT EXCEPTION REPORT</li>
+                    <li class="list-group-item" data-form="user-forms/user-evaluation-form4.php">PROJECT RESULTS</li>
                 </ul>
             </div>
             <div id="form-content" class="mt-4">
