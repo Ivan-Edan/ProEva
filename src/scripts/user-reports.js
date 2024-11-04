@@ -75,3 +75,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 });
+document.getElementById('sort-progress').addEventListener('click', () => {
+  const tableBody = document.querySelector('table tbody');
+  const rows = Array.from(tableBody.querySelectorAll('tr'));
+  const ascending = !document.getElementById('sort-progress').classList.contains('sorted-asc');
+
+  // Toggle sort direction icons
+  document.getElementById('sort-progress').classList.toggle('sorted-asc', ascending);
+  document.getElementById('sort-progress').classList.toggle('sorted-desc', !ascending);
+
+  // Sort rows by Progress column (assumed to be percentage values)
+  const sortedRows = rows.sort((a, b) => {
+    const progressA = parseInt(a.children[1].textContent.replace('%', ''), 10);
+    const progressB = parseInt(b.children[1].textContent.replace('%', ''), 10);
+    return ascending ? progressA - progressB : progressB - progressA;
+  });
+
+  // Update table with sorted rows
+  tableBody.innerHTML = '';
+  sortedRows.forEach(row => tableBody.appendChild(row));
+});

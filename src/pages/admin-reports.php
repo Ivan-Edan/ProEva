@@ -141,47 +141,6 @@
                       <p class="text-detail-2">Project implementation delays due to uncooperative lot owners. Lot owners not fully apprised/informed on <br>the project.</p>
                 </div>
                 <br>
-                <br>
-                <div class="container-7">Archive</div>
-                <div class="container-8">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Project Name</th>
-                      <th class="text-center">
-                          <button class="sort-icon-btn" data-column="progress">
-                              <i class="sort-icon" data-feather="arrow-down"></i>
-                          </button>
-                          Department
-                      </th>
-                      <th class="text-center">
-                          <button class="sort-icon-btn" data-column="progress">
-                              <i class="sort-icon" data-feather="arrow-down"></i>
-                          </button>
-                          Form Type
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-center">Bridge Building 1</td>
-                      <td class="text-center">Engineering Office</td>
-                      <td class="text-center download-link">SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">Bridge Building 1</td>
-                      <td class="text-center">Engineering Office</td>
-                      <td class="text-center download-link">REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMEN....</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">Bridge Building 1</td>
-                      <td class="text-center">Engineering Office</td>
-                      <td class="text-center download-link">PROJECT INSPECTION REPORT</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                  </tbody>
-                </table>
-                </div>
             </div>
         </div>
     </div>

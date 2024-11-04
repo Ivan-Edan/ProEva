@@ -29,12 +29,17 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'admin-evaluation') ? 'active' : ''; ?>" href="index-admin.php?page=admin-evaluation">
-                <img src="images/svg/bar-chart-2.svg" alt="Evaluation Icon" class="nav-icon"> Evaluation
+                <img src="images/svg/file-text.svg" alt="Evaluation Icon" class="nav-icon"> Forms
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'admin-reports') ? 'active' : ''; ?>" href="index-admin.php?page=admin-reports">
-                <img src="images/svg/folder.svg" alt="Reports Icon" class="nav-icon"> Reports
+                <img src="images/svg/bar-chart-2.svg" alt="Reports Icon" class="nav-icon"> Reports
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white <?php echo ($page == 'admin-archive') ? 'active' : ''; ?>" href="index-admin.php?page=admin-archive">
+                <img src="images/svg/folder.svg" alt="Archive Icon" class="nav-icon"> Archive
             </a>
         </li>
     </ul>

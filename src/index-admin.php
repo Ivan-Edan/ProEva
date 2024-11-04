@@ -1,6 +1,31 @@
 <?php
 session_start();
 
+// Define the timeout duration in seconds (e.g., 30 minutes)
+$timeout_duration = 1800;
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // User is not logged in, redirect to login
+    header("Location: login-welcome.php");
+    exit();
+}
+
+// Check for inactivity
+if (isset($_SESSION['LAST_ACTIVITY'])) {
+    // Calculate the time since the last activity
+    if (time() - $_SESSION['LAST_ACTIVITY'] > $timeout_duration) {
+        // Last activity was more than the timeout duration
+        session_unset(); // Unset session variables
+        session_destroy(); // Destroy the session
+        header("Location: login.php"); // Redirect to login page
+        exit();
+    }
+}
+
+// Update last activity time
+$_SESSION['LAST_ACTIVITY'] = time(); // Set/update last activity time
+
 // Determine which page to show
 $page = isset($_GET['page']) ? basename($_GET['page']) : 'admin-home';
 
