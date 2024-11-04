@@ -114,7 +114,7 @@
                         </button>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 mx-5 mt-7">
+                    <div class="col-md-3 mx-4 mt-7" style="margin-left: 40px;">
                             <div class="card" style="height: 350px; background-color: #F8F8F8;">
                                 <div class="card-body">
                                     <div class="card card-head">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mx-5 mt-7">
+                        <div class="col-md-3 mx-4 mt-7">
                             <div class="card" style="height: 350px; background-color: #F8F8F8;">
                                 <div class="card-body">
                                     <div class="card card-head">
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mx-5 mt-7">
+                        <div class="col-md-3 mx-4 mt-7">
                             <div class="card" style="height: 350px; background-color: #F8F8F8;">
                                 <div class="card-body">
                                     <div class="card card-head">

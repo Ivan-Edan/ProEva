@@ -1,5 +1,6 @@
 body{
     background-color: #F5F5F5;
+    color: #585858;
 }
 
 .container-1 {
@@ -15,7 +16,7 @@ body{
     margin-bottom: 50px;
     height: 100px;
 }
-.container-2, .container-7 {
+.container-2 {
     text-align: center;
     border-radius: 5px;
     background-color: #27374D;
@@ -94,7 +95,9 @@ body{
     font-size: 14px;
     white-space: nowrap; 
 }
-
+.table td {
+color: #585858;
+}
 .table thead th {
     background-color: #27374D;
     color: white;
@@ -124,4 +127,3 @@ body{
     color: #000000;
     cursor: pointer; 
 }
-

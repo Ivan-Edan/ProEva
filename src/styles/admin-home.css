@@ -71,7 +71,16 @@
     min-width: 200px;         /* Ensure minimum width for readability */
     box-sizing: border-box;  /* Include padding and borders in width calculation */
 }
-
+.stat-box-1 {
+    background-color: #27374D;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1 1 auto;           /* Allow items to grow and shrink */
+    min-width: 200px;         /* Ensure minimum width for readability */
+    box-sizing: border-box;  /* Include padding and borders in width calculation */
+}
 /* Stat content styles */
 .stat-content {
     display: flex;
@@ -96,7 +105,7 @@
 }
 
 .stat-label {
-    font-size: 1.2em;
+    font-size: 1em;
     color: white;
     margin: 0;
     flex-grow: 1;
@@ -111,7 +120,30 @@
     margin: 0;
     font-weight: bold;
 }
-
+.stat-number-1 {
+    font-size: 22px;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 40px;
+}
+.stat-number-3 {
+    font-size: 30px;
+    color: white;
+    margin: 0;
+    flex-grow: 1;
+    text-align:start;
+    font-weight: bold;
+}
+.stat-number-4 {
+    font-size: 20px;
+    color: white;
+    margin: 0;
+    flex-grow: 1;
+    text-align:start;
+    font-weight: bold;
+}
 /* Outer container for projects table */
 .projects-outer-box {
     background-color: white;
@@ -151,14 +183,14 @@
 .dropdown .btn-secondary.dropdown-toggle {
     border-radius: 25px; /* Adjust if needed */
     background-color: #27374D;
-    width: 150px;
+    width: 250px;
     /* Add a specific width to match the dropdown button */
 }
 
 .dropdown-menu {
     padding: 0.5rem; /* Adjust padding as needed */
     /* Set width to match the button */
-    max-width: 150px; /* Ensure this matches or exceeds the button width */
+    max-width: 250px; /* Ensure this matches or exceeds the button width */
 }
 
 .dropdown-item {

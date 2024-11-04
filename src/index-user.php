@@ -1,6 +1,31 @@
 <?php
 session_start();
 
+// Define the timeout duration in seconds (e.g., 30 minutes)
+$timeout_duration = 1800;
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // User is not logged in, redirect to login
+    header("Location: login-welcome.php");
+    exit();
+}
+
+// Check for inactivity
+if (isset($_SESSION['LAST_ACTIVITY'])) {
+    // Calculate the time since the last activity
+    if (time() - $_SESSION['LAST_ACTIVITY'] > $timeout_duration) {
+        // Last activity was more than the timeout duration
+        session_unset(); // Unset session variables
+        session_destroy(); // Destroy the session
+        header("Location: login.php"); // Redirect to login page
+        exit();
+    }
+}
+
+// Update last activity time
+$_SESSION['LAST_ACTIVITY'] = time(); // Set/update last activity time
+
 // Determine which page to show
 $page = isset($_GET['page']) ? basename($_GET['page']) : 'user-home';
 
@@ -22,7 +47,6 @@ $pagePath = "user-page/{$page}.php";
     <button class="hamburger-button">&#9776;</button> <!-- Hamburger icon in header -->
 </header>
 <div class="container-fluid">
-    
         <?php include 'includes/components/sidebar-user.php'; ?>
         <main class="col-12 col-md-9 col-lg-10 ms-md-auto px-4 main-content">
             <?php if (file_exists($pagePath)) {
@@ -31,7 +55,6 @@ $pagePath = "user-page/{$page}.php";
                 echo "Page not found.";
             } ?>
         </main>
-    
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Updated jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Updated Bootstrap JS -->

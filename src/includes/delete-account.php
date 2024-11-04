@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
             // Check if any row was affected in users_info
             if ($stmt->affected_rows > 0) {
-                // Delete the user's email from users table
+                // Delete the user from the users table
                 $stmt2 = $conn->prepare("DELETE FROM users WHERE id = ?");
                 $stmt2->bind_param('i', $userId);
                 $stmt2->execute();
@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
                     $conn->commit();
                     echo json_encode(['success' => true]);
                 } else {
-                    // Rollback if the email deletion failed
+                    // Rollback if the deletion from users failed
                     $conn->rollback();
-                    echo json_encode(['success' => false, 'message' => 'Error deleting account email.']);
+                    echo json_encode(['success' => false, 'message' => 'Error deleting account from users.']);
                 }
             } else {
                 // Rollback if the personal info deletion failed
@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             $conn->rollback();
             echo json_encode(['success' => false, 'message' => 'Transaction failed: ' . $e->getMessage()]);
         }
-
     } else {
         // Invalid or missing user ID
         echo json_encode(['success' => false, 'message' => 'Invalid or missing user ID.']);

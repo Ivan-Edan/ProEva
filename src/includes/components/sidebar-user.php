@@ -24,12 +24,17 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'user-MandE-forms') ? 'active' : ''; ?>" href="index-user.php?page=user-MandE-forms">
-                <img src="images/svg/bar-chart-2.svg" alt="M&E forms Icon" class="nav-icon"> M&E Forms
+                <img src="images/svg/file-text.svg" alt="M&E forms Icon" class="nav-icon"> Forms
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'user-reports') ? 'active' : ''; ?>" href="index-user.php?page=user-reports">
-                <img src="images/svg/folder.svg" alt="Reports Icon" class="nav-icon"> Reports
+                <img src="images/svg/bar-chart-2.svg" alt="Reports Icon" class="nav-icon"> Reports
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white <?php echo ($page == 'user-archive') ? 'active' : ''; ?>" href="index-user.php?page=user-archive">
+                <img src="images/svg/folder.svg" alt="Archive Icon" class="nav-icon"> Archive
             </a>
         </li>
     </ul>

@@ -7,13 +7,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT id, email, password, role, department FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT u.id, u.email, u.password, u.role, u.department_id, d.name AS department 
+                             FROM users u 
+                             JOIN departments d ON u.department_id = d.id 
+                             WHERE u.email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $db_email, $db_password, $role, $department);
+        $stmt->bind_result($id, $db_email, $db_password, $role, $department_id, $department);
         $stmt->fetch();
 
         // Verify password
@@ -21,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $id;
             $_SESSION['email'] = $db_email;
             $_SESSION['role'] = $role;
-            $_SESSION['department'] = $department;
+            $_SESSION['department'] = $department; // Now fetching from the departments table
 
             // Return redirect URL
             echo json_encode(['redirect' => $role === 'admin' ? 'index-admin.php' : 'index-user.php']);
@@ -29,22 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(['error' => 'Invalid password. Please try again.']);
         }
     } else {
-        // Email not found, now we can check if the password is incorrect as well
-        $stmt->close();
-
-        // Prepare a new statement to check if the password exists (meaning the email was incorrect)
-        $stmt = $conn->prepare("SELECT id FROM users WHERE password = ?");
-        $stmt->bind_param("s", $password);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows > 0) {
-            // Password exists but email is wrong
-            echo json_encode(['error' => 'No user found with that email. Please check your email.']);
-        } else {
-            // Both email and password are incorrect
-            echo json_encode(['error' => 'Invalid email and password combination. Please try again.']);
-        }
+        // Email not found
+        echo json_encode(['error' => 'No user found with that email. Please check your email.']);
     }
 
     $stmt->close(); // Close the statement

@@ -1,14 +1,11 @@
-
-
-
 /* Main content styling */
 
 .forms-container {
     background-color: #FFFFFF; /* White background color for the forms container */
-    border-radius: 25px !important; /* Curved corners */
+    border-radius: 20px !important; /* Curved corners */
     padding: 20px; /* Padding inside the forms container */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to simulate depth */
-    border: 1px solid #ddd; /* Optional: subtle border to enhance the container look */
+    border: 1px solid #a4a4a4; /* Optional: subtle border to enhance the container look */
 }
 
 /* Card and list group styling */
