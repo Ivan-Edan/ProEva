@@ -37,19 +37,23 @@ $(document).ready(function() {
         $('#previewContainersImage').html(photoHtml); // Display the photos
     }
 
-    $('.main-task').click(function() {
-        var projectName = $(this).data('project-name');
-        var startDate = $(this).data('start-date');
-        var endDate = $(this).data('end-date');
-        var totalCost = $(this).data('total-cost');
-        var fundSource = $(this).data('fund-source');
-        var fundingAgency = $(this).data('funding-agency');
-        var currentStatus = $(this).data('status');
-        var taskId = $(this).data('id');
-        var comments = $(this).data('comments');
-        var photos = $(this).data('photos');
-        var fullnames = $(this).data('fullnames');
+    $('.subtasks-name').click(function() {
+        var subProjectName = $(this).data('subproject-name');
+        var subStartDate = $(this).data('substart-date');
+        var subEndDate = $(this).data('subend-date');
+        var subTotalCost = $(this).data('subtotal-cost');
+        var subFundSource = $(this).data('subfund-source');
+        var subFundingAgency = $(this).data('subfunding-agency');
+        var subCurrentStatus = $(this).data('substatus');
+        var subTaskId = $(this).data('id');
         var formattedId = $(this).data('id-formatted');
+        var subComments = $(this).data('subcomments');
+        var subPhotos = $(this).data('subphotos');
+        var subFullnames = $(this).data('subfullnames');
+
+        console.log('Subtask ID:', subTaskId);
+        console.log('Subtask Comments:', subComments);
+        console.log('Subtask Photos:', subPhotos);
 
         function formatDate(dateStr) {
             var date = new Date(dateStr);
@@ -61,24 +65,19 @@ $(document).ready(function() {
             return Number(cost).toLocaleString();
         }
 
-        console.log('Task ID:', taskId);
-        console.log('Comments:', comments);
-        console.log('Photos:', photos);
-
-        $('#taskModalLabel').text(projectName);
-        $('#startDate').text(formatDate(startDate));
-        $('#endDate').text(formatDate(endDate));
-        $('#totalCost').text(formatCost(totalCost));
-        $('#fundSource').text(fundSource);
-        $('#fundingAgency').text(fundingAgency);
-        $('#statusDropdown').val(currentStatus);
+        $('#taskModalLabel').text(subProjectName);
+        $('#startDate').text(formatDate(subStartDate));
+        $('#endDate').text(formatDate(subEndDate));
+        $('#totalCost').text(formatCost(subTotalCost));
+        $('#fundSource').text(subFundSource);
+        $('#fundingAgency').text(subFundingAgency);
+        $('#status').text(subCurrentStatus);
 
         // Display multiple comments and photos
-        displayCommentsAndPhotos(comments, photos, fullnames);
+        displayCommentsAndPhotos(subComments, subPhotos, subFullnames);
 
-        console.log('Formatted Id', formattedId);
-        // Store task ID in submit button's data attribute
-        $('#submitGantt').data('id', taskId);
+        // Store subtask ID in submit button's data attribute
+        $('#submitGantt').data('id', subTaskId);
         $('#submitGantt').data('id-formatted', formattedId);
         var modal = new bootstrap.Modal(document.getElementById('taskModal'));
         modal.show();
@@ -90,14 +89,12 @@ $(document).ready(function() {
     $('#submitGantt').off('click').on('click', function() {
         var taskId = $(this).data('id');
         var formattedId = $(this).data('id-formatted');
-        var newStatus = $('#statusDropdown').val();
         var comment = $('#commentPrev').val().trim();
         var photo = $('#imagePrev')[0].files[0];
 
         var formData = new FormData();
         formData.append('id', taskId);
         formData.append('id-formatted', formattedId);
-        formData.append('status', newStatus);
         if (comment) {
             formData.append('comment', comment);
         }
@@ -106,7 +103,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'user-page/update-task-status.php',
+            url: 'upload-comment-sub.php',
             type: 'POST',
             data: formData,
             processData: false,

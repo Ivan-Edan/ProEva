@@ -71,7 +71,7 @@ $(document).ready(function() {
         $('#totalCost').text(formatCost(totalCost));
         $('#fundSource').text(fundSource);
         $('#fundingAgency').text(fundingAgency);
-        $('#statusDropdown').val(currentStatus);
+        $('#status').text(currentStatus);
 
         // Display multiple comments and photos
         displayCommentsAndPhotos(comments, photos, fullnames);
@@ -90,14 +90,12 @@ $(document).ready(function() {
     $('#submitGantt').off('click').on('click', function() {
         var taskId = $(this).data('id');
         var formattedId = $(this).data('id-formatted');
-        var newStatus = $('#statusDropdown').val();
         var comment = $('#commentPrev').val().trim();
         var photo = $('#imagePrev')[0].files[0];
 
         var formData = new FormData();
         formData.append('id', taskId);
         formData.append('id-formatted', formattedId);
-        formData.append('status', newStatus);
         if (comment) {
             formData.append('comment', comment);
         }
@@ -106,7 +104,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'user-page/update-task-status.php',
+            url: 'upload-comment.php',
             type: 'POST',
             data: formData,
             processData: false,
