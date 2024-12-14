@@ -6,12 +6,12 @@ session_start();
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401); // Unauthorized
+    http_response_code(401); 
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }
 
-$user_id = $_SESSION['user_id']; // Get the logged-in user ID
+$user_id = $_SESSION['user_id']; 
 
 if (isset($_GET['project_id'])) {
     $project_id = $_GET['project_id'];
