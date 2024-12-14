@@ -19,18 +19,18 @@
                     <div class="details-header">
                         <h5>Project Details</h5>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="departmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Departments
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="departmentDropdown">
-                                <li>
-                                    <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-                                </li>
-                                <li><a class="dropdown-item" href="#">DSWD</a></li>
-                                <li><a class="dropdown-item" href="#">NDRRMC</a></li>
-                                <li><a class="dropdown-item" href="#">CPDO</a></li>
-                            </ul>
-                        </div>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+        Form# | Department | Project Title
+    </button>
+    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
+        <li>
+            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
+        </li>
+        <div id="dropdownList">
+            <!-- Dropdown items will be dynamically populated here -->
+        </div>
+    </ul>
+</div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">

@@ -17,25 +17,25 @@
                     Project Evaluation Forms
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form1.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form1.php" data-form-type="adminform1">
                         SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form2.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form2.php" data-form-type="adminform2">
                         REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form3.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form3.php" data-form-type="adminform3">
                         PROJECT INSPECTION REPORT
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form4.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form4.php" data-form-type="adminform4">
                         PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form5.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form5.php" data-form-type="adminform5">
                         TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form6.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form6.php" data-form-type="adminform6">
                         RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
                     </li>
-                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form7.php">
+                    <li class="list-group-item" data-form="admin-forms/admin-evaluation-form7.php" data-form-type="adminform7">
                         KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
                     </li>
                 </ul>
