@@ -85,18 +85,18 @@ $conn->close();
             </div>
         </div>
         <div class="row project-stats-container mb-4">
-        <div class="col">
-            <div class="stat-box-1 d-flex align-items-center">
+            <div class="col">
+                <div class="stat-box-1 d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Current Time Icon" class="stat-icon">
-                        <p id="philippine-time" class="stat-number-1"></p>
+                        <img src="images/illustration/clock.png" alt="Current Time Icon" class="stat-icon-1">
+                        <p id="philippine-time" class="stat-label-1"></p>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="stat-box-1 d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
+                        <img src="images/illustration/calendar.png" alt="Tasks Done Icon" class="stat-icon-3">
                         <p id="philippine-day" class="stat-number-3"></p>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ $conn->close();
             <div class="col">
                 <div class="stat-box-1 d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
+                        <img src="images/illustration/date.png" alt="Tasks Done Icon" class="stat-icon-2">
                         <p id="philippine-date" class="stat-number-4"></p>
                     </div>
                 </div>
@@ -120,9 +120,6 @@ $conn->close();
                             <i data-feather="chevron-down" class="icon-edge"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="departmentDropdown">
-                            <li>
-                                <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-                            </li>
                             <li><a class="dropdown-item" href="#">Done</a></li>
                             <li><a class="dropdown-item" href="#">On Progress</a></li>
                             <li><a class="dropdown-item" href="#">Incoming</a></li>
@@ -141,20 +138,20 @@ $conn->close();
                         </thead>
                     <tbody>
                         <tbody id="table-body">
-                            <tr>
-                                <td class="text-center">Bridge Building</td>
-                                <td class="text-center">On Progress</td>
-                                <td class="text-center">January 27, 2024</td>
-                                <td class="text-center">January 27, 2025</td>
-                                <td class="text-center">December 27, 2024</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building-2</td>
-                                <td class="text-center">On Progress</td>
-                                <td class="text-center">January 27, 2024</td>
-                                <td class="text-center">January 27, 2025</td>
-                                <td class="text-center">December 27, 2024</td>
-                            </tr>
+                        <tr>
+                            <td class="text-center" data-label="Project Name">Bridge Building</td>
+                            <td class="text-center" data-label="Project Status">On Progress</td>
+                            <td class="text-center" data-label="Start Date">January 27, 2024</td>
+                            <td class="text-center" data-label="End Date">January 27, 2025</td>
+                            <td class="text-center" data-label="Date Created">December 27, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" data-label="Project Name">Bridge Building-2</td>
+                            <td class="text-center" data-label="Project Status">On Progress</td>
+                            <td class="text-center" data-label="Start Date">January 27, 2024</td>
+                            <td class="text-center" data-label="End Date">January 27, 2025</td>
+                            <td class="text-center" data-label="Date Created">December 27, 2024</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

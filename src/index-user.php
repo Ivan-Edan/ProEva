@@ -18,7 +18,7 @@ if (isset($_SESSION['LAST_ACTIVITY'])) {
         // Last activity was more than the timeout duration
         session_unset(); // Unset session variables
         session_destroy(); // Destroy the session
-        header("Location: login.php"); // Redirect to login page
+        header("Location: login-welcome.php"); // Redirect to login page
         exit();
     }
 }

@@ -199,3 +199,147 @@ document.getElementById('editAccountForm').addEventListener('submit', function(e
     })
     .catch(error => console.error('Error:', error));
 });
+
+    // Department Sort Function
+    document.getElementById("sort-icon").addEventListener("click", function() {
+        sortTableAlphabetically();
+        toggleSortIcon();
+    });
+
+    let ascending = true;
+
+    function sortTableAlphabetically() {
+        const tableBody = document.getElementById("account-table-body");
+        const rows = Array.from(tableBody.rows);
+
+        rows.sort((a, b) => {
+            const deptA = a.cells[3].textContent.trim();
+            const deptB = b.cells[3].textContent.trim();
+            return ascending ? deptA.localeCompare(deptB) : deptB.localeCompare(deptA);
+        });
+
+        rows.forEach(row => tableBody.appendChild(row));
+        ascending = !ascending;
+    }
+
+    function toggleSortIcon() {
+        const icon = document.getElementById("sort-icon");
+        icon.classList.toggle("fa-sort-up", ascending);
+        icon.classList.toggle("fa-sort-down", !ascending);
+    }
+
+  // Search Function
+        document.getElementById("searchBar").addEventListener("input", function() {
+            const query = this.value.toLowerCase();
+            filterTable(query);
+        });
+
+        function filterTable(query) {
+            const tableBody = document.getElementById("account-table-body");
+            const rows = tableBody.getElementsByTagName("tr");
+
+            let matchFound = false;
+
+            for (let row of rows) {
+                const firstName = row.cells[1]?.textContent.toLowerCase();
+                const lastName = row.cells[0]?.textContent.toLowerCase();
+
+                // Check if either first name or last name includes the query
+                if (firstName.includes(query) || lastName.includes(query)) {
+                    row.style.display = ""; // Show matching row
+                    matchFound = true;
+                } else {
+                    row.style.display = "none"; // Hide non-matching row
+                }
+            }
+
+            // Display "No Results" message if no matches are found in both first and last names
+            if (!matchFound) {
+                displayNoResultsMessage(tableBody);
+            } else {
+                // Remove "No results" row if matches are found
+                const noResultsRow = document.getElementById("no-results-row");
+                if (noResultsRow) noResultsRow.remove();
+            }
+        }
+
+        function displayNoResultsMessage(tableBody) {
+            // Remove any existing "No results" message row
+            const existingNoResultsRow = document.getElementById("no-results-row");
+            if (existingNoResultsRow) existingNoResultsRow.remove();
+
+            // Create a new row for the "No results" message
+            const noResultsRow = document.createElement("tr");
+            noResultsRow.id = "no-results-row";
+
+            // Create a cell to span all columns
+            const noResultsCell = document.createElement("td");
+            noResultsCell.colSpan = 7; // Adjust based on the total number of columns
+            noResultsCell.classList.add("text-center");
+
+            // Add image and message content
+            noResultsCell.innerHTML = `
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">There is no name existed</h5>
+            `;
+
+            noResultsRow.appendChild(noResultsCell);
+            tableBody.appendChild(noResultsRow);
+        }
+        
+        // Search Function
+        document.getElementById("searchBar").addEventListener("input", function() {
+            const query = this.value.toLowerCase();
+            filterTable(query);
+        });
+
+        function filterTable(query) {
+            const tableBody = document.getElementById("account-table-body");
+            const rows = tableBody.getElementsByTagName("tr");
+
+            let matchFound = false;
+
+            // Remove the "No Results" message row if it exists
+            const existingNoResultsRow = document.getElementById("no-results-row");
+            if (existingNoResultsRow) existingNoResultsRow.remove();
+
+            for (let row of rows) {
+                const firstName = row.cells[1]?.textContent.toLowerCase();
+                const lastName = row.cells[0]?.textContent.toLowerCase();
+
+                // Check if either first name or last name includes the query
+                if (firstName.includes(query) || lastName.includes(query)) {
+                    row.style.display = ""; // Show matching row
+                    matchFound = true;
+                } else {
+                    row.style.display = "none"; // Hide non-matching row
+                }
+            }
+
+            // Display "No Results" message if no matches are found in both first and last names
+            if (!matchFound) {
+                displayNoResultsMessage(tableBody);
+            }
+        }
+
+        function displayNoResultsMessage(tableBody) {
+            // Create a new row for the "No results" message
+            const noResultsRow = document.createElement("tr");
+            noResultsRow.id = "no-results-row";
+
+            // Create a cell to span all columns
+            const noResultsCell = document.createElement("td");
+            noResultsCell.colSpan = 7; // Adjust based on the total number of columns
+            noResultsCell.classList.add("text-center");
+
+            // Add image and message content
+            noResultsCell.innerHTML = `
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">There is no name existed</h5>
+            `;
+
+            noResultsRow.appendChild(noResultsCell);
+            tableBody.appendChild(noResultsRow);
+        }
+
+    

@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../includes/config.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,31 +28,28 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="text-center">
-                        <a class="direct-link" href="admin-progress/admin-monitoring-chart.php">Bridge Building 1</a>
-                      </td>
-                      <td>Engineering Office</td>
-                      <td>Juan Carlos Garcia</td>
-                      <td>On Progress</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <a class="direct-link">Package Distribution</a>
-                      </td>
-                      <td>Social Service Office</td>
-                      <td>Bernadette Campos</td>
-                      <td>On Progress</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <a class="direct-link">Dog Vaccination</a>
-                      </td>
-                      <td>City Vet Office</td>
-                      <td>Nestor De Castro</td>
-                      <td>On Progress</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    <?php
+                      $sql = "SELECT pt.project_title, ip.project_id
+                                        FROM initialprojectreport ip
+                                        JOIN userprojecttitle pt
+                                        ON ip.project_id = pt.project_id";
+                      $resultMain = $conn->query($sql);
+
+                      if ($resultMain->num_rows > 0) {
+                          while ($main = $resultMain->fetch_assoc()) {
+                            $projectId = $main['project_id'];
+                            $projectName = $main['project_title'];
+
+                            echo "<tr>";
+                            echo "<td class='text-center' style='display:none;'>{$projectId}</td>";
+                            echo "<td class='text-center'><a class='direct-link' href='admin-progress/admin-monitoring-chart.php?project_id={$projectId}'>{$projectName}</a></td>";
+                            echo "<td></td>";
+                            echo "<td></td>";
+                            echo "<td></td>";
+                            echo "</tr>";
+                          }
+                        }
+                    ?>
                   </tbody>
                 </table>
               </div>

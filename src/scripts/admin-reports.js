@@ -76,71 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Graph Line
-const ctx = document.getElementById('projectChart').getContext('2d');
-
-const projectChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
-            {
-                label: 'Project 1',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                borderColor: '#9DB2BF',
-                backgroundColor: '#9DB2BF',
-                fill: false,
-                tension: 0.4
-            },
-            {
-                label: 'Project 2',
-                data: [15, 20, 35, 45, 60, 75, 90, 100],
-                borderColor: '#27374D',
-                backgroundColor: '#27374D',
-                fill: false,
-                tension: 0.4
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false, // Ensures the chart fits the container
-        plugins: {
-            legend: {
-                display: true,
-                position: 'bottom', // Move the legend to the bottom
-                align: 'start', // Align the legend to the start
-                labels: {
-                    boxWidth: 20, // Set the width of the legend box
-                    boxHeight: 20, // Set the height of the legend box
-                    padding: 10, // Adjust the padding around the legend items
-                    usePointStyle: true, // Use point styles (circles) instead of boxes
-                    pointStyle: 'circle' // Set the point style to circle
-                }
-            },
-            tooltip: {
-                enabled: false
-            }
-        },
-        layout: {
-            padding: {
-                top: 20,   // Add space at the top
-                right: 40, // Add space on the right
-                bottom: 5, // Add more space at the bottom
-                left: 40   // Add space on the left
-            }
-        }
-    },
-});
+ 
   // Initialize Feather icons
   feather.replace();
-
-  // Track the sorting state for each column
-  const sortingStates = {
-      progress: false,
-      'start-date': false,
-      'end-date': false
-  };
 
   // Get all the buttons
   const sortButtons = document.querySelectorAll('.sort-icon-btn');
@@ -166,5 +104,4 @@ const projectChart = new Chart(ctx, {
       });
   });
 
-  
  

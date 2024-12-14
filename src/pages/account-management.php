@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/landing-pic.png">
     <title>Account Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/account-management.css"> 
 </head>
@@ -17,7 +18,7 @@
                     <div class="d-flex align-items-center mb-3">
                         <div class="d-flex me-3 position-relative">
                             <img src="images/svg/search.svg" class="search-icon" id="searchIcon">
-                            <input type="text" class="form-control search-input" placeholder="Search" id="searchBar">
+                            <input type="text" class="form-control search-input" placeholder="Search by First or Last Name" id="searchBar">
                         </div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                             <img src="images/svg/plus.svg" class="nav-icon"> Add Account
@@ -30,7 +31,7 @@
                                 <th class="text-center">Last Name</th>
                                 <th class="text-center">First Name</th>
                                 <th class="text-center">Middle Name</th>
-                                <th>Department</th>
+                                <th>Department <i id="sort-icon" class="fas fa-sort"></i></th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Role</th>
                                 <th>Date Added</th>
@@ -43,10 +44,8 @@
 
                     <!-- Pagination -->
                     <nav aria-label="Page navigation" class="mt-3">
-                    <ul class="pagination justify-content-center" id="pagination-links">
-                        <!-- Pagination links will be dynamically generated here -->
-                    </ul>
-                </nav>
+                        <ul class="pagination justify-content-center" id="pagination-links"></ul>
+                    </nav>
                 </div>
             </div>
         </div>

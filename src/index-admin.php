@@ -18,7 +18,7 @@ if (isset($_SESSION['LAST_ACTIVITY'])) {
         // Last activity was more than the timeout duration
         session_unset(); // Unset session variables
         session_destroy(); // Destroy the session
-        header("Location: login.php"); // Redirect to login page
+        header("Location: login-welcome.php"); // Redirect to login page
         exit();
     }
 }
@@ -41,7 +41,9 @@ $pagePath = "pages/{$page}.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> <!-- Updated Bootstrap CSS -->
     <link rel="stylesheet" href="styles/admin-sidebar.css"> <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="<?php echo 'styles/spinner.css'; ?>" />
 </head>
+<?php include 'spinner.html'; ?>
 <body>
 <header class="bg-D9D9D9">
     <button class="hamburger-button">&#9776;</button> <!-- Hamburger icon in header -->
@@ -59,5 +61,6 @@ $pagePath = "pages/{$page}.php";
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Updated jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Updated Bootstrap JS -->
 <script src="scripts/sidebar.js"></script>
+<script src="<?php echo 'scripts/spinner.js'; ?>"></script>
 </body>
 </html>
