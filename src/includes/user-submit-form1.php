@@ -1,161 +1,213 @@
 <?php
-// Assuming you have a database connection file
 include 'config.php';
+include 'helpers.php';
 
-// Set the header to return JSON
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    // Start transaction
-    $conn->begin_transaction();
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = getUserId(); // Retrieve the user_id securely
     try {
-        // 3. Insert into Target Output Table
-        $outputIndicator1 = $_POST['user_indicator_1_1'];
-        $outputIndicator2 = $_POST['user_indicator_2_1'];
-        $outputIndicator3 = $_POST['user_indicator_3_1'];
-        $outputIndicator4 = $_POST['user_indicator_4_1'];
-        $outputIndicator5 = $_POST['user_indicator_5_1'];
+        // Decode the JSON payload
+        $input = json_decode(file_get_contents('php://input'), true);
 
-        $stmt = $conn->prepare("INSERT INTO UserTargetOutput (Target_output_1, Target_output_2, Target_output_3, Target_output_4, Target_output_5) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $outputIndicator1, $outputIndicator2, $outputIndicator3, $outputIndicator4, $outputIndicator5);
-        $stmt->execute();
-
-        $target_output_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 4. Insert into Employment Targets Table
-        $maleTarget = $_POST['user_male_1'];
-        $femaleTarget = $_POST['user_female_1'];
-        $outputIndicators = $_POST['user_output_indicators_1']; // Assume this is a string or array
-
-        $stmt = $conn->prepare("INSERT INTO UserTargetEmployee (male, female, output_indicator) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $maleTarget, $femaleTarget, $outputIndicators);
-        $stmt->execute();
-
-        $target_employee_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 5. Insert into Location Table
-        $location = $_POST['user_province_1'];
-        $cityMunicipality = $_POST['user_city_1'];
-        $barangay = $_POST['user_barangay_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userlocation (location, city, barangay) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $location, $cityMunicipality, $barangay);
-        $stmt->execute();
-
-        $location_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 6. Insert into Project Validation Table
-        //$submittedBy = $_POST['user_submitted_by_1'];
-        $submittedDesignation = $_POST['user_designation_1'];
-        //$submittedDate = $_POST['user_submission_date_1'];
-        //$approvedBy = $_POST['user_approved_by_1'];
-        //$approvedDate = $_POST['user_approval_date_1'];
-
-        $stmt = $conn->prepare("INSERT INTO UserProjectValidation (/*submitted_by,*/ submitted_designation /*submitted_date, approved_by, approved_date*/) VALUES (?/* ?, ?, ?, ?*/)");
-        $stmt->bind_param("s", /*$submittedBy,*/ $submittedDesignation /*$submittedDate,*/  /*$approvedBy,$approvedDate*/ );
-        $stmt->execute();
-
-        $project_validation_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 7. Insert into userimplementingagency Table
-        $implementingAgency = $_POST['user_implementing_agency_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userimplementingagency (implementing_agency) VALUES (?)");
-        $stmt->bind_param("s", $implementingAgency);
-        $stmt->execute();    
-        $implementing_agency_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 8. Insert into userfundagency Table
-        $fundAgency = $_POST['user_funding_agency_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userfundagency (fund_agency) VALUES (?)");
-        $stmt->bind_param("s", $fundAgency);
-        $stmt->execute();
-        
-        $fund_agency_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 9. Insert into userfundsource Table
-        $fundSource = $_POST['user_fund_source_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userfundsource (fund_source) VALUES (?)");
-        $stmt->bind_param("s", $fundSource);
-        $stmt->execute();
-        
-        $fund_source_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 10. Insert into usermodeofimplementation Table        
-        $modeOfImplementation = $_POST['user_mode_implementation_1'];
-
-        $stmt = $conn->prepare("INSERT INTO usermodeofimplementation (mode_of_implementation) VALUES (?)");
-        $stmt->bind_param("s", $modeOfImplementation);
-        $stmt->execute();
-        
-        $mode_of_implementation_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 11. Insert into usersector Table
-        $sector = $_POST['user_sector_1'];
-
-        $stmt = $conn->prepare("INSERT INTO usersector (sector) VALUES (?)");
-        $stmt->bind_param("s", $sector);
-        $stmt->execute();
-        
-        $sector_id = $conn->insert_id; // Store the inserted ID for later use
-
-        // 12. Insert into userprojecttitle Table
-        $projectTitle = $_POST['user_project_title_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userprojecttitle (project_title) VALUES (?)");
-        $stmt->bind_param("s", $projectTitle);
-        $stmt->execute();
-        
-        $project_id = $conn->insert_id; // Store the inserted ID for later use in InitialProjectReport (UserInitialProjectReport)
-
-        // 1. Insert into Project Details Table
-        $year = $_POST['user_year_1'];
-        $startDate = $_POST['user_start_date_1'];
-        $endDate = $_POST['user_end_date_1'];
-        $remarks = $_POST['user_remarks_1'];
-        $totalCost = $_POST['user_total_cost_1'];
-
-        $stmt = $conn->prepare("INSERT INTO userinitialprojectreport (project_id, year, start_date, end_date, remarks, total_cost, implementing_agency_id, fund_agency_id, fund_source_id, sector_id, mode_of_implementation_id, location_id, target_employee_id, target_output_id, project_validation_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("isssssiiiiiiiii", $project_id, $year, $startDate, $endDate, $remarks, $totalCost, $implementing_agency_id, $fund_agency_id, $fund_source_id, $sector_id, $mode_of_implementation_id, $location_id, $target_employee_id, $target_output_id, $project_validation_id);
-        $stmt->execute();
-
-        $details_id = $conn->insert_id; // Store the last inserted details_id
-
-        // 2. Insert into Monthly Quarterly Targets Table
-        for ($i = 1; $i <= 5; $i++) {
-            $startDate = $_POST["user_first_start_$i"];
-            $endDate = $_POST["user_first_end_$i"];
-            $financialTargets = $_POST["user_first_financial_targets_$i"];
-            $physicalTargets = $_POST["user_first_physical_targets_$i"];
-
-            if (!empty($startDate) && !empty($endDate)) {
-                $stmt = $conn->prepare("INSERT INTO usermtyltarget (period_start, period_end, financial_target, physical_target_percentage, details_id) VALUES (?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssdis", $startDate, $endDate, $financialTargets, $physicalTargets, $details_id);
-                $stmt->execute();
-            }
+        if (!isset($input['project_forms']) || empty($input['project_forms'])) {
+            throw new Exception("No forms submitted.");
         }
 
-        // Commit transaction
+        $project_forms = $input['project_forms'];
+        if (!is_array($project_forms)) {
+            throw new Exception("Invalid form data structure.");
+        }
+
+        $conn->begin_transaction();
+
+        foreach ($project_forms as $project) {
+            // Extract data from the current form
+            $project_title = $project['project_title'];
+            $year = $project['year'];
+            $implementing_agency = $project['implementing_agency'];
+            $fund_agency = $project['fund_agency'];
+            $fund_source = $project['fund_source'];
+            $mode_of_implementation = $project['mode_of_implementation'];
+            $sector = $project['sector'];
+            $total_cost = $project['total_cost'];
+            $start_date = $project['start_date'];
+            $end_date = $project['end_date'];
+            $location = $project['location'];
+            $city = $project['city'];
+            $barangay = $project['barangay'];
+            $remarks = $project['remarks'];
+            $male = $project['male'];
+            $female = $project['female'];
+
+            // Insert data into related tables and get foreign keys
+            // 1. Insert into `UserProjectTitle`
+            $stmt = $conn->prepare("INSERT INTO UserProjectTitle (project_title) VALUES (?)");
+            $stmt->bind_param("s", $project_title);
+            $stmt->execute();
+            $project_id = $conn->insert_id;
+
+            // 2. Insert into `UserImplementingAgency`
+            $stmt = $conn->prepare("INSERT INTO UserImplementingAgency (implementing_agency) VALUES (?)");
+            $stmt->bind_param("s", $implementing_agency);
+            $stmt->execute();
+            $implementing_agency_id = $conn->insert_id;
+
+            // 3. Insert into `UserFundSource`
+            $stmt = $conn->prepare("INSERT INTO UserFundSource (fund_source) VALUES (?)");
+            $stmt->bind_param("s", $fund_source);
+            $stmt->execute();
+            $fund_source_id = $conn->insert_id;
+
+            // 4. Insert into `UserFundAgency`
+            $stmt = $conn->prepare("INSERT INTO UserFundAgency (fund_agency) VALUES (?)");
+            $stmt->bind_param("s", $fund_agency);
+            $stmt->execute();
+            $fund_agency_id = $conn->insert_id;
+
+            // 5. Insert into `UserModeOfImplementation`
+            $stmt = $conn->prepare("INSERT INTO UserModeOfImplementation (mode_of_implementation) VALUES (?)");
+            $stmt->bind_param("s", $mode_of_implementation);
+            $stmt->execute();
+            $mode_of_implementation_id = $conn->insert_id;
+
+            // 6. Insert into `UserSector`
+            $stmt = $conn->prepare("INSERT INTO UserSector (sector) VALUES (?)");
+            $stmt->bind_param("s", $sector);
+            $stmt->execute();
+            $sector_id = $conn->insert_id;
+
+            // 7. Insert into `UserTotalCost`
+            $stmt = $conn->prepare("INSERT INTO UserTotalCost (total_cost) VALUES (?)");
+            $stmt->bind_param("d", $total_cost);
+            $stmt->execute();
+            $total_cost_id = $conn->insert_id;
+
+            // 8. Insert into `UserSDateEDate`
+            $stmt = $conn->prepare("INSERT INTO UserSDateEDate (start_date, end_date, year) VALUES (?, ?, ?)");
+            $stmt->bind_param("ssi", $start_date, $end_date, $year);
+            $stmt->execute();
+            $s_date_e_date_id = $conn->insert_id;
+
+            // 9. Insert into `UserLocation`
+            $stmt = $conn->prepare("INSERT INTO UserLocation (location, city, barangay) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $location, $city, $barangay);
+            $stmt->execute();
+            $location_id = $conn->insert_id;
+
+            // 10. Insert into `UserRemarks`
+            $stmt = $conn->prepare("INSERT INTO UserRemarks (remarks) VALUES (?)");
+            $stmt->bind_param("s", $remarks);
+            $stmt->execute();
+            $remarks_id = $conn->insert_id;
+
+            // 11. Insert into `UserTargetEmployee`
+            $stmt = $conn->prepare("INSERT INTO UserTargetEmployee (male, female) VALUES (?, ?)");
+            $stmt->bind_param("ii", $male, $female);
+            $stmt->execute();
+            $target_employee_id = $conn->insert_id;
+
+            // 12. Insert into `InitialProjectReport`
+            $stmt = $conn->prepare("
+                INSERT INTO InitialProjectReport 
+                (project_id, implementing_agency_id, fund_source_id, fund_agency_id, mode_of_implementation_id, 
+                sector_id, total_cost_id, s_date_e_date_id, location_id, target_employee_id, remarks_id, user_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+            $stmt->bind_param("iiiiiiiiiiii", $project_id, $implementing_agency_id, $fund_source_id, $fund_agency_id,
+                $mode_of_implementation_id, $sector_id, $total_cost_id, $s_date_e_date_id, $location_id, $target_employee_id, $remarks_id,$user_id);
+            $stmt->execute();
+            $details_id = $conn->insert_id;
+            // 13. Insert dynamic data: `UserOutputIndicator`, `UserTargetOutput`, `UserMtyTarget`
+
+            // Handle `UserOutputIndicator`
+            if (isset($project['output_indicators']) && is_array($project['output_indicators'])) {
+                $output_indicators = $project['output_indicators'];
+            } else {
+                $output_indicators = json_decode($project['output_indicators'] ?? '', true); // Decode if necessary
+            }
+
+            if (!empty($output_indicators) && is_array($output_indicators)) {
+                foreach ($output_indicators as $index => $output_indicator) {
+                    $output_text = $output_indicator['output_indicator'] ?? null;
+                    $position = $output_indicator['position'] ?? $index + 1;
+
+                    if ($output_text) { // Ensure there's valid output text
+                        $stmt = $conn->prepare("INSERT INTO UserOutputIndicator (output_indicator, output_indicator_position, details_id) VALUES (?, ?, ?)");
+                        $stmt->bind_param("sii", $output_text, $position, $details_id);
+                        $stmt->execute();
+                    }
+                }
+            } else {
+                // Optional: Log or handle the case where `output_indicators` is invalid or empty
+                file_put_contents('debug_log.txt', "No valid output indicators found for details_id: $details_id\n", FILE_APPEND);
+            }
+
+            // Handle `UserTargetOutput`
+            if (isset($project['target_outputs']) && is_array($project['target_outputs'])) {
+                $target_outputs = $project['target_outputs'];
+            } else {
+                $target_outputs = json_decode($project['target_outputs'] ?? '', true); // Decode if necessary
+            }
+
+            if (!empty($target_outputs) && is_array($target_outputs)) {
+                foreach ($target_outputs as $target_output) {
+                    if ($target_output) { // Ensure there's valid target output text
+                        $stmt = $conn->prepare("INSERT INTO UserTargetOutput (target_output, details_id) VALUES (?, ?)");
+                        $stmt->bind_param("si", $target_output, $details_id);
+                        $stmt->execute();
+                    }
+                }
+            } else {
+                // Optional: Log or handle the case where `target_outputs` is invalid or empty
+                file_put_contents('debug_log.txt', "No valid target outputs found for details_id: $details_id\n", FILE_APPEND);
+            }
+
+        
+            // 3. Insert into `UserMtyTarget`
+            if (isset($project['monthly_targets']) && is_array($project['monthly_targets'])) {
+                $monthly_targets = $project['monthly_targets']; // Use array directly if already decoded
+            } else {
+                $monthly_targets = json_decode($project['monthly_targets'] ?? '', true); // Decode if necessary
+            }
+
+            // Check if $monthly_targets is valid and not empty
+            if (!empty($monthly_targets) && is_array($monthly_targets)) {
+                foreach ($monthly_targets as $target) {
+                    // Validate each target entry to ensure all necessary fields are present
+                    $position = $target['position'] ?? null;
+                    $start_date = $target['start'] ?? null;
+                    $end_date = $target['end'] ?? null;
+                    $financial_target = $target['financial'] ?? null;
+                    $physical_target_percent = $target['physical'] ?? null;
+
+                    // Only insert if at least one of the values is provided
+                    if ($position !== null || $start_date !== null || $end_date !== null || $financial_target !== null || $physical_target_percent !== null) {
+                        $stmt = $conn->prepare("
+                            INSERT INTO UserMtyTarget (mty_target_position, period_start, period_end, financial_target, physical_target_percent, details_id)
+                            VALUES (?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param("issdii", 
+                            $position, 
+                            $start_date, 
+                            $end_date, 
+                            $financial_target, 
+                            $physical_target_percent, 
+                            $details_id
+                        );
+                        $stmt->execute();
+                    }
+                }
+            } else {
+                // Optional: Log or handle the case where `monthly_targets` is invalid or empty
+                file_put_contents('debug_log.txt', "No valid monthly targets found for details_id: $details_id\n", FILE_APPEND);
+            }
+            }
+
         $conn->commit();
+        echo json_encode(['status' => 'success', 'message' => 'Forms submitted successfully!']);
 
-        // Return JSON success response
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Data successfully submitted!'
-        ]);
     } catch (Exception $e) {
-        // Rollback transaction on error
         $conn->rollback();
-
-        // Return JSON error response
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Error: ' . $e->getMessage()
-        ]);
+        echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
     }
 }
 ?>

@@ -1,11 +1,14 @@
 <?php
 // Include your database configuration
 include 'config.php';
+include 'helpers.php';
 
 // Set response to JSON format
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $user_id = getUserId(); // Retrieve the user_id securely
 
     // Begin transaction
     $conn->begin_transaction();
@@ -45,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $observeResults = $_POST['user_observed_results_4'];
 
         // Insert into UserProjectResult table
-        $stmt = $conn->prepare("INSERT INTO UserProjectResult (project_id, implementing_agency_id, project_validation_id, objectives, result_indicator, observe_results, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiisssii", $project_id, $implementing_agency_id, $project_validation_id, $objectives, $resultIndicator, $observeResults, $month, $year);
+        $stmt = $conn->prepare("INSERT INTO UserProjectResult (project_id, implementing_agency_id, project_validation_id, objectives, result_indicator, observe_results, month, year,user_id) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iiisssiii", $project_id, $implementing_agency_id, $project_validation_id, $objectives, $resultIndicator, $observeResults, $month, $year,$user_id);
         $stmt->execute();
 
         
