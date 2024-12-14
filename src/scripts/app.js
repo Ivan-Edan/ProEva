@@ -119,3 +119,166 @@ function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
+// Get the modal elements
+var emailModal = document.getElementById("emailModal");
+var passwordResetModal = document.getElementById("passwordResetModal");
+
+// Get the link and buttons
+var forgotPasswordLink = document.querySelector("#forgotPasswordLink");
+var submitEmailBtn = document.getElementById("submitEmail");
+var cancelEmailBtn = document.getElementById("cancelEmail");
+var cancelResetForm = document.getElementById("cancelResetForm");
+
+// Show the email modal when clicking the "Forgot Password" link
+forgotPasswordLink.addEventListener("click", function() {
+    emailModal.style.display = "block"; // Show the email modal
+});
+
+// Show the password reset modal after submitting the email
+submitEmailBtn.addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent form submission for now (you can replace this with actual AJAX submission if needed)
+    
+    // After submitting the email, hide the email modal and show the password reset modal
+    emailModal.style.display = "none"; // Hide the email modal
+    passwordResetModal.style.display = "block"; // Show the password reset modal
+});
+
+// Close the email modal when the cancel button is clicked
+cancelEmailBtn.addEventListener("click", function() {
+    emailModal.style.display = "none"; // Hide the email modal
+});
+
+// Close the password reset modal when the cancel button is clicked
+cancelResetForm.addEventListener("click", function() {
+    passwordResetModal.style.display = "none"; // Hide the password reset modal
+});
+
+
+
+
+// Password confirmation validation
+var resetForm = document.querySelector("form");
+var newPassword = document.getElementById("newPassword");
+var confirmPassword = document.getElementById("confirmPassword");
+var passwordMismatchMessage = document.getElementById("passwordMismatchMessage");
+
+resetForm.addEventListener("submit", function(event) {
+    // If passwords do not match, prevent form submission
+    if (newPassword.value !== confirmPassword.value) {
+        event.preventDefault(); // Stop form submission
+        passwordMismatchMessage.style.display = "block"; // Show the mismatch message
+    }
+});
+// Get the cancel button element
+var cancelResetForm = document.getElementById("cancelResetForm");
+
+// Get the modal element
+var modal = document.getElementById("passwordResetModal");
+
+// Add event listener to the cancel button
+cancelResetForm.addEventListener("click", function() {
+    // Hide the modal when cancel button is clicked
+    modal.style.display = "none";
+});
+// Get both toggle buttons
+const toggleNewPassword = document.querySelector("#toggleNewPassword");
+const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword");
+
+// Get the password fields
+const newPasswordField = document.querySelector("#newPassword");
+const confirmPasswordField = document.querySelector("#confirmPassword");
+
+// Toggle password visibility for the new password field
+toggleNewPassword.addEventListener("click", function() {
+  const type = newPasswordField.getAttribute("type") === "password" ? "text" : "password";
+  newPasswordField.setAttribute("type", type);
+  toggleNewPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
+});
+
+// Toggle password visibility for the confirm password field
+toggleConfirmPassword.addEventListener("click", function() {
+  const type = confirmPasswordField.getAttribute("type") === "password" ? "text" : "password";
+  confirmPasswordField.setAttribute("type", type);
+  toggleConfirmPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
+});
+
+
+
+
+
+
+$(document).ready(function() {
+  $("#submitResetForm").on("click", function(event) {
+      event.preventDefault(); 
+
+      var newPassword = $("#newPassword").val().trim();
+      var confirmPassword = $("#confirmPassword").val().trim();
+      var email = $("#resetEmail").val().trim(); 
+
+      if (newPassword !== confirmPassword) {
+          $("#passwordMismatchMessage").show(); 
+          return;
+      }
+
+      $.ajax({
+          type: "POST",
+          url: "includes/reset_password.php",
+          data: { newPassword: newPassword, confirmPassword: confirmPassword, email: email },
+          dataType: "json",
+          success: function(response) {
+              if (response.status === "success") {
+                  // Show success modal
+                  $('#successEditModal').modal('show');
+                  window.location.href = "login-welcome.php"; 
+              } else {
+                  alert(response.message); 
+              }
+          },
+          error: function() {
+              alert("An error occurred. Please try again.");
+          }
+      });
+  });
+});
+
+
+
+
+
+
+
+$(document).ready(function() {
+  $("#submitResetForm").on("click", function(event) {
+      event.preventDefault(); 
+
+      var newPassword = $("#newPassword").val().trim();
+      var confirmPassword = $("#confirmPassword").val().trim();
+      var email = $("#resetEmail").val().trim(); 
+
+      if (newPassword !== confirmPassword) {
+          $("#passwordMismatchMessage").show(); 
+          return;
+      }
+
+      $.ajax({
+          type: "POST",
+          url: "includes/reset_password.php",
+          data: { newPassword: newPassword, confirmPassword: confirmPassword, email: email },
+          dataType: "json",
+          success: function(response) {
+              if (response.status === "success") {
+                  alert("Password updated successfully.");
+                  window.location.href = "login-welcome.php"; 
+              } else {
+                  alert(response.message); 
+              }
+          },
+          error: function() {
+              alert("An error occurred. Please try again.");
+          }
+      });
+  });
+});
+
+
+

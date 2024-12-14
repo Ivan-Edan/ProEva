@@ -83,7 +83,16 @@
     min-width: 200px;         /* Ensure minimum width for readability */
     box-sizing: border-box;  /* Include padding and borders in width calculation */
 }
-
+.no-data{
+    width: 250px;
+    height: 220px;
+}
+.no-data-placeholder{
+    display: none; 
+    text-align: center; 
+    margin-top: 20px;
+    height: 500px;
+}
 .stat-content {
     display: flex;
     align-items: center;
@@ -96,7 +105,21 @@
     height: 60px;
     margin-right: 10px;
 }
-
+.stat-icon-1 {
+    width: 100px;
+    height: 75px;
+    margin-right: 10px;
+}
+.stat-icon-2 {
+    width: 95px;
+    height: 75px;
+    margin-left: -30px;
+}
+.stat-icon-3 {
+    width: 80px;
+    height: 75px;
+    margin-right: 10px;
+}
 .stat-label {
     font-size: 15px;
     color: white;
@@ -114,13 +137,14 @@
     font-weight: bold;
     margin-left: 5px;
 }
-.stat-number-1 {
-    font-size: 32px;
+.stat-label-1 {
+    font-size: 22px;
     color: #ffffff;
     margin: 0;
-    text-align: center;
+    flex-grow: 1;
+    text-align: left;
+    padding-right: 15px;
     font-weight: bold;
-    margin-left: 40px;
 }
 .stat-number-2 {
     font-size: 15px;
@@ -441,6 +465,18 @@
 }
 
 /* Responsive adjustment for small screens */
+@media (max-width: 1010px) {
+    .container-8 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .table th, .table td {
+        padding: 15px; /* Adjust padding for smaller screens */
+        font-size: 7px;
+    }
+}
+
 @media (max-width: 576px) {
     .pagination .page-link {
         padding: 6px 10px;

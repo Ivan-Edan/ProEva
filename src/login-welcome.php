@@ -14,9 +14,11 @@
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@feathericons/fontawesome@1.0.0/dist/feather.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <!-- Spinner -->
+    <link rel="stylesheet" href="<?php echo 'styles/spinner.css'; ?>" />
 </head>
 <body>
+<?php include 'spinner.html'; ?>
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
@@ -30,7 +32,7 @@
                     <input type="submit" class="btn" value="LOGIN" id="sign-up-btn" />
                 </form>
 
-                <!-- Sign In Form -->
+                <!-- Login Form -->
                 <form action="<?php echo 'login.php'; ?>" method="POST" class="sign-up-form">
                     <h2 class="title login-title">LOGIN</h2>
                     <div class="text-container">
@@ -39,7 +41,7 @@
                     <label class="label-field" for="email">Email</label>
                     <div class="input-field">
                         <img src="<?php echo 'images/svg/user.svg'; ?>" />
-                        <input type="email" id="email" name="email" placeholder="ex: juancarlos@gmail.com" required />
+                        <input type="email" id="email" name="email" placeholder="e.g juancarlos@gmail.com" required />
                     </div>
                     <br>
                     <label class="label-field" for="password">Password</label>
@@ -48,7 +50,7 @@
                         <input type="password" id="password" name="password" placeholder="Account password" required />
                         <img src="<?php echo 'images/svg/eye.svg'; ?>" id="togglePassword" class="toggle-password" alt="Toggle Password Visibility" />
                     </div>
-                    <p class="social-text-text">Forgot password ?</p>
+                    <p class="social-text-text" id="forgotPasswordLink">Forgot password?</p>
                     <input type="submit" value="Login" class="btn solid" id="login-form"/>
                 </form>
             </div>
@@ -74,6 +76,119 @@
             </div>
         </div>
     </div>
-</body>
+
+<!-- Email Input Modal (First Step) -->
+<div id="emailModal" class="modal">
+    <div class="modal-content">
+        <h2 class="title login-title-2">Forgot Password</h2>
+        <div class="text-container">
+            <p class="social-text-2">Enter your email address to reset your password</p>
+        </div>
+        <form action="send_reset_email.php" method="POST">
+            <label class="label-field-2" for="email">Email</label>
+                    <div class="input-field">
+                        <img src="<?php echo 'images/svg/user.svg'; ?>" />
+                        <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your email" required />
+                    </div>
+            <div class="modal-buttons">
+                <input type="submit" value="Submit" class="btn" id="submitEmail" />
+                <button type="button" class="btn cancel-btn" id="cancelEmail">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Password Reset Modal (Second Step) -->
+<div id="passwordResetModal" class="modal">
+    <div class="modal-content">
+        <h2 class="title login-title-2">Reset Your Password</h2>
+        <div class="text-container">
+            <p class="social-text-2">Enter your new password for your account</p>
+        </div>
+        <form action="reset_password.php" method="POST">
+            <label class="label-field-2" for="newPassword">New Password</label>
+            <div class="input-field-password input-field-password-modal">
+                <input type="password" id="newPassword" name="newPassword" placeholder="Enter your new password" required />
+                <img src="<?php echo 'images/svg/eye.svg'; ?>" id="toggleNewPassword" class="toggle-password" alt="Toggle Password Visibility" />
+            </div>
+            <br>
+            <label class="label-field-2" for="confirmPassword">Confirm New Password</label>
+            <div class="input-field-password input-field-password-modal">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your new password" required />
+                <img src="<?php echo 'images/svg/eye.svg'; ?>" id="toggleConfirmPassword" class="toggle-password" alt="Toggle Password Visibility" />
+            </div>
+
+            <div id="passwordMismatchMessage" style="color: red; display: none;">
+                <p>Passwords do not match. Please try again.</p>
+            </div>
+
+            <div class="modal-buttons">
+                <input type="submit" value="Submit" class="btn" id="submitResetForm" />
+                <button type="button" class="btn cancel-btn" id="cancelResetForm">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="<?php echo 'scripts/app.js'; ?>"></script>
+<script src="<?php echo 'scripts/spinner.js'; ?>"></script>
+<script>
+    // Handle forgot password functionality
+    const forgotPasswordLink = document.querySelector("#forgotPasswordLink");
+    const emailModal = document.getElementById("emailModal");
+    const submitEmailBtn = document.getElementById("submitEmail");
+    const passwordResetModal = document.getElementById("passwordResetModal");
+    const cancelEmailBtn = document.getElementById("cancelEmail");
+    const cancelResetForm = document.getElementById("cancelResetForm");
+
+    forgotPasswordLink.addEventListener("click", function() {
+        emailModal.style.display = "block";
+    });
+
+    submitEmailBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        emailModal.style.display = "none";
+        passwordResetModal.style.display = "block";
+    });
+
+    cancelEmailBtn.addEventListener("click", function() {
+        emailModal.style.display = "none";
+    });
+
+    cancelResetForm.addEventListener("click", function() {
+        passwordResetModal.style.display = "none";
+    });
+
+    // Password mismatch check
+    var resetForm = document.querySelector("form");
+    var newPassword = document.getElementById("newPassword");
+    var confirmPassword = document.getElementById("confirmPassword");
+    var passwordMismatchMessage = document.getElementById("passwordMismatchMessage");
+
+    resetForm.addEventListener("submit", function(event) {
+        if (newPassword.value !== confirmPassword.value) {
+            event.preventDefault();
+            passwordMismatchMessage.style.display = "block";
+        }
+    });
+
+    // Toggle password visibility for new and confirm password
+    const toggleNewPassword = document.querySelector("#toggleNewPassword");
+    const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword");
+    const newPasswordField = document.querySelector("#newPassword");
+    const confirmPasswordField = document.querySelector("#confirmPassword");
+
+    toggleNewPassword.addEventListener("click", function() {
+        const type = newPasswordField.getAttribute("type") === "password" ? "text" : "password";
+        newPasswordField.setAttribute("type", type);
+        toggleNewPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
+    });
+
+    toggleConfirmPassword.addEventListener("click", function() {
+        const type = confirmPasswordField.getAttribute("type") === "password" ? "text" : "password";
+        confirmPasswordField.setAttribute("type", type);
+        toggleConfirmPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
+    });
+</script>
+</body>
 </html>
