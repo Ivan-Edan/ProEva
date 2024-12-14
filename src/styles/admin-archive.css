@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #F5F5F5;
 }
 
@@ -15,31 +15,32 @@ body{
     margin-bottom: 50px;
     height: 100px;
 }
+
 .container-8 {
     background-color: #FFFFFF;
     border: 1px solid #AEAEAE;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin-bottom: 20px;
-    height: 550px;
-    overflow: hidden; 
     padding-top: 40px;
     padding-left: 20px;
     padding-right: 20px;
+    width: 100%; /* Ensures the container is fluid and shrinks */
 }
+
 .table {
-    width: 100%; 
-    table-layout: auto; 
-    margin: 0; 
-    border-collapse: separate; 
-    border-spacing: 0; 
+    width: 100%;  /* Ensure table takes up 100% of container width */
+    table-layout: auto;  /* Auto layout to allow columns to resize based on content */
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .table th, .table td {
-    padding: 20px; 
+    padding: 20px;
     text-align: left;
     font-size: 14px;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .table thead th {
@@ -60,17 +61,14 @@ body{
 
 .table td {
     border-bottom: 0.5px solid #bebebe;
-}
-
-/* Optional: adjust the hover effect */
-.table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-.table td {
     color: #585858;
 }
 
-/* Center pagination buttons */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Pagination Adjustments */
 .pagination {
     display: flex;
     justify-content: center;
@@ -78,7 +76,6 @@ body{
     margin-top: 40px;
 }
 
-/* Style for each pagination item */
 .pagination .page-item {
     margin: 0 5px;
 }
@@ -93,7 +90,6 @@ body{
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover effect */
 .pagination .page-link:hover {
     background-color: #27374D;
     color: #ffffff;
@@ -101,7 +97,6 @@ body{
     border-radius: 50px;
 }
 
-/* Active page style */
 .pagination .page-item.active .page-link {
     color: #ffffff;
     background-color: #27374D;
@@ -109,7 +104,6 @@ body{
     border-radius: 50px;
 }
 
-/* Disabled state for Previous/Next when not clickable */
 .pagination .page-item.disabled .page-link {
     color: #6c757d;
     background-color: #ffffff;
@@ -118,18 +112,28 @@ body{
     border-radius: 50px;
 }
 
-/* Focus style for accessibility */
 .pagination .page-link:focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     border-radius: 50px;
 }
 
-/* Responsive adjustment for small screens */
+/* Responsive Table for small screens */
+@media (max-width: 1010px) {
+    .container-8 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .table th, .table td {
+        padding: 15px; /* Adjust padding for smaller screens */
+        font-size: 7px;
+    }
+}
+
 @media (max-width: 576px) {
     .pagination .page-link {
         padding: 6px 10px;
         font-size: 0.875rem;
     }
 }
-

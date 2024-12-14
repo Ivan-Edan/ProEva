@@ -20,6 +20,7 @@
                             <tr>
                                 <th class="text-center">Project Name</th>
                                 <th class="text-center">Department <i id="sort-icon" class="fas fa-sort"></i></th>
+                                <th class="text-center">Date Created</th>
                                 <th class="text-center">Form Type</th>
                             </tr>
                         </thead>
@@ -27,16 +28,19 @@
                             <tr>
                                 <td class="text-center">Bridge Building 1</td>
                                 <td class="text-center">CPDO</td>
+                                <td class="text-center">January 27, 2024</td>
                                 <td class="text-center download-link">SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS</td>
                             </tr>
                             <tr>
                                 <td class="text-center">Bridge Building 1</td>
                                 <td class="text-center">Accounting</td>
+                                <td class="text-center">January 27, 2024</td>
                                 <td class="text-center download-link">REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMEN....</td>
                             </tr>
                             <tr>
                                 <td class="text-center">Bridge Building 1</td>
                                 <td class="text-center">Engineering</td>
+                                <td class="text-center">January 27, 2024</td>
                                 <td class="text-center download-link">PROJECT INSPECTION REPORT</td>
                             </tr>
                             <!-- Additional rows can be added dynamically through JavaScript -->

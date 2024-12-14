@@ -23,52 +23,7 @@
                             </tr>
                         </thead>
                         <tbody id="table-body">
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMEN....</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">PROJECT INSPECTION REPORT</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMEN....</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">PROJECT INSPECTION REPORT</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMEN....</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">Bridge Building 1</td>
-                                <td class="text-center download-link">PROJECT INSPECTION REPORT</td>
-                                <td class="text-center">January 27, 2022</td>
-                            </tr>
-                            <!-- Additional rows can be added dynamically through JavaScript -->
+                            <!-- Additional rows can be added dynamically through JavaScript <td class="text-center download-link"> -->
                         </tbody>
                     </table>
 

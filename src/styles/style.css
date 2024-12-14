@@ -70,7 +70,10 @@ form.sign-in-form {
   font-weight: 800 !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
-
+.login-title-2{
+  font-weight: 800 !important;
+  text-align: center;
+}
 .input-field, .input-field-password {
   max-width: 380px;
   width: 100%;
@@ -83,7 +86,10 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
-
+.input-field-password-modal {
+  grid-template-columns: 85% 85% !important;
+  padding: 0 0.8rem !important;
+}
 .input-field img ,.input-field-password img{
   text-align: center;
   padding-top: 15px;
@@ -113,7 +119,6 @@ form.sign-in-form {
   font-size: 1rem;
   font-weight: bold;
   color: #333333;
-  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   display: block; 
   margin-bottom: 5px; 
   width: 60%;
@@ -126,7 +131,13 @@ form.sign-in-form {
   font-weight: bold;
   color: #333333;
 }
-
+.social-text-2 {
+  padding: 0.7rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+}
 .text-container {
   border-bottom: 4px solid #134B70; 
   padding-bottom: 10px; 
@@ -147,11 +158,17 @@ form.sign-in-form {
 }
 .label-field{
   font-weight: bold;
-  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   display: block; 
   margin-bottom: 5px; 
   width: 60%;
   text-align: left; 
+}
+.label-field-2{
+  font-weight: bold;
+  display: block; 
+  margin-bottom: 5px; 
+  width: 60%;
+  text-align: left !important; 
 }
 #togglePassword {
   cursor: pointer;
@@ -445,4 +462,103 @@ input[type="password"]::-ms-reveal {
     bottom: 28%;
     left: 50%;
   }
+}
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be adjusted */
+    max-width: 400px;
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    background: transparent;
+    border: none;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Make sure the modal is in the front */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be adjusted */
+  max-width: 500px;
+  z-index: 9999; /* Ensure the content is also in front */
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  background: transparent;
+  border: none;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;  /* Distributes buttons evenly with space in between */
+    gap: 10px;  /* Optional: Adds space between the buttons */
+    margin-top: 20px; /* Adds space between the form and buttons */
+}
+
+
+.cancel-btn {
+    background-color: #f44336; /* Red background for the cancel button */
+    color: white;
+    border: none;
+}
+
+
+.cancel-btn:hover, .solid:hover {
+    opacity: 0.8; /* Button hover effect */
 }
