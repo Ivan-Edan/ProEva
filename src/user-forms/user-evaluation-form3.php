@@ -13,51 +13,14 @@
                 Project Exception Report
             </div>
             <div class="card-body">
-                <form id="user_form3" data-action="includes/user-submit-form3.php">
+                <form id="form3-form" data-action="includes/user-submit-form3.php" method="POST">
                     <h5>Project Details</h5>
                     <div class="row mb-3">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <label for="projectTitle">Program / Project Title:</label>
                             <input type="text" class="form-control" id="projectTitle" name = "user_project_title_1">
                         </div>
-                        <div class="col-md-1">
-                            <label for="month">Month:</label>
-                            <select class="form-control" id="month"  name = "user_month_3">
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1">
-                            <label for="year">Year:</label>
-                            <select class="form-control" id="year" name = "user_year_3">
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <!-- Add more years as needed -->
-                            </select>
-                        </div>
-                        <div class="col-md-1">
-                            <label for="quarter">Quarter:</label>
-                            <select class="form-control" id="quarter" name = "user_quarter_3">
-                                <option value="Q1">Q1</option>
-                                <option value="Q2">Q2</option>
-                                <option value="Q3">Q3</option>
-                                <option value="Q4">Q4</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="implementingAgency">Implementing Agency:</label>
                             <input type="text" class="form-control" id="implementingAgency"  name = "user_implementing_agency_1">
                         </div>

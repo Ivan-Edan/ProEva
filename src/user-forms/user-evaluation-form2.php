@@ -13,26 +13,14 @@
                 Physical and Financial Accomplishment Report
             </div>
             <div class="card-body">
-                <form id="user_form2" data-action="includes/user-submit-form2.php">
+                <form id="form2-form" data-action="includes/user-submit-form2.php"  method="POST">
                     <h5>Project Details</h5>
                     <div class="row mb-3">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <label for="projectTitle">Program / Project Title:</label>
                             <input type="text" class="form-control" id="projectTitle" name="user_project_title_1" required>
                         </div>
-                        <div class="col-md-1">
-                            <label for="month">Month:</label>
-                            <input type="text" class="form-control" id="month" name="user_month_2">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="year">Year:</label>
-                            <input type="text" class="form-control" id="year" name="user_year_2">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="quarter">Quarter:</label>
-                            <input type="text" class="form-control" id="quarter" name="user_quarter_2">
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="implementingAgency">Implementing Agency:</label>
                             <input type="text" class="form-control" id="implementingAgency" name="user_implementing_agency_1">
                         </div>

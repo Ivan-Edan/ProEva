@@ -13,7 +13,7 @@
                 PROJECT RESULTS
             </div>
             <div class="card-body">
-                <form id="user_form4" data-action="includes/user-submit-form4.php">
+                <form id="form4-form" data-action="includes/user-submit-form4.php" method="POST">
                     <h5>Project Details</h5>
 
                     <div class="mb-3 row">
