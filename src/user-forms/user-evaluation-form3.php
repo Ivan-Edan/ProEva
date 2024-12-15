@@ -16,20 +16,16 @@
                 <form id="form3-form" data-action="includes/user-submit-form3.php" method="POST">
                     <h5>Project Details</h5>
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="projectTitle">Program / Project Title:</label>
                             <input type="text" class="form-control" id="projectTitle" name = "user_project_title_1">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="implementingAgency">Implementing Agency:</label>
-                            <input type="text" class="form-control" id="implementingAgency"  name = "user_implementing_agency_1">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="daRegion">Implementing Agency/NGOs/Concerned Citizens: DA Region IV-A:</label>
-                            <input type="text" class="form-control" id="daRegion"  name = "user_da_region_3">
+                            <label for="implementingAgency">Implementing Agency:</label>
+                            <input type="text" class="form-control" id="implementingAgency"  name = "user_implementing_agency_1">
                         </div>
                         <div class="col-md-6">
                             <label for="sector">Sector:</label>
