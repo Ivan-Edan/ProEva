@@ -44,9 +44,9 @@ if ($result_department->num_rows > 0) {
     SELECT 
         p.project_title, 
         s.sector, 
-        r.total_cost, 
-        r.start_date, 
-        r.end_date
+        c.total_cost, 
+        d.start_date, 
+        d.end_date
     FROM 
         initialprojectreport AS r
     INNER JOIN 
@@ -55,11 +55,18 @@ if ($result_department->num_rows > 0) {
         usersector AS s ON r.sector_id = s.sector_id
     INNER JOIN 
         users AS u ON r.user_id = u.id
+    LEFT JOIN 
+        usertotalcost AS c ON r.total_cost_id = c.total_cost_id
+    LEFT JOIN 
+        usersdateedate AS d ON r.s_date_e_date_id = d.s_date_e_date_id
     WHERE 
         r.user_id = ? AND u.department_id = ?
     LIMIT ?, ?"; // Using LIMIT and OFFSET
 
     $stmt_reports = $conn->prepare($sql_reports);
+    if (!$stmt_reports) {
+        die("SQL Error: " . $conn->error);
+    }
     $stmt_reports->bind_param('iiii', $user_id, $user_department, $offset, $recordsPerPage);
     $stmt_reports->execute();
     $result_reports = $stmt_reports->get_result();
@@ -83,6 +90,9 @@ if ($result_department->num_rows > 0) {
     echo json_encode(["error" => "User department not found"]);
 }
 
+// Close prepared statements and database connection
 $stmt_department->close();
+if (isset($stmt_reports)) $stmt_reports->close();
+if (isset($stmt_count)) $stmt_count->close();
 $conn->close();
 ?>

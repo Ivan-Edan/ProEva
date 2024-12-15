@@ -238,7 +238,7 @@ $user_id = $_SESSION['user_id'];
                 <h3 class="modal-title" style="font-weight: bold;">Main Project Details</h3>
             </div>
 
-            <form method="POST" action="/src/user-page/functions/addProject.php" enctype="multipart/form-data">
+            <form method="POST" action="user-page/functions/addProject.php" enctype="multipart/form-data">
                 <div class="modal-body" style="text-align: left;">
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 20px;">
             
@@ -575,7 +575,7 @@ $(document).ready(function() {
         const userId = selectedOption.getAttribute('data-id'); // Retrieve the user_id from the selected option's data-id attribute
 
         if (selectedProjectId && selectedProjectId !== "0" && userId) {
-            fetch('/src/user-page/graph.php', {
+            fetch('user-page/graph.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `project_id=${selectedProjectId}&user_id=${userId}` // Send project_id and user_id in the request body
