@@ -63,3 +63,58 @@ function showNotification(type, message) {
         alertDiv.remove();
     }, 3000);
 }
+
+function enableProjectTitleAutofill() {
+    const projectTitleInput = document.getElementById('projectTitle');
+    if (!projectTitleInput) return;
+
+    // Create dropdown container
+    let suggestionsContainer = document.createElement('ul');
+    suggestionsContainer.className = 'autocomplete-list';
+    projectTitleInput.parentNode.style.position = 'relative';
+    projectTitleInput.parentNode.appendChild(suggestionsContainer);
+
+    projectTitleInput.addEventListener('input', function () {
+        const query = projectTitleInput.value.trim();
+        if (query.length > 1) {
+            fetch(`includes/fetch-project-autofillTitle.php?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsContainer.innerHTML = '';
+                    if (data.length === 0) {
+                        suggestionsContainer.innerHTML = '<li class="autocomplete-item">No matches found</li>';
+                        return;
+                    }
+
+                    data.forEach(title => {
+                        const item = document.createElement('li');
+                        item.className = 'autocomplete-item';
+                        item.innerHTML = highlightMatch(title, query);
+                        item.addEventListener('click', () => {
+                            projectTitleInput.value = title;
+                            suggestionsContainer.innerHTML = '';
+                        });
+                        suggestionsContainer.appendChild(item);
+                    });
+                })
+                .catch(err => console.error('Error fetching titles:', err));
+        } else {
+            suggestionsContainer.innerHTML = '';
+        }
+    });
+
+    // Close suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!projectTitleInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+            suggestionsContainer.innerHTML = '';
+        }
+    });
+}
+
+// Highlight matched text in dropdown
+function highlightMatch(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<span class="autocomplete-highlight">$1</span>');
+}
+
+

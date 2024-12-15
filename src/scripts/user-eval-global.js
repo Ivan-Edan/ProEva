@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         loadForm1Logic();
                     }
 
+                    // Enable project title autofill for forms 2, 3, and 4
+                    if (formType === 'form2' || formType === 'form3' || formType === 'form4') {
+                        enableProjectTitleAutofill();
+                    }
+
                     attachFormSubmitListener(formType); // Attach form submission handler
                 })
                 .catch((error) => {

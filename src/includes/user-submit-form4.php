@@ -15,11 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // 2. Insert into userprojecttitle
-        $projectTitle = $_POST['user_project_title_1'];
-        $stmt = $conn->prepare("INSERT INTO userprojecttitle (project_title) VALUES (?)");
-        $stmt->bind_param("s", $projectTitle);
+        $project_title = $_POST['user_project_title_1'];
+        $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ?");
+        $stmt->bind_param("s", $project_title);
         $stmt->execute();
-        $project_id = $conn->insert_id; // Store the inserted ID
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $project_id = $row['project_id'];
+        } else {
+            throw new Exception("Project title does not exist. Submit Form 1 first.");
+        }        
 
         // 7. Insert into userimplementingagency Table
         $implementingAgency = $_POST['user_implementing_agency_1'];
