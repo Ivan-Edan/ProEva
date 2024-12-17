@@ -360,7 +360,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin-bottom: 20px;
-    height: 550px;
+    height: 570px;
     overflow: hidden; 
     padding-top: 20px;
     padding-left: 20px;
@@ -469,6 +469,7 @@
     .container-8 {
         padding-left: 10px;
         padding-right: 10px;
+        height: 450px;
     }
 
     .table th, .table td {
@@ -482,6 +483,40 @@
         padding: 6px 10px;
         font-size: 0.875rem;
     }
+}
+#pagination-controls button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 15px !important;
+    border: 1px solid #27374D;
+    background-color: #27374D;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for all buttons */
+#pagination-controls button:hover {
+    background-color: #f0f0f0;
+    border-color: transparent;
+    color: #1e1e1e;
+}
+
+/* Disabled button */
+#pagination-controls button:disabled {
+    color: #474747;
+    border-color: transparent;
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.page-link:hover {
+    background-color: #27374D !;
+    color: #fff;
 }
 
 

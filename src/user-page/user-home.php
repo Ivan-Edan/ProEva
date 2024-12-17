@@ -55,35 +55,36 @@ $conn->close();
         </div>
 
         <!-- Project Stats Section -->
-        <div class="row project-stats-container mb-4">
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
-                        <p class="stat-label">Number of Task Done:</p>
-                        <p class="stat-number">9</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Incoming Icon" class="stat-icon">
-                        <p class="stat-label">Number of Task that is Incoming:</p>
-                        <p class="stat-number">2</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks In Progress Icon" class="stat-icon">
-                        <p class="stat-label">Number of Task On Progress:</p>
-                        <p class="stat-number">1</p>
-                    </div>
-                </div>
+<div class="row project-stats-container mb-4">
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
+                <p class="stat-label">Number of Task Done:</p>
+                <p class="stat-number done">0</p> <!-- Start with 0 or any default value -->
             </div>
         </div>
+    </div>
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks Incoming Icon" class="stat-icon">
+                <p class="stat-label">Number of Task that is Incoming:</p>
+                <p class="stat-number incoming">0</p> <!-- Start with 0 or any default value -->
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks In Progress Icon" class="stat-icon">
+                <p class="stat-label">Number of Task On Progress:</p>
+                <p class="stat-number in_progress">0</p> <!-- Start with 0 or any default value -->
+            </div>
+        </div>
+    </div>
+</div>
+
         <div class="row project-stats-container mb-4">
             <div class="col">
                 <div class="stat-box-1 d-flex align-items-center">
@@ -112,49 +113,43 @@ $conn->close();
         </div>
         <br>
         <div class="container-8">
-            <!-- Dropdown Button -->
-            <div class="dropdown-container">
-                    <div class="dropdown dropdown-details">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="departmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Project Status Sort By: 
-                            <i data-feather="chevron-down" class="icon-edge"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="departmentDropdown">
-                            <li><a class="dropdown-item" href="#">Done</a></li>
-                            <li><a class="dropdown-item" href="#">On Progress</a></li>
-                            <li><a class="dropdown-item" href="#">Incoming</a></li>
-                        </ul>
-                    </div>
-                </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Project Name</th>
-                                <th class="text-center">Project Status</th>
-                                <th class="text-center">Start Date</th>
-                                <th class="text-center">End Date</th>
-                                <th class="text-center">Date Created</th>
-                            </tr>
-                        </thead>
-                    <tbody>
-                        <tbody id="table-body">
-                        <tr>
-                            <td class="text-center" data-label="Project Name">Bridge Building</td>
-                            <td class="text-center" data-label="Project Status">On Progress</td>
-                            <td class="text-center" data-label="Start Date">January 27, 2024</td>
-                            <td class="text-center" data-label="End Date">January 27, 2025</td>
-                            <td class="text-center" data-label="Date Created">December 27, 2024</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center" data-label="Project Name">Bridge Building-2</td>
-                            <td class="text-center" data-label="Project Status">On Progress</td>
-                            <td class="text-center" data-label="Start Date">January 27, 2024</td>
-                            <td class="text-center" data-label="End Date">January 27, 2025</td>
-                            <td class="text-center" data-label="Date Created">December 27, 2024</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <!-- Dropdown Button -->
+    <div class="dropdown-container">
+        <div class="dropdown dropdown-details">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="departmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Project Status Sort By: 
+                <i data-feather="chevron-down" class="icon-edge"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="departmentDropdown">
+                <li><a class="dropdown-item" href="#">All</a></li> <!-- Added All option -->
+                <li><a class="dropdown-item" href="#">Done</a></li>
+                <li><a class="dropdown-item" href="#">In Progress</a></li>
+                <li><a class="dropdown-item" href="#">Incoming</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">Main Task Name</th>
+                <th class="text-center">Project Title</th>
+                <th class="text-center">Project Status</th>
+                <th class="text-center">Start Date</th>
+                <th class="text-center">End Date</th>
+                <th class="text-center">Date Created</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- The rows will be dynamically generated here -->
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div id="pagination-controls" class="pagination"></div>
+    
+</div>
+
         <br>
         <br>
         <div class="container-2">Project’s Information</div>
