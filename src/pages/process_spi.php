@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fetchQuery->bind_result($spi, $status, $issue_details, $pv, $ev);
         $fetchQuery->fetch();
         $fetchQuery->close();
-    
+
         $details[] = [
             'spi' => $spi,
             'status' => $status,
@@ -73,21 +73,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Prepare the command for the Python script
-    $command = "py spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $targetDate $actualDate $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
+    $command = "py spi_calculator.py $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $targetDate $actualDate $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
 
     // Execute the command and capture the output
     $output = shell_exec($command);
 
     preg_match('/Project Name: (.*?)\nSPI: (.*?)\nStatus: (.*?)\nIssue Details: (.*?)\nPV: (.*?)\nEV: (.*)/s', $output, $matches);
 
-    $spi = $matches[2] ?? '';
-    $status = $matches[3] ?? '';
-    $issue_details = $matches[4] ?? '';
-    $pv = $matches[5] ?? '';
-    $ev = $matches[6] ?? '';
+    $spi = (float)trim($matches[2] ?? '0');
+    $status = trim($matches[3] ?? '');
+    $issue_details = trim($matches[4] ?? '');
+    $pv = (float)trim($matches[5] ?? '0');
+    $ev = (float)trim($matches[6] ?? '0');
 
-    if ($output === null) {
-        echo json_encode(['error' => 'Failed to execute the Python script.']);
+    // Validate that the output is meaningful
+    if ($output === null || $spi <= 0 || $pv <= 0 || $ev <= 0 || empty($status) || empty($issue_details)) {
+        echo json_encode(['error' => 'Invalid data received or generated.']);
         exit;
     }
 
@@ -116,4 +117,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['error' => 'Invalid request method']);
 }
+
 ?>
