@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fetchQuery->bind_result($spi, $status, $issue_details, $pv, $ev);
         $fetchQuery->fetch();
         $fetchQuery->close();
-
+    
         $details[] = [
             'spi' => $spi,
             'status' => $status,
@@ -73,32 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Prepare the command for the Python script
-    $command = "py spi_calculator.py $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $targetDate $actualDate $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
+    $command = "py spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $targetDate $actualDate $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
 
     // Execute the command and capture the output
     $output = shell_exec($command);
 
     preg_match('/Project Name: (.*?)\nSPI: (.*?)\nStatus: (.*?)\nIssue Details: (.*?)\nPV: (.*?)\nEV: (.*)/s', $output, $matches);
 
-    $spi = (float)trim($matches[2] ?? '0');
-    $status = trim($matches[3] ?? '');
-    $issue_details = trim($matches[4] ?? '');
-    $pv = (float)trim($matches[5] ?? '0');
-    $ev = (float)trim($matches[6] ?? '0');
+    $spi = isset($matches[2]) ? (float)$matches[2] : 0.0;
+    $status = $matches[3] ?? '';
+    $issue_details = $matches[4] ?? '';
+    $pv = $matches[5] ?? '';
+    $ev = $matches[6] ?? '';
 
-    // Validate that the output is meaningful
-    if ($output === null || $spi <= 0 || $pv <= 0 || $ev <= 0 || empty($status) || empty($issue_details)) {
-        echo json_encode(['error' => 'Invalid data received or generated.']);
+    if ($output === null) {
+        echo json_encode(['error' => 'Failed to execute the Python script.']);
         exit;
     }
-
-    // Save results to the issue_details table
-    $insertQuery = $conn->prepare(
-        "INSERT INTO issue_details (project_id, spi, status, issue_details, pv, ev) VALUES (?, ?, ?, ?, ?, ?)"
-    );
-    $insertQuery->bind_param("isssss", $projectId, $spi, $status, $issue_details, $pv, $ev);
-    $insertQuery->execute();
-    $insertQuery->close();
 
     $details[] = [
         'spi' => $spi,
@@ -110,12 +101,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ev' => $ev
     ];
 
-    header('Content-Type: application/json');
-    error_log("SPI: $spi, Status: $status, Issue Details: $issue_details");
+    // Check if SPI is greater than 0.0 before saving
+    if ($spi > 0.0) {
+        $insertQuery = $conn->prepare(
+            "INSERT INTO issue_details (project_id, spi, status, issue_details, pv, ev) VALUES (?, ?, ?, ?, ?, ?)"
+        );
+        $insertQuery->bind_param("isssss", $projectId, $spi, $status, $issue_details, $pv, $ev);
+        $insertQuery->execute();
+        $insertQuery->close();
+    }
 
+    // Return details to the front end
     echo json_encode($details);
 } else {
     echo json_encode(['error' => 'Invalid request method']);
 }
-
 ?>
