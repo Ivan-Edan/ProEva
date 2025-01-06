@@ -4,7 +4,7 @@
 $servername = "localhost"; 
 $username = 'root'; 
 $password = ''; 
-$dbname = "db";
+$dbname = "db_proeva";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
