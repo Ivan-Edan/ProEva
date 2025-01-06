@@ -75,9 +75,7 @@ let currentStatus = ''; // Initially show all projects
 
 // Function to fetch projects based on status and page
 function fetchProjects(status = '', page = 1) {
-    const url = `includes/fetch-projects.php?status=${encodeURIComponent(status)}&page=${page}`;
-
-    fetch(url)
+    fetch(`includes/fetch-projects.php?page=${page}&status=${status}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -85,38 +83,24 @@ function fetchProjects(status = '', page = 1) {
                 return;
             }
 
-            // Get the table body
             const tableBody = document.querySelector('#table-body');
-            tableBody.innerHTML = '';  // Clear existing rows
+            tableBody.innerHTML = ''; // Clear existing rows
 
-            if (data.projects.length === 0) {
-                // No data found, display the no-data placeholder
-                const noDataRow = document.createElement('tr');
-                noDataRow.innerHTML = `
-                    <td colspan="6" class="text-center no-data-placeholder">
-                        <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
-                        <p style="font-weight: 500;">There are no project data available to display.</p>
-                    </td>
+            // Add projects to the table
+            data.projects.forEach(project => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${project.main_project_name}</td>
+                    <td class="text-center">${project.task_status}</td>
+                    <td class="text-center">${project.startDate}</td>
+                    <td class="text-center">${project.endDate}</td>
+                    <td class="text-center">${project.created_at}</td>
                 `;
-                tableBody.appendChild(noDataRow);
-            } else {
-                // Populate the table with project data
-                data.projects.forEach(project => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="text-center">${project.main_project_name}</td>
-                        <td class="text-center">${project.project_title}</td> 
-                        <td class="text-center">${project.task_status}</td>
-                        <td class="text-center">${project.start_date}</td>
-                        <td class="text-center">${project.end_date}</td>
-                        <td class="text-center">${project.created_at}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            }
+                tableBody.appendChild(row);
+            });
 
             // Update pagination controls
-            updatePaginationControls(data.total_pages);
+            updatePaginationControls(data.totalPages);
         })
         .catch(error => console.error('Error:', error));
 }
@@ -124,7 +108,7 @@ function fetchProjects(status = '', page = 1) {
 // Function to update pagination controls
 function updatePaginationControls(totalPages) {
     const paginationControls = document.querySelector('#pagination-controls');
-    paginationControls.innerHTML = '';  // Clear existing controls
+    paginationControls.innerHTML = ''; // Clear existing controls
 
     for (let i = 1; i <= totalPages; i++) {
         const pageLink = document.createElement('button');
@@ -138,7 +122,7 @@ function updatePaginationControls(totalPages) {
 
         pageLink.addEventListener('click', () => {
             currentPage = i;
-            fetchProjects(currentStatus, currentPage);  // Fetch projects for the selected page
+            fetchProjects(currentStatus, currentPage); // Fetch projects for the selected page
         });
 
         paginationControls.appendChild(pageLink);
@@ -147,15 +131,26 @@ function updatePaginationControls(totalPages) {
 
 // Event listener for the dropdown selection
 document.querySelectorAll('.dropdown-item').forEach(item => {
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function () {
         const selectedStatus = this.textContent.trim();
-        currentStatus = selectedStatus === 'All' ? '' : selectedStatus;  // Reset status to empty for all projects
+        currentStatus = selectedStatus === 'All' ? '' : selectedStatus; // Reset status to empty for all projects
+        currentPage = 1; // Reset to first page when status changes
         fetchProjects(currentStatus, currentPage); // Fetch and update the table with the selected status and current page
     });
 });
 
 // Initial fetch with no status selected (loads all projects)
 fetchProjects(currentStatus, currentPage);
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Convert markdown to HTML using marked.js
+    const htmlContent = marked(issueDetails);
+
+    // Insert the converted HTML into the <p class="text-detail-2">
+    document.querySelector('.text-detail-2').innerHTML = htmlContent;
+});
+
 
 
   

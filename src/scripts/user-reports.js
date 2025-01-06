@@ -83,169 +83,250 @@ function generatePagination(totalPages, currentPage) {
 // Initial data load
 fetchReports();
 
-let projectChart; // Global variable for the chart instance
 
-// Function to show "No Data" message
-function showNoDataMessage() {
+  let projectChart;
+
+  // Function to fetch project details and update the chart
+  function fetchProjectDetails(projectId) {
+    const chartElement = document.getElementById('projectChart');
+    const noDataElement = document.getElementById('noDataMessage');
+
+    chartElement.style.display = 'none';
+    noDataElement.style.display = 'none';
+
+    noDataElement.innerHTML = '<p>Loading data...</p>';
+    noDataElement.style.display = 'block';
+
+    fetch(`includes/fetch_project_details.php?project_id=${projectId}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Fetched Data: ", data);
+
+        noDataElement.style.display = 'none';
+
+        if (data.error || data.message) {
+          showNoDataMessage();
+        } else {
+          if (!projectChart) {
+            initializeChart();
+          }
+          updateChart(data);
+          chartElement.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching project details:', error);
+        showNoDataMessage();
+      });
+  }
+
+  // Show "No Data" message
+  function showNoDataMessage() {
     const chartElement = document.getElementById('projectChart');
     const noDataElement = document.getElementById('noDataMessage');
 
     chartElement.style.display = 'none';
     noDataElement.style.display = 'block';
     noDataElement.innerHTML = `
-        <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
-        <p style="font-weight: 500;">There are no project data available to compute.</p>
+      <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
+      <p style="font-weight: 500;">There are no project data available to compute.</p>
     `;
-}
+  }
 
-// Function to initialize the chart
-function initializeChart() {
+  function initializeChart() {
     const ctx = document.getElementById('projectChart').getContext('2d');
     projectChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Appropriations', 'Allotments', 'Obligations', 'Disbursements'],
-            datasets: [{
-                label: 'Project Financial Status',
-                data: [0, 0, 0, 0], // Default to zero for all bars
-                backgroundColor: ['#27374D', '#9DB2BF', '#5478A9', '#4BC0C0'],
-            }]
+            labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Total'], // Add 'Total' column
+            datasets: [
+                {
+                    label: 'Appropriations',
+                    data: [0, 0, 0, 0, 0], // Placeholder data
+                    borderColor: '#AEAEAE',
+                    backgroundColor: '#27374D',
+                    borderWidth: 1,
+                    fill: true,
+                    barThickness: 30,
+                    categoryPercentage: 0.5,
+                    barPercentage: 1.0
+                },
+                {
+                    label: 'Allotments',
+                    data: [0, 0, 0, 0, 0], // Placeholder data
+                    borderColor: '#9DB2BF',
+                    backgroundColor: '#9DB2BF',
+                    borderWidth: 1,
+                    fill: true,
+                    barThickness: 30,
+                    categoryPercentage: 0.5,
+                    barPercentage: 1.0
+                },
+                {
+                    label: 'Obligations',
+                    data: [0, 0, 0, 0, 0], // Placeholder data
+                    borderColor: '#5478A9',
+                    backgroundColor: '#5478A9',
+                    borderWidth: 1,
+                    fill: true,
+                    barThickness: 30,
+                    categoryPercentage: 0.5,
+                    barPercentage: 1.0
+                },
+                {
+                    label: 'Disbursements',
+                    data: [0, 0, 0, 0, 0], // Placeholder data
+                    borderColor: '#4BC0C0',
+                    backgroundColor: '#4BC0C0',
+                    borderWidth: 1,
+                    fill: true,
+                    barThickness: 30,
+                    categoryPercentage: 0.5,
+                    barPercentage: 1.0
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: {
+                duration: 800,
+                easing: 'easeInOutQuad',
+            },
             plugins: {
                 legend: {
-                    display: false, // Hide legend since labels are clear
+                    display: true,
+                    position: 'bottom',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 20,
+                        boxHeight: 20,
+                        padding: 10,
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
                 },
                 tooltip: {
-                    enabled: true,
+                    enabled: true
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return value.toLocaleString(); // Format numbers with commas
-                        }
-                    }
-                },
-                x: {
-                    barThickness: 10, // Set a fixed bar thickness
-                    maxBarThickness: 15, // Limit maximum bar thickness
-                    ticks: {
-                        autoSkip: false
-                    },
-                    grid: {
-                        display: false, // Disable grid lines on the x-axis
-                    }
                 }
             }
         }
     });
 }
 
-// Function to update the chart with fetched data
 function updateChart(data) {
-    const appropriations = parseFloat(data[0]?.appropriations) || 0;
-    const allotments = parseFloat(data[0]?.allotment) || 0;
-    const obligations = parseFloat(data[0]?.obligations) || 0;
-    const disbursements = parseFloat(data[0]?.disbursements) || 0;
+    const quarterlyData = {
+        Q1: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
+        Q2: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
+        Q3: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
+        Q4: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 }
+    };
 
-    if (appropriations || allotments || obligations || disbursements) {
-        // Update chart data
-        projectChart.data.datasets[0].data = [appropriations, allotments, obligations, disbursements];
-        projectChart.update();
-    } else {
-        showNoDataMessage();
-    }
+    data.forEach(item => {
+        const date = new Date(item.created_at);
+        const quarter = getQuarter(date);
+
+        if (!isNaN(item.appropriations)) quarterlyData[quarter].appropriations += parseFloat(item.appropriations);
+        if (!isNaN(item.allotment)) quarterlyData[quarter].allotments += parseFloat(item.allotment);
+        if (!isNaN(item.obligations)) quarterlyData[quarter].obligations += parseFloat(item.obligations);
+        if (!isNaN(item.disbursements)) quarterlyData[quarter].disbursements += parseFloat(item.disbursements);
+    });
+
+    // Calculate totals
+    const totals = {
+        appropriations: Object.values(quarterlyData).reduce((sum, q) => sum + q.appropriations, 0),
+        allotments: Object.values(quarterlyData).reduce((sum, q) => sum + q.allotments, 0),
+        obligations: Object.values(quarterlyData).reduce((sum, q) => sum + q.obligations, 0),
+        disbursements: Object.values(quarterlyData).reduce((sum, q) => sum + q.disbursements, 0)
+    };
+
+    // Update the chart data
+    projectChart.data.datasets[0].data = [
+        quarterlyData.Q1.appropriations, quarterlyData.Q2.appropriations,
+        quarterlyData.Q3.appropriations, quarterlyData.Q4.appropriations, totals.appropriations
+    ];
+    projectChart.data.datasets[1].data = [
+        quarterlyData.Q1.allotments, quarterlyData.Q2.allotments,
+        quarterlyData.Q3.allotments, quarterlyData.Q4.allotments, totals.allotments
+    ];
+    projectChart.data.datasets[2].data = [
+        quarterlyData.Q1.obligations, quarterlyData.Q2.obligations,
+        quarterlyData.Q3.obligations, quarterlyData.Q4.obligations, totals.obligations
+    ];
+    projectChart.data.datasets[3].data = [
+        quarterlyData.Q1.disbursements, quarterlyData.Q2.disbursements,
+        quarterlyData.Q3.disbursements, quarterlyData.Q4.disbursements, totals.disbursements
+    ];
+
+    projectChart.update();
 }
 
-// Function to fetch project details and update the chart
-function fetchProjectDetails(projectId) {
-    const chartElement = document.getElementById('projectChart');
-    const noDataElement = document.getElementById('noDataMessage');
 
-    chartElement.style.display = 'none';
-    noDataElement.style.display = 'none';
-    noDataElement.innerHTML = '<p>Loading data...</p>';
-    noDataElement.style.display = 'block';
+  // Function to determine the quarter of a given date
+  function getQuarter(date) {
+    const month = date.getMonth() + 1; // Months are 0-indexed
+    if (month >= 1 && month <= 3) return 'Q1';
+    if (month >= 4 && month <= 6) return 'Q2';
+    if (month >= 7 && month <= 9) return 'Q3';
+    return 'Q4';
+  }
 
-    fetch(`includes/fetch-graph-user.php?project_id=${projectId}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched Data: ", data);
+  // Initialize chart with placeholder data when no project is selected
+  initializeChart();
 
-            noDataElement.style.display = 'none';
+  // Fetch project titles and populate dropdown
+  fetch('includes/fetch_projecttitle.php')
+    .then(response => response.json())
+    .then(data => {
+      const projectList = document.getElementById('projectList');
+      const searchField = document.getElementById('searchField');
 
-            if (data.error || !data.length) {
-                showNoDataMessage();
-            } else {
-                updateChart(data);
-                chartElement.style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching project details:', error);
-            showNoDataMessage();
-        });
-}
+      function renderProjects(projects) {
+        const listItems = projectList.querySelectorAll('li:not(:first-child)');
+        listItems.forEach(item => item.remove());
 
-// Function to fetch and display project titles
-function fetchProjects() {
-    fetch('includes/fetch-user-projects.php')
-        .then(response => response.json())
-        .then(data => {
-            const projectList = document.getElementById('projectList');
-            const searchField = document.getElementById('searchField');
+        if (projects.length > 0) {
+          projects.forEach(project => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.classList.add('dropdown-item');
+            a.href = '#';
+            a.textContent = project.project_title;
+            a.dataset.projectId = project.project_id;
+            li.appendChild(a);
+            projectList.appendChild(li);
+          });
+        } else {
+          const li = document.createElement('li');
+          li.textContent = 'No projects found.';
+          projectList.appendChild(li);
+        }
+      }
 
-            function renderProjects(projects) {
-                const listItems = projectList.querySelectorAll('li:not(:first-child)');
-                listItems.forEach(item => item.remove());
+      function filterProjects(query) {
+        const filteredProjects = data.filter(project =>
+          project.project_title.toLowerCase().includes(query.toLowerCase())
+        );
+        renderProjects(filteredProjects);
+      }
 
-                if (projects.length > 0) {
-                    projects.forEach(project => {
-                        const li = document.createElement('li');
-                        const a = document.createElement('a');
-                        a.classList.add('dropdown-item');
-                        a.href = '#';
-                        a.textContent = project.project_title;
-                        a.dataset.projectId = project.project_id;
-                        li.appendChild(a);
-                        projectList.appendChild(li);
-                    });
-                } else {
-                    const li = document.createElement('li');
-                    li.textContent = 'No projects found.';
-                    projectList.appendChild(li);
-                }
-            }
+      renderProjects(data);
 
-            function filterProjects(query) {
-                const filteredProjects = data.filter(project =>
-                    project.project_title.toLowerCase().includes(query.toLowerCase())
-                );
-                renderProjects(filteredProjects);
-            }
+      searchField.addEventListener('input', function() {
+        const query = this.value;
+        filterProjects(query);
+      });
 
-            renderProjects(data);
-
-            searchField.addEventListener('input', function() {
-                const query = this.value;
-                filterProjects(query);
-            });
-
-            projectList.addEventListener('click', function(e) {
-                if (e.target && e.target.matches('a.dropdown-item')) {
-                    const projectId = e.target.dataset.projectId;
-                    fetchProjectDetails(projectId);
-                }
-            });
-        })
-        .catch(error => console.error('Error fetching projects:', error));
-}
-
-// Initialize chart and fetch projects on load
-initializeChart();
-fetchProjects();
+      projectList.addEventListener('click', function(e) {
+        if (e.target && e.target.matches('a.dropdown-item')) {
+          const projectId = e.target.dataset.projectId;
+          fetchProjectDetails(projectId);
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching projects:', error));

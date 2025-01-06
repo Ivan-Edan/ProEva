@@ -104,4 +104,95 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 
+  $(document).ready(function () {
+    let currentPage = 1;
+    const recordsPerPage = 5;
+    let departmentSortOrder = 'ASC'; // Default sort order
+
+    // Initialize Feather Icons
+    feather.replace();
+
+    // Function to fetch project data with pagination and sorting
+    function fetchProjects(page = 1, sortOrder = 'ASC') {
+        $.ajax({
+            url: 'includes/fetch-reports-data.php',
+            type: 'GET',
+            data: {
+                page: page,
+                sort_order: sortOrder,
+            },
+            dataType: 'json',
+            success: function (data) {
+                let tableBody = $('#project-data');
+                tableBody.empty();
+
+                if (data.projects && data.projects.length > 0) {
+                    // Loop through the data and add rows to the table
+                    $.each(data.projects, function (index, project) {
+                        let row = '<tr>';
+                        row += '<td class="text-center">' + project.project_title + '</td>';
+                        row += '<td class="text-end">' + project.department_name + '</td>';
+                        row += '<td class="text-center">' + project.sector + '</td>';
+                        row += '<td>' + project.total_cost + '</td>';
+                        row += '<td>' + formatDate(project.start_date) + '</td>';
+                        row += '<td>' + formatDate(project.end_date) + '</td>';
+                        row += '<td class="text-center">' + project.completed_tasks + '</td>';
+                        row += '<td class="text-center">' + project.in_progress_tasks + '</td>';
+                        row += '</tr>';
+                        tableBody.append(row);
+                    });
+
+                    // Update pagination
+                    generatePagination(data.totalPages, page);
+                } else {
+                    tableBody.html(`
+                        <tr>
+                            <td colspan="8" class="text-center no-data-placeholder">
+                                <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
+                                <p style="font-weight: 500;">There are no project data available.</p>
+                            </td>
+                        </tr>
+                    `);
+                }
+            },
+            error: function () {
+                $('#project-data').html(
+                    '<tr><td colspan="8" class="text-center">Error fetching data</td></tr>'
+                );
+            },
+        });
+    }
+
+    // Sorting by department
+    $('#department-header').click(function () {
+        departmentSortOrder = departmentSortOrder === 'ASC' ? 'DESC' : 'ASC';
+        const sortIcon = $('#department-sort-icon');
+        sortIcon.attr('data-feather', departmentSortOrder === 'ASC' ? 'chevron-up' : 'chevron-down');
+        feather.replace();
+        fetchProjects(currentPage, departmentSortOrder);
+    });
+
+    // Date formatting
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(date).toLocaleDateString('en-US', options);
+    }
+
+    // Pagination buttons
+    function generatePagination(totalPages, currentPage) {
+        let paginationHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += `<button class="page-btn" data-page="${i}" ${i === currentPage ? 'disabled' : ''}>${i}</button>`;
+        }
+        $('#pagination').html(paginationHTML);
+
+        $('.page-btn').click(function () {
+            const page = $(this).data('page');
+            fetchProjects(page, departmentSortOrder);
+        });
+    }
+
+    // Fetch projects on page load
+    fetchProjects(currentPage);
+});
  
