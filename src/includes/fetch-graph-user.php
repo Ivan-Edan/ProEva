@@ -18,7 +18,7 @@ if (isset($_GET['project_id'])) {
 
     try {
         // SQL query to fetch the financial_status_id from userphysfinaccompreport based on project_id and user_id
-        $sql_report = "SELECT financial_status_id 
+        $sql_report = "SELECT financial_status_id, created_at 
                        FROM userphysfinaccompreport 
                        WHERE project_id = ? AND user_id = ?";
 
@@ -31,6 +31,7 @@ if (isset($_GET['project_id'])) {
         if ($result_report->num_rows > 0) {
             $row = $result_report->fetch_assoc();
             $financial_status_id = $row['financial_status_id'];
+            $created_at = $row['created_at']; // Fetch the created_at field
 
             // Now fetch the financial details from userfinancialstatus using the financial_status_id
             $sql_financial = "SELECT 
@@ -56,7 +57,8 @@ if (isset($_GET['project_id'])) {
                         'appropriations' => $row['appropriations'],
                         'allotment' => $row['allotment'],
                         'obligations' => $row['obligations'],
-                        'disbursements' => $row['disbursements']
+                        'disbursements' => $row['disbursements'],
+                        'created_at' => $created_at // Include created_at
                     ];
                 }
                 echo json_encode($financialDetails); // Return the financial details for the logged-in user and project
