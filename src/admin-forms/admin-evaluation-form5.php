@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form4" class="d">
+    <div id="form5" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
@@ -17,59 +17,36 @@
                 <form>
                     <div class="details-header">
                         <h5>Title Details</h5>
-                        <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        Form# | Department | Project Title
-    </button>
-    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
-        <li>
-            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-        </li>
-        <div id="dropdownList">
-            <!-- Dropdown items will be dynamically populated here -->
-        </div>
-    </ul>
-</div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
                             <label for="trainingTitle">Title of Training/Workshop</label>
                             <input type="text" class="form-control" id="trainingTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="year">Year</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
                         <div class="form-group col-md-6">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter location">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="date">Date</label>
-                            <input type="text" class="form-control" id="date" placeholder="Enter date">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="conductedBy">Conducted/Facilitated/Attended</label>
-                            <input type="text" class="form-control" id="conductedBy" placeholder="Enter details">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-12">
                             <label for="objective">Objective of the Training/Workshop</label>
-                            <input type="text" class="form-control" id="objective" placeholder="Enter objective" style="height: 100px;">
+                            <input type="text" class="form-control" id="objective" placeholder="Enter objective">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date" placeholder="Enter date">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="conductedBy">Conducted/Facilitated/Attended</label>
+                            <input type="text" class="form-control" id="conductedBy" placeholder="Enter details">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="leadOffice">Lead Office/Unit</label>
                             <input type="text" class="form-control" id="leadOffice" placeholder="Enter lead office/unit">
                         </div>
-                        <div class="form-group col-md-8">
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
                             <label for="participatingOffices">Participating Offices/Agencies/Organizations</label>
                             <input type="text" class="form-control" id="participatingOffices" placeholder="Enter participating offices/agencies/organizations">
                         </div>
@@ -77,15 +54,15 @@
 
                     <h5>Total No. of Participants</h5>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for="maleParticipants">Male</label>
                             <input type="text" class="form-control" id="maleParticipants" placeholder="Enter number">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for="femaleParticipants">Female</label>
                             <input type="text" class="form-control" id="femaleParticipants" placeholder="Enter number">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for="totalParticipants">Total</label>
                             <input type="text" class="form-control" id="totalParticipants" placeholder="Enter total number">
                         </div>
@@ -94,7 +71,7 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="resultsFeedback">Results and Feedback</label>
-                            <input type="text" class="form-control" id="resultsFeedback" placeholder="Enter results and feedback" style="height: 100px;">
+                            <input type="text" class="form-control" id="resultsFeedback" placeholder="Enter results and feedback" style="height: 50px;">
                         </div>
                     </div>
 

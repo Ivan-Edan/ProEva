@@ -1,73 +1,203 @@
 <?php
+// Database configuration
 include 'config.php';
 
+// Set response to JSON format
 header('Content-Type: application/json');
 
+try {
+    // Capture form type
+    $formType = isset($_GET['formType']) ? $_GET['formType'] : null;
 
-$options = [];
+    // Validate input
+    if (!$formType) {
+        echo json_encode(['status' => 'error', 'message' => 'Form type is required.']);
+        exit;
+    }
 
-// Define form queries with the form number, table name, unique identifier, and label
-$form_queries = [
-    [
-        'form_number' => 'Form 1',
-        'table' => 'userinitialprojectreport',
-        'id_field' => 'details_id',
-        'user_id_field' => 'user_id',
-        'project_id_field' => 'project_id'
-    ],
-    [
-        'form_number' => 'Form 2',
-        'table' => 'userphysfinaccompreport',
-        'id_field' => 'Form2_id',
-        'user_id_field' => 'user_id',
-        'project_id_field' => 'project_id'
-    ],
-    [
-        'form_number' => 'Form 3',
-        'table' => 'userprojectexptrprt',
-        'id_field' => 'form3_id',
-        'user_id_field' => 'user_id',
-        'project_id_field' => 'project_id'
-    ],
-    [
-        'form_number' => 'Form 4',
-        'table' => 'userprojectresult',
-        'id_field' => 'form4_id',
-        'user_id_field' => 'user_id',
-        'project_id_field' => 'project_id'
-    ]
-    // Add more form queries if needed
-];
+    // Query for adminform1
+    if ($formType === 'adminform1') {
+        $query = "
+            SELECT 
+                pt.project_id,
+                pt.project_title,
+                pt.project_year,
+                ia.implementing_agency,
+                sde.start_date,
+                sde.end_date,
+                s.sector,
+                fs.fund_source,
+                fa.fund_agency,
+                tc.total_cost,
+                fs2.appropriations,
+                fs2.allotment,
+                fs2.obligations,
+                fs2.disbursements,
+                ROUND((fs2.appropriations / NULLIF(fs2.allotment, 0)) * 100, 2) AS funding_support,
+                ROUND((fs2.disbursements / NULLIF(fs2.allotment, 0)) * 100, 2) AS fund_utilization,
+                pa.target_owpa,
+                pa.actual_owpa,
+                (pa.actual_owpa - pa.target_owpa) AS slippage,
+                te.male,
+                te.female,
+                r.remarks
+            FROM userprojecttitle pt
+            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+            LEFT JOIN usersdateedate sde ON ipr.s_date_e_date_id = sde.s_date_e_date_id
+            LEFT JOIN usersector s ON ipr.sector_id = s.sector_id
+            LEFT JOIN userfundsource fs ON ipr.fund_source_id = fs.fund_source_id
+            LEFT JOIN userfundagency fa ON ipr.fund_agency_id = fa.fund_agency_id
+            LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
+            LEFT JOIN userphysfinaccompreport pfar ON pt.project_id = pfar.project_id
+            LEFT JOIN userfinancialstatus fs2 ON pfar.financial_status_id = fs2.financial_status_id
+            LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
+            LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.Target_employee_id
+            LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
+            WHERE pt.project_id IN (
+                SELECT project_id FROM userphysfinaccompreport
+                ORDER BY userphysfinaccompreport.created_at DESC
+            )
+            GROUP BY pt.project_id
+            ORDER BY sde.start_date DESC;
+        ";
+        
 
-foreach ($form_queries as $form) {
-    $query = "
-        SELECT
-            f.{$form['id_field']} AS form_id,
-            '{$form['form_number']}' AS form_number,
-            d.name AS department,
-            p.project_title AS project_title
-        FROM
-            {$form['table']} AS f
-        INNER JOIN
-            users AS u ON f.{$form['user_id_field']} = u.id
-        INNER JOIN
-            departments AS d ON u.department_id = d.id
-        INNER JOIN
-            userprojecttitle AS p ON f.{$form['project_id_field']} = p.project_id
-    ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    $result = $conn->query($query);
-    if ($result->num_rows > 0) {
+        $options = [];
         while ($row = $result->fetch_assoc()) {
             $options[] = [
-                'label' => "{$row['form_number']} - {$row['department']} - {$row['project_title']}",
-                'value' => strtolower(str_replace(' ', '', $row['form_number'])) . "_{$row['form_id']}"
+                'label' => $row['project_title'] . ' (' . $row['project_year'] . ')',
+                'value' => $row['project_id'],
+                'data'  => $row
             ];
         }
+        echo json_encode(['status' => 'success', 'options' => $options]);
     }
+
+    elseif ($formType === 'adminform2') {
+        $query = "
+            SELECT
+                pt.project_id,
+                pt.project_title,
+                pt.project_year,
+                l.location,
+                l.city,
+                l.barangay,
+                ia.implementing_agency,
+                -- Calculated Fields
+                ROUND((fs.disbursements / NULLIF(fs.allotment, 0)) * 100, 2) AS fund_utilization,
+                pa.target_owpa,
+                pa.actual_owpa,
+                (pa.actual_owpa - pa.target_owpa) AS slippage
+            FROM userprojecttitle pt
+
+            -- Join Form 1 Tables
+            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN userlocation l ON ipr.location_id = l.location_id
+            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+
+            -- Join Form 2 Tables
+            LEFT JOIN userphysfinaccompreport pfar ON pt.project_id = pfar.project_id
+            LEFT JOIN userfinancialstatus fs ON pfar.financial_status_id = fs.financial_status_id
+            LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
+
+            GROUP BY pt.project_id
+            ORDER BY pt.project_title, l.location;
+        ";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $options = [];
+        while ($row = $result->fetch_assoc()) {
+            $options[] = [
+                'label' => $row['project_title'] . ' (' . $row['project_year'] . ')',
+                'value' => $row['project_id'],
+                'data'  => $row
+            ];
+        }
+
+        echo json_encode(['status' => 'success', 'options' => $options]);
+    }
+
+    elseif ($formType === 'adminform3') {
+        $query = "
+            SELECT
+                pt.project_id,
+                pt.project_title,
+                tc.total_cost,
+                CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location,
+                ia.implementing_agency
+            FROM userprojecttitle pt
+            -- Joins for Form 1 Data
+            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
+            LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
+            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+            ORDER BY pt.project_title;
+
+        ";
+    // Execute the query
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $options = [];
+    while ($row = $result->fetch_assoc()) {
+        $options[] = [
+            'label' => $row['project_title'] . ' (' . ($row['project_year'] ?? 'No Year') . ')',
+            'value' => $row['project_id'],
+            'data'  => $row
+        ];
+    }
+
+    // Return the results
+    echo json_encode(['status' => 'success', 'options' => $options]);
+    }
+
+    // Query for Admin Form 4 (formerly Form 8)
+    elseif ($formType === 'adminform4') {
+        $query = "
+            SELECT
+                pt.project_id,
+                pt.project_title,
+                ia.implementing_agency
+            FROM userprojecttitle pt
+            LEFT JOIN initialprojectreport ipr 
+                ON pt.project_id = ipr.project_id
+            LEFT JOIN userimplementingagency ia 
+                ON ipr.implementing_agency_id = ia.implementing_agency_id
+            GROUP BY pt.project_id
+            ORDER BY pt.project_title;
+        ";
+
+    // Execute the query
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $options = [];
+    while ($row = $result->fetch_assoc()) {
+        $options[] = [
+            'label' => $row['project_title'] . ' (' . ($row['project_year'] ?? 'No year') . ')',
+            'value' => $row['project_id'],
+            'data'  => $row
+        ];
+    }
+
+    // Return the results
+    echo json_encode(['status' => 'success', 'options' => $options]);
+    }
+
+    else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid form type.']);
+    }
+} catch (Exception $e) {
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
-
-// Output the combined options as JSON
-echo json_encode($options, JSON_PRETTY_PRINT);
-
 ?>

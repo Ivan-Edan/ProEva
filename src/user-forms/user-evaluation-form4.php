@@ -17,39 +17,15 @@
                     <h5>Project Details</h5>
 
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="projectTitle">Program / Project Title :</label>
-                            <input type="text" class="form-control" id="projectTitle" placeholder="Enter title" name="user_project_title_1">
+                        <div class="form-group col-md-6">
+                        <label for="projectTitle">Program / Project Title:</label>
+                        <input type="text" class="form-control" id="projectTitle" name="user_project_title_1" required>
+                        <input type="hidden" id="hiddenProjectTitle" name="project_title">
+                        <input type="hidden" id="hiddenProjectYear" name="project_year">
                         </div>
-                        <div class="col-md-2">
-                            <label for="month">Month:</label>
-                            <select class="form-control" id="month" name="user_month_4">
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="year">Year:</label>
-                            <select class="form-control" id="year" name="user_year_4">
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <!-- Add more years as needed -->
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
+
+
+                        <div class="form-group col-md-6">
                             <label for="implementingAgency">Implementing Agency :</label>
                             <input type="text" class="form-control" id="implementingAgency" placeholder="Enter implementing agency" name="user_implementing_agency_1">
                         </div>
@@ -81,33 +57,30 @@
 
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By :</label>
                             <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>-->
+                        </div>
                         <div class="form-group col-md-4">
                             <label for="designation">Designation/Office :</label>
                             <input type="text" class="form-control" id="designation" placeholder="Enter designation/office" name="user_designation_1">
 
                         </div>
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="submissionDate">Date :</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>-->
+                            <input type="date" class="form-control" id="submissionDate" placeholder="Enter date">
+                        </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="approvedBy">Approved By :</label>
                             <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
                         </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
-                            <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
                         <div class="form-group col-md-4">
                             <label for="approvalDate">Date :</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
-                        </div>-->
+                            <input type="date" class="form-control" id="approvalDate" placeholder="Enter date">
+                        </div>
                     </div>
 
 

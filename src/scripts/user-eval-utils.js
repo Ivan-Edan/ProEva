@@ -63,10 +63,12 @@ function showNotification(type, message) {
         alertDiv.remove();
     }, 3000);
 }
-
 function enableProjectTitleAutofill() {
     const projectTitleInput = document.getElementById('projectTitle');
-    if (!projectTitleInput) return;
+    const hiddenProjectTitle = document.getElementById('hiddenProjectTitle');
+    const hiddenProjectYear = document.getElementById('hiddenProjectYear');
+
+    if (!projectTitleInput || !hiddenProjectTitle || !hiddenProjectYear) return;
 
     // Create dropdown container
     let suggestionsContainer = document.createElement('ul');
@@ -77,24 +79,33 @@ function enableProjectTitleAutofill() {
     projectTitleInput.addEventListener('input', function () {
         const query = projectTitleInput.value.trim();
         if (query.length > 1) {
-            fetch(`includes/fetch-project-autofillTitle.php?query=${encodeURIComponent(query)}`)
+            fetch(`includes/fetch-user-project-autofillTitle.php?query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     suggestionsContainer.innerHTML = '';
+
                     if (data.length === 0) {
                         suggestionsContainer.innerHTML = '<li class="autocomplete-item">No matches found</li>';
                         return;
                     }
 
-                    data.forEach(title => {
-                        const item = document.createElement('li');
-                        item.className = 'autocomplete-item';
-                        item.innerHTML = highlightMatch(title, query);
-                        item.addEventListener('click', () => {
-                            projectTitleInput.value = title;
-                            suggestionsContainer.innerHTML = '';
+                    // Populate dropdown with suggestions
+                    data.forEach(item => {
+                        const { project_title, project_year } = item;
+                        const displayText = `${project_title} (${project_year})`;
+
+                        const suggestionItem = document.createElement('li');
+                        suggestionItem.className = 'autocomplete-item'; // Apply the class
+                        suggestionItem.textContent = displayText;
+
+                        suggestionItem.addEventListener('click', () => {
+                            projectTitleInput.value = displayText; // Show selected title
+                            hiddenProjectTitle.value = project_title; // Store title
+                            hiddenProjectYear.value = project_year; // Store year
+                            suggestionsContainer.innerHTML = ''; // Clear dropdown
                         });
-                        suggestionsContainer.appendChild(item);
+
+                        suggestionsContainer.appendChild(suggestionItem);
                     });
                 })
                 .catch(err => console.error('Error fetching titles:', err));
@@ -111,10 +122,11 @@ function enableProjectTitleAutofill() {
     });
 }
 
-// Highlight matched text in dropdown
+// Utility function to highlight matching text
 function highlightMatch(text, query) {
     const regex = new RegExp(`(${query})`, 'gi');
-    return text.replace(regex, '<span class="autocomplete-highlight">$1</span>');
+    return text.replace(regex, '<strong>$1</strong>');
 }
+
 
 

@@ -8,95 +8,79 @@
     <title>Problem Solving Sessions / Facilitation Meeting Conducted</title>
 </head>
 <body>
-    <div id="form3" class="d">
+    <div id="form8" class="d" data-form-type="adminform4">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 Problem Solving Sessions / Facilitation Meeting Conducted
             </div>
             <div class="card-body">
-                <form>
+                <form id="admin-form-8">
                     <div class="details-header">
                         <h5>Project Details</h5>
-                        <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        Form# | Department | Project Title
-    </button>
-    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
-        <li>
-            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-        </li>
-        <div id="dropdownList">
-            <!-- Dropdown items will be dynamically populated here -->
-        </div>
-    </ul>
-</div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            Form# | Department | Project Title
+                        </button>
+                        <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
+                            <li>
+                                <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
+                            </li>
+                            <div id="dropdownList">
+                                <!-- Dropdown items will be dynamically populated here -->
+                            </div>
+                        </ul>
+                    </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
                             <label for="projectTitle">Program / Project Title</label>
                             <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="month">Month</label>
-                            <select id="month" class="form-control">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="year">Year</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="quarter">Quarter</label>
-                            <select id="quarter" class="form-control">
-                                <option>Q1</option>
-                                <option>Q2</option>
-                                <option>Q3</option>
-                                <option>Q4</option>
-                            </select>
+                        <div class="form-group col-md-6">
+                            <label for="issueDetails">Issue Details</label>
+                            <input type="text" class="form-control" id="issueDetails" placeholder="Enter issue details">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <div class="form-group col-md-6">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter location">
+                    <div class="form-group col-md-6">
+                            <label for="issueTypology">Issue Typology :</label>
+                            <select id="issueTypology" class="form-control" placeholder="Select Issue Typology">
+                                <option>Site Condition/Availability</option>
+                                <option>Procurement</option>
+                                <option>Government/Funding Institution Approvals</option>
+                                <option>Budget and Funds Flow</option>
+                                <option>Design, Scope, Technical Specifications</option>
+                                <option>Performance of Contractors/Consultants</option>
+                                <option>Capacity of Project Management Unit and Other Implementing Partners</option>
+                                <option>Institutional Support</option>
+                                <option>Inputs and Costs</option>
+                                <option>Legal and Policy Issuances</option>
+                                <option>Sustainability, Operations and Maintenance</option>
+                                <option>Force Majeure</option>
+                                <option>Others</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="IA">IA</label>
                             <input type="text" class="form-control" id="IA" placeholder="Enter IA">
                         </div>
                     </div>
-
-                    <h5>Additional Information</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
-                            <label for="issueDetails">Issue Details</label>
-                            <input type="text" class="form-control" id="issueDetails" placeholder="Enter issue details" style="height: 100px;">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location" style="height: 50px;">
                         </div>
                     </div>
+                    <h5>Additional Information</h5>
+
 
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="issueTypology">Issue Typology</label>
-                            <input type="text" class="form-control" id="issueTypology" placeholder="Enter issue typology">
-                        </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="dateOfMeeting">Date of Meeting</label>
-                            <input type="text" class="form-control" id="dateOfMeeting" placeholder="Enter date of meeting">
+                            <input type="date" class="form-control" id="dateOfMeeting" placeholder="Enter date of meeting">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="concernedAgencies">Concerned Agencies</label>
                             <input type="text" class="form-control" id="concernedAgencies" placeholder="Enter concerned agencies">
                         </div>
@@ -105,37 +89,16 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="agreementsReached">Agreements Reached</label>
-                            <input type="text" class="form-control" id="agreementsReached" placeholder="Enter agreements reached" style="height: 100px;">
+                            <input type="text" class="form-control" id="agreementsReached" placeholder="Enter agreements reached" style="height: 50px;">
                         </div>
                     </div>
 
                     <h5>Project Validation</h5>
+                    
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="submittedBy">Submitted By</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>
                         <div class="form-group col-md-4">
                             <label for="designation">Designation/Office</label>
                             <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="submissionDate">Date</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
-                            <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
                         </div>
                     </div>
 

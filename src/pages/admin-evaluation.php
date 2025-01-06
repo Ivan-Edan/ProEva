@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include 'includes/admin-submittedForms-table-modal.php'; ?><!-- Fetches the submittedForm files modal -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Evaluation Page</title>
@@ -43,10 +44,47 @@
             <div id="form-content" class="mt-4">
                 <!-- Form content will be loaded here -->
             </div>
+            <!-- Quarter Section -->
+            <div class="card-header text-white mt-4" id="quarter-container">
+                <select id="filterDropdown">
+                    <option value="all">All Forms</option>
+                    <option value="form1">Form1: Initial Project Report</option>
+                    <option value="form2">Form2: Financial & Physical Accomplishments</option>
+                    <option value="form3">Form3: Exception Report</option>
+                    <option value="form4">Form4: Project Results</option>
+                </select>
+                QUARTER : 1st
+            </div>
+
+            <!-- Table Section -->
+            <div class="card shadow-sm mt-4" id="submitted-forms-container">
+                <div class="card-body" >
+                <table id="submissionsTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Department</th>
+                            <th>User Submitted Forms</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamic rows will be inserted here -->
+                    </tbody>
+                </table>
+                <nav class="pagination-container" id="pagination-container">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Dynamic pagination links will be generated here -->
+                    </ul>
+                </nav>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Include JavaScript -->
+    <script src="scripts/admin-load-submissions.js"></script>
     <script src="scripts/admin-evaluation.js"></script> <!-- Your existing custom script -->
+
 </body>
 </html>

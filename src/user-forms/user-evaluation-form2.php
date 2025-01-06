@@ -16,10 +16,13 @@
                 <form id="form2-form" data-action="includes/user-submit-form2.php"  method="POST">
                     <h5>Project Details</h5>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="projectTitle">Program / Project Title:</label>
-                            <input type="text" class="form-control" id="projectTitle" name="user_project_title_1" required>
-                        </div>
+                    <div class="col-md-6">
+                        <label for="projectTitle">Program / Project Title:</label>
+                        <input type="text" class="form-control" id="projectTitle" name="user_project_title_1" required>
+                        <input type="hidden" id="hiddenProjectTitle" name="project_title">
+                        <input type="hidden" id="hiddenProjectYear" name="project_year">
+                    </div>
+
                         <div class="col-md-6">
                             <label for="implementingAgency">Implementing Agency:</label>
                             <input type="text" class="form-control" id="implementingAgency" name="user_implementing_agency_1">
@@ -90,6 +93,7 @@
                             <input type="text" class="form-control" id="outputIndicator" name="user_output_indicator_2">
                         </div>
                     </div>
+                    
 
                     <div class="row mb-3">
                         <div class="col-md-8">
@@ -138,33 +142,29 @@
 
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By :</label>
                             <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>-->
-                        <div class="form-group col-md-4">
-                            <label for="designation">Designation/Office :</label>
-                            <input type="text" class="form-control" id="designation" placeholder="Enter designation/office" name="user_designation_1">
-
                         </div>
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
+                            <label for="user_designation_1">Designation/Office :</label>
+                            <input type="text" class="form-control" id="user_designation_1" placeholder="Enter designation/office" name="user_designation_1">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="submissionDate">Date :</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>-->
+                            <input type="date" class="form-control" id="submissionDate" placeholder="Enter date">
+                        </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <!--<div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="approvedBy">Approved By :</label>
                             <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
                         </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
-                            <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
                         <div class="form-group col-md-4">
                             <label for="approvalDate">Date :</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
-                        </div>-->
+                            <input type="date" class="form-control" id="approvalDate" placeholder="Enter date">
+                        </div>
                     </div>
 
                     <div class="form-group">

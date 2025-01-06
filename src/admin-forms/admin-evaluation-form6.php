@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to the CSS file -->
 </head>
 <body>
-    <div id="form5" class="d">
+    <div id="form6" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 RPMC and RDC Resolutions Related to Implementation of the RPMES
@@ -16,48 +16,31 @@
                 <form>
                     <div class="details-header">
                         <h5>Information Details</h5>
-                        <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        Form# | Department | Project Title
-    </button>
-    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
-        <li>
-            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-        </li>
-        <div id="dropdownList">
-            <!-- Dropdown items will be dynamically populated here -->
-        </div>
-    </ul>
-</div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="resolutionNumber">Resolution Number</label>
                             <input type="text" class="form-control" id="resolutionNumber" placeholder="Enter resolution number">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="resolutionTitle">Resolution Title</label>
                             <input type="text" class="form-control" id="resolutionTitle" placeholder="Enter resolution title">
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="year">Year</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="dateApproved">Date Approved</label>
-                            <input type="text" class="form-control" id="dateApproved" placeholder="Enter date approved">
-                        </div>
-                        <div class="form-group col-md-9">
-                            <label for="resolutionLink">Link to the Resolution</label>
-                            <input type="text" class="form-control" id="resolutionLink" placeholder="Enter link to the resolution">
+                            <input type="date" class="form-control" id="dateApproved" placeholder="Enter date approved">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="resolution">Resolution</label>
-                            <input type="text" class="form-control" id="resolution" placeholder="Enter resolution" style="height: 100px;">
+                            <input type="text" class="form-control" id="resolution" placeholder="Enter resolution" style="height: 50px;">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="resolutionLink">Link to the Resolution</label>
+                            <input type="text" class="form-control" id="resolutionLink" placeholder="Enter link to the resolution">
                         </div>
                     </div>
 

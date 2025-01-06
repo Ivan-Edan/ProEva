@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($project_forms as $project) {
             // Extract data from the current form
             $project_title = $project['project_title'];
-            $year = $project['year'];
+            $project_year = $project['project_year'];
             $implementing_agency = $project['implementing_agency'];
             $fund_agency = $project['fund_agency'];
             $fund_source = $project['fund_source'];
@@ -39,19 +39,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $remarks = $project['remarks'];
             $male = $project['male'];
             $female = $project['female'];
+            $comp_details = $project['comp_details'];
+            $year_financial_target = $project['year_financial_target'];
+            $year_phy_target_percent = $project['year_phy_target_percent'];
+            $submitted_designation = $project['submitted_designation'];
+
 
             // Insert data into related tables and get foreign keys
-            // 1. Insert into `UserProjectTitle`
-            $stmt = $conn->prepare("INSERT INTO UserProjectTitle (project_title) VALUES (?)");
-            $stmt->bind_param("s", $project_title);
+            // Check if project title and year combination already exists
+            $stmt = $conn->prepare("SELECT project_id FROM UserProjectTitle WHERE project_title = ? AND project_year = ?");
+            $stmt->bind_param("si", $project_title, $project_year);
             $stmt->execute();
-            $project_id = $conn->insert_id;
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                // Duplicate exists, return an error response
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'This project title already exists for the selected year.'
+                ]);
+                exit();
+            }
+
+            // If no duplicate, proceed to insert into UserProjectTitle
+            $stmt = $conn->prepare("INSERT INTO UserProjectTitle (project_title, project_year) VALUES (?, ?)");
+            $stmt->bind_param("si", $project_title, $project_year);
+            $stmt->execute();
+            $project_id = $conn->insert_id; // Retrieve the inserted project ID
 
             // 2. Insert into `UserImplementingAgency`
             $stmt = $conn->prepare("INSERT INTO UserImplementingAgency (implementing_agency) VALUES (?)");
             $stmt->bind_param("s", $implementing_agency);
             $stmt->execute();
             $implementing_agency_id = $conn->insert_id;
+
+            // insert into usercompdetails
+            $stmt = $conn->prepare("INSERT INTO Usercompdetails (comp_details) VALUES (?)");
+            $stmt->bind_param("s", $comp_details);
+            $stmt->execute();
+            $comp_details_id = $conn->insert_id; // Get the inserted ID
+
+            $stmt = $conn->prepare("
+            INSERT INTO useryeartargets ( year_financial_target, year_phy_target_percent) 
+            VALUES ( ?, ?)");
+            $stmt->bind_param("ss", $year_financial_target, $year_phy_target_percent);
+            $stmt->execute();
+            $year_targets_id = $conn->insert_id; // Get the inserted ID
+
+            $stmt = $conn->prepare("
+            INSERT INTO userprojectvalidation (submitted_designation) 
+            VALUES ( ?)");
+            $stmt->bind_param("s", $submitted_designation );
+            $stmt->execute();
+            $project_validation_id = $conn->insert_id; // Get the inserted ID
 
             // 3. Insert into `UserFundSource`
             $stmt = $conn->prepare("INSERT INTO UserFundSource (fund_source) VALUES (?)");
@@ -84,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $total_cost_id = $conn->insert_id;
 
             // 8. Insert into `UserSDateEDate`
-            $stmt = $conn->prepare("INSERT INTO UserSDateEDate (start_date, end_date, year) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssi", $start_date, $end_date, $year);
+            $stmt = $conn->prepare("INSERT INTO UserSDateEDate (start_date, end_date) VALUES (?, ?)");
+            $stmt->bind_param("ss", $start_date, $end_date);
             $stmt->execute();
             $s_date_e_date_id = $conn->insert_id;
 
@@ -111,10 +151,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("
                 INSERT INTO InitialProjectReport 
                 (project_id, implementing_agency_id, fund_source_id, fund_agency_id, mode_of_implementation_id, 
-                sector_id, total_cost_id, s_date_e_date_id, location_id, target_employee_id, remarks_id, user_id) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
-            $stmt->bind_param("iiiiiiiiiiii", $project_id, $implementing_agency_id, $fund_source_id, $fund_agency_id,
-                $mode_of_implementation_id, $sector_id, $total_cost_id, $s_date_e_date_id, $location_id, $target_employee_id, $remarks_id,$user_id);
+                sector_id, total_cost_id, s_date_e_date_id, location_id, target_employee_id, remarks_id, user_id,comp_details_id, year_targets_id,project_validation_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
+            $stmt->bind_param("iiiiiiiiiiiiiii", $project_id, $implementing_agency_id, $fund_source_id, $fund_agency_id,
+                $mode_of_implementation_id, $sector_id, $total_cost_id, $s_date_e_date_id, $location_id, $target_employee_id, $remarks_id,$user_id,$comp_details_id,$year_targets_id,$project_validation_id);
             $stmt->execute();
             $details_id = $conn->insert_id;
             // 13. Insert dynamic data: `UserOutputIndicator`, `UserTargetOutput`, `UserMtyTarget`

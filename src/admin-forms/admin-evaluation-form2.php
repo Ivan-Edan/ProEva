@@ -6,78 +6,48 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form1" class="d">
+    <div id="form6" class="d" data-form-type="adminform2">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 Report on the Status of Projects Encountering Implementation Problems
             </div>
             <div class="card-body">
-                <form>
+            <form id="admin-form-6">
                     <!-- Wrapping the h5 and dropdown in a flex container -->
                     <div class="details-header">
                         <h5>Project Details</h5>
                         <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        Form# | Department | Project Title
-    </button>
-    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
-        <li>
-            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-        </li>
-        <div id="dropdownList">
-            <!-- Dropdown items will be dynamically populated here -->
-        </div>
-    </ul>
-</div>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                                Form# | Department | Project Title
+                            </button>
+                            <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
+                                </li>
+                                <div id="dropdownList">
+                                    <!-- Dropdown items will be dynamically populated here -->
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="projectTitle">Program / Project Title :</label>
                             <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="month">Month :</label>
-                            <select id="month" class="form-control">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="year">Year :</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="quarter">Quarter :</label>
-                            <select id="quarter" class="form-control">
-                                <option>Q1</option>
-                                <option>Q2</option>
-                                <option>Q3</option>
-                                <option>Q4</option>
-                            </select>
+                        <div class="form-group col-md-8">
+                            <label for="location">Location :</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
                     </div>
 
                     <!-- Rest of the form remains unchanged -->
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
-                            <label for="location">Location :</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter location">
-                        </div>
-                        <div class="form-group col-md-3">
                             <label for="IA">IA :</label>
                             <input type="text" class="form-control" id="IA" placeholder="Enter IA">
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             <label for="fundUtilization">Fund Utilization(%) :</label>
                             <input type="text" class="form-control" id="fundUtilization" placeholder="Enter fund utilization">
                         </div>
@@ -103,14 +73,28 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="issueDetails">Issue Details :</label>
-                            <input type="text" class="form-control" id="issueDetails" placeholder="Enter issue details" style="height: 100px;">
+                            <input type="text" class="form-control" id="issueDetails" placeholder="Enter issue details" style="height: 75px;">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="issueTypology">Issue Typology :</label>
-                            <input type="text" class="form-control" id="issueTypology" placeholder="Enter issue typology">
+                            <select id="issueTypology" class="form-control" placeholder="Select Issue Typology">
+                                <option>Site Condition/Availability</option>
+                                <option>Procurement</option>
+                                <option>Government/Funding Institution Approvals</option>
+                                <option>Budget and Funds Flow</option>
+                                <option>Design, Scope, Technical Specifications</option>
+                                <option>Performance of Contractors/Consultants</option>
+                                <option>Capacity of Project Management Unit and Other Implementing Partners</option>
+                                <option>Institutional Support</option>
+                                <option>Inputs and Costs</option>
+                                <option>Legal and Policy Issuances</option>
+                                <option>Sustainability, Operations and Maintenance</option>
+                                <option>Force Majeure</option>
+                                <option>Others</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="issueStatus">Issue Status :</label>
@@ -125,14 +109,14 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="actionTaken">Action Taken :</label>
-                            <input type="text" class="form-control" id="actionTaken" placeholder="Enter action taken" style="height: 100px;">
+                            <input type="text" class="form-control" id="actionTaken" placeholder="Enter action taken" style="height: 75px;">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="actionsToBeTaken">Actions to be Taken :</label>
-                            <input type="text" class="form-control" id="actionsToBeTaken" placeholder="Enter actions to be taken" style="height: 100px;">
+                            <input type="text" class="form-control" id="actionsToBeTaken" placeholder="Enter actions to be taken" style="height: 75px;">
                         </div>
                     </div>
 
@@ -153,30 +137,8 @@
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
-                            <label for="submittedBy">Submitted By :</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4">
                             <label for="designation">Designation/Office :</label>
                             <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="submissionDate">Date :</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By :</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
-                            <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date :</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
                         </div>
                     </div>
 

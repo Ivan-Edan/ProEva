@@ -38,7 +38,7 @@ function loadForm1Logic() {
                             </div>
                             <div class="col-md-2">
                                 <label for="year_${projectCount}">Year:</label>
-                                <select class="form-control" id="year_${projectCount}" name="year_${projectCount}">
+                                <select class="form-control" id="year_${projectCount}" name="project_year_${projectCount}">
                                     <option value="2024">2024</option>
                                     <option value="2023">2023</option>
                                     <option value="2022">2022</option>
@@ -140,11 +140,11 @@ function loadForm1Logic() {
                                 <span class="form-control-plaintext text-left" style="margin-top: 24px;"  >Total Target for the Year :</span>
                             </div>
                             <div class="col-md-2">
-                                <label for="financial_targets_${projectCount}">Financial Targets:</label>
-                                <input type="text" class="form-control" id="user_financial_targets_${projectCount}" name="year_financial_targets_${projectCount}" required>
+                                <label for="year_financial_target_${projectCount}">Financial Targets:</label>
+                                <input type="text" class="form-control" id="user_financial_targets_${projectCount}" name="year_financial_target_${projectCount}" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="physical_targets_${projectCount}">Physical Targets (in %):</label>
+                                <label for="year_phy_target_percent_${projectCount}">Physical Targets (in %):</label>
                                 <input type="text" class="form-control" id="user_physical_targets_${projectCount}" name="year_phy_target_percent_${projectCount}" required>
                             </div>
                         </div>

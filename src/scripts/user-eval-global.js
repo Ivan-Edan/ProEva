@@ -28,38 +28,58 @@ document.addEventListener('DOMContentLoaded', function () {
             formContent.innerHTML = '<p>Loading form...</p>';
 
             fetch(formFile)
-                .then((response) => {
-                    if (response.ok) return response.text();
-                    throw new Error("Network response was not ok.");
-                })
-                .then((html) => {
-                    formContent.innerHTML = html;
-
-                    formsList.style.display = 'none';
-                    formContent.style.display = 'block';
-
-                    if (quarterContainer) quarterContainer.style.display = 'none';
-                    if (submittedFormsContainer) submittedFormsContainer.style.display = 'none';
-                    if (paginationContainer) paginationContainer.style.display = 'none';
-
-                    // Load form-specific logic
-                    if (formType === 'form1') {
-                        loadForm1Logic();
+            .then((response) => {
+                if (response.ok) return response.text();
+                throw new Error("Network response was not ok.");
+            })
+            .then((html) => {
+                formContent.innerHTML = html;
+        
+                formsList.style.display = 'none';
+                formContent.style.display = 'block';
+        
+                if (quarterContainer) quarterContainer.style.display = 'none';
+                if (submittedFormsContainer) submittedFormsContainer.style.display = 'none';
+                if (paginationContainer) paginationContainer.style.display = 'none';
+        
+                // Attach event listeners for the dynamically loaded form
+                const targetOWPA = document.getElementById('targetOWPA');
+                const actualOWPA = document.getElementById('actualOWPA');
+                const slippage = document.getElementById('slippage');
+        
+                if (targetOWPA && actualOWPA && slippage) {
+                    function calculateSlippage() {
+                        const target = parseFloat(targetOWPA.value) || 0;
+                        const actual = parseFloat(actualOWPA.value) || 0;
+                        const result = actual - target ;
+                        slippage.value = result.toFixed(2) + '%';
                     }
-
-                    // Enable project title autofill for forms 2, 3, and 4
-                    if (formType === 'form2' || formType === 'form3' || formType === 'form4') {
-                        enableProjectTitleAutofill();
-                    }
-
-                    attachFormSubmitListener(formType); // Attach form submission handler
-                })
+        
+                    targetOWPA.addEventListener('input', calculateSlippage);
+                    actualOWPA.addEventListener('input', calculateSlippage);
+                }
+        
+                // Load form-specific logic
+                if (formType === 'form1') {
+                    loadForm1Logic();
+                }
+        
+                // Enable project title autofill for forms 2, 3, and 4
+                if (formType === 'form2' || formType === 'form3' || formType === 'form4') {
+                    enableProjectTitleAutofill();
+                }
+        
+                attachFormSubmitListener(formType); // Attach form submission handler
+            })
+        
                 .catch((error) => {
                     console.error("Error loading form:", error);
                     formContent.innerHTML = '<p>Failed to load form. Please try again later.</p>';
                 });
         });
     });
+    
+    
 
     // Handle the cancel button click
     document.addEventListener('click', function (event) {
@@ -69,3 +89,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+

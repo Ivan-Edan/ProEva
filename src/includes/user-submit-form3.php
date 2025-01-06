@@ -31,11 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $addi_form3_details_id = $conn->insert_id; // Get the inserted ID
 
         // 2. Insert into UserProjectTitle
-        $project_title = $_POST['user_project_title_1'];
-        $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ?");
-        $stmt->bind_param("s", $project_title);
+
+        $project_title = $_POST['project_title'];
+        $project_year = $_POST['project_year'];
+        $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ? AND project_year = ?");
+        $stmt->bind_param("si", $project_title, $project_year);
         $stmt->execute();
         $result = $stmt->get_result();
+    
         
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -69,19 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         $location_id = $conn->insert_id;
 
+        $user_designation_1 = $_POST['user_designation_1'];
+
+        // Insert into userprojectvalidation table
+        $stmt = $conn->prepare("
+            INSERT INTO userprojectvalidation 
+            (submitted_designation) 
+            VALUES (?)");
+        $stmt->bind_param("s", $user_designation_1);
+        $stmt->execute();
+        $project_validation_id = $conn->insert_id; // Get the inserted ID
+
+
         // 6. Insert into UserProjectExptRprt
         $stmt = $conn->prepare("
-            INSERT INTO UserProjectExptRprt (project_id, implementing_agency_id, sector_id, location_id, addi_form3_details_id, user_id) 
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO UserProjectExptRprt (project_id, implementing_agency_id, sector_id, location_id, addi_form3_details_id, user_id,project_validation_id) 
+            VALUES (?, ?, ?, ?, ?, ?,?)
         ");
         $stmt->bind_param(
-            "iiiiii", 
+            "iiiiiii", 
             $project_id, 
             $implementing_agency_id, 
             $sector_id, 
             $location_id, 
             $addi_form3_details_id, 
-            $user_id
+            $user_id,
+            $project_validation_id
         );
         $stmt->execute();
 
