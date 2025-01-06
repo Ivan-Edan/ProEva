@@ -11,7 +11,8 @@ if (isset($_GET['project_id'])) {
                     ufs.appropriations, 
                     ufs.allotment, 
                     ufs.obligations, 
-                    ufs.disimbursements
+                    ufs.disbursements, 
+                    upfr.created_at
                 FROM 
                     userfinancialstatus ufs
                 LEFT JOIN 
@@ -34,18 +35,16 @@ if (isset($_GET['project_id'])) {
                     'appropriations' => $row['appropriations'],
                     'allotment' => $row['allotment'],
                     'obligations' => $row['obligations'],
-                    'disimbursements' => $row['disimbursements']
+                    'disbursements' => $row['disbursements'],
+                    'created_at' => $row['created_at']
                 ];
             }
             echo json_encode($financialDetails);
         } else {
-            // Return a structured message for no data
-            echo json_encode(['message' => 'No data found for this project.']);
+            echo json_encode(['message' => 'No project data available']);
         }
     } catch (Exception $e) {
-        echo json_encode(['error' => $e->getMessage()]);
+        echo json_encode(['error' => 'Database query failed: ' . $e->getMessage()]);
     }
-} else {
-    echo json_encode(['error' => 'Project ID is required.']);
 }
 ?>

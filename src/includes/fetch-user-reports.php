@@ -41,27 +41,33 @@ if ($result_department->num_rows > 0) {
 
     // Query to fetch the user reports with pagination
     $sql_reports = "
-    SELECT 
-        p.project_title, 
-        s.sector, 
-        c.total_cost, 
-        d.start_date, 
-        d.end_date
-    FROM 
-        initialprojectreport AS r
-    INNER JOIN 
-        userprojecttitle AS p ON r.project_id = p.project_id
-    INNER JOIN 
-        usersector AS s ON r.sector_id = s.sector_id
-    INNER JOIN 
-        users AS u ON r.user_id = u.id
-    LEFT JOIN 
-        usertotalcost AS c ON r.total_cost_id = c.total_cost_id
-    LEFT JOIN 
-        usersdateedate AS d ON r.s_date_e_date_id = d.s_date_e_date_id
-    WHERE 
-        r.user_id = ? AND u.department_id = ?
-    LIMIT ?, ?"; // Using LIMIT and OFFSET
+SELECT 
+    p.project_title, 
+    s.sector, 
+    c.total_cost, 
+    d.start_date, 
+    d.end_date,
+    -- Count the completed tasks
+    (SELECT COUNT(*) FROM user_mainproject AS mp WHERE mp.project_id = p.project_id AND mp.status = 'Done') +
+    (SELECT COUNT(*) FROM user_subproject AS sp WHERE sp.project_id = p.project_id AND sp.status = 'Done') AS completed_tasks,
+    -- Count the in-progress tasks
+    (SELECT COUNT(*) FROM user_mainproject AS mp WHERE mp.project_id = p.project_id AND mp.status = 'In Progress') +
+    (SELECT COUNT(*) FROM user_subproject AS sp WHERE sp.project_id = p.project_id AND sp.status = 'In Progress') AS in_progress_tasks
+FROM 
+    initialprojectreport AS r
+INNER JOIN 
+    userprojecttitle AS p ON r.project_id = p.project_id
+INNER JOIN 
+    usersector AS s ON r.sector_id = s.sector_id
+INNER JOIN 
+    users AS u ON r.user_id = u.id
+LEFT JOIN 
+    usertotalcost AS c ON r.total_cost_id = c.total_cost_id
+LEFT JOIN 
+    usersdateedate AS d ON r.s_date_e_date_id = d.s_date_e_date_id
+WHERE 
+    r.user_id = ? AND u.department_id = ?
+LIMIT ?, ?"; // Using LIMIT and OFFSET
 
     $stmt_reports = $conn->prepare($sql_reports);
     if (!$stmt_reports) {

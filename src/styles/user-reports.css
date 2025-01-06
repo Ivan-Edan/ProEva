@@ -167,7 +167,13 @@ color: #585858;
     background-color: white;
     cursor: not-allowed;
 }
-
+#projectList {
+    max-height: 300px; 
+    overflow-y: auto;
+}
+#searchField {
+    margin-bottom: 10px; 
+}
 /* Responsive Table for small screens */
 @media (max-width: 1010px) {
     .container-3 {
