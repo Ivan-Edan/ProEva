@@ -23,19 +23,18 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-1">Project Monitoring</div>
                 <div class="container-2">
                     <span class="title">Project Gantt Chart</span>
-                    <select class="form-control project" id="project" name="project" style="width:fit-content;">
-                        <option value="0">Project</option>
+                    <div class="select-container">
+                    <select class="form-control project" id="project" name="project">
+                        <option value="0">Project List</option>
                         <?php
                         $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
-                                                            FROM initialprojectreport ip
-                                                            JOIN userprojecttitle pt
-                                                            ON ip.project_id = pt.project_id
-                                                            WHERE ip.user_id = ?");
+                                FROM initialprojectreport ip
+                                JOIN userprojecttitle pt
+                                ON ip.project_id = pt.project_id
+                                WHERE ip.user_id = ?");
                         $stmt->bind_param("i", $user_id);
                         $stmt->execute();
                         $result = $stmt->get_result();
-
-                        // Check if there are any rows
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $projId1 = $row['project_id'];
@@ -47,117 +46,153 @@ $user_id = $_SESSION['user_id'];
                         }
                         ?>
                     </select>
+                    </div>
                 </div>
-                <div class="container-3" style="width: fit-content; height:fit-content;">
+
+                <div class="container-3" style="height: fit-content;">
                     <h3 class="project-title"></h3>
-                    <table class="gantt-chart">
-                        <thead>
-                            <tr>
-                                <th>Project Name</th>
-                                <th>Jan</th>
-                                <th>Feb</th>
-                                <th>Mar</th>
-                                <th>Apr</th>
-                                <th>May</th>
-                                <th>Jun</th>
-                                <th>Jul</th>
-                                <th>Aug</th>
-                                <th>Sep</th>
-                                <th>Oct</th>
-                                <th>Nov</th>
-                                <th>Dec</th>
-                            </tr>
-                        </thead>
-                        <tbody id="gantt-chart-body">
-                            <!--  -->
-                        </tbody>
-                    </table>
+                    <div class="gantt-chart-container">
+                        <table class="gantt-chart">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; font-size: 15px;">Task Name</th>
+                                    <?php for ($month = 1; $month <= 12; $month++): ?>
+                                        <th colspan="31"><?php echo date("M", mktime(0, 0, 0, $month, 1)); ?></th>
+                                    <?php endfor; ?>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <?php for ($month = 1; $month <= 12; $month++): ?>
+                                        <?php for ($day = 1; $day <= 31; $day++): ?>
+                                            <th><?php echo $day; ?></th>
+                                        <?php endfor; ?>
+                                    <?php endfor; ?>
+                                </tr>
+                            </thead>
+                            <tbody id="gantt-chart-body">
+                                <!-- Dynamic rows appended here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
                 </div>
+
                 <br>
                 <br>
                 <div class="container-7">Project Backlog</div>
                 <div class="container-8 position-relative">
-                    <!-- Button container for the two buttons -->
-                    <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
-                        <button type="button" class="btn btn-primary mb-2 mainProject">
-                            <i class="fas fa-plus"></i> Add Main Project Details
-                        </button>
-                        <button type="button" class="btn btn-secondary subProject">
-                            <i class="fas fa-plus"></i> Add Sub Project Details
-                        </button>
+                <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
+                    <button type="button" class="btn btn-primary mb-2 mainProject">
+                        <i class="fas fa-plus"></i> Add Main Project Details
+                    </button>
+                    <button type="button" class="btn btn-secondary subProject">
+                        <i class="fas fa-plus"></i> Add Sub Project Details
+                    </button>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <!-- Done Projects Card -->
+                    <div class="col-md-12 mt-4">
+                        <div class="card" style="background-color: #F8F8F8;">
+                            <div class="card-body">
+                                <div class="card card-head">
+                                    <div class="card-title">
+                                        <p class="card-text">Task Done</p>
+                                    </div>
+                                </div>
+                                <p class="card-text-detail-no-data">No Done Project Found!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 mx-4 mt-7" style="margin-left: 40px;">
-                            <div class="card" style="height: 350px; background-color: #F8F8F8;">
-                                <div class="card-body">
-                                    <div class="card card-head">
-                                        <div class="card-title">
-                                            <p class="card-text">Project Done</p>
-                                        </div>
+                    <!-- In Progress Projects Card -->
+                    <div class="col-md-12 mt-4">
+                        <div class="card" style="background-color: #F8F8F8;">
+                            <div class="card-body">
+                                <div class="card card-head">
+                                    <div class="card-title">
+                                        <p class="card-text">Task In Progress</p>
                                     </div>
-                                    <?php
-                                    $projectDone = mysqli_query($conn, "SELECT * FROM user_mainproject WHERE status = 'Done'");
-                                    if (mysqli_num_rows($projectDone) > 0) {
-                                        while ($row = mysqli_fetch_assoc($projectDone)) {
-                                            $projName1 = $row['projectName'];
-                                            echo "<p class='card-text-detail'>$projName1</p>";
-                                        }
-                                    } else {
-                                        echo "<p class='card-text-detail'>No Done Project Found!</p>";
-                                    }
-                                    ?>
                                 </div>
+                                <p class="card-text-detail-no-data">No In Progress Project Found!</p>
                             </div>
                         </div>
-                        <div class="col-md-3 mx-4 mt-7">
-                            <div class="card" style="height: 350px; background-color: #F8F8F8;">
-                                <div class="card-body">
-                                    <div class="card card-head">
-                                        <div class="card-title">
-                                            <p class="card-text">Project On progress</p>
-                                        </div>
+                    </div>
+                    <!-- Incoming Projects Card -->
+                    <div class="col-md-12 mt-4">
+                        <div class="card" style="background-color: #F8F8F8;">
+                            <div class="card-body">
+                                <div class="card card-head">
+                                    <div class="card-title">
+                                        <p class="card-text">Task Incoming</p>
                                     </div>
-                                    <?php
-                                    $projectsProgress = mysqli_query($conn, "SELECT * FROM user_mainproject WHERE status = 'In Progress'");
-                                    if (mysqli_num_rows($projectsProgress) > 0) {
-                                        while ($row = mysqli_fetch_assoc($projectsProgress)) {
-                                            $projName2 = $row['projectName'];
-                                            echo "<p class='card-text-detail'>$projName2</p>";
-                                        }
-                                    } else {
-                                        echo "<p class='card-text-detail'>No In Progress Project Found!</p>";
-                                    }
-                                    ?>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mx-4 mt-7">
-                            <div class="card" style="height: 350px; background-color: #F8F8F8;">
-                                <div class="card-body">
-                                    <div class="card card-head">
-                                        <div class="card-title">
-                                            <p class="card-text">Project Incoming</p>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    $projectIncoming = mysqli_query($conn, "SELECT * FROM user_mainproject WHERE status = 'Incoming'");
-                                    if (mysqli_num_rows($projectIncoming) > 0) {
-                                        while ($row = mysqli_fetch_assoc($projectIncoming)) {
-                                            $projName3 = $row['projectName'];
-                                            echo "<p class='card-text-detail'>$projName3</p>";
-                                        }
-                                    } else {
-                                        echo "<p class='card-text-detail'>No Incoming Project Found!</p>";
-                                    }
-                                    ?>
-                                </div>
+                                <p class="card-text-detail-no-data">No Incoming Project Found!</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
+    <script>
+document.getElementById('project').addEventListener('change', function () {
+    const projectId = this.value;
+
+    if (projectId !== '0') {
+        fetch('includes/fetch_backlogs.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ project_id: projectId }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Update Task Done Section
+                const taskDoneContainer = document.querySelector('.col-md-12.mt-4:nth-child(1) .card-body');
+                taskDoneContainer.innerHTML = `
+                    <div class="card card-head">
+                        <div class="card-title">
+                            <p class="card-text">Task Done</p>
+                        </div>
+                    </div>
+                    ${
+                        data.done.length
+                            ? data.done.map(task => `<p class='card-text-detail'>${task.projectName}</p>`).join('')
+                            : "<p class='card-text-detail-no-data'>No Done Project Found!</p>"
+                    }`;
+
+                // Update Task In Progress Section
+                const inProgressContainer = document.querySelector('.col-md-12.mt-4:nth-child(2) .card-body');
+                inProgressContainer.innerHTML = `
+                    <div class="card card-head">
+                        <div class="card-title">
+                            <p class="card-text">Task In Progress</p>
+                        </div>
+                    </div>
+                    ${
+                        data.inProgress.length
+                            ? data.inProgress.map(task => `<p class='card-text-detail'>${task.projectName}</p>`).join('')
+                            : "<p class='card-text-detail-no-data'>No In Progress Project Found!</p>"
+                    }`;
+
+                // Update Task Incoming Section
+                const incomingContainer = document.querySelector('.col-md-12.mt-4:nth-child(3) .card-body');
+                incomingContainer.innerHTML = `
+                    <div class="card card-head">
+                        <div class="card-title">
+                            <p class="card-text">Task Incoming</p>
+                        </div>
+                    </div>
+                    ${
+                        data.incoming.length
+                            ? data.incoming.map(task => `<p class='card-text-detail'>${task.projectName}</p>`).join('')
+                            : "<p class='card-text-detail-no-data'>No Incoming Project Found!</p>"
+                    }`;
+            })
+            .catch(error => console.error('Error fetching backlog data:', error));
+    }
+});
+</script>
 
     <!-- Modal -->
     <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
@@ -292,8 +327,7 @@ $user_id = $_SESSION['user_id'];
                                 id="comment"
                                 name="comment"
                                 rows="4"
-                                placeholder="Add comment"
-                            ></textarea>
+                                placeholder="Add comment"></textarea>
 
                             <!-- Image Upload Icon -->
                             <div class="upload-button-wrapper">
@@ -306,8 +340,7 @@ $user_id = $_SESSION['user_id'];
                                     name="photo"
                                     accept="image/*"
                                     class="upload-input"
-                                    onchange="handleImageUploadMain(event)"
-                                />
+                                    onchange="handleImageUploadMain(event)" />
                             </div>
                         </div>
                         <div id="previewContainerss" style="margin-top: 10px;"></div>
@@ -346,42 +379,45 @@ $user_id = $_SESSION['user_id'];
                             </select>
                         </p>
 
-                        <p style="font-size: 20px;"><strong>Main Project Name:</strong></p>
-                        <select class="form-control mainproject" id="mainproject" name="mainproject">
-                            <option value="">Select Main Project</option>
-                            <?php
-                            $projects = mysqli_query($conn, "SELECT * FROM user_mainproject");
-                            if (mysqli_num_rows($projects) > 0) {
-                                while ($row = mysqli_fetch_assoc($projects)) {
-                                    $projId = $row['id'];
-                                    $projName = $row['projectName'];
-                                    $projStartDate = $row['startDate'];
-                                    $projEndDate = $row['endDate'];
-                                    echo "<option value='$projId' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
+                        <div class="project-form">
+                            <p class="form-label"><strong>Main Project Name:</strong></p>
+                            <select class="form-control" id="mainproject" name="mainproject">
+                                <option value="">Select Main Project</option>
+                                <?php
+                                $projects = mysqli_query($conn, "SELECT * FROM user_mainproject");
+                                if (mysqli_num_rows($projects) > 0) {
+                                    while ($row = mysqli_fetch_assoc($projects)) {
+                                        $projId = $row['id'];
+                                        $projName = $row['projectName'];
+                                        $projStartDate = $row['startDate'];
+                                        $projEndDate = $row['endDate'];
+                                        echo "<option value='$projId' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No Main Project Found!</option>";
                                 }
-                            } else {
-                                echo "<option value=''>No Main Project Found!</option>";
-                            }
-                            ?>
-                        </select>
+                                ?>
+                            </select>
 
-                        <p style="font-size: 20px;"><strong>Sub Project Name:</strong></p>
-                        <input type="input" class="form-control subProjectName" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
+                            <p class="form-label">Sub Project Name:</p>
+                            <input type="text" class="form-control" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
 
-                        <p style="font-size: 20px;"><strong>Start Date:</strong></p>
-                        <input type="date" class="form-control subStartDate" id="subStartDate" name="subStartDate" placeholder="">
+                            <p class="form-label">Start Date:</p>
+                            <input type="date" class="form-control" id="subStartDate" name="subStartDate">
 
-                        <p style="font-size: 20px;"><strong>End Date:</strong></p>
-                        <input type="date" class="form-control subEndDate" id="subEndDate" name="subEndDate" placeholder="">
+                            <p class="form-label">End Date:</p>
+                            <input type="date" class="form-control" id="subEndDate" name="subEndDate">
 
-                        <p style="font-size: 20px;"><strong>Total Project Cost:</strong></p>
-                        <input type="text" class="form-control subProjectCost" id="subProjectCost" name="subProjectCost" placeholder="Add Project Cost">
+                            <p class="form-label">Total Project Cost:</p>
+                            <input type="text" class="form-control" id="subProjectCost" name="subProjectCost" placeholder="Add Project Cost">
 
-                        <p style="font-size: 20px;"><strong>Fund Source:</strong></p>
-                        <input type="text" class="form-control subFundSource" id="subFundSource" name="subFundSource" placeholder="Add Fund Source">
+                            <p class="form-label">Fund Source:</p>
+                            <input type="text" class="form-control" id="subFundSource" name="subFundSource" placeholder="Add Fund Source">
 
-                        <p style="font-size: 20px;"><strong>Funding Agency:</strong></p>
-                        <input type="text" class="form-control subFundingAgency" id="subFundingAgency" name="subFundingAgency" placeholder="Add Funding Agency">
+                            <p class="form-label">Funding Agency:</p>
+                            <input type="text" class="form-control" id="subFundingAgency" name="subFundingAgency" placeholder="Add Funding Agency">
+                        </div>
+                        <br>
 
                         <p style="font-size: 20px;"><strong>Comments:</strong></p>
                         <div class="comment-input-wrapper">
@@ -390,13 +426,12 @@ $user_id = $_SESSION['user_id'];
                                 id="subComment"
                                 name="subComment"
                                 rows="4"
-                                placeholder="Add comment"
-                            ></textarea>
+                                placeholder="Add comment"></textarea>
 
                             <!-- Image Upload Icon -->
                             <div class="upload-button-wrapper">
                                 <label for="uploadImages1" class="upload-button">
-                                    <i class="fas fa-upload"></i> 
+                                    <i class="fas fa-upload"></i>
                                 </label>
                                 <input
                                     type="file"
@@ -404,8 +439,7 @@ $user_id = $_SESSION['user_id'];
                                     name="photo"
                                     accept="image/*"
                                     class="upload-input"
-                                    onchange="handleImageUploadSub(event)"
-                                />
+                                    onchange="handleImageUploadSub(event)" />
                             </div>
                         </div>
 
