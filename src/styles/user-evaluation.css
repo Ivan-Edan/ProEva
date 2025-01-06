@@ -164,6 +164,122 @@
     border-bottom: 0.5px solid #bebebe;
 }
 
+/* Dropdown Styling */
+#filterDropdown {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #1f3247;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #1f3247;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Dropdown Hover Effect */
+#filterDropdown:hover {
+    border-color: #007bff;
+}
+
+/* Dropdown Focus Effect */
+#filterDropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Header Container */
+#quarter-container {
+    background-color: #1f3247; /* Dark background */
+    padding: 10px 20px; /* Padding adjustments */
+    border-radius: 5px;
+}
+
+/* Flex container for dropdown */
+.filter-container {
+    margin-right: 10px; /* Space between dropdown and label */
+}
+
+/* Quarter Label Styling */
+.quarter-label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #243c5a; /* Dark blue header */
+    color: white;
+    font-weight: bold;
+}
+
+/* Section Titles */
+.modal-body h6 {
+    font-weight: bold;
+    color: #243c5a; /* Matching dark blue */
+    margin-bottom: 10px;
+}
+
+/* Input and Textarea Fields */
+.modal-body .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Adjust Textarea Height */
+.modal-body textarea.form-control {
+    height: 80px;
+}
+
+/* Buttons in Modal Footer */
+.modal-footer {
+    justify-content: center; /* Center-align buttons */
+}
+
+.modal-footer button {
+    min-width: 100px; /* Equal button width */
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.btn-close{
+    background-color:white;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Danger Button */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Hover Effects */
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 95%;
+    }
+}
+
+
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .list-group-item {

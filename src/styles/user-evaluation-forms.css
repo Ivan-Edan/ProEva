@@ -114,9 +114,7 @@ h6 {
     width: 100%; /* Full width of the dropdown container */
     box-sizing: border-box; /* Ensure padding is included in the width */
 }
-
-/* Dropdown list styling */
-input#projectTitle + .autocomplete-list {
+.autocomplete-list {
     position: absolute;
     background: #fff;
     max-height: 200px;
@@ -124,27 +122,33 @@ input#projectTitle + .autocomplete-list {
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 95%;
+    width: 95%; /* Ensure it aligns perfectly with input width */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    border-radius: 4px;
 }
 
 /* Dropdown items */
-input#projectTitle + .autocomplete-list .autocomplete-item {
+.autocomplete-item {
     padding: 8px 12px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Hover effect for dropdown */
-input#projectTitle + .autocomplete-list .autocomplete-item:hover {
+.autocomplete-item:hover {
     background-color: #007bff;
     color: #fff;
 }
 
 /* Highlight matching text */
-input#projectTitle + .autocomplete-list .autocomplete-highlight {
+.autocomplete-highlight {
     font-weight: bold;
     color: #050d16;
 }
 
+/* Optional: Remove bullets from dropdown list */
+.autocomplete-list li {
+    list-style: none;
+}

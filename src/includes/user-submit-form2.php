@@ -71,12 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target_employee_id = $conn->insert_id;
 
         // 7. Insert into UserProjectTitle
-        $project_title = $_POST['user_project_title_1'];
-        $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ?");
-        $stmt->bind_param("s", $project_title);
+
+        $project_title = $_POST['project_title'];
+        $project_year = $_POST['project_year'];
+        $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ? AND project_year = ?");
+        $stmt->bind_param("si", $project_title, $project_year);
         $stmt->execute();
         $result = $stmt->get_result();
-
+    
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $project_id = $row['project_id'];
@@ -125,19 +127,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         $remarks_id = $conn->insert_id;
 
+
+        // Capture form data
+        $user_designation_1 = $_POST['user_designation_1'];
+
+        // Insert into userprojectvalidation table
+        $stmt = $conn->prepare("
+            INSERT INTO userprojectvalidation 
+            (submitted_designation) 
+            VALUES (?)");
+        $stmt->bind_param("s", $user_designation_1);
+        $stmt->execute();
+        $project_validation_id = $conn->insert_id; // Get the inserted ID
+
+
         // 13. Insert final report into UserPhysFinAccompReport
         $stmt = $conn->prepare("
             INSERT INTO UserPhysFinAccompReport (
                 project_id, s_date_e_date_id, fund_agency_id, fund_source_id, 
                 total_cost_id, financial_status_id, Phys_Accomplishment_id, 
-                Addi_Details_id, Target_employee_id, remarks_id, user_id
+                Addi_Details_id, Target_employee_id, remarks_id, user_id,implementing_agency_id,project_validation_id
             ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
         $stmt->bind_param(
-            "iiiiiiiiiii",
+            "iiiiiiiiiiiii",
             $project_id, $s_date_e_date_id, $fund_agency_id, $fund_source_id,
             $total_cost_id, $financial_status_id, $phys_accomplishment_id,
-            $addi_details_id, $target_employee_id, $remarks_id, $user_id
+            $addi_details_id, $target_employee_id, $remarks_id, $user_id,$implementing_agency_id,$project_validation_id
         );
         $stmt->execute();
 

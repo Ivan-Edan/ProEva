@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include 'includes/user-submittedForms-table-modal.php'; ?><!-- Fetches the submittedForm files modal -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forms Page</title>
@@ -28,54 +29,46 @@
                 <!-- Form content will be dynamically loaded here -->
             </div>
             <!-- Quarter Section -->
-            
-                <div class="card-header text-white mt-4" id="quarter-container">
-                    QUARTER : 1st
-                </div>
+            <div class="card-header text-white mt-4" id="quarter-container">
+                <select id="filterDropdown">
+                    <option value="all">All Forms</option>
+                    <option value="form1">Form1: Initial Project Report</option>
+                    <option value="form2">Form2: Financial & Physical Accomplishments</option>
+                    <option value="form3">Form3: Exception Report</option>
+                    <option value="form4">Form4: Project Results</option>
+                </select>
+                QUARTER : 1st
+            </div>
             <!-- Table Section -->
             <div class="card shadow-sm mt-4" id="submitted-forms-container">
                 <div class="card-body" >
-                <table class="table table-hover" >
+                <table id="userSubmissionsTable" class="table table-striped">
             <thead class="table-header">
                 <tr>
                     <th>Project Name</th>
                     <th>User Submitted Forms</th>
                     <th>Date Submitted</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Bridge Building 1</td>
-                    <td>INITIAL PROJECT REPORT</td>
-                    <td>Jan 24, 2024</td>
-                </tr>
-                <tr>
-                    <td>Bridge Building 2</td>
-                    <td>INITIAL PROJECT REPORT</td>
-                    <td>Jan 24, 2024</td>
-                </tr>
-                <tr>
-                    <td>Bridge Building 3</td>
-                    <td>INITIAL PROJECT REPORT</td>
-                    <td>Jan 24, 2024</td>
-                </tr>
+
             </tbody>
         </table>
-                    <nav class="pagination-container" id="pagination-container">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        </ul>
-                    </nav>
+        <nav class="pagination-container" id="pagination-container">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Dynamic pagination links will be generated here -->
+                    </ul>
+                </nav>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- Include JavaScript -->
     <script src="scripts/user-eval-utils.js"></script>
     <script src="scripts/user-eval-global.js"></script>
     <script src="scripts/user-form1.js"></script>
+    <script src="scripts/user-load-submissions.js"></script>
 </body>
 </html>

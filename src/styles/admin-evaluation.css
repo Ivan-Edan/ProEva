@@ -33,6 +33,9 @@
     text-align: center;
     border-radius: 10px !important;
     background-color: #27374D;
+    color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .list-group-item {
@@ -53,6 +56,161 @@
 .heading-container h1 {
     margin: 0; /* Remove default margin */
     font-weight: bold; /* Make the text bold */
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; /* Circle size */
+    height: 36px; /* Circle size */
+    border-radius: 50%; /* Makes it circular */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333; /* Default text color */
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.pagination li a:hover {
+    color: #fff;
+    background-color: #1f3044; /* Hover background color */
+}
+
+.pagination li.active a {
+    color: #fff;
+    background-color: #1f3044; /* Active button background color */
+    pointer-events: none; /* Disable clicking on active page */
+}
+
+
+.table {
+    width: 100%; 
+    table-layout: auto; 
+    margin: 0; 
+    border-collapse: separate; 
+    border-spacing: 0; 
+}
+
+.table th, .table td {
+    padding: 20px; 
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap; 
+}
+
+.table thead th {
+    background-color: #27374D;
+    color: white;
+    font-weight: 600;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table td {
+    border-bottom: 0.5px solid #bebebe;
+}
+
+/* Dropdown Styling */
+#filterDropdown {
+    width: 250px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #1f3247;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #1f3247;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Dropdown Hover Effect */
+#filterDropdown:hover {
+    border-color: #007bff;
+}
+
+/* Dropdown Focus Effect */
+#filterDropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Header Container */
+#quarter-container {
+    background-color: #1f3247; /* Dark background */
+    padding: 10px 20px; /* Padding adjustments */
+    border-radius: 5px;
+}
+
+/* Flex container for dropdown */
+.filter-container {
+    margin-right: 10px; /* Space between dropdown and label */
+}
+
+/* Quarter Label Styling */
+.quarter-label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+
+/* Modal Header */
+.modal-header {
+    background-color: #243c5a; /* Dark blue header */
+    color: white;
+    font-weight: bold;
+}
+
+/* Section Titles */
+.modal-body h6 {
+    font-weight: bold;
+    color: #243c5a; /* Matching dark blue */
+    margin-bottom: 10px;
+}
+
+/* Input and Textarea Fields */
+.modal-body .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Adjust Textarea Height */
+.modal-body textarea.form-control {
+    height: 80px;
+}
+
+.btn-close{
+    background-color:white;
 }
 
 /* Responsive adjustments */

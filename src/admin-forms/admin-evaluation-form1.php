@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +6,13 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form7" class="d">
+    <div id="form5" class="d" data-form-type="adminform1">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
             </div>
             <div class="card-body">
-                <form>
+                <form id="admin-form-5">
                     <div class="details-header">
                         <h5>Project Details</h5>
                     <div class="dropdown">
@@ -32,75 +28,62 @@
                             </div>
                         </ul>
                     </div>
-
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-6">
                             <label for="projectTitle">Program / Project Title</label>
                             <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="month">Month</label>
-                            <select id="month" class="form-control">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="year">Year</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="quarter">Quarter</label>
-                            <select id="quarter" class="form-control">
-                                <option>Q1</option>
-                                <option>Q2</option>
-                                <option>Q3</option>
-                                <option>Q4</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             <label for="implementingAgency">Implementing Agency</label>
                             <input type="text" class="form-control" id="implementingAgency" placeholder="Enter agency">
                         </div>
                     </div>
+
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="fundSource">Fund Source</label>
-                            <input type="text" class="form-control" id="fundSource" placeholder="Enter fund source">
+                        <div class="col-md-6">
+                            <label for="startDate">Start Date:</label>
+                            <input type="date" class="form-control" id="startDate">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="fundingAgency">Funding Agency</label>
-                            <input type="text" class="form-control" id="fundingAgency" placeholder="Enter funding agency">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="projectCost">Total Program/Project Cost (PHP)</label>
-                            <input type="text" class="form-control" id="projectCost" placeholder="Enter cost">
+                        <div class="col-md-6">
+                            <label for="endDate">End Date:</label>
+                            <input type="date" class="form-control" id="endDate">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="sector">Sector</label>
-                            <input type="text" class="form-control" id="sector" placeholder="Enter sector">
+                            <select id="sector" class="form-control">
+                                <option>General Public Services</option>
+                                <option>Social Services</option>
+                                <option>Economic Services</option>
+                                <option>Other Services</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="startDate">Start Date</label>
-                            <input type="text" class="form-control" id="startDate" placeholder="Enter start date">
+                            <label for="fundSource">Fund Source</label>
+                            <select id="fundSource" class="form-control">
+                                <option>ODA Loan</option>
+                                <option>ODA Grant</option>
+                                <option>Oda loan and Grant</option>
+                                <option>LFP</option>
+                                <option>PPP</option>
+                                <option>NTA</option>
+                                <option>Local Development Fund</option>
+                                <option>OtherS</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="endDate">End Date</label>
-                            <input type="text" class="form-control" id="endDate" placeholder="Enter end date">
+                            <label for="fundingAgency">Funding Agency</label>
+                            <input type="text" class="form-control" id="fundingAgency" placeholder="Enter funding agency">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="form-group col-md-12">
+                            <label for="projectCost">Total Program/Project Cost (PHP)</label>
+                            <input type="text" class="form-control" id="projectCost" placeholder="Enter cost">
                         </div>
                     </div>
 
@@ -165,35 +148,17 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="remarks">Remarks</label>
-                            <textarea class="form-control" id="remarks" placeholder="Enter remarks" rows="4"></textarea>
+                            <select id="remarks" class="form-control">
+                                <option>Ongoing</option>
+                                <option>Completed</option>
+                            </select>
                         </div>
                     </div>
                     <h5>Project Validation</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
-                            <label for="submittedBy">Submitted By</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4">
                             <label for="designation">Designation/Office</label>
                             <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="submissionDate">Date</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
-                            <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
                         </div>
                     </div>
                     <div class="form-group">

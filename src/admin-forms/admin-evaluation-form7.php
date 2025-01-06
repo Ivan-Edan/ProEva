@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/admin-evaluation-forms.css"> <!-- Link to your custom CSS file -->
 </head>
 <body>
-    <div id="form6" class="d">
+    <div id="form7" class="d">
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 Key Lessons Learned from Issues Resolved and Best Practices
@@ -16,40 +16,23 @@
                 <form>
                     <div class="details-header">
                         <h5>Project Details</h5>
-                        <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        Form# | Department | Project Title
-    </button>
-    <ul class="dropdown-menu" id="formDropdown" aria-labelledby="dropdownMenu">
-        <li>
-            <input type="text" class="form-control" id="searchField" name="searchField" placeholder="Search">
-        </li>
-        <div id="dropdownList">
-            <!-- Dropdown items will be dynamically populated here -->
-        </div>
-    </ul>
-</div>
                     </div>
                     <div class="mb-3 row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-4">
                             <label for="projectTitle">Program / Project Title</label>
                             <input type="text" class="form-control" id="projectTitle" placeholder="Enter title">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="year">Year</label>
-                            <input type="text" class="form-control" id="year" placeholder="Enter year">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
-                    </div>
-                    <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="implementingAgency">Implementing Agency</label>
                             <input type="text" class="form-control" id="implementingAgency" placeholder="Enter implementing agency">
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter location">
-                        </div>
                     </div>
+
+
                     <h5>Problem/Issue</h5>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
@@ -65,19 +48,19 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="strategies">Strategies/Actions Taken to Resolve the Problem/Issue</label>
-                            <input type="text" class="form-control" id="strategies" placeholder="Enter strategies/actions taken" style="height: 100px;">
+                            <input type="text" class="form-control" id="strategies" placeholder="Enter strategies/actions taken" style="height: 50px;">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="responsibleEntity">Responsible Entity/Key Actors and their Specific Assistance</label>
-                            <input type="text" class="form-control" id="responsibleEntity" placeholder="Enter responsible entity/key actors" style="height: 100px;">
+                            <input type="text" class="form-control" id="responsibleEntity" placeholder="Enter responsible entity/key actors" style="height: 50px;">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="lessonsLearned">Lessons Learned and Good Practices that could be shared to the NPMC/Other PMCs</label>
-                            <input type="text" class="form-control" id="lessonsLearned" placeholder="Enter lessons learned and good practices" style="height: 100px;">
+                            <input type="text" class="form-control" id="lessonsLearned" placeholder="Enter lessons learned and good practices" style="height: 50px;">
                         </div>
                     </div>
                     <h5>Project Validation</h5>
