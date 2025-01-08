@@ -241,12 +241,6 @@ $(document).ready(function() {
   });
 });
 
-
-
-
-
-
-
 $(document).ready(function() {
   $("#submitResetForm").on("click", function(event) {
       event.preventDefault(); 
@@ -280,5 +274,22 @@ $(document).ready(function() {
   });
 });
 
+
+// Clear input fields when the email modal is closed and disable the submit button
+cancelEmailBtn.addEventListener("click", function() {
+  emailModal.style.display = "none"; // Hide the email modal
+  document.getElementById('resetEmail').value = ''; // Clear the email input
+  document.getElementById('submitEmail').disabled = true; // Disable the submit button
+});
+
+// Clear input fields when the password reset modal is closed
+cancelResetForm.addEventListener("click", function() {
+  passwordResetModal.style.display = "none"; // Hide the password reset modal
+  document.getElementById('newPassword').value = ''; // Clear the new password input
+  document.getElementById('confirmPassword').value = ''; // Clear the confirm password input
+  document.getElementById('passwordMismatchMessage').style.display = 'none'; // Hide mismatch message
+  document.getElementById('resetEmail').value = ''; // Clear the email input
+  document.getElementById('submitEmail').disabled = true; // Disable the submit button
+});
 
 

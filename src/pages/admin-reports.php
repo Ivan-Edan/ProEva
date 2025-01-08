@@ -27,6 +27,7 @@ require_once __DIR__ . '/../includes/config.php';
         <div class="container-1">Reports</div>
         <div class="container-2">Performance Reports</div>
         <div class="container-3">
+        <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -47,7 +48,7 @@ require_once __DIR__ . '/../includes/config.php';
               <!-- Data will be inserted here -->
             </tbody>
           </table>
-
+        </div>
           <div id="pagination" class="text-center">
             <!-- Pagination buttons will appear here -->
           </div>

@@ -125,16 +125,56 @@ document.getElementById('deleteAccountBtn').addEventListener('click', function()
 });
 
 
-// Fetch existing accounts on page load
-fetch('includes/fetch-accounts.php')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('account-table-body').innerHTML = data;
-    })
-    .catch(error => {
-        console.error('Error fetching accounts:', error);
-        document.getElementById('account-table-body').innerHTML = '<tr><td colspan="7" class="text-center">Error loading accounts.</td></tr>';
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    let currentPage = 1; // Current page number
+    const rowsPerPage = 5; // Number of rows per page
+    let totalRows = 0; // Total number of rows in the table
+
+    const tableBody = document.getElementById('account-table-body');
+    const paginationControls = document.getElementById('pagination-controls');
+
+    // Function to fetch and display accounts with pagination
+    function fetchAccounts(page = 1) {
+        fetch(`includes/fetch-accounts.php?page=${page}&limit=${rowsPerPage}`)
+            .then(response => response.text())
+            .then(data => {
+                const responseData = JSON.parse(data);
+                totalRows = responseData.totalRows;
+                tableBody.innerHTML = responseData.html;
+                updatePaginationControls();
+            })
+            .catch(error => {
+                console.error('Error fetching accounts:', error);
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Error loading accounts.</td></tr>';
+            });
+    }
+
+    // Function to create pagination controls
+    function updatePaginationControls() {
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+        paginationControls.innerHTML = ''; // Clear existing buttons
+
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.className = 'btn btn-secondary mx-1';
+            button.textContent = i;
+            if (i === currentPage) {
+                button.classList.add('active');
+            }
+
+            button.addEventListener('click', function () {
+                currentPage = i;
+                fetchAccounts(currentPage);
+            });
+
+            paginationControls.appendChild(button);
+        }
+    }
+
+    // Fetch accounts for the initial page
+    fetchAccounts(currentPage);
+});
+
 
 // Event listener for opening the edit modal
 document.getElementById('account-table-body').addEventListener('click', function(event) {
