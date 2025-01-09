@@ -644,3 +644,141 @@ document.getElementById('project').addEventListener('change', function () {
         }
     });
 </script>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border: 2px solid blue;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The <b>Maintask</b> has been added successfully.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sub Task Success Modal -->
+<div class="modal fade" id="successsubModal" tabindex="-1" aria-labelledby="successsubLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border: 2px solid blue;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The <b>Subtask</b> has been added successfully.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Update Modal -->
+<div class="modal fade" id="successupdateModal" tabindex="-1" aria-labelledby="successupdateLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border: 2px solid blue;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The TAsk <b>Updated</b> has been added successfully.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    // Handle form submission using Ajax
+    $('form').on('submit', function(event) {
+        event.preventDefault();  // Prevent default form submission
+
+        var formData = new FormData(this); // Create FormData object from the form
+
+        // Send the form data via Ajax
+        $.ajax({
+            url: 'user-page/functions/addProject.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Parse the JSON response from the server
+                var data = JSON.parse(response);
+                if (data.status === 'success') {
+                    // Show the success modal
+                    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    successModal.show();
+                    
+                    // Optionally, clear the form fields if needed
+                    $('form')[0].reset();
+                } else {
+                    // Handle failure, display an alert or message
+                    alert('Failed to add project: ' + data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', status, error);
+                alert('There was an error with the request.');
+            }
+        });
+    });
+
+    // Refresh the page when the close button is clicked on the success modal
+    $('#successModal .btn-close').on('click', function() {
+        location.reload();  // Reload the page
+    });
+});
+
+</script>
+<script>
+    $(document).ready(function() {
+    // Prevent multiple event bindings for form submission
+    $('#submitBtn1').off('click').on('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        var formData = new FormData($('#taskModalSub form')[0]); // Get form data
+
+        $.ajax({
+            url: 'user-page/functions/addSubProject.php', // Endpoint for form submission
+            type: 'POST',
+            data: formData,
+            processData: false, // Prevent jQuery from transforming data into a query string
+            contentType: false, // Prevent jQuery from setting content type automatically
+            success: function(response) {
+                console.log(response);
+
+                try {
+                    const data = JSON.parse(response); // Parse the JSON response
+                    if (data.status === "success") {
+                        // Show success modal
+                        var successModal = new bootstrap.Modal(document.getElementById('successsubModal'));
+                        successModal.show();
+
+                        // Optionally, clear the form fields after successful submission
+                        $('#taskModalSub form')[0].reset();
+                    } else {
+                        alert('Failed to add subtask: ' + data.message);
+                    }
+                } catch (e) {
+                    alert('Error parsing the server response');
+                    console.error(e);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error: ', status, error);
+                alert('Failed to submit data.');
+            }
+        });
+    });
+
+    // Refresh the page when the close button is clicked on the success modal
+    $('#successsubModal .btn-close').on('click', function() {
+        location.reload();  // Reload the page
+    });
+});
+
+
+</script>

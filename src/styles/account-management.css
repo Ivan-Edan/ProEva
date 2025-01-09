@@ -307,3 +307,41 @@ h6 {
     align-items: center;
     margin: 0 auto;
 }
+/* Pagination container */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Pagination button (default state) */
+  #pagination-controls button {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    border-color: transparent;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Hover effect for all buttons */
+  #pagination-controls button:hover {
+    background-color: #f0f0f0;
+    color: #27374D;
+  }
+/* Active button */
+#pagination-controls .active {
+    background-color:  #27374D !important;
+    color: #f0f0f0 !important;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 10px;
+    }
