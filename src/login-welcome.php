@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Spinner -->
     <link rel="stylesheet" href="<?php echo 'styles/spinner.css'; ?>" />
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <?php include 'spinner.html'; ?>
@@ -27,8 +29,7 @@
                     <div class="text-container-landing">
                         <img src="<?php echo 'images/landing-pic.png'; ?>" class="landing-image" alt="">
                     </div>
-                    <h2 class="title">Project Monitoring and</h2>
-                    <h2 class="title">Evaluation System</h2>
+                    <h2 class="title">ProEva: Project Monitoring System</h2>
                     <input type="submit" class="btn" value="LOGIN" id="sign-up-btn" />
                 </form>
 
@@ -60,7 +61,7 @@
                 <div class="content">
                     <h3>Learn More !</h3>
                     <br><br>
-                    <button class="btn transparent" id="sign-up-btn">About</button>
+                    <button class="btn transparent about-btn">About</button>
                 </div>
                 <img src="<?php echo 'images/svg/register.svg'; ?>" class="image" alt="" />
             </div>
@@ -86,12 +87,12 @@
         </div>
         <form action="send_reset_email.php" method="POST">
             <label class="label-field-2" for="email">Email</label>
-                    <div class="input-field">
-                        <img src="<?php echo 'images/svg/user.svg'; ?>" />
-                        <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your email" required />
-                    </div>
+            <div class="input-field">
+                <img src="<?php echo 'images/svg/user.svg'; ?>" />
+                <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your email" required />
+            </div>
             <div class="modal-buttons">
-                <input type="submit" value="Submit" class="btn" id="submitEmail" />
+                <input type="submit" value="Submit" class="btn" id="submitEmail" disabled />
                 <button type="button" class="btn cancel-btn" id="cancelEmail">Cancel</button>
             </div>
         </form>
@@ -123,10 +124,58 @@
             </div>
 
             <div class="modal-buttons">
-                <input type="submit" value="Submit" class="btn" id="submitResetForm" />
+                <input type="submit" value="Submit" class="btn" id="submitResetForm" disabled />
                 <button type="button" class="btn cancel-btn" id="cancelResetForm">Cancel</button>
             </div>
         </form>
+    </div>
+</div>
+
+
+<script>
+    // Email Modal Input Validation
+    const resetEmailInput = document.getElementById('resetEmail');
+    const submitEmailButton = document.getElementById('submitEmail');
+
+    resetEmailInput.addEventListener('input', function() {
+        if (resetEmailInput.value.trim() === "") {
+            submitEmailButton.disabled = true;
+        } else {
+            submitEmailButton.disabled = false;
+        }
+    });
+
+    // Password Reset Modal Input Validation
+    const newPasswordInput = document.getElementById('newPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const submitResetFormButton = document.getElementById('submitResetForm');
+
+    function toggleSubmitButton() {
+        if (newPasswordInput.value.trim() === "" || confirmPasswordInput.value.trim() === "") {
+            submitResetFormButton.disabled = true;
+        } else {
+            submitResetFormButton.disabled = false;
+        }
+    }
+
+    newPasswordInput.addEventListener('input', toggleSubmitButton);
+    confirmPasswordInput.addEventListener('input', toggleSubmitButton);
+</script>
+
+
+<!-- Modal about us-->
+<div id="aboutModal" class="modalAbout">
+    <div class="modal-content">
+        <span class="close" id="closeAboutModal">&times;</span>
+        <h2 class="title page">About Us</h2>
+        <hr class="heading-line">
+        <img class="CPDO" src="images/CPDO.png">
+        <p class="about-us">The <b>City Planning and Development Office (CPDO)</b> of Santa Rosa City, Laguna, is dedicated to ensuring that 
+            urban development aligns with the city’s long-term goals of sustainability and progress. The <b>Project Monitoring System </b> is a 
+            vital tool used by CPDO to track and assess the implementation of various city 
+            development projects. This system allows for monitoring, data collection, and analyze of project 
+            performance, ensuring that resources are efficiently allocated, timelines are adhered to, and outcomes meet the 
+            strategic objectives for the city's growth and development.</p>
     </div>
 </div>
 
@@ -190,5 +239,30 @@
         toggleConfirmPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
     });
 </script>
+<script>
+    // Ensure the modal is hidden when the page loads
+    $(document).ready(function() {
+        $("#aboutModal").hide(); // Hide modal initially
+
+        // Show the About Modal when About button is clicked
+        $(".btn.transparent.about-btn").on("click", function() {
+            $("#aboutModal").fadeIn();
+        });
+
+        // Close the modal when the close button is clicked
+        $("#closeAboutModal").on("click", function() {
+            $("#aboutModal").fadeOut();
+        });
+
+        // Close modal if clicked outside of modal content
+        $(window).on("click", function(event) {
+            if ($(event.target).is("#aboutModal")) {
+                $("#aboutModal").fadeOut();
+            }
+        });
+    });
+</script>
+
+
 </body>
 </html>

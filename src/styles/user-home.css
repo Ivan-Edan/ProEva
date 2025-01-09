@@ -450,8 +450,8 @@
     color: #585858;
 }
 .table-responsive {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 10px;
 }
 

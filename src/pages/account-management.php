@@ -25,6 +25,7 @@
                         </button>
                     </div>
                     <br>
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -41,17 +42,17 @@
                             <!-- Account entries will be updated dynamically -->
                         </tbody>
                     </table>
+                    </div>
+                    <div id="pagination-controls" class="d-flex justify-content-center mt-3">
+                        <!-- Pagination buttons will be dynamically added here -->
+                    </div>
 
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation" class="mt-3">
-                        <ul class="pagination justify-content-center" id="pagination-links"></ul>
-                    </nav>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Account Modal -->
+   <!-- Add Account Modal -->
     <div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -78,7 +79,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="suffix" class="form-label">Suffix</label>
-                                <input class="form-control" id="suffix" name="suffix" placeholder="Jr" required>
+                                <input class="form-control" id="suffix" name="suffix" placeholder="Jr">
                             </div>
                         </div>
 
