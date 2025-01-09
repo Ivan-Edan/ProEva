@@ -8,8 +8,8 @@ ini_set('display_errors', 1);
 
 $response = [];
 
-// Check if form was submitted
-if (isset($_POST['submitBtn'])) {
+// Check if required fields are present in the POST request
+if (isset($_POST['projectName'], $_POST['startDate'], $_POST['endDate'], $_POST['projectCost'], $_POST['fundSource'], $_POST['fundingAgency'], $_POST['statusDropdown'], $_POST['project1'])) {
     // Project data
     $projName = $_POST['projectName'];
     $startDate = $_POST['startDate'];
@@ -80,15 +80,18 @@ if (isset($_POST['submitBtn'])) {
         }
 
         $conn->commit();
+        // Return success response as JSON
         $response = ["status" => "success"];
     } catch (Exception $e) {
         $conn->rollback(); // Rollback transaction on error
+        // Return error response as JSON
         $response = ["status" => "error", "message" => $e->getMessage()];
     }
 } else {
+    // Return error response when required fields are missing
     $response = ["status" => "error", "message" => "Required fields are missing."];
 }
 
-// Return JSON response
+// Return the response as JSON
 echo json_encode($response);
 ?>
