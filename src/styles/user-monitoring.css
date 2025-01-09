@@ -621,3 +621,18 @@ body{
     font-style: italic;
 }
 
+.icon-modal-success{
+    height: 30vh;
+    width: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.text-modal{
+    padding-top: -60px;
+    text-align: center;
+}
+.modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}

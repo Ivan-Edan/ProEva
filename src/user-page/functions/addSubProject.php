@@ -8,8 +8,8 @@ ini_set('display_errors', 1);
 
 $response = [];
 
-// Check if form was submitted
-if (isset($_POST['submitBtn1'])) {
+// Check if form data is received via POST (whether AJAX or not)
+if (isset($_POST['mainproject'])) {
     // Sub-project data
     $mainProj = $_POST['mainproject'];
     $subProjectName = $_POST['subProjectName'];
@@ -32,8 +32,8 @@ if (isset($_POST['submitBtn1'])) {
         $photoPath = $uploadDir . $fileName; // Path for saving the file
         $dbPhotoPath = 'uploads/' . $fileName; // Path stored in the database
         $photoPathAdmin = '../uploads/' . $fileName;
-
     }
+
     $userId = $_SESSION['user_id']; // Assuming userId is stored in session
 
     $conn->autocommit(false); // Start transaction
