@@ -1,5 +1,6 @@
 <?php
-require_once '../includes/config.php'; 
+require_once 'includes/config.php';
+
 
 $projectId = $_GET['project_id'];
 $sql = "SELECT project_title FROM userprojecttitle WHERE project_id =?";
@@ -24,8 +25,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="src/images/landing-pic.png">
     <title>Progress Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.neprojectNamet/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="src/styles/admin-monitoring.css"> 
+    <link rel="stylesheet" href="styles/admin-monitoring.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -163,7 +163,8 @@ if ($result->num_rows > 0) {
                             </tr>
                         </thead>
                         <tbody id="gantt-chart-body">
-                            <?php include 'graph.php';?>
+                        <?php include 'graph.php'; ?>
+
                             <!-- <tr class="main-task" data-target="#bridgeSubtasks1">
                                 <td>
                                     <i class="fas fa-chevron-down task-icon"></i>
@@ -342,7 +343,7 @@ if ($result->num_rows > 0) {
     <!-- Include JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/admin-monitoring.js"></script>
+    <script src="admin-progress/admin-monitoring.js"></script>
 
     <script>
         // Event listener for clicking on a row (either main or sub)
@@ -370,24 +371,24 @@ if ($result->num_rows > 0) {
 
 <script>
   // Function to handle image upload and preview
-  function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const previewContainer = document.getElementById('previewContainer');
-        previewContainer.innerHTML = `
-          <div style="margin-top: 10px;">
-            <img 
-              src="${e.target.result}" 
-              alt="Preview" 
-              style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;" />
-          </div>
-        `;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+function handleImageUpload(event) {
+const file = event.target.files[0];
+if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+    const previewContainer = document.getElementById('previewContainer');
+    previewContainer.innerHTML = `
+        <div style="margin-top: 10px;">
+        <img 
+            src="${e.target.result}" 
+            alt="Preview" 
+            style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;" />
+        </div>
+    `;
+    };
+    reader.readAsDataURL(file);
+}
+}
 </script>
 </body>
 </html>

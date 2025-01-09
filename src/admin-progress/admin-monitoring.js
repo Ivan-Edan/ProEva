@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function() {console.log("admin-monitoring.js is loaded");
+
     // Function to display comments and photos in the modal
     function displayCommentsAndPhotos(comments, photos, fullnames) {
         var commentHtml = '';

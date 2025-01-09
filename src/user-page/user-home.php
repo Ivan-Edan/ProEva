@@ -154,36 +154,37 @@ $conn->close();
         <br>
         <br>
         <div class="container-2">Project’s Information</div>
-        <!-- Project Stats Section -->
-        <div class="row project-stats-container mb-4">
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
-                        <p class="stat-label">Number of Accepted Projects :</p>
-                        <p class="stat-number">9</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks Incoming Icon" class="stat-icon">
-                        <p class="stat-label">Number of Rejected Projects :</p>
-                        <p class="stat-number">2</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="stat-box d-flex align-items-center">
-                    <div class="stat-content d-flex align-items-center justify-content-between w-100">
-                        <img src="images/illustration/done-icon.png" alt="Tasks In Progress Icon" class="stat-icon">
-                        <p class="stat-label">Number of Pending Projects :</p>
-                        <p class="stat-number">1</p>
-                    </div>
-                </div>
+<!-- Project Stats Section -->
+<div class="row project-stats-container mb-4">
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks Done Icon" class="stat-icon">
+                <p class="stat-label">Number of Accepted Projects :</p>
+                <p class="stat-number accepted">0</p> <!-- Dynamic -->
             </div>
         </div>
+    </div>
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks Incoming Icon" class="stat-icon">
+                <p class="stat-label">Number of Rejected Projects :</p>
+                <p class="stat-number rejected">0</p> <!-- Dynamic -->
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="stat-box d-flex align-items-center">
+            <div class="stat-content d-flex align-items-center justify-content-between w-100">
+                <img src="images/illustration/done-icon.png" alt="Tasks In Progress Icon" class="stat-icon">
+                <p class="stat-label">Number of Pending Projects :</p>
+                <p class="stat-number pending">0</p> <!-- Dynamic -->
+            </div>
+        </div>
+    </div>
+</div>
+
         <div class="container-6">
     <div class="d-flex justify-content-between align-items-start">
         <!-- Card Content -->

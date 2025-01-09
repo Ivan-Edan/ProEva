@@ -42,7 +42,7 @@ require_once __DIR__ . '/../includes/config.php';
 
                             echo "<tr>";
                             echo "<td class='text-center' style='display:none;'>{$projectId}</td>";
-                            echo "<td class='text-center'><a class='direct-link' href='admin-progress/admin-monitoring-chart.php?project_id={$projectId}'>{$projectName}</a></td>";
+                            echo "<td class='text-center'><a class='direct-link' href='index-admin.php?page=admin-monitoring-chart&project_id={$projectId}'>{$projectName}</a></td>";
                             echo "<td></td>";
                             echo "<td></td>";
                             echo "<td></td>";
@@ -58,7 +58,7 @@ require_once __DIR__ . '/../includes/config.php';
     </div>
 
     <!--JavaScript -->
-    <script src="scripts/admin-monitoring.js"></script>
+    <script src="progress-admin/admin-monitoring.js"></script>
 
 </body>
 </html>
