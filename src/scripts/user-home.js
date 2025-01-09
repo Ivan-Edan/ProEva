@@ -152,5 +152,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('includes/get-user-form-stats.php') // Replace with your PHP endpoint
+        .then(response => response.json())
+        .then(data => {
+            // Update the numbers dynamically
+            document.querySelector('.stat-number.accepted').textContent = data.accepted || 0;
+            document.querySelector('.stat-number.rejected').textContent = data.rejected || 0;
+            document.querySelector('.stat-number.pending').textContent = data.pending || 0;
+        })
+        .catch(error => console.error('Error fetching project stats:', error));
+});
 
   

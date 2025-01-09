@@ -29,8 +29,12 @@ $_SESSION['LAST_ACTIVITY'] = time(); // Set/update last activity time
 // Determine which page to show
 $page = isset($_GET['page']) ? basename($_GET['page']) : 'admin-home';
 
-// Ensure the file exists before including it
-$pagePath = "pages/{$page}.php";
+if ($page == 'admin-monitoring-chart') {
+    $pagePath = "admin-progress/admin-monitoring-chart.php";
+} else {
+    $pagePath = "pages/{$page}.php";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +62,7 @@ $pagePath = "pages/{$page}.php";
         } ?>
     </main>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Updated jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Updated Bootstrap JS -->
+
 <script src="scripts/sidebar.js"></script>
 <script src="<?php echo 'scripts/spinner.js'; ?>"></script>
 </body>

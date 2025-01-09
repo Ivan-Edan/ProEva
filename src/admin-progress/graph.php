@@ -124,19 +124,19 @@ if (isset($_GET['project_id'])) {
 
                 // Display subtask row
                 echo "<tr class='subtasks-name' data-target='#subtasks_$subId'
-                       data-subproject-name='$subProjectName'
-                       data-substart-date='".$sub['subStartDate']."'
-                       data-subend-date='".$sub['subEndDate']."'
-                       data-subtotal-cost='".$sub['subProjectCost']."'  
-                       data-subfund-source='".$sub['subFundSource']."' 
-                       data-subfunding-agency='".$sub['subFundingAgency']."'
-                       data-substatus='".$sub['status']."'
-                       data-subcomments='".$commentsSubString."'
-                       data-subphotos='$photosSubString'
-                       data-subfullnames='$fullnamesSubString'
-                       data-id-formatted='$formattedIdSub'
-                       data-id='$subId'
-                       data-type='sub'>";
+                    data-subproject-name='$subProjectName'
+                    data-substart-date='".$sub['subStartDate']."'
+                    data-subend-date='".$sub['subEndDate']."'
+                    data-subtotal-cost='".$sub['subProjectCost']."'  
+                    data-subfund-source='".$sub['subFundSource']."' 
+                    data-subfunding-agency='".$sub['subFundingAgency']."'
+                    data-substatus='".$sub['status']."'
+                    data-subcomments='".$commentsSubString."'
+                    data-subphotos='$photosSubString'
+                    data-subfullnames='$fullnamesSubString'
+                    data-id-formatted='$formattedIdSub'
+                    data-id='$subId'
+                    data-type='sub'>";
 
                 echo "<td class='subtask-name'>$subProjectName</td>";
                 for ($j = 1; $j <= 12; $j++) {
