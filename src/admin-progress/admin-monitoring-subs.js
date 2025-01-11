@@ -1,9 +1,9 @@
-$(document).ready(function() {
-    // Function to display comments and photos in the modal
-    function displayCommentsAndPhotos(comments, photos, fullnames) {
+$(document).ready(function() {    // Function to display comments and photos in the modal
+    function displayCommentsAndPhotosSub(comments, photos, fullnames) {
         var commentHtml = '';
         var photoHtml = '';
 
+        console.log("123 triggred");
         // Ensure that comments, photos, and fullnames are arrays
         var commentArray = comments ? comments.split(' | ') : [];
         var photoArray = photos ? photos.split(' | ') : [];
@@ -16,13 +16,15 @@ $(document).ready(function() {
             fullnameArray = [fullnameArray[0] || '']; // Wrap the single full name into an array (if exists)
         }
 
+        console.log("test");
         // Loop through each comment and photo and create corresponding HTML
         commentArray.forEach(function(comment, index) {
             // Check if the comment is not empty or null
             if (comment && comment.trim() !== '') {
                 commentHtml += `<p><strong>${fullnameArray[index] || 'Anonymous'}:</strong> ${comment}</p>`;
             }
-            
+            console.log("test1");
+
             // Check if the photo exists and add it to the HTML
             if (photoArray[index]) {
                 var photoPath = photoArray[index];
@@ -37,7 +39,7 @@ $(document).ready(function() {
         $('#previewContainersImage').html(photoHtml); // Display the photos
     }
 
-    $('.subtasks-name').click(function() {
+    $('.subtask-name').click(function() {
         var subProjectName = $(this).data('subproject-name');
         var subStartDate = $(this).data('substart-date');
         var subEndDate = $(this).data('subend-date');
@@ -47,13 +49,9 @@ $(document).ready(function() {
         var subCurrentStatus = $(this).data('substatus');
         var subTaskId = $(this).data('id');
         var formattedId = $(this).data('id-formatted');
-        var subComments = $(this).data('subcomments');
-        var subPhotos = $(this).data('subphotos');
-        var subFullnames = $(this).data('subfullnames');
-
-        console.log('Subtask ID:', subTaskId);
-        console.log('Subtask Comments:', subComments);
-        console.log('Subtask Photos:', subPhotos);
+        var comments = $(this).data('subcomments');
+        var photos = $(this).data('subphotos');
+        var fullnames = $(this).data('subfullnames');
 
         function formatDate(dateStr) {
             var date = new Date(dateStr);
@@ -65,6 +63,10 @@ $(document).ready(function() {
             return Number(cost).toLocaleString();
         }
 
+        console.log('Subtask ID:', subTaskId);
+        console.log('Subtask Comments:', comments);
+        console.log('Subtask Photos:', photos);
+
         $('#taskModalLabel').text(subProjectName);
         $('#startDate').text(formatDate(subStartDate));
         $('#endDate').text(formatDate(subEndDate));
@@ -74,7 +76,7 @@ $(document).ready(function() {
         $('#status').text(subCurrentStatus);
 
         // Display multiple comments and photos
-        displayCommentsAndPhotos(subComments, subPhotos, subFullnames);
+        displayCommentsAndPhotosSub(comments, photos, fullnames);
 
         // Store subtask ID in submit button's data attribute
         $('#submitGantt').data('id', subTaskId);
@@ -103,7 +105,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'upload-comment-sub.php',
+            url: 'admin-progress/upload-comment-sub.php',
             type: 'POST',
             data: formData,
             processData: false,
