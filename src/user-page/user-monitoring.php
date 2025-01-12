@@ -219,7 +219,7 @@ document.getElementById('project').addEventListener('change', function () {
                     </p>
 
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 5px;">
-                    <p style="font-size: 20px;"><strong>Project Details</strong></p>
+                    <p style="font-size: 20px;"><strong>Project Task Details</strong></p>
                     <p style="font-size: 15px;"><strong>Start Date:</strong> <span id="startDate"></span></p>
                     <p style="font-size: 15px;"><strong>End Date:</strong> <span id="endDate"></span></p>
                     <p style="font-size: 15px;"><strong>Total Project Cost:</strong> <span id="totalCost"></span></p>
@@ -229,7 +229,7 @@ document.getElementById('project').addEventListener('change', function () {
 
                     <div class="comment-section">
                         <div class="comment-header">
-                            <p class="comment-title"><strong>Project Comment Details</strong></p>
+                            <p class="comment-title"><strong>Message Board</strong></p>
                             <p id="nameDetails" class="nameDetails comment-name"></p>
                         </div>
 
@@ -238,7 +238,7 @@ document.getElementById('project').addEventListener('change', function () {
                         <hr class="divider">
 
                         <div class="comment-header">
-                            <p class="comment-title"><strong>Project Image Details</strong></p>
+                            <p class="comment-title"><strong>Project Task Image Details</strong></p>
                         </div>
 
                         <div id="previewContainersImage" class="comment-image-preview"></div>
@@ -246,7 +246,7 @@ document.getElementById('project').addEventListener('change', function () {
                     <br>
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 10px;">
                     <div class="comment-section">
-                        <p class="comment-title"><strong>Add Comment</strong></p>
+                        <p class="comment-title"><strong>Add Message</strong></p>
 
                         <div class="comment-input-wrapper">
                             <textarea

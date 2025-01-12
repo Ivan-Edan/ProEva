@@ -311,18 +311,17 @@ h5 {
   margin-top: 20px;
 }
 
-/* Pagination button (default state) */
+/* Pagination button (numbered buttons only) */
 #pagination button {
   width: 40px;
   height: 40px;
-  line-height: 40px;
   border-radius: 50%;
-  border-color: transparent;
-  background-color: transparent;
+  border: 1px solid white; 
+  background-color: white; 
   color: #27374D;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
-  margin: 0 2px;
+  margin: 0 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -330,16 +329,17 @@ h5 {
 /* Hover effect for all buttons */
 #pagination button:hover {
   background-color: #f0f0f0;
-  color: #27374D;
+  border-color: transparent;
+  color: #1e1e1e; 
 }
 
 /* Disabled button */
-#pagination .disabled {
-  background-color: #b0bec5;
-  color: #6c7c8c;
-  pointer-events: none;
+#pagination button:disabled {
+  background-color: #27374D;
+  color: #fff;
+  border-color: #27374D;
+  cursor: not-allowed;
 }
-
 #department-header {
   cursor: pointer;
 }

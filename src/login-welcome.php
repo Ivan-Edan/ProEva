@@ -7,11 +7,11 @@
     <title>ProEva</title>
 
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@feathericons/fontawesome@1.0.0/dist/feather.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Styles -->
     <link rel="stylesheet" href="<?php echo 'styles/style.css'; ?>" />
     <!-- JS -->
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@feathericons/fontawesome@1.0.0/dist/feather.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Spinner -->
@@ -30,7 +30,7 @@
                         <img src="<?php echo 'images/landing-pic.png'; ?>" class="landing-image" alt="">
                     </div>
                     <h2 class="title">ProEva: Project Monitoring System</h2>
-                    <input type="submit" class="btn" value="LOGIN" id="sign-up-btn" />
+                    <input type="submit" class="btn-1" value="LOGIN" id="sign-up-btn" />
                 </form>
 
                 <!-- Login Form -->
