@@ -35,6 +35,19 @@ if (isset($_POST['projectName'], $_POST['startDate'], $_POST['endDate'], $_POST[
 
     $userId = $_SESSION['user_id']; // Assuming userId is stored in session
 
+    // Get the current year
+    $currentYear = date("Y");
+
+    // Validate startDate and endDate
+    $startYear = date("Y", strtotime($startDate));
+    $endYear = date("Y", strtotime($endDate));
+
+    if ($startYear != $currentYear || $endYear != $currentYear) {
+        // Only send status "invalid_year" if the years do not match
+        echo json_encode(["status" => "invalid_year"]);
+        exit;
+    }
+
     $conn->autocommit(false); // Start transaction
 
     try {
