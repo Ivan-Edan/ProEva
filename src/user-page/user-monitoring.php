@@ -396,7 +396,7 @@ document.getElementById('project').addEventListener('change', function () {
                                         $projName = $row['projectName'];
                                         $projStartDate = $row['startDate'];
                                         $projEndDate = $row['endDate'];
-                                        echo "<option value='$projId' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
+                                        echo "<option value='$projId' data-project-id='" . $row['project_id'] . "' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
                                     }
                                 } else {
                                     echo "<option value=''>No Main Project Found!</option>";
@@ -404,6 +404,25 @@ document.getElementById('project').addEventListener('change', function () {
                                 ?>
                             </select>
 
+                            <script>
+                            document.getElementById('project').addEventListener('change', function() {
+                                var selectedProjectId = this.value;
+                                var mainProjectDropdown = document.getElementById('mainproject');
+                                var mainProjectOptions = mainProjectDropdown.getElementsByTagName('option');
+
+                                // Loop through all options and hide those that do not match the selected project_id
+                                for (var i = 0; i < mainProjectOptions.length; i++) {
+                                    var option = mainProjectOptions[i];
+                                    var projectId = option.getAttribute('data-project-id');
+
+                                    if (selectedProjectId === "0" || selectedProjectId === projectId) {
+                                        option.style.display = ''; // Show the option
+                                    } else {
+                                        option.style.display = 'none'; // Hide the option
+                                    }
+                                }
+                            });
+                            </script>
                             <p class="form-label">Sub Project Name:</p>
                             <input type="text" class="form-control" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
 
@@ -679,8 +698,8 @@ document.getElementById('project').addEventListener('change', function () {
     </div>
 </div>
 
-<!-- Success Update Modal -->
-<div class="modal fade" id="successupdateModal" tabindex="-1" aria-labelledby="successupdateLabel" aria-hidden="true">
+<!-- Invalid Year Modal -->
+<div class="modal fade" id="sinvalidModal" tabindex="-1" aria-labelledby="successupdateLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="border: 2px solid blue;">
             <div class="modal-header">
@@ -688,14 +707,31 @@ document.getElementById('project').addEventListener('change', function () {
             </div>
             <div class="modal-body">
                 <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
-                <h5 class="text-modal">The TAsk <b>Updated</b> has been added successfully.</h5>
+                <h5 class="text-modal">The StartDate and EndDate must be within the current year (2025).</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- UPDATE Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="successupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border: 2px solid blue;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The <b>Task</b> has been updated successfully.</h5>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     // Handle form submission using Ajax
     $('form').on('submit', function(event) {
         event.preventDefault();  // Prevent default form submission
@@ -710,18 +746,19 @@ document.getElementById('project').addEventListener('change', function () {
             processData: false,
             contentType: false,
             success: function(response) {
-                // Parse the JSON response from the server
-                var data = JSON.parse(response);
+                var data = JSON.parse(response); // Parse the JSON response from the server
+
                 if (data.status === 'success') {
-                    // Show the success modal
+                    // Show the success modal for main task
                     var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();
-                    
+
                     // Optionally, clear the form fields if needed
                     $('form')[0].reset();
-                } else {
-                    // Handle failure, display an alert or message
-                    alert('Failed to add project: ' + data.message);
+                } else if (data.status === 'invalid_year') {
+                    // Show the invalid year modal
+                    var invalidModal = new bootstrap.Modal(document.getElementById('sinvalidModal'));
+                    invalidModal.show();
                 }
             },
             error: function(xhr, status, error) {
@@ -731,16 +768,7 @@ document.getElementById('project').addEventListener('change', function () {
         });
     });
 
-    // Refresh the page when the close button is clicked on the success modal
-    $('#successModal .btn-close').on('click', function() {
-        location.reload();  // Reload the page
-    });
-});
-
-</script>
-<script>
-    $(document).ready(function() {
-    // Prevent multiple event bindings for form submission
+    // Handle sub-task form submission using Ajax
     $('#submitBtn1').off('click').on('click', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
@@ -758,7 +786,7 @@ document.getElementById('project').addEventListener('change', function () {
                 try {
                     const data = JSON.parse(response); // Parse the JSON response
                     if (data.status === "success") {
-                        // Show success modal
+                        // Show success modal for sub-task
                         var successModal = new bootstrap.Modal(document.getElementById('successsubModal'));
                         successModal.show();
 
@@ -779,11 +807,10 @@ document.getElementById('project').addEventListener('change', function () {
         });
     });
 
-    // Refresh the page when the close button is clicked on the success modal
-    $('#successsubModal .btn-close').on('click', function() {
+    // Refresh the page when the close button is clicked on any success modal
+    $('#successModal .btn-close, #successsubModal .btn-close').on('click', function() {
         location.reload();  // Reload the page
     });
+
 });
-
-
 </script>
