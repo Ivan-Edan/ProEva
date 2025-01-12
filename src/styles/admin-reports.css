@@ -381,3 +381,10 @@ h5 {
       font-size: 0.875rem;
   }
 }
+
+.truncate {
+  max-width: 250px; /* Adjust the width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

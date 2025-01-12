@@ -23,30 +23,35 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-1">Project Monitoring</div>
                 <div class="container-2">
                     <span class="title">Project Gantt Chart</span>
-                    <div class="select-container">
-                    <select class="form-control project" id="project" name="project">
-                        <option value="0">Project List</option>
-                        <?php
-                        $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
+                    <div class="select-container"> 
+    <select class="form-control project" id="project" name="project">
+        <option value="0">Project List</option>
+        <?php
+        // Prepare the SQL query to fetch approved projects
+        $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
                                 FROM initialprojectreport ip
                                 JOIN userprojecttitle pt
                                 ON ip.project_id = pt.project_id
-                                WHERE ip.user_id = ?");
-                        $stmt->bind_param("i", $user_id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $projId1 = $row['project_id'];
-                                $projName1 = $row['project_title'];
-                                echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No Main Project Found!</option>";
-                        }
-                        ?>
-                    </select>
-                    </div>
+                                WHERE ip.user_id = ? AND ip.status = 'approved'");
+        $stmt->bind_param("i", $user_id); // Bind the user_id parameter
+        $stmt->execute(); // Execute the query
+        $result = $stmt->get_result(); // Get the result set
+        
+        if (mysqli_num_rows($result) > 0) {
+            // Loop through the results and populate the dropdown
+            while ($row = mysqli_fetch_assoc($result)) {
+                $projId1 = htmlspecialchars($row['project_id']); // Sanitize output
+                $projName1 = htmlspecialchars($row['project_title']); // Sanitize output
+                echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
+            }
+        } else {
+            // Display a message if no approved projects are found
+            echo "<option value=''>No Approved Projects Found!</option>";
+        }
+        ?>
+    </select>
+</div>
+
                 </div>
 
                 <div class="container-3" style="height: fit-content;">
@@ -83,10 +88,10 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-8 position-relative">
                 <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
                     <button type="button" class="btn btn-primary mb-2 mainProject">
-                        <i class="fas fa-plus"></i> Add Main Project Details
+                        <i class="fas fa-plus"></i> Add Main Task Details
                     </button>
                     <button type="button" class="btn btn-secondary subProject">
-                        <i class="fas fa-plus"></i> Add Sub Project Details
+                        <i class="fas fa-plus"></i> Add Sub Task Details
                     </button>
                 </div>
                 <br><br><br>
@@ -283,7 +288,7 @@ document.getElementById('project').addEventListener('change', function () {
             <div class="modal-content" style="border-radius: 10px; padding: 20px; height: 100%; overflow-y: auto;">
                 <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
-                    <h3 class="modal-title" style="font-weight: bold;">Main Project Details</h3>
+                    <h3 class="modal-title" style="font-weight: bold;">Main Task Details</h3>
                 </div>
 
                 <form method="POST" action="user-page/functions/addProject.php" enctype="multipart/form-data">
@@ -364,7 +369,7 @@ document.getElementById('project').addEventListener('change', function () {
             <div class="modal-content" style="border-radius: 10px; padding: 20px; height: 100%; overflow-y: auto;">
                 <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
-                    <h3 class="modal-title" style="font-weight: bold;">Sub Project Details</h3>
+                    <h3 class="modal-title" style="font-weight: bold;">Sub Task Details</h3>
                 </div>
 
                 <form method="POST" action="user-page/functions/addSubProject.php" enctype="multipart/form-data">

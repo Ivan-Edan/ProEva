@@ -347,7 +347,7 @@ if ($result->num_rows > 0) {
 
     <script>
         // Event listener for clicking on a row (either main or sub)
-        document.querySelectorAll('.main-task, .subtasks-name').forEach(item => {
+        document.querySelectorAll('.main-task, .subtask-name').forEach(item => {
             item.addEventListener('click', function() {
                 var projectType = this.getAttribute('data-type'); // Get project type (main or sub)
 
@@ -355,7 +355,8 @@ if ($result->num_rows > 0) {
                 if (projectType === 'main') {
                     loadScript('admin-monitoring.js');
                 } else if (projectType === 'sub') {
-                    loadScript('admin-monitoring-sub.js');
+                    loadScript('admin-progress/admin-monitoring-subs.js');
+                    console.log("triggered");
                 }
             });
         });

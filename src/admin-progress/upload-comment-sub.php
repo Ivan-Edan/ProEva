@@ -39,7 +39,7 @@ if (isset($_POST['id'], $_POST['id-formatted'])) {
         $sql = "INSERT INTO sub_comment (subId, userId, comment, photoPath, photoPath_admin, formatted_id_sub) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param("iissss", $taskId, $userId, $comment, $photoPath, $photoPathAdmin, $formattedId);
+            $stmt->bind_param("iissss", $taskId, $userId, $comment, $photoPath, $photoPath, $formattedId);
             if ($stmt->execute()) {
                 $commentAdded = true;
             }
