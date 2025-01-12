@@ -565,6 +565,9 @@
     color: #fff;
 }
 
-
-
-
+.pending{
+color: rgb(243, 243, 0);
+}
+.rejected{
+color: #Ff0000;
+}

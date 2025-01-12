@@ -123,7 +123,7 @@ if (isset($_GET['project_id'])) {
                 $fullnamesSubString = implode(" | ", $fullnamesSub);
 
                 // Display subtask row
-                echo "<tr class='subtasks-name' data-target='#subtasks_$subId'
+                echo "<tr class='subtask-name' data-target='#subtasks_$subId'
                     data-subproject-name='$subProjectName'
                     data-substart-date='".$sub['subStartDate']."'
                     data-subend-date='".$sub['subEndDate']."'

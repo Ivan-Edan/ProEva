@@ -16,7 +16,9 @@ body{
     height: 100px;
 }
 
-
+.project-title{
+    text-align: center !important;
+}
 /* CSS for project-monitoring-chart */
 .container-1 {
     padding: 17px;
@@ -125,18 +127,16 @@ body{
 }
 
 /* Table headers and cells */
-/* Table headers and cells */
 .gantt-chart th, 
 .gantt-chart td {
     padding: 0;
-    width: 30px; /* Increase width for better readability */
+    width: 30px; /* Adjust width as needed */
     height: 35px; /* Consistent height */
     border-top: 1px solid #ddd; /* Horizontal top border */
     border-bottom: 1px solid #ddd; /* Horizontal bottom border */
     border-left: none; /* Remove vertical left border */
     border-right: none; /* Remove vertical right border */
 }
-
 
 .gantt-chart th {
     text-align: center;
@@ -145,6 +145,17 @@ body{
     font-weight: bold;
     color: #333;
     border-bottom: 1px solid #ddd; /* Header-bottom border */
+}
+
+/* Make the first column sticky */
+.gantt-chart th:first-child, 
+.gantt-chart td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2; /* Ensure it stays above other cells */
+    background-color: #f9f9f9; /* Background color for visibility */
+    text-align: left;
+    padding-left: 10px; /* Add some padding for spacing */
 }
 
 /* Remove horizontal lines (borders between rows) */
@@ -161,9 +172,7 @@ body{
     background-color: #f1f1f1;
 }
 
-
 /* Progress bar container spanning entire row */
-/* Progress bar container */
 .progress-bar-container {
     position: relative;
     width: 100%; /* Ensures it spans the full row */
@@ -195,6 +204,11 @@ body{
     pointer-events: none; /* Prevent interaction */
 }
 
+/* Hover effect on the table row */
+.gantt-chart tr:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
 
 /* Task and subtask icon styles */
 .task-icon {
@@ -208,7 +222,14 @@ body{
     display: inline-block;
     vertical-align: middle;
 }
-
+.light-circle{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
 .blue-circle {
     background-color: #27374D; 
 }
@@ -217,69 +238,28 @@ body{
     background-color: #6fa4cc;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .gantt-chart {
-        font-size: 10px;
-    }
-    .gantt-chart th, .gantt-chart td {
-        width: 20px; /* Reduce width for smaller screens */
-    }
-}
-
-/* Hover effect on the table row */
-.gantt-chart tr:hover {
-    background-color: #e0e0e0;
-    cursor: pointer;
-}
-
 /* Task and subtask styles */
 .task-name {
     font-weight: 500;
     cursor: pointer;
     font-size: 14px;
-     margin-right: 10px !important;
-}
-
-.task-icon {
-    margin-right: 10px;
-}
-
-.blue-circle {
-    width: 12px;
-    height: 12px;
-    background-color: #27374D; 
-    border-radius: 50%; 
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px !important;
-}
-.light-circle{
-    width: 12px;
-    height: 12px;
-    background-color: #6fa4cc; 
-    border-radius: 50%; 
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px !important;
-}
-.subtask-name {
-    font-weight:500;
-    cursor: pointer;
-    font-size: 13px;
     margin-right: 10px !important;
 }
 
-/* Project title alignment */
-.project-title {
-    text-align: center;
-    font-weight: bold;
+.subtask-name {
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 10px !important;
 }
 
 /* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .gantt-chart {
         font-size: 10px;
+    }
+    .gantt-chart th, .gantt-chart td {
+        width: 20px; /* Reduce width for smaller screens */
     }
 }
 
