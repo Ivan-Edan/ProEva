@@ -18,8 +18,15 @@ function fetchSlippageData(departmentId) {
 // Function to update the chart
 function updateChart(data) {
     const ctx = document.getElementById('projectChart').getContext('2d');
+
+    // Simplify project names to only show the first two words
+    const simplifiedLabels = data.labels.map(label => {
+        const words = label.split(' ');
+        return words.slice(0, 3).join(' ');
+    });
+
     const chartData = {
-        labels: data.labels,
+        labels: simplifiedLabels, // Use simplified labels
         datasets: [
             {
                 label: 'Positive Slippage',
@@ -96,6 +103,7 @@ function updateChart(data) {
         }
     });
 }
+
 
 // Fetch departments and populate dropdown
 fetch('includes/fetch_departments.php')

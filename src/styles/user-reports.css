@@ -143,9 +143,9 @@ color: #585858;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #27374D; 
-    background-color: #27374D; 
-    color: white; 
+    border: 1px solid white; 
+    background-color: white; 
+    color: #27374D;
     font-size: 16px;
     font-weight: bold;
     margin: 0 5px;
@@ -162,9 +162,9 @@ color: #585858;
 
 /* Disabled button */
 #pagination button:disabled {
-    color: #474747;
-    border-color: transparent;
-    background-color: white;
+    background-color: #27374D;
+    color: #fff;
+    border-color: #27374D;
     cursor: not-allowed;
 }
 #projectList {

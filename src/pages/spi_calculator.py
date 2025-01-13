@@ -24,11 +24,7 @@ except Exception as e:
     print(json.dumps({"error": f"Failed to initialize GenerativeModel: {str(e)}"}))
     sys.exit(1)
 
-# Check and parse command-line arguments
-if len(sys.argv) < 16:
-    missing_args = 16 - len(sys.argv)
-    print(f"Error: Missing {missing_args} arguments.")
-    sys.exit(1)
+print(sys.argv)
 
 try:
     start = datetime.strptime(sys.argv[1], "%Y-%m-%d").date()
@@ -38,15 +34,13 @@ try:
     target_owpa = float(sys.argv[5])
     actual_owpa = float(sys.argv[6])
     slippage = float(sys.argv[7])
-    target_date = datetime.strptime(sys.argv[8], "%Y-%m-%d").date()
-    actual_date = datetime.strptime(sys.argv[9], "%Y-%m-%d").date()
-    finding = sys.argv[10]
-    typology = sys.argv[11]
-    issue_status = sys.argv[12]
-    reasons = sys.argv[13]
-    action_taken = sys.argv[14]
-    action_to_be_taken = sys.argv[15]
-    project_name = sys.argv[16]
+    finding = sys.argv[8]
+    typology = sys.argv[9]
+    issue_status = sys.argv[10]
+    reasons = sys.argv[11]
+    action_taken = sys.argv[12]
+    action_to_be_taken = sys.argv[13]
+    project_name = sys.argv[14]
 except (ValueError, KeyError, json.JSONDecodeError) as e:
     print(json.dumps({"error": f"Invalid input data: {str(e)}"}))
     sys.exit(1)

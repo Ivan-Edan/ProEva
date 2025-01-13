@@ -369,7 +369,6 @@ function updateChart(data) {
                         $projName = $row['project_title'];
                         $startDate = $row['start_date'];
                         $endDate = $row['end_date'];
-                        $year = $row['year'];
                         $fundAgency = $row['fund_agency'];
                         $fundSource = $row['fund_source'];
                         $totalCost = $row['total_cost'];
@@ -401,7 +400,6 @@ function updateChart(data) {
                                               data-name='$projName'
                                               data-start='$startDate' 
                                               data-end='$endDate' 
-                                              data-year='$year'
                                               data-fundagency='$fundAgency'
                                               data-fundsource='$fundSource'
                                               data-totalcost='$totalCost'
@@ -494,7 +492,6 @@ function updateChart(data) {
           name: $(this).find(':selected').data('name'),
           start: $(this).find(':selected').data('start'),
           end: $(this).find(':selected').data('end'),
-          year: $(this).find(':selected').data('year'),
           totalcost: $(this).find(':selected').data('totalcost'),
           fundagency: $(this).find(':selected').data('fundagency'),
           fundsource: $(this).find(':selected').data('fundsource'),
@@ -505,8 +502,6 @@ function updateChart(data) {
           targetowpa: $(this).find(':selected').data('targetowpa'),
           actualowpa: $(this).find(':selected').data('actualowpa'),
           slippage: $(this).find(':selected').data('slippage'),
-          targetdate: $(this).find(':selected').data('targetdate'),
-          actualdate: $(this).find(':selected').data('actualdate'),
           male: $(this).find(':selected').data('male'),
           female: $(this).find(':selected').data('female'),
           remarks: $(this).find(':selected').data('remarks'),
@@ -531,7 +526,7 @@ function updateChart(data) {
           data: projectData,
           success: function(response) {
             console.log('ASD: ', projectData)
-            console.log("AJAX response:", response); // Add this line
+            console.log("AJAX response:", response);
 
             console.log("Raw Responses:", response);
 
@@ -546,7 +541,6 @@ function updateChart(data) {
               const formattedIssueDetails = issueDetails.replace(/\n/g, '<br>');
 
               const totalProgramCost = parseFloat(response[0].total_program_cost);
-              const selectedProjectName = response[0].project_name;
 
               $('#pv-detail').text(Number(pv).toLocaleString());
               $('#ev-detail').text(Number(ev).toLocaleString());

@@ -23,30 +23,35 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-1">Project Monitoring</div>
                 <div class="container-2">
                     <span class="title">Project Gantt Chart</span>
-                    <div class="select-container">
-                    <select class="form-control project" id="project" name="project">
-                        <option value="0">Project List</option>
-                        <?php
-                        $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
+                    <div class="select-container"> 
+    <select class="form-control project" id="project" name="project">
+        <option value="0">Project List</option>
+        <?php
+        // Prepare the SQL query to fetch approved projects
+        $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
                                 FROM initialprojectreport ip
                                 JOIN userprojecttitle pt
                                 ON ip.project_id = pt.project_id
-                                WHERE ip.user_id = ?");
-                        $stmt->bind_param("i", $user_id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $projId1 = $row['project_id'];
-                                $projName1 = $row['project_title'];
-                                echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No Main Project Found!</option>";
-                        }
-                        ?>
-                    </select>
-                    </div>
+                                WHERE ip.user_id = ? AND ip.status = 'approved'");
+        $stmt->bind_param("i", $user_id); // Bind the user_id parameter
+        $stmt->execute(); // Execute the query
+        $result = $stmt->get_result(); // Get the result set
+        
+        if (mysqli_num_rows($result) > 0) {
+            // Loop through the results and populate the dropdown
+            while ($row = mysqli_fetch_assoc($result)) {
+                $projId1 = htmlspecialchars($row['project_id']); // Sanitize output
+                $projName1 = htmlspecialchars($row['project_title']); // Sanitize output
+                echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
+            }
+        } else {
+            // Display a message if no approved projects are found
+            echo "<option value=''>No Approved Projects Found!</option>";
+        }
+        ?>
+    </select>
+</div>
+
                 </div>
 
                 <div class="container-3" style="height: fit-content;">
@@ -83,10 +88,10 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-8 position-relative">
                 <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
                     <button type="button" class="btn btn-primary mb-2 mainProject">
-                        <i class="fas fa-plus"></i> Add Main Project Details
+                        <i class="fas fa-plus"></i> Add Main Task Details
                     </button>
                     <button type="button" class="btn btn-secondary subProject">
-                        <i class="fas fa-plus"></i> Add Sub Project Details
+                        <i class="fas fa-plus"></i> Add Sub Task Details
                     </button>
                 </div>
                 <br><br><br>
@@ -214,7 +219,7 @@ document.getElementById('project').addEventListener('change', function () {
                     </p>
 
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 5px;">
-                    <p style="font-size: 20px;"><strong>Project Details</strong></p>
+                    <p style="font-size: 20px;"><strong>Project Task Details</strong></p>
                     <p style="font-size: 15px;"><strong>Start Date:</strong> <span id="startDate"></span></p>
                     <p style="font-size: 15px;"><strong>End Date:</strong> <span id="endDate"></span></p>
                     <p style="font-size: 15px;"><strong>Total Project Cost:</strong> <span id="totalCost"></span></p>
@@ -224,7 +229,7 @@ document.getElementById('project').addEventListener('change', function () {
 
                     <div class="comment-section">
                         <div class="comment-header">
-                            <p class="comment-title"><strong>Project Comment Details</strong></p>
+                            <p class="comment-title"><strong>Message Board</strong></p>
                             <p id="nameDetails" class="nameDetails comment-name"></p>
                         </div>
 
@@ -233,7 +238,7 @@ document.getElementById('project').addEventListener('change', function () {
                         <hr class="divider">
 
                         <div class="comment-header">
-                            <p class="comment-title"><strong>Project Image Details</strong></p>
+                            <p class="comment-title"><strong>Project Task Image Details</strong></p>
                         </div>
 
                         <div id="previewContainersImage" class="comment-image-preview"></div>
@@ -241,7 +246,7 @@ document.getElementById('project').addEventListener('change', function () {
                     <br>
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 10px;">
                     <div class="comment-section">
-                        <p class="comment-title"><strong>Add Comment</strong></p>
+                        <p class="comment-title"><strong>Add Message</strong></p>
 
                         <div class="comment-input-wrapper">
                             <textarea
@@ -283,7 +288,7 @@ document.getElementById('project').addEventListener('change', function () {
             <div class="modal-content" style="border-radius: 10px; padding: 20px; height: 100%; overflow-y: auto;">
                 <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
-                    <h3 class="modal-title" style="font-weight: bold;">Main Project Details</h3>
+                    <h3 class="modal-title" style="font-weight: bold;">Main Task Details</h3>
                 </div>
 
                 <form method="POST" action="user-page/functions/addProject.php" enctype="multipart/form-data">
@@ -364,7 +369,7 @@ document.getElementById('project').addEventListener('change', function () {
             <div class="modal-content" style="border-radius: 10px; padding: 20px; height: 100%; overflow-y: auto;">
                 <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
-                    <h3 class="modal-title" style="font-weight: bold;">Sub Project Details</h3>
+                    <h3 class="modal-title" style="font-weight: bold;">Sub Task Details</h3>
                 </div>
 
                 <form method="POST" action="user-page/functions/addSubProject.php" enctype="multipart/form-data">
@@ -391,7 +396,7 @@ document.getElementById('project').addEventListener('change', function () {
                                         $projName = $row['projectName'];
                                         $projStartDate = $row['startDate'];
                                         $projEndDate = $row['endDate'];
-                                        echo "<option value='$projId' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
+                                        echo "<option value='$projId' data-project-id='" . $row['project_id'] . "' data-start='$projStartDate' data-end='$projEndDate'>$projName</option>";
                                     }
                                 } else {
                                     echo "<option value=''>No Main Project Found!</option>";
@@ -399,6 +404,25 @@ document.getElementById('project').addEventListener('change', function () {
                                 ?>
                             </select>
 
+                            <script>
+                            document.getElementById('project').addEventListener('change', function() {
+                                var selectedProjectId = this.value;
+                                var mainProjectDropdown = document.getElementById('mainproject');
+                                var mainProjectOptions = mainProjectDropdown.getElementsByTagName('option');
+
+                                // Loop through all options and hide those that do not match the selected project_id
+                                for (var i = 0; i < mainProjectOptions.length; i++) {
+                                    var option = mainProjectOptions[i];
+                                    var projectId = option.getAttribute('data-project-id');
+
+                                    if (selectedProjectId === "0" || selectedProjectId === projectId) {
+                                        option.style.display = ''; // Show the option
+                                    } else {
+                                        option.style.display = 'none'; // Hide the option
+                                    }
+                                }
+                            });
+                            </script>
                             <p class="form-label">Sub Project Name:</p>
                             <input type="text" class="form-control" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
 
@@ -674,8 +698,8 @@ document.getElementById('project').addEventListener('change', function () {
     </div>
 </div>
 
-<!-- Success Update Modal -->
-<div class="modal fade" id="successupdateModal" tabindex="-1" aria-labelledby="successupdateLabel" aria-hidden="true">
+<!-- Invalid Year Modal -->
+<div class="modal fade" id="sinvalidModal" tabindex="-1" aria-labelledby="successupdateLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="border: 2px solid blue;">
             <div class="modal-header">
@@ -683,14 +707,31 @@ document.getElementById('project').addEventListener('change', function () {
             </div>
             <div class="modal-body">
                 <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
-                <h5 class="text-modal">The TAsk <b>Updated</b> has been added successfully.</h5>
+                <h5 class="text-modal">The StartDate and EndDate must be within the current year (2025).</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- UPDATE Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="successupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border: 2px solid blue;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon">
+                <h5 class="text-modal">The <b>Task</b> has been updated successfully.</h5>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     // Handle form submission using Ajax
     $('form').on('submit', function(event) {
         event.preventDefault();  // Prevent default form submission
@@ -705,18 +746,19 @@ document.getElementById('project').addEventListener('change', function () {
             processData: false,
             contentType: false,
             success: function(response) {
-                // Parse the JSON response from the server
-                var data = JSON.parse(response);
+                var data = JSON.parse(response); // Parse the JSON response from the server
+
                 if (data.status === 'success') {
-                    // Show the success modal
+                    // Show the success modal for main task
                     var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();
-                    
+
                     // Optionally, clear the form fields if needed
                     $('form')[0].reset();
-                } else {
-                    // Handle failure, display an alert or message
-                    alert('Failed to add project: ' + data.message);
+                } else if (data.status === 'invalid_year') {
+                    // Show the invalid year modal
+                    var invalidModal = new bootstrap.Modal(document.getElementById('sinvalidModal'));
+                    invalidModal.show();
                 }
             },
             error: function(xhr, status, error) {
@@ -726,16 +768,7 @@ document.getElementById('project').addEventListener('change', function () {
         });
     });
 
-    // Refresh the page when the close button is clicked on the success modal
-    $('#successModal .btn-close').on('click', function() {
-        location.reload();  // Reload the page
-    });
-});
-
-</script>
-<script>
-    $(document).ready(function() {
-    // Prevent multiple event bindings for form submission
+    // Handle sub-task form submission using Ajax
     $('#submitBtn1').off('click').on('click', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
@@ -753,7 +786,7 @@ document.getElementById('project').addEventListener('change', function () {
                 try {
                     const data = JSON.parse(response); // Parse the JSON response
                     if (data.status === "success") {
-                        // Show success modal
+                        // Show success modal for sub-task
                         var successModal = new bootstrap.Modal(document.getElementById('successsubModal'));
                         successModal.show();
 
@@ -774,11 +807,10 @@ document.getElementById('project').addEventListener('change', function () {
         });
     });
 
-    // Refresh the page when the close button is clicked on the success modal
-    $('#successsubModal .btn-close').on('click', function() {
+    // Refresh the page when the close button is clicked on any success modal
+    $('#successModal .btn-close, #successsubModal .btn-close').on('click', function() {
         location.reload();  // Reload the page
     });
+
 });
-
-
 </script>

@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $projectName = escapeshellarg($_POST['name']);
     $start = escapeshellarg($_POST['start']);
     $end = escapeshellarg($_POST['end']);
-    $year = escapeshellarg($_POST['year']);
     $totalCost = (float)$_POST['totalcost'];
     $fundAgency = escapeshellarg($_POST['fundagency']);
     $fundSource = escapeshellarg($_POST['fundsource']);
@@ -24,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetOWPA = (float)$_POST['targetowpa'] / 100;
     $actualOWPA = (float)$_POST['actualowpa'] / 100;
     $slippage = escapeshellarg($_POST['slippage']);
-    $targetDate = escapeshellarg($_POST['targetdate']);
-    $actualDate = escapeshellarg($_POST['actualdate']);
     $male = escapeshellarg($_POST['male']);
     $female = escapeshellarg($_POST['female']);
     $remarks = escapeshellarg($_POST['remarks']);
@@ -73,19 +70,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Prepare the command for the Python script
-    $command = "py spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $targetDate $actualDate $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
+    $command = "py spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
 
     // Execute the command and capture the output
     $output = shell_exec($command);
 
     preg_match('/Project Name: (.*?)\nSPI: (.*?)\nStatus: (.*?)\nIssue Details: (.*?)\nPV: (.*?)\nEV: (.*)/s', $output, $matches);
 
-    $spi = isset($matches[2]) ? (float)$matches[2] : 0.0;
-    $status = $matches[3] ?? '';
-    $issue_details = $matches[4] ?? '';
-    $pv = $matches[5] ?? '';
-    $ev = $matches[6] ?? '';
-
+    $spi = (float)trim($matches[2] ?? '0');
+    $status = trim($matches[3] ?? '');
+    $issue_details = trim($matches[4] ?? '');
+    $pv = (float)trim($matches[5] ?? '0');
+    $ev = (float)trim($matches[6] ?? '0');
+    
     if ($output === null) {
         echo json_encode(['error' => 'Failed to execute the Python script.']);
         exit;

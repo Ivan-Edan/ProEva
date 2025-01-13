@@ -180,7 +180,7 @@ form.sign-in-form {
 input[type="password"]::-ms-reveal {
   display: none;
   }
-.btn {
+.btn,.btn-1 {
   width: 150px;
   background-color: #134B70;
   border: none;
@@ -209,7 +209,7 @@ input[type="password"]::-ms-reveal {
   border: 2px solid green;
 }
 
-.btn:hover {
+.btn:hover, .btn-1:hover {
   background-color: #526D82;
 }
 .panels-container {

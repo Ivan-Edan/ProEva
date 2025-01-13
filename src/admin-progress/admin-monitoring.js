@@ -1,4 +1,4 @@
-$(document).ready(function() {console.log("admin-monitoring.js is loaded");
+$(document).ready(function() {
 
     // Function to display comments and photos in the modal
     function displayCommentsAndPhotos(comments, photos, fullnames) {
@@ -105,7 +105,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'upload-comment.php',
+            url: 'admin-progress/upload-comment.php',
             type: 'POST',
             data: formData,
             processData: false,
@@ -132,4 +132,3 @@ $(document).ready(function() {
         });
     });
 });
-
