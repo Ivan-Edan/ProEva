@@ -79,79 +79,87 @@ if (isset($_GET['project_id'])) {
             echo "</tr>";
 
             // Fetch subtasks for the main project
-            $sqlSub = "SELECT * FROM user_subproject WHERE main_id = ?";
-            $stmtSub = $conn->prepare($sqlSub);
-            $stmtSub->bind_param("i", $mainId);
-            $stmtSub->execute();
-            $resultSub = $stmtSub->get_result();
+$sqlSub = "SELECT * FROM user_subproject WHERE main_id = ?";
+$stmtSub = $conn->prepare($sqlSub);
+$stmtSub->bind_param("i", $mainId);
+$stmtSub->execute();
+$resultSub = $stmtSub->get_result();
 
-            if ($resultSub->num_rows > 0) {
-                while ($sub = $resultSub->fetch_assoc()) {
-                    $subId = $sub['id'];
-                    $formattedIdSub = $sub['formatted_id'];
-                    $subProjectName = $sub['subProjectName'];
-                    $subStartDate = new DateTime($sub['subStartDate']);
-                    $subEndDate = new DateTime($sub['subEndDate']);
+if ($resultSub->num_rows > 0) {
+    while ($sub = $resultSub->fetch_assoc()) {
+        $subId = $sub['id'];
+        $formattedIdSub = $sub['formatted_id'];
+        $subProjectName = $sub['subProjectName'];
 
-                    // Initialize variables for subtasks
-                    $commentsSub = [];
-                    $photosSub = [];
-                    $fullnamesSub = [];
+        // Initialize start and end dates as DateTime objects
+        $subStartDate = new DateTime($sub['subStartDate']);
+        $subEndDate = new DateTime($sub['subEndDate']);
+        
+        $subStartMonth = (int)$subStartDate->format('n');
+        $subEndMonth = (int)$subEndDate->format('n');
+        $durationSub = $subEndMonth - $subStartMonth + 1;
 
-                    // Fetch comments for subtasks
-                    $commentSubQuery = "SELECT m.*, u.* FROM sub_comment m JOIN users_info u ON u.user_id = m.userId
-                                        WHERE m.formatted_id_sub = ?"; 
-                    $stmtSubComm = $conn->prepare($commentSubQuery);
-                    $stmtSubComm->bind_param("s", $formattedIdSub);
-                    $stmtSubComm->execute();
-                    $commentResultsSub = $stmtSubComm->get_result();
+        // Initialize variables for subtasks
+        $commentsSub = [];
+        $photosSub = [];
+        $fullnamesSub = [];
 
-                    if ($commentResultsSub->num_rows > 0) {
-                        while ($comm = $commentResultsSub->fetch_assoc()) {
-                            $commentsSub[] = $comm['comment'];
-                            $photosSub[] = $comm['photoPath'];
-                            $fullnamesSub[] = $comm['first_name'] . ' ' . $comm['last_name'];
-                        }
-                    }
+        // Fetch all comments for the subtask
+        $commentSubQuery = "SELECT m.*, u.* FROM sub_comment m JOIN users_info u ON u.user_id = m.userId
+                           WHERE m.formatted_id_sub = ?"; 
+        $stmtSub = $conn->prepare($commentSubQuery);
+        $stmtSub->bind_param("s", $formattedIdSub);
+        $stmtSub->execute();
+        $commentResultsSub = $stmtSub->get_result();
 
-                    // Convert arrays to strings
-                    $commentsSubString = implode(" | ", $commentsSub);
-                    $photosSubString = implode(" | ", $photosSub);
-                    $fullnamesSubString = implode(" | ", $fullnamesSub);
+        if ($commentResultsSub->num_rows > 0) {
+            while ($comm = $commentResultsSub->fetch_assoc()) {
+                $commentsSub[] = $comm['comment'];
+                $photosSub[] = $comm['photoPath_admin'];
+                $fullnamesSub[] = $comm['first_name'] . ' ' . $comm['last_name'];
+            }
+        }
 
-                    echo "<tr class='subtasks-name' data-target='#subtasks_$subId'
-                           data-subproject-name='$subProjectName'
-                           data-substart-date='".$sub['subStartDate']."'
-                           data-subend-date='".$sub['subEndDate']."'
-                           data-subtotal-cost='".$sub['subProjectCost']."'  
-                           data-subfund-source='".$sub['subFundSource']."' 
-                           data-subfunding-agency='".$sub['subFundingAgency']."'
-                           data-substatus='".$sub['status']."'
-                           data-subcomments='$commentsSubString'
-                           data-subphotos='$photosSubString'
-                           data-subfullnames='$fullnamesSubString'
-                           data-id-formatted='$formattedIdSub'
-                           data-id='$subId'
-                           data-type='sub'>";
+        // Convert arrays into a string for easier handling later
+        $commentsSubString = implode(" | ", $commentsSub);
+        $photosSubString = implode(" | ", $photosSub);
+        $fullnamesSubString = implode(" | ", $fullnamesSub);
 
-                    echo "<td class='subtask-name'><div class='light-circle'></div> $subProjectName</td>";
+        // Display subtask row
+        echo "<tr class='subtasks-name' data-target='#subtasks_$subId'
+            data-subproject-name='$subProjectName'
+            data-substart-date='".$sub['subStartDate']."'
+            data-subend-date='".$sub['subEndDate']."'
+            data-subtotal-cost='".$sub['subProjectCost']."'  
+            data-subfund-source='".$sub['subFundSource']."' 
+            data-subfunding-agency='".$sub['subFundingAgency']."'
+            data-substatus='".$sub['status']."'
+            data-subcomments='".$commentsSubString."'
+            data-subphotos='$photosSubString'
+            data-subfullnames='$fullnamesSubString'
+            data-id-formatted='$formattedIdSub'
+            data-id='$subId'
+            data-type='sub'>";
 
-                    // Day-based Gantt chart rendering for subtasks
-                    for ($month = 1; $month <= 12; $month++) {
-                        for ($day = 1; $day <= 31; $day++) {
-                            $currentDate = DateTime::createFromFormat('Y-n-j', date("Y") . "-$month-$day");
+        echo "<td><div class='light-circle'></div> <span class='subtasks-name'>$subProjectName</span></td>";
 
-                            if ($currentDate && $currentDate >= $subStartDate && $currentDate <= $subEndDate) {
-                                echo "<td class='active-day'><span class='progress-bar' style='width: 100%;'></span></td>";
-                            } elseif ($currentDate) {
-                                echo "<td></td>";
-                            }
-                        }
-                    }
+        // Day-based Gantt chart rendering for subtasks
+        for ($month = 1; $month <= 12; $month++) {
+            for ($day = 1; $day <= 31; $day++) {
+                $currentDate = DateTime::createFromFormat('Y-n-j', date("Y") . "-$month-$day");
 
-                    echo "</tr>";
+                if ($currentDate && $currentDate >= $subStartDate && $currentDate <= $subEndDate) {
+                    echo "<td class='active-day'><span class='progress-bar' style='width: 100%;'></span></td>";
+                } elseif ($currentDate) {
+                    echo "<td></td>";
                 }
             }
+        }
+
+        echo "</tr>";
+    }
+}
+
         }
     } else {
         echo "Project not found.";
