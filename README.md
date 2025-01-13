@@ -1,11 +1,11 @@
 # ProEva
 
-A Project Monitoring Tool for Developing a Monitoring and Evaluation System with Prescriptive Analytics.
+A Project Monitoring Tool for Developing a Monitoring System with Prescriptive Analytics.
 =====================================
 
 ## Overview
 
-This project provides a project management tool designed for developing Monitoring and Evaluation (M&E) systems with a focus on prescriptive analytics. It integrates data from various sources to provide monitoring, customizable evaluation, and activities details. The system features reporting and visualization tools to help clients interpret data and make informed decisions. It is used for project management, program evaluation, and organizational improvement.
+This project provides a project management tool designed for developing Monitoring systems with a focus on prescriptive analytics. It integrates data from various sources to provide monitoring and activities details. The system features reporting and visualization tools to help clients interpret data and make informed decisions. It is used for project management, program evaluation, and organizational improvement.
 
 =====================================
 
@@ -19,9 +19,8 @@ This project provides a project management tool designed for developing Monitori
 | **User Dashboard**   | Allows users to view and manage their personal information and activities. |
 | **Forgot Password**  | Enables users to reset their passwords if they forget them. |
 | **Account Management** | Allows admins to manage their account settings and details. |
-| **Activities Page**  | Add a project details in implementing and monitoring a project. |
-| **Monitoring Page**  | Provides monitoring of activities inside the system status and performance of the activities. |
-| **Evaluation Page**  | Allows admins to evaluate users project progress inside the system. |
+| **Monitoring Page**  | Add a project details in implementing and monitoring a project. |
+| **Forms Page**  | Provides forms inside the system for filling up project information. |
 | **Reports**          | Generates various reports based on user data or system metrics. |
 
 =====================================
@@ -31,7 +30,7 @@ This project provides a project management tool designed for developing Monitori
 | **Category**                  | **Tools**                   |
 |-------------------------------|-----------------------------|
 | **Frontend**                  | CSS, Bootstrap, JavaScript  |
-| **Backend**                   | PHP                         |
+| **Backend**                   | PHP, Python                         |
 | **Database Server**           | MySQL                       |
 | **Version Control System**    | Git/GitHub                  |
 | **Project Management Tool**   | Jira                        |
@@ -41,11 +40,11 @@ This project provides a project management tool designed for developing Monitori
 
 ## Contributors
 
-* **Ivan Edan** - *Developer*
+* **Ivan Angelo Edan** - *Developer*
 
-* **Peter Saul** - *Developer*
+* **Peter Paul Saul** - *Developer*
 
-* **Jc Bagwisa** - *Project  Manager*
+* **John Carlo Bagwisa** - *Project  Manager*
 
 =====================================
 

@@ -96,22 +96,76 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="role" class="form-label">Role Type</label>
-                                <select class="form-select" id="role" name="role" required>
-                                    <option value="Admin">Admin</option>
-                                    <option value="User">User</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="department" class="form-label">Department</label>
-                                <select class="form-select" id="department" name="department" required>
-                                    <option value="planning">Planning</option>
-                                    <option value="dept1">Department 1</option>
-                                    <option value="dept2">Department 2</option>
-                                </select>
-                            </div>
-                        </div>
+    <div class="col-md-6">
+        <label for="role" class="form-label">Role Type</label>
+        <select class="form-select" id="role" name="role" required>
+            <option value="" disabled selected>Select a role</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="department" class="form-label">Department</label>
+        <select class="form-select" id="department" name="department" required>
+            <option value="" disabled selected>Select a department</option>
+            <!-- Dynamic options will be inserted here -->
+        </select>
+    </div>
+</div>
+
+<script>
+    const roleSelect = document.getElementById('role');
+    const departmentSelect = document.getElementById('department');
+
+    // Fetch departments and store them for dynamic control
+    let allDepartments = [];
+
+    fetch('includes/fetch_departments.php')
+        .then(response => response.json())
+        .then(data => {
+            allDepartments = data; // Store fetched departments
+            populateDepartments(allDepartments); // Initially populate all departments
+        })
+        .catch(error => console.error('Error fetching departments:', error));
+
+    // Populate department dropdown
+    function populateDepartments(departments) {
+        // Clear the existing options
+        departmentSelect.innerHTML = '<option value="" disabled selected>Select a department</option>';
+
+        if (departments.length > 0) {
+            departments.forEach(department => {
+                const option = document.createElement('option');
+                option.value = department.id;
+                option.textContent = department.name;
+                departmentSelect.appendChild(option);
+            });
+        } else {
+            const noOption = document.createElement('option');
+            noOption.value = "";
+            noOption.textContent = "No departments available";
+            noOption.disabled = true;
+            departmentSelect.appendChild(noOption);
+        }
+    }
+
+    // Adjust department options based on the selected role
+    roleSelect.addEventListener('change', () => {
+        if (roleSelect.value === "") {
+            // Clear department options if no role is selected
+            departmentSelect.innerHTML = '<option value="" disabled selected>Select a department</option>';
+        } else if (roleSelect.value === "Admin") {
+            // Show only the department with id = 1 for Admin
+            const adminDepartments = allDepartments.filter(department => department.id === "1");
+            populateDepartments(adminDepartments);
+        } else if (roleSelect.value === "User") {
+            // Show all departments starting from index 2 for User
+            const userDepartments = allDepartments.slice(1); // Skip index 0 (assuming index 0 is for Admin)
+            populateDepartments(userDepartments);
+        }
+    });
+</script>
+
 
                         <!-- Submit Button -->
                         <div class="d-flex justify-content-center">

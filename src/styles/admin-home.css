@@ -109,7 +109,7 @@
 }
 
 .stat-icon {
-    width: 130px;
+    width: 100px;
     height: 75px;
     margin-right: 10px;
 }
@@ -132,12 +132,28 @@
     padding-right: 15px;
     font-weight: bold;
 }
+.stat-label-dept {
+    font-size: 1em;
+    color: white;
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+    padding-right: 15px;
+    font-weight: bold;
+}
 
 .stat-number {
     font-size: 1.5em;
     color: #75C9DE;
     margin: 0;
     font-weight: bold;
+}
+.stat-number-dept {
+    font-size: 1.5em;
+    color: #75C9DE;
+    margin: 0;
+    font-weight: bold;
+    margin-right: 15px;
 }
 .stat-label-1 {
     font-size: 22px;
@@ -271,3 +287,7 @@
     }
 }
 
+.dropdown-menu {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
