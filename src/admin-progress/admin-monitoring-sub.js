@@ -103,7 +103,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'upload-comment-sub.php',
+            url: 'admin-progress/upload-comment-sub.php',
             type: 'POST',
             data: formData,
             processData: false,

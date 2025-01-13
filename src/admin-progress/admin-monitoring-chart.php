@@ -179,7 +179,7 @@ if ($result->num_rows > 0) {
     margin-right: 10px !important;
 }
 
-.subtask-name {
+.subtasks-name {
     font-weight: 500;
     cursor: pointer;
     font-size: 13px;
@@ -516,20 +516,6 @@ if ($result->num_rows > 0) {
         .modal-backdrop {
             display: none !important;
         }
-        /* Task and subtask styles */
-        .task-name {
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px !important;
-        }
-
-        .subtask-name {
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 13px;
-            margin-right: 10px !important;
-        }
     </style>
 </head>
 
@@ -541,7 +527,6 @@ if ($result->num_rows > 0) {
                 <div class="container-2">Project Gantt Chart</div>
                 <div class="container-3" style="height: fit-content;">
                 <h3 class="project-title"><?php echo $projectName; ?></h3>
-                    <h3 class="project-title"></h3>
                     <div class="gantt-chart-container">
                         <table class="gantt-chart">
                             <thead>
@@ -580,15 +565,8 @@ if ($result->num_rows > 0) {
                     <h6 class="modal-title" id="taskModalLabel" style="font-weight: normal;"></h6>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 5px;">
-                    <p style="font-size: 20px;"><strong>Status:</strong>
-                        <select class="form-control statusDropdown" id="statusDropdown" name="statusDropdown">
-                            <option value="Done">Done</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Incoming">Incoming</option>
-                        </select>
-                    </p>
-
+                    <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 15px;">
+                    <p style="font-size: 20px;"><strong>Status:</strong> <span id="status"></span></p>
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 5px;">
                     <p style="font-size: 20px;"><strong>Project Task Details</strong></p>
                     <p style="font-size: 15px;"><strong>Start Date:</strong> <span id="startDate"></span></p>
@@ -661,7 +639,7 @@ if ($result->num_rows > 0) {
 
     <script>
         // Event listener for clicking on a row (either main or sub)
-        document.querySelectorAll('.main-task, .subtask-name').forEach(item => {
+        document.querySelectorAll('.main-task, .subtasks-name').forEach(item => {
             item.addEventListener('click', function() {
                 var projectType = this.getAttribute('data-type'); // Get project type (main or sub)
 
