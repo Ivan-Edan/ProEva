@@ -123,11 +123,15 @@
                     <div id="monthlyTargetsContainer"></div>
 
                     <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Submitted Designation:</label>
+                    <label class="col-sm-6 col-form-label">Submitted Designation:</label>
                         <div class="col-sm-8">
                             <input type="text" id="submittedDesignationForm1" class="form-control">
                         </div>
                     </div>
+                    <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm1" class="form-control">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -268,11 +272,15 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label">Submitted Designation:</label>
+                        <label class="col-sm-6 col-form-label">Submitted Designation:</label>
                         <div class="col-sm-8">
                             <input type="text" id="designationForm2" class="form-control" readonly>
                         </div>
                     </div>
+                    <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm2" class="form-control">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -379,6 +387,10 @@
                             <input type="text" id="submittedDesignationForm3" class="form-control" readonly>
                         </div>
                     </div>
+                    <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm3" class="form-control">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -445,6 +457,10 @@
                             <input type="text" id="submittedDesignationForm4" class="form-control" readonly>
                         </div>
                     </div>
+                    <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm4" class="form-control">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">

@@ -2,19 +2,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const formListItems = document.querySelectorAll('#form-list .list-group-item');
     const formContent = document.getElementById('form-content');
     const formsList = document.getElementById('forms-list');
-
     const quarterContainer = document.getElementById('quarter-container');
     const submittedFormsContainer = document.getElementById('submitted-forms-container');
     const paginationContainer = document.getElementById('pagination-container');
 
-     // Function to hide additional containers
+    // Utility: Hide additional containers
     function hideAdditionalContainers() {
         if (quarterContainer) quarterContainer.style.display = 'none';
         if (submittedFormsContainer) submittedFormsContainer.style.display = 'none';
         if (paginationContainer) paginationContainer.style.display = 'none';
     }
 
-    // Function to show additional containers
+    // Utility: Show additional containers
     function showAdditionalContainers() {
         if (quarterContainer) quarterContainer.style.display = 'block';
         if (submittedFormsContainer) submittedFormsContainer.style.display = 'block';
@@ -25,29 +24,22 @@ document.addEventListener('DOMContentLoaded', function () {
     formListItems.forEach(item => {
         item.addEventListener('click', function () {
             const formFile = this.getAttribute('data-form');
-            const formType = this.getAttribute('data-form-type'); // Form type attribute
+            const formType = this.getAttribute('data-form-type');
             console.log('Form Type:', formType);
             hideAdditionalContainers();
 
-            // Load the form content dynamically
+            // Dynamically load form content
             fetch(formFile)
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
+                .then(response => response.ok ? response.text() : Promise.reject('Error loading form content.'))
                 .then(html => {
                     formContent.innerHTML = html;
                     formsList.style.display = 'none';
                     formContent.style.display = 'block';
 
-                    // After form loads, locate the dropdown and populate it
-                    initializeFormDropdown(formType); // Dropdown initialization
+                    // Initialize dropdown
+                    initializeFormDropdown(formType);
                 })
-                .catch(error => {
-                    console.error('Error loading form:', error);
-                });
+                .catch(error => console.error('Error loading form:', error));
         });
     });
 
@@ -62,130 +54,198 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Populate dropdown options
         loadDropdownOptions(formType, dropdownList);
 
-        // Attach search functionality to the dropdown
-        if (dropdownSearch) {
-            dropdownSearch.addEventListener('input', function () {
-                const searchTerm = dropdownSearch.value.toLowerCase();
-                const items = dropdownList.querySelectorAll('.dropdown-item');
-
-                items.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(searchTerm) ? '' : 'none';
-                });
+        // Attach search functionality
+        dropdownSearch.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const items = dropdownList.querySelectorAll('.dropdown-item');
+            items.forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(searchTerm) ? '' : 'none';
             });
-        }
+        });
     }
 
     // Load dropdown options dynamically
     function loadDropdownOptions(formType, dropdownList) {
         console.log('Fetching dropdown options for formType:', formType);
-        fetch('includes/get-admin-dropdown-options.php?formType=' + encodeURIComponent(formType))
+        fetch(`includes/get-admin-dropdown-options.php?formType=${encodeURIComponent(formType)}`)
             .then(response => response.json())
             .then(data => {
-                console.log('Dropdown options received:', data); // Debugging
-
-                // Validate response format
                 if (data.status === 'success' && Array.isArray(data.options)) {
-                    const options = data.options;
                     dropdownList.innerHTML = ''; // Clear previous options
-                    options.forEach(option => {
+                    data.options.forEach(option => {
                         const listItem = document.createElement('li');
                         listItem.classList.add('dropdown-item', 'px-3', 'py-2', 'border-bottom');
                         listItem.textContent = option.label;
-                        listItem.setAttribute('data-value', option.value);
-                        listItem.setAttribute('data-info', JSON.stringify(option.data)); // Store additional data
+                        listItem.dataset.value = option.value;
+                        listItem.dataset.info = JSON.stringify(option.data);
                         dropdownList.appendChild(listItem);
                     });
-                    attachDropdownListeners(dropdownList, formType); // Pass form type for mappings
+                    attachDropdownListeners(dropdownList, formType);
                 } else {
                     console.error('Invalid response format:', data);
                     dropdownList.innerHTML = '<li class="dropdown-item">No options found</li>';
                 }
             })
-            .catch(error => {
-                console.error('Error fetching dropdown options:', error);
-            });
+            .catch(error => console.error('Error fetching dropdown options:', error));
     }
 
-    // Attach click event listeners to dropdown items
+    // Attach click listeners to dropdown items
     function attachDropdownListeners(dropdownList, formType) {
-        const items = dropdownList.querySelectorAll('.dropdown-item');
-        items.forEach(item => {
+        dropdownList.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', function () {
-                const selectedValue = this.getAttribute('data-value');
-                const selectedData = JSON.parse(this.getAttribute('data-info')); // Retrieve additional data
-                console.log('Selected Value:', selectedValue);
+                const selectedData = JSON.parse(this.dataset.info);
                 console.log('Selected Data:', selectedData);
 
-                // Autofill form fields based on the selected data
-                autofillFormFields(formType, selectedData); // Call autofill function
+                autofillFormFields(formType, selectedData);
             });
         });
     }
 
-    // Autofill form fields
-    function autofillFormFields(formType, data) {
-        console.log('Autofilling form fields for:', formType);
+function autofillFormFields(formType, data) {
+    console.log('Autofilling form fields for:', formType);
+    console.log('Data passed to autofillFormFields:', data); // Debugging
 
-        // Admin Form 1 Mapping
-        if (formType === 'adminform1') {
-            document.getElementById('projectTitle').value = data.project_title || '';
-            document.getElementById('implementingAgency').value = data.implementing_agency || '';
-            document.getElementById('startDate').value = data.start_date || '';
-            document.getElementById('endDate').value = data.end_date || '';
-            document.getElementById('fundingAgency').value = data.fund_agency || '';
-            document.getElementById('projectCost').value = data.total_cost || '';
-            document.getElementById('appropriations').value = data.appropriations || '';
-            document.getElementById('allotment').value = data.allotment || '';
-            document.getElementById('obligations').value = data.obligations || '';
-            document.getElementById('disbursements').value = data.disbursements || '';
-            document.getElementById('fundingSupport').value = data.funding_support || '';
-            document.getElementById('fundUtilization').value = data.fund_utilization || '';
-            document.getElementById('targetOWPA').value = data.target_owpa || '';
-            document.getElementById('actualOWPA').value = data.actual_owpa || '';
-            document.getElementById('slippage').value = data.slippage || '';
-            document.getElementById('male').value = data.male || '';
-            document.getElementById('female').value = data.female || '';
+    const mappings = {
+        adminform1: {
+            projectTitle: 'project_title',
+            implementingAgency: 'implementing_agency',
+            startDate: 'start_date',
+            endDate: 'end_date',
+            fundingAgency: 'fund_agency',
+            projectCost: 'total_cost',
+            appropriations: 'appropriations',
+            sector:'sector',
+            fundSource: 'fund_source',
+            allotment: 'allotment',
+            obligations: 'obligations',
+            disbursements: 'disbursements',
+            fundingSupport: 'funding_support',
+            fundUtilization: 'fund_utilization',
+            targetOWPA: 'target_owpa',
+            actualOWPA: 'actual_owpa',
+            slippage: 'slippage',
+            male: 'male',
+            female: 'female'
+        },
+        adminform2: {
+            projectTitle: 'project_title',
+            location: 'location', // Assuming data.location includes city, barangay concatenated
+            IA: 'implementing_agency',
+            fundUtilization: 'fund_utilization',
+            targetOWPA: 'target_owpa',
+            actualOWPA: 'actual_owpa',
+            slippage: 'slippage'
+        },
+        adminform3: {
+            projectTitle: 'project_title',
+            totalCost: 'total_cost',
+            location: 'location', // Same as above
+            IA: 'implementing_agency'
+        },
+        adminform4: {
+            projectTitle: 'project_title',
+            IA: 'implementing_agency',
+            location: 'location'
         }
+    };
 
-        // Admin Form 2 Mapping
-        else if (formType === 'adminform2') {
-            document.getElementById('projectTitle').value = data.project_title || '';
-            document.getElementById('location').value = `${data.location}, ${data.city}, ${data.barangay}` || '';
-            document.getElementById('IA').value = data.implementing_agency || '';
-            document.getElementById('fundUtilization').value = data.fund_utilization || '';
-            document.getElementById('targetOWPA').value = data.target_owpa || '';
-            document.getElementById('actualOWPA').value = data.actual_owpa || '';
-            document.getElementById('slippage').value = data.slippage || '';
-        }
+    if (mappings[formType]) {
+        const formMapping = mappings[formType];
+        Object.keys(formMapping).forEach(field => {
+            const dataKey = formMapping[field];
+            const element = document.getElementById(field);
 
-        // Admin Form 3 Mapping
-        else if (formType === 'adminform3') {
-            document.getElementById('projectTitle').value = data.project_title || '';
-            document.getElementById('totalCost').value = data.total_cost || '';
-            document.getElementById('location').value = `${data.location}, ${data.city}, ${data.barangay}` || '';
-            document.getElementById('IA').value = data.implementing_agency || '';
-        }
-         // Admin Form 4 Mapping
-        else if (formType === 'adminform4') {
-            document.getElementById('projectTitle').value = data.project_title || '';
-            document.getElementById('IA').value = data.implementing_agency || '';
-        }
+            if (element) {
+                const value = data[dataKey];
+                element.value = value !== undefined ? value : ''; // Set to empty string if value is missing
+            } else {
+                console.warn(`Field "${field}" not found in the form.`);
+            }
+        });
+    } else {
+        console.error(`No mappings found for formType: ${formType}`);
+    }
+}
+
+
+
+    // Reset form fields
+    function resetForm(formId) {
+        const form = document.getElementById(formId);
+        if (form) form.reset();
     }
 
-    
+    // Submit forms dynamically
+    function submitForm(formType, formData) {
+        fetch(`includes/admin-submit-${formType}.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    successModal.show();
+                    successModal._element.addEventListener('hidden.bs.modal', function () {
+                        resetToFormList();
+                    });
+                    resetForm(`admin-form-${formType}`);
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                alert('An error occurred while submitting the form.');
+            });
+    }
+
+    // Handle form submission
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.btn-submit')) {
+            event.preventDefault();
+
+            const form = event.target.closest('form');
+            const formType = form.getAttribute('data-form-type');
+
+            if (formType) {
+                const formData = Array.from(new FormData(form)).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+                submitForm(formType, formData);
+                
+                
+                
+            }
+        }
+    });
 
     // Cancel button functionality
     document.addEventListener('click', function (event) {
         if (event.target && event.target.id === 'cancelBtn') {
             formContent.style.display = 'none';
             formsList.style.display = 'block';
+            resetForm(event.target.closest('form').id);
             showAdditionalContainers();
         }
     });
-
-    
 });
+
+
+function resetToFormList() {
+    const formContent = document.getElementById('form-content');
+    const formsList = document.getElementById('forms-list');
+    const quarterContainer = document.getElementById('quarter-container');
+    const submittedFormsContainer = document.getElementById('submitted-forms-container');
+    const paginationContainer = document.getElementById('pagination-container');
+
+    if (formContent) {
+        formContent.style.display = 'none';
+        formContent.innerHTML = '';
+    }
+    if (formsList) formsList.style.display = 'block';
+    if (quarterContainer) quarterContainer.style.display = 'block';
+    if (submittedFormsContainer) submittedFormsContainer.style.display = 'block';
+    if (paginationContainer) paginationContainer.style.display = 'block';
+}

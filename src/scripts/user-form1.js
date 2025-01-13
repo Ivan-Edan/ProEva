@@ -39,11 +39,11 @@ function loadForm1Logic() {
                             <div class="col-md-2">
                                 <label for="year_${projectCount}">Year:</label>
                                 <select class="form-control" id="year_${projectCount}" name="project_year_${projectCount}">
-                                    <option value="2024">2024</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
@@ -59,7 +59,15 @@ function loadForm1Logic() {
                             </div>
                             <div class="col-md-3">
                                 <label for="fund_source_${projectCount}">Fund Source:</label>
-                                <input type="text" class="form-control" id="user_fund_source_${projectCount}" name="fund_source_${projectCount}" required>
+                                <select class="form-control" id="user_fund_source_${projectCount}" name="fund_source_${projectCount}" required>
+                                    <option value="ODA Loan">ODA Loan</option>
+                                    <option value="ODA Grant">ODA Grant</option>
+                                    <option value="Oda loan and Grant">Oda loan and Grant</option>
+                                    <option value="LFP">LFP</option>
+                                    <option value="PPP">PPP</option>
+                                    <option value="NTA">NTA</option>
+                                    <option value="Local Development Fund">Local Development Fund</option>
+                                </select>
                             </div>
                             <div class="col-md-3">
                                 <label for="funding_agency_${projectCount}">Funding Agency:</label>
@@ -70,13 +78,22 @@ function loadForm1Logic() {
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="mode_implementation_${projectCount}">Mode of Implementation:</label>
-                                <input type="text" class="form-control" id="user_mode_implementation_${projectCount}" name="mode_of_implementation_${projectCount}" required>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="sector_${projectCount}">Sector:</label>
-                                <input type="text" class="form-control" id="user_sector_${projectCount}" name="sector_${projectCount}" required>
+                                <select class="form-control" id="mode_implementation_${projectCount}" name="mode_of_implementation_${projectCount}">
+                                    <option value=" By administration"> By administration</option>
+                                    <option value=" By Contract"> By Contract</option>
+                                    <option value=" Implemented by the Development Partner/Funding Agency">Implemented by the Development Partner/Funding Agency</option>
+                                    <option value="Coursed through NGOs/CSOs">Coursed through NGOs/CSOs</option>
+                                </select>
                             </div>
                             <div class="col-md-3">
+                                <label for="sector_${projectCount}">Sector:</label>
+                                <select class="form-control" id="sector_${projectCount}" name="sector_${projectCount}" required>
+                                    <option value=" General Public Services"> General Public Services</option>
+                                    <option value=" Social Services"> Social Services</option>
+                                    <option value="Economic Services">Economic Services</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
                                 <label for="total_cost_${projectCount}">Total Program / Project Cost (PHP):</label>
                                 <input type="text" class="form-control" id="user_total_cost_${projectCount}" name="total_cost_${projectCount}" required>
                             </div>
@@ -158,7 +175,11 @@ function loadForm1Logic() {
                         <h5>Per Month/Quarter Financial Targets</h5>
                         ${generateStaticMonthlyTargets(projectCount)}
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-5">
+                            <label for="submitted_by_${projectCount}">Submitted By :</label>
+                            <input type="text" class="form-control" id="user_submitted_by_${projectCount}" placeholder="Enter Submitted By" name="submitted_by_${projectCount}" required>
+                        </div>
+                        <div class="form-group col-md-5">
                             <label for="designation_${projectCount}">Designation/Office :</label>
                             <input type="text" class="form-control" id="user_designation_${projectCount}" placeholder="Enter designation/office" name="submitted_designation_${projectCount}" required>
                         </div>
@@ -184,6 +205,10 @@ function loadForm1Logic() {
         attachRemoveButton(formId);
     }
 
+    // Automatically add one project form when Form 1 is loaded
+    if (projectFormsContainer) {
+        createProjectForm();
+    }
     
     
     /**
@@ -222,123 +247,175 @@ function loadForm1Logic() {
         });
     }
 
-function handleSubmit(event) {
-    event.preventDefault();
 
-    const projectFormsContainer = document.getElementById('project-forms-container'); // Ensure this ID matches your HTML
-    if (!projectFormsContainer) {
-        console.error('Error: projectFormsContainer not found.');
-        return;
-    }
+    function handleSubmit(event) {
+        event.preventDefault();
+    
+        const projectFormsContainer = document.getElementById('project-forms-container');
+        const forms = projectFormsContainer.querySelectorAll('.accordion-item');
+    
+        let isValid = true;
 
-    const forms = projectFormsContainer.querySelectorAll('.accordion-item');
-    const projectForms = []; // Array to hold all form data
-
-    forms.forEach((form, index) => {
-        const formData = {};
-        const inputs = form.querySelectorAll('input, textarea, select');
-
-        inputs.forEach((input) => {
-            const fieldName = input.name.replace(`_${index + 1}`, ''); // Strip dynamic suffix
-            if (!formData[fieldName]) {
-                formData[fieldName] = input.value;
-            } else if (Array.isArray(formData[fieldName])) {
-                formData[fieldName].push(input.value); // Handle array fields
-            } else {
-                formData[fieldName] = [formData[fieldName], input.value];
+        forms.forEach((form) => {
+            let formIsValid = true; // Reset validity for each form container
+            const projectTitleInput = form.querySelector('input[name^="project_title_"]'); // Select project title input
+        
+            if (projectTitleInput) {
+                if (!projectTitleInput.checkValidity()) {
+                    projectTitleInput.classList.add('is-invalid'); // Add visual feedback
+                    formIsValid = false; // Mark this form container as invalid
+                } else {
+                    projectTitleInput.classList.remove('is-invalid'); // Remove feedback if valid
+                }
+            }
+        
+            if (!formIsValid) {
+                isValid = false; // If any form container is invalid, mark the entire submission as invalid
             }
         });
-
-        // Collect Monthly Targets
-        const monthlyTargets = [];
-        const periodStarts = form.querySelectorAll(`[name="period_start_${index + 1}[]"]`);
-        const periodEnds = form.querySelectorAll(`[name="period_end_${index + 1}[]"]`);
-        const financialTargets = form.querySelectorAll(`[name="financial_target_${index + 1}[]"]`);
-        const physicalTargetPercents = form.querySelectorAll(`[name="physical_target_percent_${index + 1}[]"]`);
-
-        for (let i = 0; i < periodStarts.length; i++) {
-            const start = periodStarts[i]?.value || null;
-            const end = periodEnds[i]?.value || null;
-            const financial = parseFloat(financialTargets[i]?.value) || null;
-            const physical = parseFloat(physicalTargetPercents[i]?.value) || null;
-
-            // Add to monthlyTargets only if at least one field is filled
-            if (start || end || financial !== null || physical !== null) {
-                monthlyTargets.push({
-                    position: i + 1,
-                    start: start,
-                    end: end,
-                    financial: financial,
-                    physical: physical,
-                });
-            }
+        
+        if (!isValid) {
+            alert('Please fill out all required "Program / Project Title" fields before submitting.');
+            return;
         }
-        formData['monthly_targets'] = monthlyTargets.length > 0 ? monthlyTargets : null; // Set to null if no valid entries
+        
 
-
-        // Collect Output Indicators
-        const outputIndicators = [];
-        const outputIndicatorInputs = form.querySelectorAll(`[name^="output_indicator_${index + 1}_"]`);
-        outputIndicatorInputs.forEach((indicator, idx) => {
-            outputIndicators.push({
-                output_indicator: indicator.value,
-                position: idx + 1,
+    
+        // Show confirmation modal
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
+    
+        // Handle Confirm Button Click
+        const confirmButton = document.getElementById('confirmSubmitButton');
+        confirmButton.onclick = function () {
+            // Close the modal
+            confirmationModal.hide();
+    
+            // Proceed with form data collection and submission
+            const projectForms = []; // Array to hold all form data
+    
+            forms.forEach((form, index) => {
+                const formData = {};
+                const inputs = form.querySelectorAll('input, textarea, select');
+    
+                inputs.forEach((input) => {
+                    const fieldName = input.name.replace(`_${index + 1}`, ''); // Strip dynamic suffix
+                    if (!formData[fieldName]) {
+                        formData[fieldName] = input.value;
+                    } else if (Array.isArray(formData[fieldName])) {
+                        formData[fieldName].push(input.value); // Handle array fields
+                    } else {
+                        formData[fieldName] = [formData[fieldName], input.value];
+                    }
+                });
+    
+                // Collect Monthly Targets
+                const monthlyTargets = [];
+                const periodStarts = form.querySelectorAll(`[name="period_start_${index + 1}[]"]`);
+                const periodEnds = form.querySelectorAll(`[name="period_end_${index + 1}[]"]`);
+                const financialTargets = form.querySelectorAll(`[name="financial_target_${index + 1}[]"]`);
+                const physicalTargetPercents = form.querySelectorAll(`[name="physical_target_percent_${index + 1}[]"]`);
+    
+                for (let i = 0; i < periodStarts.length; i++) {
+                    const start = periodStarts[i]?.value || null;
+                    const end = periodEnds[i]?.value || null;
+                    const financial = parseFloat(financialTargets[i]?.value) || null;
+                    const physical = parseFloat(physicalTargetPercents[i]?.value) || null;
+    
+                    // Add to monthlyTargets only if at least one field is filled
+                    if (start || end || financial !== null || physical !== null) {
+                        monthlyTargets.push({
+                            position: i + 1,
+                            start: start,
+                            end: end,
+                            financial: financial,
+                            physical: physical,
+                        });
+                    }
+                }
+                formData['monthly_targets'] = monthlyTargets.length > 0 ? monthlyTargets : null; // Set to null if no valid entries
+    
+                // Collect Output Indicators
+                const outputIndicators = [];
+                const outputIndicatorInputs = form.querySelectorAll(`[name^="output_indicator_${index + 1}_"]`);
+                outputIndicatorInputs.forEach((indicator, idx) => {
+                    outputIndicators.push({
+                        output_indicator: indicator.value,
+                        position: idx + 1,
+                    });
+                });
+                formData['output_indicators'] = outputIndicators;
+    
+                // Collect Target Outputs
+                const targetOutputs = [];
+                const targetOutputInputs = form.querySelectorAll(`[name^="target_output_${index + 1}_"]`);
+                targetOutputInputs.forEach((target) => {
+                    targetOutputs.push(target.value);
+                });
+                formData['target_outputs'] = targetOutputs;
+    
+                projectForms.push(formData); // Add this form's data to the array
+    
+                console.log(`Form ${index + 1} data collected:`, formData);
             });
-        });
-        formData['output_indicators'] = outputIndicators;
-
-        // Collect Target Outputs
-        const targetOutputs = [];
-        const targetOutputInputs = form.querySelectorAll(`[name^="target_output_${index + 1}_"]`);
-        targetOutputInputs.forEach((target) => {
-            targetOutputs.push(target.value);
-        });
-        formData['target_outputs'] = targetOutputs;
-
-        projectForms.push(formData); // Add this form's data to the array
-
-        console.log(`Form ${index + 1} data collected:`, formData);
-    });
-
-    if (projectForms.length === 0) {
-        console.error('Error: No forms found or data collected.');
-        alert('No forms to submit.');
-        return;
+    
+            // Submit data to the backend
+            fetch('includes/user-submit-form1.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ project_forms: projectForms }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('Server response:', data);
+                    if (data.status === 'success') {
+                        alert('Forms submitted successfully!');
+                        
+                        
+                        setTimeout(() => {
+                            const quarterContainer = document.getElementById('quarter-container');
+                            const submittedFormsContainer = document.getElementById('submitted-forms-container');
+                            const paginationContainer = document.getElementById('pagination-container');
+                            const formContent = document.getElementById('form-content');
+                            const formsList = document.getElementById('forms-list');
+    
+                            if (formContent) {
+                                formContent.style.display = 'none';
+                                formContent.innerHTML = '';
+                            }
+                            if (quarterContainer) {
+                                quarterContainer.style.display = 'block';
+                            }
+                            if (submittedFormsContainer) {
+                                submittedFormsContainer.style.display = 'block';
+                            }
+                            if (paginationContainer) {
+                                paginationContainer.style.display = 'block';
+                            }
+                            if (formsList) {
+                                formsList.style.display = 'block';
+                            }
+                        }, 100);
+                        }
+                        else {
+                            alert(`Error: ${data.message}`);
+                        }
+                })
+                .catch((error) => {
+                    console.error('Error submitting forms:', error);
+                    alert('An error occurred while submitting the forms.');
+                });
+        };
     }
-
-    console.log("Submitting the following data to the server:", projectForms);
-
-    // Submit data to the backend
-    fetch('includes/user-submit-form1.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ project_forms: projectForms }),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Server response:', data);
-            if (data.status === 'success') {
-                alert('Forms submitted successfully!');
-            } else {
-                alert(`Error: ${data.message}`);
-            }
-        })
-        .catch((error) => {
-            console.error('Error submitting forms:', error);
-            alert('An error occurred while submitting the forms.');
-        });
-}
-
     
-    
-    
+
 
 
     /**
@@ -409,18 +486,54 @@ function handleSubmit(event) {
         });
     }
 
-    // Cancel button functionality (updated to return to the full M&E page)
-    cancelButton.addEventListener('click', function () {
+    let unsavedChanges = false; // Flag to track if there are unsaved changes
+
+    // Detect changes in any form input, textarea, or select
+    document.addEventListener('input', (event) => {
+        if (event.target.matches('form input, form textarea, form select')) {
+            unsavedChanges = true; // Mark unsaved changes
+            console.log("Unsaved changes detected.");
+        }
+    });
+    
+    // Cancel button functionality (updated to show modal only when necessary)
+    cancelButton.addEventListener('click', function (event) {
+        event.preventDefault();
+    
+        if (unsavedChanges) {
+            // Show the Cancel Confirmation Modal only if there are unsaved changes
+            const cancelModal = new bootstrap.Modal(document.getElementById('cancelConfirmationModal'));
+            cancelModal.show();
+    
+            // Handle Confirm Cancel Button Click
+            const confirmCancelButton = document.getElementById('confirmCancelButton');
+            confirmCancelButton.onclick = function () {
+                cancelModal.hide();
+                resetFormAndShowList(); // Proceed with the original cancel logic
+                unsavedChanges = false; // Reset unsaved changes flag
+            };
+        } else {
+            // No unsaved changes, reset the form immediately without showing the modal
+            console.log("No unsaved changes. Resetting form without confirmation.");
+            resetFormAndShowList();
+        }
+    });
+    
+    // Function to reset the form and return to the form list
+    function resetFormAndShowList() {
         if (projectFormsContainer) {
             projectFormsContainer.innerHTML = ''; // Remove all dynamic forms
             projectCount = 0; // Reset project count
+            createProjectForm(); // Automatically add one project form
         }
         formContent.style.display = 'none';
         formsList.style.display = 'block'; // Show form selection list
         if (quarterContainer) quarterContainer.style.display = 'block'; // Show quarter container
         if (submittedFormsContainer) submittedFormsContainer.style.display = 'block'; // Show submitted forms container
         if (paginationContainer) paginationContainer.style.display = 'block';
-    });
+    }
+    
+    
 
     // Add project form on button click
     addProjectFormButton.addEventListener('click', function () {

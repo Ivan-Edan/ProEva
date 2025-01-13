@@ -8,8 +8,16 @@ if (isset($_GET['query'])) {
     $searchTerm = "%$input%"; // Prepare the search term with wildcards
 
     try {
-        // Select project_title and project_year
-        $stmt = $conn->prepare("SELECT project_title, project_year FROM userprojecttitle WHERE project_title LIKE ? LIMIT 10");
+        // Join userprojecttitle with initialprojectreport and filter by status = 'approved'
+        $stmt = $conn->prepare("
+            SELECT userprojecttitle.project_title, userprojecttitle.project_year 
+            FROM userprojecttitle 
+            INNER JOIN initialprojectreport 
+            ON userprojecttitle.project_id = initialprojectreport.project_id 
+            WHERE userprojecttitle.project_title LIKE ? 
+            AND initialprojectreport.status = 'approved' 
+            LIMIT 10
+        ");
         $stmt->bind_param("s", $searchTerm);
         $stmt->execute();
 
@@ -30,5 +38,4 @@ if (isset($_GET['query'])) {
 } else {
     echo json_encode(['error' => 'No query parameter provided.']);
 }
-
 ?>

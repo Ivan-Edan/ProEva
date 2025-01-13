@@ -11,6 +11,7 @@
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 Physical and Financial Accomplishment Report
+                <span id="quarter-display" style="margin-left: 10px; font-weight: bold;"></span>
             </div>
             <div class="card-body">
                 <form id="form2-form" data-action="includes/user-submit-form2.php"  method="POST">
@@ -144,26 +145,11 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By :</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
+                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name" name="user_submitted_by_1">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="user_designation_1">Designation/Office :</label>
                             <input type="text" class="form-control" id="user_designation_1" placeholder="Enter designation/office" name="user_designation_1">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="submissionDate">Date :</label>
-                            <input type="date" class="form-control" id="submissionDate" placeholder="Enter date">
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By :</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date :</label>
-                            <input type="date" class="form-control" id="approvalDate" placeholder="Enter date">
                         </div>
                     </div>
 

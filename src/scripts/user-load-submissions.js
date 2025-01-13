@@ -173,6 +173,7 @@ function openFormModal(submissionId, formType) {
 
                 // Project Validation
                 document.getElementById('submittedDesignationForm1').value = formData.submitted_designation || '';
+                document.getElementById('submittedByForm1').value = formData.submitted_by || '';
 
                 // Dynamic Fields - Output Indicators (with numbering)
                 const outputIndicatorsContainer = document.getElementById('outputIndicatorsContainer');
@@ -280,6 +281,7 @@ function openFormModal(submissionId, formType) {
 
                 // Project Validation
                 document.getElementById('designationForm2').value = formData.submitted_designation || '';
+                document.getElementById('submittedByForm2').value = formData.submitted_by || '';
                     // Show modal for Form 2
                     const modal = new bootstrap.Modal(document.getElementById('form2Modal'));
                     modal.show();
@@ -307,6 +309,7 @@ function openFormModal(submissionId, formType) {
                 
                     // Project Validation
                     document.getElementById('submittedDesignationForm3').value = formData.submitted_designation || '';
+                    document.getElementById('submittedByForm3').value = formData.submitted_by || '';
                 
                     // Show Form 3 modal
                     const modal = new bootstrap.Modal(document.getElementById('form3Modal'));
@@ -327,6 +330,7 @@ function openFormModal(submissionId, formType) {
 
                     // Project Validation
                     document.getElementById('submittedDesignationForm4').value = formData.submitted_designation || '';
+                    document.getElementById('submittedByForm4').value = formData.submitted_by || '';
 
                     // Show Form 4 modal
                     const modal = new bootstrap.Modal(document.getElementById('form4Modal'));

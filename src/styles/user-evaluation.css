@@ -271,6 +271,21 @@
     background-color: #c82333;
 }
 
+
+/* Add styles for the form list items */
+#form-list .list-group-item {
+    cursor: pointer; /* Change cursor to indicate clickable items */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect */
+#form-list .list-group-item:hover {
+    background-color: #004085; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .modal-dialog {

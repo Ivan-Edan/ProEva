@@ -83,8 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = $result->fetch_assoc();
             $project_id = $row['project_id'];
         } else {
-            throw new Exception("Project title does not exist. Submit Form 1 first.");
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Project title does not exist or is not yet approved. Submit Form 1 first.'
+            ]);
+            exit;
         }
+        
 
 
         // 8. Insert into UserImplementingAgency
@@ -130,13 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Capture form data
         $user_designation_1 = $_POST['user_designation_1'];
+        $user_submitted_by_1 = $_POST['user_submitted_by_1'];
 
         // Insert into userprojectvalidation table
         $stmt = $conn->prepare("
             INSERT INTO userprojectvalidation 
-            (submitted_designation) 
-            VALUES (?)");
-        $stmt->bind_param("s", $user_designation_1);
+            (submitted_by,submitted_designation) 
+            VALUES (?,?)");
+        $stmt->bind_param("ss", $user_submitted_by_1,$user_designation_1);
         $stmt->execute();
         $project_validation_id = $conn->insert_id; // Get the inserted ID
 

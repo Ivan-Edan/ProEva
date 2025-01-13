@@ -30,8 +30,13 @@
                             <input type="text" class="form-control" id="implementingAgency"  name = "user_implementing_agency_1">
                         </div>
                         <div class="col-md-6">
-                            <label for="sector">Sector:</label>
-                            <input type="text" class="form-control" id="sector" name = "user_sector_1">
+                        <label for="sector">Sector:</label>
+                            <select id="sector" class="form-control" name="user_sector_1">
+                                <option value="General Public Services">General Public Services</option>
+                                <option value="Social Services">Social Services</option>
+                                <option value="Economic Services">Economic Services</option>
+                                <option value="Other Services">Other Services</option>
+                            </select>
                         </div>
                     </div>
 
@@ -59,11 +64,27 @@
                         </div>
                         <div class="col-md-4">
                             <label for="typology">Typology:</label>
-                            <input type="text" class="form-control" id="typology" name = "user_typology_3">
+                            <select id="typology" class="form-control" placeholder="Select Issue Typology" name = "user_typology_3">
+                                <option value="Site Condition/Availability"> Site Condition/Availability</option>
+                                <option value="Procurement">Procurement</option>
+                                <option value="Government/Funding Institution Approvals">Government/Funding Institution Approvals</option>
+                                <option value="Budget and Funds Flow">Budget and Funds Flow</option>
+                                <option value="Design, Scope, Technical Specifications">Design, Scope, Technical Specifications</option>
+                                <option value="Performance of Contractors/Consultants">Performance of Contractors/Consultants</option>
+                                <option value="Capacity of Project Management Unit and Other Implementing Partners">Capacity of Project Management Unit and Other Implementing Partners</option>
+                                <option value="Institutional Support">Institutional Support</option>
+                                <option value="Inputs and Costs">Inputs and Costs</option>
+                                <option value="Legal and Policy Issuances">Legal and Policy Issuances</option>
+                                <option value="Sustainability, Operations and Maintenance">Sustainability, Operations and Maintenance</option>
+                                <option value="Force Majeure">Force Majeure</option>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="issueStatus">Issue Status:</label>
-                            <input type="text" class="form-control" id="issueStatus" name = "user_issue_status_3">
+                            <select id="issueStatus" class="form-control" placeholder="Select Issue Typology" name = "user_issue_status_3">
+                                <option value="Current">Current</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
                         </div>
                     </div>
                     
@@ -93,29 +114,14 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By :</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
+                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name" name = "user_submit_by_1">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="user_designation_1">Designation/Office :</label>
                             <input type="text" class="form-control" id="user_designation_1" placeholder="Enter designation/office" name="user_designation_1">
-
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="submissionDate">Date :</label>
-                            <input type="date" class="form-control" id="submissionDate" placeholder="Enter date">
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By :</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date :</label>
-                            <input type="date" class="form-control" id="approvalDate" placeholder="Enter date">
-                        </div>
-                    </div>
 
 
                     <div class="form-group">

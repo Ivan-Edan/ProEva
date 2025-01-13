@@ -8,12 +8,14 @@ if (isset($_GET['query'])) {
     $searchTerm = "%$input%"; // Prepare for LIKE query
 
     try {
-        // Fetch project titles and years from the database
+        // Fetch approved project titles and years from the database
         $stmt = $conn->prepare("
-            SELECT project_id, project_title, project_year 
-            FROM userprojecttitle 
-            WHERE project_title LIKE ? 
-            ORDER BY project_year DESC
+            SELECT pt.project_id, pt.project_title, pt.project_year 
+            FROM userprojecttitle pt
+            INNER JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            WHERE pt.project_title LIKE ? 
+            AND ipr.status = 'approved' -- Filter for approved projects
+            ORDER BY pt.project_year DESC
             LIMIT 10
         ");
 
