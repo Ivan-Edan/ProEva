@@ -90,8 +90,8 @@ $conn->close();
                 <div class="stat-box d-flex align-items-center">
                     <div class="stat-content d-flex align-items-center justify-content-between w-100">
                         <img src="images/illustration/done-icon.png" alt="Projects In Progress Icon" class="stat-icon">
-                        <p class="stat-label">Number of Departments:</p>
-                        <p class="stat-number"><?php echo htmlspecialchars($departmentCount); ?></p> <!-- Display department count -->
+                        <p class="stat-label-dept">Number of Departments:</p>
+                        <p class="stat-number-dept"><?php echo htmlspecialchars($departmentCount); ?></p> <!-- Display department count -->
                     </div>
                 </div>
             </div>

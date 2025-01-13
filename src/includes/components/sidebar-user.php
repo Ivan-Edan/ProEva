@@ -32,11 +32,11 @@
                 <img src="images/svg/bar-chart-2.svg" alt="Reports Icon" class="nav-icon"> Reports
             </a>
         </li>
-        <li class="nav-item">
+       <!-- <li class="nav-item">
             <a class="nav-link text-white <?php echo ($page == 'user-archive') ? 'active' : ''; ?>" href="index-user.php?page=user-archive">
                 <img src="images/svg/folder.svg" alt="Archive Icon" class="nav-icon"> Archive
             </a>
-        </li>
+        </li>-->
     </ul>
     <!-- Logout Button -->
     <div class="logout-container text-center mt-auto py-3">
