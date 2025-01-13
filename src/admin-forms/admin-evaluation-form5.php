@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,33 +12,33 @@
                 TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
             </div>
             <div class="card-body">
-                <form>
+                <form id="admin-form-9" data-form-type="adminform5">
                     <div class="details-header">
                         <h5>Title Details</h5>
                     </div>
                     <div class="mb-3 row">
                         <div class="form-group col-md-6">
                             <label for="trainingTitle">Title of Training/Workshop</label>
-                            <input type="text" class="form-control" id="trainingTitle" placeholder="Enter title">
+                            <input type="text" class="form-control" id="trainingTitle" placeholder="Enter title" name="trainingTitle">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="objective">Objective of the Training/Workshop</label>
-                            <input type="text" class="form-control" id="objective" placeholder="Enter objective">
+                            <input type="text" class="form-control" id="objective" placeholder="Enter objective" name="objective">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="date">Date</label>
-                            <input type="date" class="form-control" id="date" placeholder="Enter date">
+                            <input type="date" class="form-control" id="date" placeholder="Enter date" name="date">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="conductedBy">Conducted/Facilitated/Attended</label>
-                            <input type="text" class="form-control" id="conductedBy" placeholder="Enter details">
+                            <input type="text" class="form-control" id="conductedBy" placeholder="Enter details" name="conductedBy">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="leadOffice">Lead Office/Unit</label>
-                            <input type="text" class="form-control" id="leadOffice" placeholder="Enter lead office/unit">
+                            <input type="text" class="form-control" id="leadOffice" placeholder="Enter lead office/unit" name="leadOffice">
                         </div>
                     </div>
 
@@ -48,7 +46,7 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="participatingOffices">Participating Offices/Agencies/Organizations</label>
-                            <input type="text" class="form-control" id="participatingOffices" placeholder="Enter participating offices/agencies/organizations">
+                            <input type="text" class="form-control" id="participatingOffices" placeholder="Enter participating offices/agencies/organizations" name="participatingOffices">
                         </div>
                     </div>
 
@@ -56,22 +54,22 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="maleParticipants">Male</label>
-                            <input type="text" class="form-control" id="maleParticipants" placeholder="Enter number">
+                            <input type="text" class="form-control" id="maleParticipants" placeholder="Enter number" name="maleParticipants">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="femaleParticipants">Female</label>
-                            <input type="text" class="form-control" id="femaleParticipants" placeholder="Enter number">
+                            <input type="text" class="form-control" id="femaleParticipants" placeholder="Enter number" name="femaleParticipants">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="totalParticipants">Total</label>
-                            <input type="text" class="form-control" id="totalParticipants" placeholder="Enter total number">
+                            <input type="text" class="form-control" id="totalParticipants" placeholder="Enter total number" name="totalParticipants">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
                         <div class="form-group col-md-12">
                             <label for="resultsFeedback">Results and Feedback</label>
-                            <input type="text" class="form-control" id="resultsFeedback" placeholder="Enter results and feedback" style="height: 50px;">
+                            <input type="text" class="form-control" id="resultsFeedback" placeholder="Enter results and feedback" style="height: 50px;" name="resultsFeedback">
                         </div>
                     </div>
 
@@ -79,36 +77,27 @@
                     <div class="mb-3 row">
                         <div class="form-group col-md-4">
                             <label for="submittedBy">Submitted By</label>
-                            <input type="text" class="form-control" id="submittedBy" placeholder="Enter name">
+                            <input type="text" class="form-control" id="submittedBy" name="submittedBy" placeholder="Enter name">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="designation">Designation/Office</label>
-                            <input type="text" class="form-control" id="designation" placeholder="Enter designation/office">
+                            <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter designation/office">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="submissionDate">Date</label>
-                            <input type="text" class="form-control" id="submissionDate" placeholder="Enter date">
+                            <label for="submissionDate">Submission Date</label>
+                            <input type="date" class="form-control" id="submissionDate" name="submissionDate" placeholder="Enter date">
                         </div>
                     </div>
-
                     <div class="mb-3 row">
-                        <div class="form-group col-md-4">
-                            <label for="approvedBy">Approved By</label>
-                            <input type="text" class="form-control" id="approvedBy" placeholder="Enter name">
-                        </div>
-                        <div class="form-group col-md-4 d-flex align-items-center justify-content-center">
+                        <div class="form-group col-md-12 d-flex align-items-center justify-content-center">
                             <span class="form-control-plaintext text-center" style="margin-top: 24px;">Regional Director</span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="approvalDate">Date</label>
-                            <input type="text" class="form-control" id="approvalDate" placeholder="Enter date">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="btn-container">
                             <button type="button" class="btn btn-secondary btn-custom" id="cancelBtn">Cancel</button>
-                            <button type="submit" class="btn btn-submit btn-custom">Submit</button>
+                            <button type="button" class="btn btn-submit btn-custom">Submit</button>
                         </div>
                     </div>
                 </form>

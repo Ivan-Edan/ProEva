@@ -27,9 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = $result->fetch_assoc();
             $project_id = $row['project_id'];
         } else {
-            throw new Exception("Project title does not exist. Submit Form 1 first.");
-        }        
-
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Project title does not exist or is not yet approved. Submit Form 1 first.'
+            ]);
+            exit;
+        }
         // 7. Insert into userimplementingagency Table
         $implementingAgency = $_POST['user_implementing_agency_1'];
         $stmt = $conn->prepare("INSERT INTO userimplementingagency (implementing_agency) VALUES (?)");
@@ -40,12 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 6. Insert into Project Validation Table
         //$submittedBy = $_POST['user_submitted_by_1'];
         $submitted_designation = $_POST['user_designation_1'];
-        //$submittedDate = $_POST['user_submission_date_1'];
+        $submitted_by = $_POST['user_submitted_by_1'];
         //$approvedBy = $_POST['user_approved_by_1'];
         //$approvedDate = $_POST['user_approval_date_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserProjectValidation (/*submitted_by,*/ submitted_designation /*submitted_date, approved_by, approved_date*/) VALUES (?/* ?, ?, ?, ?*/)");
-        $stmt->bind_param("s", /*$submittedBy,*/ $submitted_designation /*$submittedDate,*/  /*$approvedBy,$approvedDate*/ );
+        $stmt = $conn->prepare("INSERT INTO UserProjectValidation (/*submitted_by,*/ submitted_by,submitted_designation /*submitted_date, approved_by, approved_date*/) VALUES (?,?/* ?, ?, ?, ?*/)");
+        $stmt->bind_param("ss", /*$submittedBy,*/ $submitted_by,$submitted_designation /*$submittedDate,*/  /*$approvedBy,$approvedDate*/ );
         $stmt->execute();
         $project_validation_id = $conn->insert_id; // Store the inserted ID for later use
 

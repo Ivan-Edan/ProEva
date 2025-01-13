@@ -5,6 +5,23 @@ function fetchForm(url) {
     });
 }
 
+function showConfirmationModal(formElement, onSubmit) {
+    // Attach event listener to the Confirm button
+    const confirmButton = document.getElementById('confirmSubmitButton');
+    confirmButton.onclick = function () {
+        // Close the modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+        modal.hide();
+
+        // Call the submit logic
+        onSubmit(formElement);
+    };
+
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    modal.show();
+}
+
 function attachFormSubmitListener(formType) {
     const submitButton = document.getElementById('submit_btn');
     if (!submitButton) return;
@@ -14,7 +31,7 @@ function attachFormSubmitListener(formType) {
 
         const form = document.querySelector(`#${formType}-form`);
         if (!form) {
-            console.error("Form not found.");
+            console.error('Form not found.');
             return;
         }
 
@@ -23,35 +40,72 @@ function attachFormSubmitListener(formType) {
             invalidFields.forEach((field) => {
                 field.classList.add('is-invalid');
             });
-            alert("Please fill out all required fields.");
+            alert('Please fill out all required fields.');
             return;
         }
 
-        const formData = new FormData(form);
-        const actionUrl = form.getAttribute('data-action');
+        // Show confirmation modal
+        showConfirmationModal(form, function (formElement) {
+            const formData = new FormData(formElement);
+            const actionUrl = formElement.getAttribute('data-action');
 
-        // Add loading state
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+            // Add loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
 
-        fetch(actionUrl, {
-            method: 'POST',
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                showNotification(data.status === 'success' ? 'success' : 'danger', data.message);
+            fetch(actionUrl, {
+                method: 'POST',
+                body: formData,
             })
-            .catch((error) => {
-                console.error("Error submitting form:", error);
-                showNotification('danger', 'An error occurred while submitting the form.');
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Submit';
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === 'error') {
+                        // Display the error modal
+                        const errorModalBody = document.getElementById('errorModalBody');
+                        errorModalBody.textContent = data.message; // Set error message
+                        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                        errorModal.show();
+                    } else {
+                        // Show success modal
+                        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+
+                        // Reset to form list after modal is closed
+                        successModal._element.addEventListener('hidden.bs.modal', function () {
+                            resetToFormList();
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error submitting form:', error);
+                    showNotification('danger', 'An error occurred while submitting the form.');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit';
+                    
+                });
+        });
     });
 }
+
+function resetToFormList() {
+    const formContent = document.getElementById('form-content');
+    const formsList = document.getElementById('forms-list');
+    const quarterContainer = document.getElementById('quarter-container');
+    const submittedFormsContainer = document.getElementById('submitted-forms-container');
+    const paginationContainer = document.getElementById('pagination-container');
+
+    if (formContent) {
+        formContent.style.display = 'none';
+        formContent.innerHTML = '';
+    }
+    if (formsList) formsList.style.display = 'block';
+    if (quarterContainer) quarterContainer.style.display = 'block';
+    if (submittedFormsContainer) submittedFormsContainer.style.display = 'block';
+    if (paginationContainer) paginationContainer.style.display = 'block';
+}
+
 
 function showNotification(type, message) {
     const alertDiv = document.createElement('div');
@@ -63,6 +117,7 @@ function showNotification(type, message) {
         alertDiv.remove();
     }, 3000);
 }
+
 function enableProjectTitleAutofill() {
     const projectTitleInput = document.getElementById('projectTitle');
     const hiddenProjectTitle = document.getElementById('hiddenProjectTitle');

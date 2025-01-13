@@ -18,13 +18,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white <?php echo ($page == 'user-monitoring') ? 'active' : ''; ?>" href="index-user.php?page=user-monitoring">
-                <img src="images/svg/check-circle.svg" alt="Monitoring Icon" class="nav-icon"> Project Monitoring
+            <a class="nav-link text-white <?php echo ($page == 'user-MandE-forms') ? 'active' : ''; ?>" href="index-user.php?page=user-MandE-forms">
+                <img src="images/svg/file-text.svg" alt="M&E forms Icon" class="nav-icon"> Forms
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white <?php echo ($page == 'user-MandE-forms') ? 'active' : ''; ?>" href="index-user.php?page=user-MandE-forms">
-                <img src="images/svg/file-text.svg" alt="M&E forms Icon" class="nav-icon"> Forms
+            <a class="nav-link text-white <?php echo ($page == 'user-monitoring') ? 'active' : ''; ?>" href="index-user.php?page=user-monitoring">
+                <img src="images/svg/check-circle.svg" alt="Monitoring Icon" class="nav-icon"> Project Monitoring
             </a>
         </li>
         <li class="nav-item">

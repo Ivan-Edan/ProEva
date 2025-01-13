@@ -129,7 +129,12 @@
                         <div class="col-sm-8">
                             <input type="text" id="submittedDesignationForm1" class="form-control">
                         </div>
+                        <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm1" class="form-control">
+                        </div>
                     </div>
+
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-center">
@@ -276,6 +281,10 @@
                         <div class="col-sm-8">
                             <input type="text" id="designationForm2" class="form-control" readonly>
                         </div>
+                        <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm2" class="form-control">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -384,6 +393,10 @@
                             <label class="form-label">Submitted Designation:</label>
                             <input type="text" id="submittedDesignationForm3" class="form-control" readonly>
                         </div>
+                        <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm3" class="form-control">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -451,6 +464,10 @@
                         <div class="col-sm-6">
                             <label class="form-label">Submitted Designation:</label>
                             <input type="text" id="submittedDesignationForm4" class="form-control" readonly>
+                        </div>
+                        <label class="col-sm-4 col-form-label">Submitted By:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="submittedByForm4" class="form-control">
                         </div>
                     </div>
                 </form>

@@ -14,9 +14,9 @@ $projectCounts = [
 
 // SQL Query to count tasks based on status
 $sql = "
-    SELECT status, COUNT(*) as count 
+    SELECT status, COUNT(*) as count
     FROM (
-        SELECT status FROM initialprojectreport WHERE user_id = ? 
+        SELECT status FROM initialprojectreport WHERE user_id = ?
         UNION ALL
         SELECT status FROM userphysfinaccompreport WHERE user_id = ?
         UNION ALL
@@ -35,7 +35,7 @@ $result = $stmt->get_result();
 // Fetch results
 while ($row = $result->fetch_assoc()) {
     $status = strtolower($row['status']); // Ensure lowercase for consistency
-    if ($status == 'accepted') {
+    if ($status == 'approved') {
         $projectCounts['accepted'] = $row['count'];
     } elseif ($status == 'rejected') {
         $projectCounts['rejected'] = $row['count'];
