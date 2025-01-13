@@ -54,12 +54,10 @@ try {
             LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
             LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.Target_employee_id
             LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
-            WHERE pt.project_id IN (
-                SELECT project_id FROM userphysfinaccompreport
-                ORDER BY userphysfinaccompreport.created_at DESC
-            )
+            WHERE ipr.status = 'approved' -- Filter for approved projects
             GROUP BY pt.project_id
             ORDER BY sde.start_date DESC;
+
         ";
         
 
@@ -84,27 +82,20 @@ try {
                 pt.project_id,
                 pt.project_title,
                 pt.project_year,
-                l.location,
-                l.city,
-                l.barangay,
+                CONCAT(l.location, ', ', l.city, ', ', l.barangay) AS location, -- Combined location
                 ia.implementing_agency,
-                -- Calculated Fields
                 ROUND((fs.disbursements / NULLIF(fs.allotment, 0)) * 100, 2) AS fund_utilization,
                 pa.target_owpa,
                 pa.actual_owpa,
                 (pa.actual_owpa - pa.target_owpa) AS slippage
             FROM userprojecttitle pt
-
-            -- Join Form 1 Tables
             LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
             LEFT JOIN userlocation l ON ipr.location_id = l.location_id
             LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
-
-            -- Join Form 2 Tables
             LEFT JOIN userphysfinaccompreport pfar ON pt.project_id = pfar.project_id
             LEFT JOIN userfinancialstatus fs ON pfar.financial_status_id = fs.financial_status_id
             LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
-
+            WHERE ipr.status = 'approved' -- Filter for approved projects
             GROUP BY pt.project_id
             ORDER BY pt.project_title, l.location;
         ";
@@ -127,20 +118,20 @@ try {
 
     elseif ($formType === 'adminform3') {
         $query = "
-            SELECT
-                pt.project_id,
-                pt.project_title,
-                tc.total_cost,
-                CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location,
-                ia.implementing_agency
-            FROM userprojecttitle pt
-            -- Joins for Form 1 Data
-            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
-            LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
-            LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
-            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
-            ORDER BY pt.project_title;
-
+                SELECT
+            pt.project_id,
+            pt.project_title,
+            pt.project_year,
+            tc.total_cost,
+            CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location,
+            ia.implementing_agency
+        FROM userprojecttitle pt
+        LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+        LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
+        LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
+        LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+        WHERE ipr.status = 'approved' -- Filter for approved projects
+        ORDER BY pt.project_title;
         ";
     // Execute the query
     $stmt = $conn->prepare($query);
@@ -166,14 +157,17 @@ try {
             SELECT
                 pt.project_id,
                 pt.project_title,
+                pt.project_year,
+                CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location, -- Combined location
                 ia.implementing_agency
             FROM userprojecttitle pt
-            LEFT JOIN initialprojectreport ipr 
-                ON pt.project_id = ipr.project_id
-            LEFT JOIN userimplementingagency ia 
-                ON ipr.implementing_agency_id = ia.implementing_agency_id
+            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
+            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+            WHERE ipr.status = 'approved' -- Filter for approved projects
             GROUP BY pt.project_id
             ORDER BY pt.project_title;
+
         ";
 
     // Execute the query

@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $year_financial_target = $project['year_financial_target'];
             $year_phy_target_percent = $project['year_phy_target_percent'];
             $submitted_designation = $project['submitted_designation'];
+            $submitted_by = $project['submitted_by'];
 
 
             // Insert data into related tables and get foreign keys
@@ -87,9 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $year_targets_id = $conn->insert_id; // Get the inserted ID
 
             $stmt = $conn->prepare("
-            INSERT INTO userprojectvalidation (submitted_designation) 
-            VALUES ( ?)");
-            $stmt->bind_param("s", $submitted_designation );
+            INSERT INTO userprojectvalidation (submitted_by,submitted_designation) 
+            VALUES ( ?,?)");
+            $stmt->bind_param("ss", $submitted_by,$submitted_designation );
             $stmt->execute();
             $project_validation_id = $conn->insert_id; // Get the inserted ID
 

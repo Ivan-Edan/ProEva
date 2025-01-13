@@ -97,7 +97,8 @@ try {
                         WHERE to1.details_id = ipr.details_id) AS target_outputs,
 
                         -- Project Validation
-                        pv.submitted_designation
+                        pv.submitted_designation,
+                        pv.submitted_by
 
                     FROM InitialProjectReport ipr
 
@@ -151,6 +152,7 @@ try {
                         te.female,
                         r.remarks,
                         pv.submitted_designation,
+                        pv.submitted_by,
                         sed.start_date,
                         sed.end_date,
                         fsr.fund_source,
@@ -207,7 +209,8 @@ try {
                     fd.actions_to_be_taken,
         
                     -- Project Validation
-                    pv.submitted_designation
+                    pv.submitted_designation,
+                    pv.submitted_by
         
                 FROM userprojectexptrprt ex
                 LEFT JOIN userprojecttitle pt ON ex.project_id = pt.project_id
@@ -240,7 +243,8 @@ try {
                     pr.objectives,
                     pr.result_indicator,
                     pr.observe_results,
-                    pv.submitted_designation
+                    pv.submitted_designation,
+                    pv.submitted_by
                 FROM userprojectresult pr
                 LEFT JOIN userprojecttitle pt ON pr.project_id = pt.project_id
                 LEFT JOIN userimplementingagency ia ON pr.implementing_agency_id = ia.implementing_agency_id

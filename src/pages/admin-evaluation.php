@@ -12,7 +12,7 @@
 <body>
     <div class="container-fluid evaluation-container">
         <div class="custom-container">
-        <div class="container-1">Evaluation</div>
+        <div class="container-1">FORMS</div>
             <div class="card shadow-sm forms-container" id="forms-list">
                 <div class="card-header text-white">
                     Project Evaluation Forms
@@ -81,6 +81,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Submission Successful</h5>
+            </div>
+            <div class="modal-body">
+                Your form has been submitted successfully.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- Include JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Updated jQuery -->
