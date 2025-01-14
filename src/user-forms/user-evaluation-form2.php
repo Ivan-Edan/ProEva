@@ -59,19 +59,19 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="appropriations">Appropriations:</label>
-                            <input type="text" class="form-control" id="appropriations" name="user_appropriations_2">
+                            <input type="number" class="form-control" id="appropriations" name="user_appropriations_2">
                         </div>
                         <div class="col-md-3">
                             <label for="allotment">Allotment:</label>
-                            <input type="text" class="form-control" id="allotment" name="user_allotment_2">
+                            <input type="number" class="form-control" id="allotment" name="user_allotment_2">
                         </div>
                         <div class="col-md-3">
                             <label for="obligations">Obligations:</label>
-                            <input type="text" class="form-control" id="obligations" name="user_obligations_2">
+                            <input type="number" class="form-control" id="obligations" name="user_obligations_2">
                         </div>
                         <div class="col-md-3">
                             <label for="disbursements">Disbursements:</label>
-                            <input type="text" class="form-control" id="disbursements" name="user_disbursements_2">
+                            <input type="number" class="form-control" id="disbursements" name="user_disbursements_2">
                         </div>
                     </div>
 
@@ -79,15 +79,15 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="targetOWPA">Target OWPA to date (%):</label>
-                            <input type="text" class="form-control" id="targetOWPA" name="user_target_owpa_2">
+                            <input type="number" class="form-control" id="targetOWPA" name="user_target_owpa_2">
                         </div>
                         <div class="col-md-3">
                             <label for="actualOWPA">Actual OWPA to date (%):</label>
-                            <input type="text" class="form-control" id="actualOWPA" name="user_actual_owpa_2">
+                            <input type="number" class="form-control" id="actualOWPA" name="user_actual_owpa_2">
                         </div>
                         <div class="col-md-2">
-                            <label for="slippage">Slippage:</label>
-                            <input type="text" class="form-control" id="slippage" name="user_slippage_2">
+                            <label for="slippage">Slippage (%): </label>
+                            <input type="number" class="form-control" id="slippage" name="user_slippage_2">
                         </div>
                         <div class="col-md-4">
                             <label for="outputIndicator">Output Indicator:</label>
@@ -125,11 +125,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="male">Male:</label>
-                                    <input type="text" class="form-control" id="male" name="user_male_2">
+                                    <input type="number" class="form-control" id="male" name="user_male_2">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="female">Female:</label>
-                                    <input type="text" class="form-control" id="female" name="user_female_2">
+                                    <input type="number" class="form-control" id="female" name="user_female_2">
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,10 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label for="remarks">Remarks:</label>
-                            <textarea class="form-control" id="remarks" name="user_remarks_2"></textarea>
+                            <select id="remarks" class="form-control" name="user_remarks_2">
+                                <option>Ongoing</option>
+                                <option>Completed</option>
+                            </select>
                         </div>
                     </div>
 

@@ -35,9 +35,11 @@ function loadForm1Logic() {
                             <div class="col-md-5">
                                 <label for="project_title_${projectCount}">Program / Project Title:</label>
                                 <input type="text" class="form-control" id="project_title_${projectCount}" name="project_title_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-2">
                                 <label for="year_${projectCount}">Year:</label>
+                                <div class="invalid-feedback"></div>
                                 <select class="form-control" id="year_${projectCount}" name="project_year_${projectCount}">
                                     <option value="2025">2025</option>
                                     <option value="2026">2026</option>
@@ -49,6 +51,7 @@ function loadForm1Logic() {
                             <div class="col-md-5">
                                 <label for="implementing_agency_${projectCount}">Implementing Agency:</label>
                                 <input type="text" class="form-control" id="implementing_agency_${projectCount}" name="implementing_agency_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -56,9 +59,11 @@ function loadForm1Logic() {
                             <div class="col-md-6">
                                 <label for="component_details_${projectCount}">Component Details:</label>
                                 <input type="text" class="form-control" id="user_component_details_${projectCount}" name="comp_details_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-3">
                                 <label for="fund_source_${projectCount}">Fund Source:</label>
+                                <div class="invalid-feedback"></div>
                                 <select class="form-control" id="user_fund_source_${projectCount}" name="fund_source_${projectCount}" required>
                                     <option value="ODA Loan">ODA Loan</option>
                                     <option value="ODA Grant">ODA Grant</option>
@@ -72,6 +77,7 @@ function loadForm1Logic() {
                             <div class="col-md-3">
                                 <label for="funding_agency_${projectCount}">Funding Agency:</label>
                                 <input type="text" class="form-control" id="user_funding_agency_${projectCount}" name="fund_agency_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -79,6 +85,7 @@ function loadForm1Logic() {
                             <div class="col-md-3">
                                 <label for="mode_implementation_${projectCount}">Mode of Implementation:</label>
                                 <select class="form-control" id="mode_implementation_${projectCount}" name="mode_of_implementation_${projectCount}">
+                                <div class="invalid-feedback"></div>
                                     <option value=" By administration"> By administration</option>
                                     <option value=" By Contract"> By Contract</option>
                                     <option value=" Implemented by the Development Partner/Funding Agency">Implemented by the Development Partner/Funding Agency</option>
@@ -88,6 +95,7 @@ function loadForm1Logic() {
                             <div class="col-md-3">
                                 <label for="sector_${projectCount}">Sector:</label>
                                 <select class="form-control" id="sector_${projectCount}" name="sector_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                                     <option value=" General Public Services"> General Public Services</option>
                                     <option value=" Social Services"> Social Services</option>
                                     <option value="Economic Services">Economic Services</option>
@@ -95,15 +103,18 @@ function loadForm1Logic() {
                             </div>
                             <div class="col-md-2">
                                 <label for="total_cost_${projectCount}">Total Program / Project Cost (PHP):</label>
-                                <input type="text" class="form-control" id="user_total_cost_${projectCount}" name="total_cost_${projectCount}" required>
+                                <input type="number" class="form-control" id="user_total_cost_${projectCount}" name="total_cost_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-2">
                                 <label for="start_date_${projectCount}">Start Date:</label>
                                 <input type="date" class="form-control" id="user_start_date_${projectCount}" name="start_date_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-2">
                                 <label for="end_date_${projectCount}">End Date:</label>
                                 <input type="date" class="form-control" id="user_end_date_${projectCount}" name="end_date_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -112,14 +123,17 @@ function loadForm1Logic() {
                             <div class="col-md-4">
                                 <label for="province_${projectCount}">Province:</label>
                                 <input type="text" class="form-control" id="user_location_${projectCount}" name="location_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-4">
                                 <label for="city_${projectCount}">City/Municipality:</label>
                                 <input type="text" class="form-control" id="user_city_${projectCount}" name="city_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-4">
                                 <label for="barangay_${projectCount}">Barangay:</label>
                                 <input type="text" class="form-control" id="user_barangay_${projectCount}" name="barangay_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -127,7 +141,11 @@ function loadForm1Logic() {
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="remarks_${projectCount}">Remarks:</label>
-                                <textarea class="form-control" id="remarks_${projectCount}" name="remarks_${projectCount}" required></textarea>
+                                <select class="form-control" id="remarks_${projectCount}" name="remarks_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
+                                    <option value=" Ongoing"> Ongoing</option>
+                                    <option value=" Completed"> Completed</option>
+                                </select>
                             </div>
                         </div>
 
@@ -141,10 +159,12 @@ function loadForm1Logic() {
                             <div class="col-md-4">
                                 <label for="male_${projectCount}">Male:</label>
                                 <input type="number" class="form-control" id="male_${projectCount}" name="male_${projectCount}" placeholder="Enter male count">
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-4">
                                 <label for="female_${projectCount}">Female:</label>
                                 <input type="number" class="form-control" id="female_${projectCount}" name="female_${projectCount}" placeholder="Enter female count">
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div id="output-indicator-container-${projectCount}">
                                 <!-- Output indicators will be added dynamically here -->
@@ -158,11 +178,13 @@ function loadForm1Logic() {
                             </div>
                             <div class="col-md-2">
                                 <label for="year_financial_target_${projectCount}">Financial Targets:</label>
-                                <input type="text" class="form-control" id="user_financial_targets_${projectCount}" name="year_financial_target_${projectCount}" required>
+                                <input type="number" class="form-control" id="user_financial_targets_${projectCount}" name="year_financial_target_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-6">
                                 <label for="year_phy_target_percent_${projectCount}">Physical Targets (in %):</label>
-                                <input type="text" class="form-control" id="user_physical_targets_${projectCount}" name="year_phy_target_percent_${projectCount}" required>
+                                <input type="number" class="form-control" id="user_physical_targets_${projectCount}" name="year_phy_target_percent_${projectCount}" required>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
                     <h5>Targets of Output</h5>
@@ -178,10 +200,12 @@ function loadForm1Logic() {
                         <div class="form-group col-md-5">
                             <label for="submitted_by_${projectCount}">Submitted By :</label>
                             <input type="text" class="form-control" id="user_submitted_by_${projectCount}" placeholder="Enter Submitted By" name="submitted_by_${projectCount}" required>
+                            <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="designation_${projectCount}">Designation/Office :</label>
                             <input type="text" class="form-control" id="user_designation_${projectCount}" placeholder="Enter designation/office" name="submitted_designation_${projectCount}" required>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Remove Button -->
@@ -194,6 +218,7 @@ function loadForm1Logic() {
         `;
 
         // Append to container
+        
         projectFormsContainer.appendChild(projectForm);
 
         submitButton.addEventListener('click', handleSubmit);
@@ -208,6 +233,7 @@ function loadForm1Logic() {
     // Automatically add one project form when Form 1 is loaded
     if (projectFormsContainer) {
         createProjectForm();
+        enforceNumberInput();
     }
     
     
@@ -219,33 +245,121 @@ function loadForm1Logic() {
         const indicatorContainer = document.getElementById(`output-indicator-container-${projectCount}`);
         const targetOutputContainer = document.getElementById(`target-output-container-${projectCount}`);
         let indicatorCount = 0; // Track the number of indicators
-
+        const maxIndicators = 5; // Set the maximum limit
+    
         addIndicatorButton.addEventListener('click', () => {
+            if (indicatorCount >= maxIndicators) {
+                alert(`You can only add up to ${maxIndicators} indicators.`);
+                return; // Prevent adding more fields
+            }
+    
             indicatorCount++;
-
+    
             // Add Output Indicator Field
             const indicatorHTML = `
-                <div class="row mb-3">
-                    <div class="col-md-12">
+                <div class="row mb-3 indicator-group" id="indicator-group-${indicatorCount}">
+                    <div class="col-md-10">
                         <label for="output_indicator_${projectCount}_${indicatorCount}">Output Indicator ${indicatorCount}:</label>
                         <input type="text" class="form-control" id="output_indicator_${projectCount}_${indicatorCount}" name="output_indicator_${projectCount}_${indicatorCount}" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center">
+                        <button type="button" class="btn btn-danger btn-sm delete-indicator" data-indicator-id="${indicatorCount}">
+                            Delete
+                        </button>
                     </div>
                 </div>
             `;
             indicatorContainer.insertAdjacentHTML('beforeend', indicatorHTML);
-
+    
             // Add Corresponding Target Output Field
             const targetOutputHTML = `
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label for="target_output_${projectCount}_${indicatorCount}">Indicator ${indicatorCount}:</label>
+                <div class="row mb-3 target-output-group" id="target-output-group-${indicatorCount}">
+                    <div class="col-md-10">
+                        <label for="target_output_${projectCount}_${indicatorCount}">Target Output ${indicatorCount}:</label>
                         <input type="text" class="form-control" id="target_output_${projectCount}_${indicatorCount}" name="target_output_${projectCount}_${indicatorCount}" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center">
+                        <button type="button" class="btn btn-danger btn-sm delete-indicator" data-indicator-id="${indicatorCount}">
+                            Delete
+                        </button>
                     </div>
                 </div>
             `;
             targetOutputContainer.insertAdjacentHTML('beforeend', targetOutputHTML);
+    
+            // Reattach Delete Functionality for All Indicators
+            reattachDeleteIndicatorFunctionality(projectCount);
         });
+    
+        /**
+         * Function to reattach delete functionality to all indicators
+         */
+        function reattachDeleteIndicatorFunctionality(projectCount) {
+            const deleteButtons = document.querySelectorAll(`#output-indicator-container-${projectCount} .delete-indicator`);
+            deleteButtons.forEach((button) => {
+                const indicatorId = button.getAttribute('data-indicator-id');
+                button.onclick = () => {
+                    const indicatorGroup = document.getElementById(`indicator-group-${indicatorId}`);
+                    const targetOutputGroup = document.getElementById(`target-output-group-${indicatorId}`);
+    
+                    if (indicatorGroup) indicatorGroup.remove();
+                    if (targetOutputGroup) targetOutputGroup.remove();
+    
+                    // Decrement the counter and renumber indicators
+                    indicatorCount--;
+                    renumberIndicatorsAndOutputs(projectCount);
+                };
+            });
+        }
+    
+        /**
+         * Function to renumber indicators and target outputs dynamically
+         */
+        function renumberIndicatorsAndOutputs(projectCount) {
+            const indicatorGroups = document.querySelectorAll(`#output-indicator-container-${projectCount} .indicator-group`);
+            const targetOutputGroups = document.querySelectorAll(`#target-output-container-${projectCount} .target-output-group`);
+    
+            // Reset the count and reassign IDs and labels
+            indicatorCount = 0;
+    
+            indicatorGroups.forEach((group, index) => {
+                const newNumber = index + 1;
+                const label = group.querySelector('label');
+                const input = group.querySelector('input');
+                const deleteButton = group.querySelector('.delete-indicator');
+    
+                group.setAttribute('id', `indicator-group-${newNumber}`);
+                label.setAttribute('for', `output_indicator_${projectCount}_${newNumber}`);
+                label.textContent = `Output Indicator ${newNumber}:`;
+                input.setAttribute('id', `output_indicator_${projectCount}_${newNumber}`);
+                input.setAttribute('name', `output_indicator_${projectCount}_${newNumber}`);
+                deleteButton.setAttribute('data-indicator-id', newNumber);
+    
+                // Update the count
+                indicatorCount = newNumber;
+            });
+    
+            targetOutputGroups.forEach((group, index) => {
+                const newNumber = index + 1;
+                const label = group.querySelector('label');
+                const input = group.querySelector('input');
+                const deleteButton = group.querySelector('.delete-indicator');
+    
+                group.setAttribute('id', `target-output-group-${newNumber}`);
+                label.setAttribute('for', `target_output_${projectCount}_${newNumber}`);
+                label.textContent = `Target Output ${newNumber}:`;
+                input.setAttribute('id', `target_output_${projectCount}_${newNumber}`);
+                input.setAttribute('name', `target_output_${projectCount}_${newNumber}`);
+                deleteButton.setAttribute('data-indicator-id', newNumber);
+            });
+    
+            // Reattach Delete Functionality after Renumbering
+            reattachDeleteIndicatorFunctionality(projectCount);
+        }
     }
+    
 
 
     function handleSubmit(event) {
@@ -253,33 +367,21 @@ function loadForm1Logic() {
     
         const projectFormsContainer = document.getElementById('project-forms-container');
         const forms = projectFormsContainer.querySelectorAll('.accordion-item');
-    
-        let isValid = true;
+        let hasErrors = false;
 
-        forms.forEach((form) => {
-            let formIsValid = true; // Reset validity for each form container
-            const projectTitleInput = form.querySelector('input[name^="project_title_"]'); // Select project title input
-        
-            if (projectTitleInput) {
-                if (!projectTitleInput.checkValidity()) {
-                    projectTitleInput.classList.add('is-invalid'); // Add visual feedback
-                    formIsValid = false; // Mark this form container as invalid
-                } else {
-                    projectTitleInput.classList.remove('is-invalid'); // Remove feedback if valid
-                }
-            }
-        
-            if (!formIsValid) {
-                isValid = false; // If any form container is invalid, mark the entire submission as invalid
+        forms.forEach((form, index) => {
+            const errors = validateForm(form, index + 1);
+            if (errors.length > 0) {
+                hasErrors = true;
             }
         });
-        
-        if (!isValid) {
-            alert('Please fill out all required "Program / Project Title" fields before submitting.');
-            return;
-        }
-        
 
+        if (hasErrors) {
+            alert('Please fix the errors before submitting.');
+            return; // Stop submission if there are validation errors
+        }
+    
+    
     
         // Show confirmation modal
         const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
@@ -376,37 +478,19 @@ function loadForm1Logic() {
                 .then((data) => {
                     console.log('Server response:', data);
                     if (data.status === 'success') {
-                        alert('Forms submitted successfully!');
-                        
-                        
-                        setTimeout(() => {
-                            const quarterContainer = document.getElementById('quarter-container');
-                            const submittedFormsContainer = document.getElementById('submitted-forms-container');
-                            const paginationContainer = document.getElementById('pagination-container');
-                            const formContent = document.getElementById('form-content');
-                            const formsList = document.getElementById('forms-list');
-    
-                            if (formContent) {
-                                formContent.style.display = 'none';
-                                formContent.innerHTML = '';
-                            }
-                            if (quarterContainer) {
-                                quarterContainer.style.display = 'block';
-                            }
-                            if (submittedFormsContainer) {
-                                submittedFormsContainer.style.display = 'block';
-                            }
-                            if (paginationContainer) {
-                                paginationContainer.style.display = 'block';
-                            }
-                            if (formsList) {
-                                formsList.style.display = 'block';
-                            }
-                        }, 100);
-                        }
-                        else {
-                            alert(`Error: ${data.message}`);
-                        }
+                // Show the success modal
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Reset form and navigate back to the form list after modal closes
+                const modalCloseButton = document.querySelector('#successModal .btn[data-bs-dismiss="modal"]');
+                modalCloseButton.addEventListener('click', () => {
+                    window.location.reload(); // Reload the page to reset the form
+                });
+            } else {
+                alert(`Error: ${data.message}`);
+            }
+                    
                 })
                 .catch((error) => {
                     console.error('Error submitting forms:', error);
@@ -455,18 +539,22 @@ function loadForm1Logic() {
                     <label>Start ${month}:</label>
                     <input type="date" class="form-control" name="period_start_${projectCount}[]" required>
                     <input type="hidden" name="mty_target_position_${projectCount}[]" value="${position}">
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-3">
                     <label>End ${month}:</label>
                     <input type="date" class="form-control" name="period_end_${projectCount}[]" required>
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-3">
                     <label>Financial Targets:</label>
                     <input type="number" class="form-control" name="financial_target_${projectCount}[]" required>
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-3">
                     <label>Physical Targets (in %):</label>
                     <input type="number" class="form-control" name="physical_target_percent_${projectCount}[]" required>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
         `;
@@ -538,5 +626,6 @@ function loadForm1Logic() {
     // Add project form on button click
     addProjectFormButton.addEventListener('click', function () {
         createProjectForm();
+        enforceNumberInput();
     });
 }

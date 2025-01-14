@@ -117,12 +117,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             const target = parseFloat(targetOWPA.value) || 0;
                             const actual = parseFloat(actualOWPA.value) || 0;
                             const result = actual - target;
-                            slippage.value = result.toFixed(2) + '%';
+                    
+                            // Set the slippage value without percentage sign
+                            slippage.value = result.toFixed(2);
                         }
-
+                    
                         targetOWPA.addEventListener('input', calculateSlippage);
                         actualOWPA.addEventListener('input', calculateSlippage);
                     }
+                    
 
                     // Load form-specific logic
                     if (formType === 'form1') {
