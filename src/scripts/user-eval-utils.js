@@ -35,14 +35,21 @@ function attachFormSubmitListener(formType) {
             return;
         }
 
-        if (!form.checkValidity()) {
-            const invalidFields = form.querySelectorAll(':invalid');
-            invalidFields.forEach((field) => {
-                field.classList.add('is-invalid');
-            });
-            alert('Please fill out all required fields.');
-            return;
+        // Perform form-specific validation
+        let isValid = true;
+        if (formType === 'form2') {
+            isValid = validateForm2(); // Call your form2 validation logic
+        } else if (formType === 'form3') {
+            isValid = validateForm3(); // Placeholder for form3 validation
+        } else if (formType === 'form4') {
+            isValid = validateForm4(); // Placeholder for form4 validation
         }
+
+        if (!isValid) {
+            console.warn('Form validation failed. Correct the highlighted errors.');
+            return; // Stop submission if validation fails
+        }
+
 
         // Show confirmation modal
         showConfirmationModal(form, function (formElement) {
@@ -70,10 +77,12 @@ function attachFormSubmitListener(formType) {
                         const successModal = new bootstrap.Modal(document.getElementById('successModal'));
                         successModal.show();
 
-                        // Reset to form list after modal is closed
+                        // Refresh the page after the success modal is closed
                         successModal._element.addEventListener('hidden.bs.modal', function () {
-                            resetToFormList();
+                            console.log('Modal closed, refreshing page...');
+                            window.location.reload();  // Reload the page
                         });
+                        
                     }
                 })
                 .catch((error) => {
@@ -87,23 +96,6 @@ function attachFormSubmitListener(formType) {
                 });
         });
     });
-}
-
-function resetToFormList() {
-    const formContent = document.getElementById('form-content');
-    const formsList = document.getElementById('forms-list');
-    const quarterContainer = document.getElementById('quarter-container');
-    const submittedFormsContainer = document.getElementById('submitted-forms-container');
-    const paginationContainer = document.getElementById('pagination-container');
-
-    if (formContent) {
-        formContent.style.display = 'none';
-        formContent.innerHTML = '';
-    }
-    if (formsList) formsList.style.display = 'block';
-    if (quarterContainer) quarterContainer.style.display = 'block';
-    if (submittedFormsContainer) submittedFormsContainer.style.display = 'block';
-    if (paginationContainer) paginationContainer.style.display = 'block';
 }
 
 

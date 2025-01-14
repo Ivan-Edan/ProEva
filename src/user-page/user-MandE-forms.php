@@ -142,6 +142,8 @@
     <script src="scripts/user-eval-utils.js"></script>
     <script src="scripts/user-eval-global.js"></script>
     <script src="scripts/user-form1.js"></script>
+    <script src="scripts/user-evalform1-validation.js"></script>
+    <script src="scripts/user-evalform2-4-validation.js"></script>
     <script src="scripts/user-load-submissions.js"></script>
 </body>
 </html>
