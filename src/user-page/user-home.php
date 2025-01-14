@@ -253,7 +253,7 @@ $(document).ready(function() {
                     $('.ev-detail').text(details.ev);
                     $('.spi-detail').text(details.spi);
                     $('.text-detail').text(details.status);
-                    $('.text-detail-2').text(details.issue_details);
+                    $('.text-detail-2').html('<strong>' + details.issue_details.replace(/\*/g, '') + '</strong>');
                 }
             });
         }
