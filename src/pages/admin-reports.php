@@ -278,7 +278,7 @@ function updateChart(data) {
   initializeChart();
 
   // Fetch project titles and populate dropdown
-  fetch('includes/fetch_projecttitle.php')
+  fetch('includes/fetch_project_admintitle.php')
     .then(response => response.json())
     .then(data => {
       const projectList = document.getElementById('projectList');
@@ -546,7 +546,7 @@ function updateChart(data) {
               $('#ev-detail').text(Number(ev).toLocaleString());
               $('#spi-detail').text(spi);
               $('#status-detail').text(status);
-              $('#issue-detail').html(formattedIssueDetails); // Use .html() to insert formatted text
+              $('#issue-detail').html('<b>' + formattedIssueDetails.replace(/\*/g, '') + '</b>'); // Use .html() to insert formatted text
 
               console.log(spi);
 
