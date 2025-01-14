@@ -12,32 +12,32 @@
 <body>
     <div class="container-fluid evaluation-container">
         <div class="custom-container">
-        <div class="container-1">FORMS</div>
+        <div class="container-1">Forms</div>
             <div class="card shadow-sm forms-container" id="forms-list">
                 <div class="card-header text-white">
-                    Project Evaluation Forms
+                    Project Forms
                 </div>
                 <ul class="list-group list-group-flush" id="form-list">
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form1.php" data-form-type="adminform1">
-                        SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
+                        Form 5: SUMMARY OF FINANCIAL AND PHYSICAL ACCOMPLISHMENTS
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form2.php" data-form-type="adminform2">
-                        REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
+                        Form 6: REPORT ON THE STATUS OF PROJECTS ENCOUNTERING IMPLEMENTATION PROBLEMS
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form3.php" data-form-type="adminform3">
-                        PROJECT INSPECTION REPORT
+                        Form 7: PROJECT INSPECTION REPORT
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form4.php" data-form-type="adminform4">
-                        PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
+                        Form 8: PROBLEM SOLVING SESSIONS / FACILITATION MEETING CONDUCTED
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form5.php" data-form-type="adminform5">
-                        TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
+                        Form 9: TRAINING/WORKSHOP CONDUCTED / FACILITATED/ATTENDED BY THE RPMC
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form6.php" data-form-type="adminform6">
-                        RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
+                        Form 10: RPMC AND RDC RESOLUTIONS RELATED TO IMPLEMENTATION OF THE RPMES
                     </li>
                     <li class="list-group-item" data-form="admin-forms/admin-evaluation-form7.php" data-form-type="adminform7">
-                        KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
+                        Form 11: KEY LESSONS LEARNED FROM ISSUES RESOLVED AND BEST PRACTICES
                     </li>
                 </ul>
             </div>
