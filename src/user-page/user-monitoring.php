@@ -480,7 +480,45 @@ document.getElementById('project').addEventListener('change', function () {
             </div>
         </div>
     </div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon" style="width: 100px;">
+                <h5 class="text-modal">The task has been updated successfully.</h5>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.getElementById('submitGantt').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Simulate a successful submission (you can replace this with actual AJAX or form handling logic)
+        setTimeout(() => {
+            // Hide the current modal
+            const taskModal = bootstrap.Modal.getInstance(document.getElementById('taskModal'));
+            if (taskModal) {
+                taskModal.hide();
+            }
+
+            // Show the success modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        }, 500); // Delay to simulate processing
+    });
+
+    // Add an event listener to refresh the page when the success modal is hidden
+    const successModalElement = document.getElementById('successModal');
+    successModalElement.addEventListener('hidden.bs.modal', function () {
+        location.reload(); // Refresh the page
+    });
+</script>
 
     <!-- Include JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
