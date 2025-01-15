@@ -2,7 +2,7 @@
 // src/includes/config.php
 
 $servername = "localhost"; 
-$username = 'root'; 
+$username = 'proeva-g-3'; 
 $password = 'Proeva123456#'; 
 $dbname = "db_proeva";
 
