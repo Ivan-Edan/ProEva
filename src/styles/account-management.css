@@ -22,7 +22,7 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin-bottom: 20px;
-    height: 550px;
+    height: 580px;
     overflow: hidden; 
     padding-top: 40px;
     padding-left: 20px;
@@ -62,11 +62,6 @@ body {
 
 .table td {
     border-bottom: 0.5px solid #bebebe;
-}
-
-/* Optional: adjust the hover effect */
-.table tbody tr:hover {
-    background-color: #f1f1f1;
 }
 
 .download-link {
@@ -128,7 +123,6 @@ button.btn {
     background-color: #27374D;
     border-color: #b4b4b4 !important;
     color: white;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     padding: 0 15px; /* Adjust padding to fit button text */
     margin-left: 10px; /* Space between search input and button */
 }
@@ -307,41 +301,39 @@ h6 {
     align-items: center;
     margin: 0 auto;
 }
-/* Pagination container */
-#pagination-controls {
+ /* Pagination button container */
+ #pagination-controls {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    gap: 5px;
   }
   
-  /* Pagination button (default state) */
-  #pagination-controls button {
-    width: 40px;
+  /* Pagination buttons */
+  #pagination-controls .btn {
     height: 40px;
-    line-height: 40px;
+    width: 40px;
+    border: 1px solid transparent !important;
+    background-color: #fff;
+    color: #232323;
     border-radius: 50%;
-    border-color: transparent;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    margin: 0 2px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
   }
   
-  /* Hover effect for all buttons */
-  #pagination-controls button:hover {
-    background-color: #f0f0f0;
-    color: #27374D;
+  /* Hover effect for buttons */
+  #pagination-controls .btn:hover {
+    background-color: #454f5e;
+    border-color: white;
+    color: #fff;
   }
-/* Active button */
-#pagination-controls .active {
-    background-color:  #27374D !important;
-    color: #f0f0f0 !important;
+  
+  /* Active button style */
+  #pagination-controls .btn.active {
+    background-color: #27374D;
+    color: #fff;
+    border-color: #27374D;
   }
   .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-bottom: 10px;
     }
+
