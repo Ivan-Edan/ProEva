@@ -118,6 +118,74 @@ body {
     border-radius: 50px;
 }
 
+
+/* Modal Header */
+.modal-header {
+    background-color: #243c5a; /* Dark blue header */
+    color: white;
+    font-weight: bold;
+}
+
+/* Section Titles */
+.modal-body h6 {
+    font-weight: bold;
+    color: #243c5a; /* Matching dark blue */
+    margin-bottom: 10px;
+}
+
+/* Input and Textarea Fields */
+.modal-body .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Adjust Textarea Height */
+.modal-body textarea.form-control {
+    height: 80px;
+}
+
+/* Buttons in Modal Footer */
+.modal-footer {
+    justify-content: center; /* Center-align buttons */
+}
+
+.modal-footer button {
+    min-width: 100px; /* Equal button width */
+    padding: 10px 20px;
+    font-size: 14px;
+}
+/* Flex container for dropdown */
+.filter-container {
+    margin-right: 10px; /* Space between dropdown and label */
+}
+
+/* Dropdown Styling */
+#filterDropdown {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #1f3247;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #1f3247;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Dropdown Hover Effect */
+#filterDropdown:hover {
+    border-color: #007bff;
+}
+
+/* Dropdown Focus Effect */
+#filterDropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
 /* Responsive Table for small screens */
 @media (max-width: 1010px) {
     .container-8 {

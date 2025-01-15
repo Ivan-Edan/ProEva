@@ -42,21 +42,43 @@ try {
                 te.female,
                 r.remarks
             FROM userprojecttitle pt
-            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN (
+                SELECT ipr.*
+                FROM initialprojectreport ipr
+                WHERE ipr.status = 'approved'
+                AND ipr.approved_date = (
+                    SELECT MAX(sub_ipr.approved_date)
+                    FROM initialprojectreport sub_ipr
+                    WHERE sub_ipr.project_id = ipr.project_id
+                        AND sub_ipr.status = 'approved'
+                )
+            ) ipr ON pt.project_id = ipr.project_id
             LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
             LEFT JOIN usersdateedate sde ON ipr.s_date_e_date_id = sde.s_date_e_date_id
             LEFT JOIN usersector s ON ipr.sector_id = s.sector_id
             LEFT JOIN userfundsource fs ON ipr.fund_source_id = fs.fund_source_id
             LEFT JOIN userfundagency fa ON ipr.fund_agency_id = fa.fund_agency_id
             LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
-            LEFT JOIN userphysfinaccompreport pfar ON pt.project_id = pfar.project_id
+            LEFT JOIN (
+                SELECT pfar.*
+                FROM userphysfinaccompreport pfar
+                WHERE pfar.status = 'approved'
+                AND pfar.approved_date = (
+                    SELECT MAX(sub_pfar.approved_date)
+                    FROM userphysfinaccompreport sub_pfar
+                    WHERE sub_pfar.project_id = pfar.project_id
+                        AND sub_pfar.status = 'approved'
+                )
+            ) pfar ON pt.project_id = pfar.project_id
             LEFT JOIN userfinancialstatus fs2 ON pfar.financial_status_id = fs2.financial_status_id
             LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
             LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.Target_employee_id
             LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
-            WHERE ipr.status = 'approved' -- Filter for approved projects
+            WHERE ipr.status = 'approved' 
+            AND pfar.status = 'approved' -- Filter for approved projects in both tables
             GROUP BY pt.project_id
             ORDER BY sde.start_date DESC;
+
 
         ";
         
@@ -89,15 +111,36 @@ try {
                 pa.actual_owpa,
                 (pa.actual_owpa - pa.target_owpa) AS slippage
             FROM userprojecttitle pt
-            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN (
+                SELECT ipr.*
+                FROM initialprojectreport ipr
+                WHERE ipr.status = 'approved'
+                AND ipr.approved_date = (
+                    SELECT MAX(sub_ipr.approved_date)
+                    FROM initialprojectreport sub_ipr
+                    WHERE sub_ipr.project_id = ipr.project_id
+                        AND sub_ipr.status = 'approved'
+                )
+            ) ipr ON pt.project_id = ipr.project_id
             LEFT JOIN userlocation l ON ipr.location_id = l.location_id
             LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
-            LEFT JOIN userphysfinaccompreport pfar ON pt.project_id = pfar.project_id
+            LEFT JOIN (
+                SELECT pfar.*
+                FROM userphysfinaccompreport pfar
+                WHERE pfar.status = 'approved'
+                AND pfar.approved_date = (
+                    SELECT MAX(sub_pfar.approved_date)
+                    FROM userphysfinaccompreport sub_pfar
+                    WHERE sub_pfar.project_id = pfar.project_id
+                        AND sub_pfar.status = 'approved'
+                )
+            ) pfar ON pt.project_id = pfar.project_id
             LEFT JOIN userfinancialstatus fs ON pfar.financial_status_id = fs.financial_status_id
             LEFT JOIN userphysaccomplishments pa ON pfar.Phys_Accomplishment_id = pa.Phys_Accomplishment_id
-            WHERE ipr.status = 'approved' -- Filter for approved projects
+            WHERE ipr.status = 'approved'
+            AND pfar.status = 'approved'
             GROUP BY pt.project_id
-            ORDER BY pt.project_title, l.location;
+            ORDER BY pt.project_id, l.location;
         ";
 
         $stmt = $conn->prepare($query);
@@ -118,7 +161,7 @@ try {
 
     elseif ($formType === 'adminform3') {
         $query = "
-                SELECT
+            SELECT
             pt.project_id,
             pt.project_title,
             pt.project_year,
@@ -126,12 +169,23 @@ try {
             CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location,
             ia.implementing_agency
         FROM userprojecttitle pt
-        LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+        LEFT JOIN (
+            SELECT ipr.*
+            FROM initialprojectreport ipr
+            WHERE ipr.status = 'approved'
+            AND ipr.approved_date = (
+                SELECT MAX(sub_ipr.approved_date)
+                FROM initialprojectreport sub_ipr
+                WHERE sub_ipr.project_id = ipr.project_id
+                    AND sub_ipr.status = 'approved'
+            )
+        ) ipr ON pt.project_id = ipr.project_id
         LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
         LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
         LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
         WHERE ipr.status = 'approved' -- Filter for approved projects
         ORDER BY pt.project_title;
+
         ";
     // Execute the query
     $stmt = $conn->prepare($query);
@@ -161,13 +215,22 @@ try {
                 CONCAT(loc.location, ', ', loc.city, ', ', loc.barangay) AS location, -- Combined location
                 ia.implementing_agency
             FROM userprojecttitle pt
-            LEFT JOIN initialprojectreport ipr ON pt.project_id = ipr.project_id
+            LEFT JOIN (
+                SELECT ipr.*
+                FROM initialprojectreport ipr
+                WHERE ipr.status = 'approved'
+                AND ipr.approved_date = (
+                    SELECT MAX(sub_ipr.approved_date)
+                    FROM initialprojectreport sub_ipr
+                    WHERE sub_ipr.project_id = ipr.project_id
+                        AND sub_ipr.status = 'approved'
+                )
+            ) ipr ON pt.project_id = ipr.project_id
             LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
             LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
             WHERE ipr.status = 'approved' -- Filter for approved projects
-            GROUP BY pt.project_id
+            GROUP BY pt.project_id, loc.location, ia.implementing_agency
             ORDER BY pt.project_title;
-
         ";
 
     // Execute the query
