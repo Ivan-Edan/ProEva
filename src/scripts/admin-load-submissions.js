@@ -368,7 +368,7 @@ document.querySelector('#filterDropdown').addEventListener('change', function ()
     loadUserSubmissions({ formType: selectedForm });
 });
 
-
+///////////////////////////////////////////////////////////
 function handleFormAction(action, submissionId, formType) {
     fetch(`includes/update-form-status.php`, {
         method: 'POST',
