@@ -1,6 +1,8 @@
 
 <!-- Modal for Form 1 -->
 <div class="modal fade" id="form1Modal" tabindex="-1" aria-labelledby="form1ModalLabel" aria-hidden="true">
+<input type="hidden" id="form1SubmissionId">
+<input type="hidden" id="form1Type">
     <div class="modal-dialog modal-xl">
         <div class="modal-content" id="form1ModalContent">
             <div class="modal-header">
@@ -135,8 +137,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm2" class="btn btn-danger">Delete</button>
-                <button type="button" id="updateForm2" class="btn btn-primary">Update</button>
+                <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>n>
+                <button type="button" id="updateForm1" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -147,6 +149,8 @@
 
 <!-- Modal for Form 2 -->
 <div class="modal fade" id="form2Modal" tabindex="-1" aria-labelledby="form2ModalLabel" aria-hidden="true">
+<input type="hidden" id="form2SubmissionId">
+<input type="hidden" id="form2Type">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="form2ModalContent">
             <div class="modal-header">
@@ -284,7 +288,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm2" class="btn btn-danger">Delete</button>
+                <button type="button" id="downloadExcelForm2" class="btn btn-success">Download as Excel</button>
                 <button type="button" id="updateForm2" class="btn btn-primary">Update</button>
             </div>
         </div>
@@ -296,6 +300,8 @@
 
 <!-- Modal for Form 3 -->
 <div class="modal fade" id="form3Modal" tabindex="-1" aria-labelledby="form3ModalLabel" aria-hidden="true">
+<input type="hidden" id="form3SubmissionId">
+<input type="hidden" id="form3Type">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="form3ModalContent">
             <div class="modal-header">
@@ -394,7 +400,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm3" class="btn btn-danger">Delete</button>
+            <button type="button" id="downloadExcelForm3" class="btn btn-success">Download as Excel</button>
                 <button type="button" id="updateForm3" class="btn btn-primary">Update</button>
             </div>
         </div>
@@ -404,6 +410,8 @@
 
 <!-- Modal for Form 4 -->
 <div class="modal fade" id="form4Modal" tabindex="-1" aria-labelledby="form4ModalLabel" aria-hidden="true">
+<input type="hidden" id="form4SubmissionId">
+<input type="hidden" id="form4Type">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="form4ModalContent">
             <div class="modal-header">
@@ -464,9 +472,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm4" class="btn btn-danger">Delete</button>
+                <button type="button" id="downloadExcelForm4" class="btn btn-success">Download as Excel</button>
                 <button type="button" id="updateForm4" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
