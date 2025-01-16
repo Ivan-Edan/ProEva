@@ -39,7 +39,7 @@ body {
 .table th, .table td {
     padding: 20px;
     text-align: left;
-    font-size: 14px;
+    font-size: 17px !important;
     white-space: nowrap;
 }
 

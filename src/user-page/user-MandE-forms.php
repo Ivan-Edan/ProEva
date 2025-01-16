@@ -42,6 +42,7 @@
             <!-- Table Section -->
             <div class="card shadow-sm mt-4" id="submitted-forms-container">
                 <div class="card-body" >
+            <div class="table-responsive">
                 <table id="userSubmissionsTable" class="table table-striped">
             <thead class="table-header">
                 <tr>
@@ -55,12 +56,12 @@
 
             </tbody>
         </table>
+        </div>
         <nav class="pagination-container" id="pagination-container">
                     <ul class="pagination justify-content-center" id="pagination">
                         <!-- Dynamic pagination links will be generated here -->
                     </ul>
         </nav>
-                </div>
             </div>
         </div>
     </div>

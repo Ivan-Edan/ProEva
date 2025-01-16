@@ -59,19 +59,21 @@
             <!-- Table Section -->
             <div class="card shadow-sm mt-4" id="submitted-forms-container">
                 <div class="card-body" >
+                <div class="table-responsive">
                 <table id="submissionsTable" class="table">
                     <thead>
                         <tr>
-                            <th>Project Name</th>
+                            <th class="text-center">Project Name</th>
                             <th>Department</th>
                             <th>User Submitted Forms</th>
-                            <th>Date Submitted</th>
+                            <th class="text-center">Date Submitted</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Dynamic rows will be inserted here -->
                     </tbody>
                 </table>
+                </div>
                 <nav class="pagination-container" id="pagination-container">
                     <ul class="pagination justify-content-center" id="pagination">
                         <!-- Dynamic pagination links will be generated here -->

@@ -32,10 +32,10 @@
                                 <th class="text-center">Last Name</th>
                                 <th class="text-center">First Name</th>
                                 <th class="text-center">Middle Name</th>
-                                <th>Department <i id="sort-icon" class="fas fa-sort"></i></th>
+                                <th class="text-center">Department <i id="sort-icon" class="fas fa-sort"></i></th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Role</th>
-                                <th>Date Added</th>
+                                <th class="text-center">Date Added</th>
                             </tr>
                         </thead>
                         <tbody id="account-table-body">
