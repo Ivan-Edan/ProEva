@@ -138,8 +138,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm2" class="btn btn-danger">Delete</button>
-                <button type="button" id="updateForm2" class="btn btn-primary">Update</button>
+                <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -290,8 +289,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm2" class="btn btn-danger">Delete</button>
-                <button type="button" id="updateForm2" class="btn btn-primary">Update</button>
+                <button type="button" id="downloadExcelForm2" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -403,8 +401,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm3" class="btn btn-danger">Delete</button>
-                <button type="button" id="updateForm3" class="btn btn-primary">Update</button>
+                <button type="button" id="downloadExcelForm3" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -476,8 +473,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="deleteForm4" class="btn btn-danger">Delete</button>
-                <button type="button" id="updateForm4" class="btn btn-primary">Update</button>
+                <button type="button" id="downloadExcelForm4" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -629,7 +625,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin1" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -752,7 +748,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin2" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -851,7 +847,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin3" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -935,7 +931,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin4" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -1032,7 +1028,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin5" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -1087,7 +1083,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin6" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
@@ -1173,8 +1169,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="downloadExcelFormAdmin7" class="btn btn-success">Download as Excel</button>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+

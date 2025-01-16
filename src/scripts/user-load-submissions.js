@@ -136,6 +136,17 @@ function openFormModal(submissionId, formType) {
         .then(data => {
             if (data.status === 'success') {
                 const formData = data.data;
+
+                    // Populate formType and submissionId hidden inputs
+                    const submissionInput = document.getElementById(`${formType}SubmissionId`);
+                    const typeInput = document.getElementById(`${formType}Type`);
+                    if (submissionInput && typeInput) {
+                        submissionInput.value = submissionId;
+                        typeInput.value = formType;
+                    } else {
+                        console.error(`Hidden input fields for ${formType} not found.`);
+                        return;
+                    }
             // Handle Form 1
             if (formType === 'form1') {
                 // Populate Form 1 modal fields
@@ -346,6 +357,7 @@ function openFormModal(submissionId, formType) {
 
 
 
+
 // Initialize the submissions table for all form types
 document.addEventListener('DOMContentLoaded', function () {
     loadUserSubmissions({ formType: 'all' }); // Load all forms by default
@@ -361,3 +373,78 @@ document.querySelector('#filterDropdown').addEventListener('change', function ()
 });
 
 
+// Add event listeners for all "Download as Excel" buttons
+document.querySelectorAll('[id^="downloadExcel"]').forEach((button) => {
+    button.addEventListener('click', function () {
+        // Get the closest modal to the button
+        const modal = this.closest('.modal');
+
+        if (!modal) {
+            console.error('Could not find the modal containing the button.');
+            alert('Unable to download Excel: Modal not found.');
+            return;
+        }
+
+        // Find the hidden input fields within the same modal
+        const submissionIdInput = modal.querySelector('[id$="SubmissionId"]');
+        const formTypeInput = modal.querySelector('[id$="Type"]');
+
+        // Validate if the hidden inputs exist
+        if (!formTypeInput || !submissionIdInput) {
+            console.error('Missing hidden input fields for form type or submission ID in modal:', modal.id);
+            alert('Unable to download Excel: Missing data fields.');
+            return;
+        }
+
+        // Get values from hidden inputs
+        const formType = formTypeInput.value.trim();
+        const submissionId = submissionIdInput.value.trim();
+
+        if (!formType || !submissionId) {
+            console.error(`Invalid form type or submission ID: formType=${formType}, submissionId=${submissionId}`);
+            alert('Unable to download Excel: Invalid data.');
+            return;
+        }
+
+        // Fetch form data and generate Excel
+        fetch(`includes/get-user-form-data.php?formType=${formType}&submissionId=${submissionId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === 'success') {
+                    console.log('Data fetched:', data);
+                    const formData = data.data;
+
+                    const filteredData = Object.entries(formData).filter(([key]) => 
+                        !['submission_id', 'adminForm1_id','details_id','Form2_id','form3_id','form4_id	', 'adminForm2_id', 'adminForm3_id', 'adminForm4_id', 'adminForm5_id', 'adminForm6_id', 'adminForm7_id'].includes(key)
+                    );
+
+                    // Transform data into a format suitable for Excel
+                    const sheetData = filteredData.map(([key, value]) => ({
+                        [key]: value,
+                    }));
+
+
+                    // Create a new workbook and add data
+                    const workbook = XLSX.utils.book_new();
+                    const worksheet = XLSX.utils.json_to_sheet(sheetData);
+                    XLSX.utils.book_append_sheet(workbook, worksheet, `${formType} Data`);
+
+                    // Trigger download
+                    const fileName = `${formType}_Submission_${submissionId}.xlsx`;
+                    XLSX.writeFile(workbook, fileName);
+
+                    // Refresh the page after download
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500); // Slight delay for user experience
+                } else {
+                    alert('Unable to fetch form data. Please try again.');
+                    console.error('Error fetching data:', data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+                alert('An error occurred while processing the request.');
+            });
+    });
+});
