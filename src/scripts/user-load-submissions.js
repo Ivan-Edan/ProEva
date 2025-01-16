@@ -137,16 +137,17 @@ function openFormModal(submissionId, formType) {
             if (data.status === 'success') {
                 const formData = data.data;
 
-                    // Populate formType and submissionId hidden inputs
-                    const submissionInput = document.getElementById(`${formType}SubmissionId`);
-                    const typeInput = document.getElementById(`${formType}Type`);
-                    if (submissionInput && typeInput) {
-                        submissionInput.value = submissionId;
-                        typeInput.value = formType;
-                    } else {
-                        console.error(`Hidden input fields for ${formType} not found.`);
-                        return;
-                    }
+                // Populate formType and submissionId hidden inputs
+                const submissionInput = document.getElementById(`${formType}SubmissionId`);
+                const typeInput = document.getElementById(`${formType}Type`);
+                if (submissionInput && typeInput) {
+                    submissionInput.value = submissionId;
+                    typeInput.value = formType;
+                } else {
+                    console.error(`Hidden input fields for ${formType} not found.`);
+                    return;
+                }
+                const isRejected = formData.status === 'rejected';
             // Handle Form 1
             if (formType === 'form1') {
                 // Populate Form 1 modal fields
@@ -251,7 +252,7 @@ function openFormModal(submissionId, formType) {
                 // Show modal for Form 1
                 const modal = new bootstrap.Modal(document.getElementById('form1Modal'));
                 modal.show();
-            }
+                }
 
 
 
@@ -330,23 +331,49 @@ function openFormModal(submissionId, formType) {
 
                 // Handle Form 4
                 else if (formType === 'form4') {
-                    // Project Details
-                    document.getElementById('projectTitleForm4').value = formData.project_title || '';
-                    document.getElementById('implementingAgencyForm4').value = formData.implementing_agency || '';
+                // Project Details
+                document.getElementById('projectTitleForm4').value = formData.project_title || '';
+                document.getElementById('implementingAgencyForm4').value = formData.implementing_agency || '';
 
-                    // Additional Details
-                    document.getElementById('objectivesForm4').value = formData.objectives || '';
-                    document.getElementById('resultIndicatorForm4').value = formData.result_indicator || '';
-                    document.getElementById('observedResultsForm4').value = formData.observe_results || '';
+                // Additional Details
+                document.getElementById('objectivesForm4').value = formData.objectives || '';
+                document.getElementById('resultIndicatorForm4').value = formData.result_indicator || '';
+                document.getElementById('observedResultsForm4').value = formData.observe_results || '';
 
-                    // Project Validation
-                    document.getElementById('submittedDesignationForm4').value = formData.submitted_designation || '';
-                    document.getElementById('submittedByForm4').value = formData.submitted_by || '';
+                // Project Validation
+                document.getElementById('submittedDesignationForm4').value = formData.submitted_designation || '';
+                document.getElementById('submittedByForm4').value = formData.submitted_by || '';
 
-                    // Show Form 4 modal
-                    const modal = new bootstrap.Modal(document.getElementById('form4Modal'));
-                    modal.show();
+                // Enable fields if status is "rejected"
+                const isRejected = formData.status === 'rejected'; // Check the form status
+                const fieldsToEnable = [
+                    'implementingAgencyForm4',
+                    'objectivesForm4',
+                    'resultIndicatorForm4',
+                    'observedResultsForm4',
+                    'submittedDesignationForm4',
+                    'submittedByForm4'
+                ];
+
+                fieldsToEnable.forEach((fieldId) => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        field.readOnly = !isRejected; // Make editable only if the form is rejected
+                    }
+                });
+
+                // Update the Update button state
+                const updateButton = document.getElementById('updateForm4');
+                updateButton.addEventListener('click', () => handleUpdateForm4(submissionId));
+                if (updateButton) {
+                    updateButton.style.display = isRejected ? 'inline-block' : 'none'; // Show the button only if rejected
                 }
+
+                // Show Form 4 modal
+                const modal = new bootstrap.Modal(document.getElementById('form4Modal'));
+                modal.show();
+            }
+
 
             } else {
                 console.error('No data available for the selected form.');
@@ -448,3 +475,56 @@ document.querySelectorAll('[id^="downloadExcel"]').forEach((button) => {
             });
     });
 });
+
+
+function handleUpdateForm4(submissionId) {
+    const formData = {
+        form_id: submissionId,
+        project_title: document.getElementById('projectTitleForm4').value.trim(),
+        implementing_agency: document.getElementById('implementingAgencyForm4').value.trim(),
+        objectives: document.getElementById('objectivesForm4').value.trim(),
+        result_indicator: document.getElementById('resultIndicatorForm4').value.trim(),
+        observed_results: document.getElementById('observedResultsForm4').value.trim(),
+        submitted_by: document.getElementById('submittedByForm4').value.trim(),
+    };
+
+    // Validate the form data
+    if (!validateForm4Data(formData)) {
+        alert('Please fix validation errors before submitting.');
+        return;
+    }
+
+    // Send updated data to the backend
+    fetch('includes/update-rejected-form.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === 'success') {
+                alert('Form updated successfully!');
+                location.reload(); // Reload the page to reflect updated status
+            } else {
+                alert(`Error: ${data.message}`);
+            }
+        })
+        .catch((error) => console.error('Error updating form:', error));
+}
+
+// Example validation function
+function validateForm4Data(data) {
+    if (!data.project_title) {
+        alert('Project Title is required.');
+        return false;
+    }
+    if (!data.implementing_agency) {
+        alert('Implementing Agency is required.');
+        return false;
+    }
+    // Add additional validations as needed
+    return true;
+}
+
