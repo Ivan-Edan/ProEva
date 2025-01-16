@@ -635,12 +635,15 @@ document.querySelectorAll('[id^="downloadExcel"]').forEach(button => {
                     const filteredData = Object.entries(formData).filter(([key]) => 
                         !['submission_id', 'adminForm1_id','details_id','Form2_id','form3_id','form4_id	', 'adminForm2_id', 'adminForm3_id', 'adminForm4_id', 'adminForm5_id', 'adminForm6_id', 'adminForm7_id'].includes(key)
                     );
+//excel display format
+                                    // Transform data into a single horizontal row for Excel
+                    const headers = filteredData.map(([key]) => key); // Extract keys as headers
+                    const values = filteredData.map(([, value]) => value); // Extract values
 
-                    // Transform data into a format suitable for Excel
-                    const sheetData = filteredData.map(([key, value]) => ({
-                        [key]: value,
-                    }));
+                    // Create a 2D array with headers and values
+                    const sheetData = [headers, values];
 
+////////////////////////////////////////////////////////
                     // Create a new workbook and add data
                     const workbook = XLSX.utils.book_new();
                     const worksheet = XLSX.utils.json_to_sheet(sheetData);

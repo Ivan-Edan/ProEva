@@ -36,6 +36,7 @@ try {
         case 'form1': // FORM 2: Physical and Financial Accomplishments
             $query = "
                     SELECT
+                        ipr.status,
                         -- Project Details
                         ipr.details_id, -- Unique ID for each submission
                         pt.project_title,
@@ -135,6 +136,7 @@ try {
         case 'form2': // FORM 2: Physical and Financial Accomplishments
             $query = "
                     SELECT
+                        fp.status,
                         pt.project_title,
                         ia.implementing_agency, -- Fetch implementing agency
                         fs.appropriations,
@@ -191,6 +193,7 @@ try {
         case 'form3':
             $query = "
                 SELECT
+                    ex.status,
                     pt.project_title,
                     ia.implementing_agency,
                     sc.sector AS sector, -- Sector name from sector table
@@ -238,6 +241,7 @@ try {
         case 'form4':
             $query = "
                 SELECT
+                    pr.status,
                     pt.project_title,
                     ia.implementing_agency,
                     pr.objectives,
