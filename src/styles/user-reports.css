@@ -95,7 +95,7 @@ body{
 .table th, .table td {
     padding: 20px; 
     text-align: left;
-    font-size: 14px;
+    font-size: 17px;
     white-space: nowrap; 
 }
 .table td {
@@ -200,6 +200,32 @@ color: #585858;
     -webkit-overflow-scrolling: touch;
     margin-bottom: 10px;
 }
+
+/* Customize the scrollbar */
+.table-responsive::-webkit-scrollbar {
+    height: 8px; /* Adjust the height for horizontal scrollbars */
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+    border-radius: 10px; /* Smooth corners */
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #c1c1c1; /* Thumb color */
+    border-radius: 10px; /* Smooth corners */
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1; /* Thumb color on hover */
+}
+
+/* For non-WebKit browsers (fallback styles) */
+.table-responsive {
+    scrollbar-color: #c1c1c1 #f1f1f1; /* Thumb color Track color */
+    scrollbar-width: thin; /* Thin scrollbar */
+}
+
 
 .no-data{
     width: 250px;

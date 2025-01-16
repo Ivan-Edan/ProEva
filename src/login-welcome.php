@@ -29,7 +29,7 @@
                     <div class="text-container-landing">
                         <img src="<?php echo 'images/landing-pic.png'; ?>" class="landing-image" alt="">
                     </div>
-                    <h2 class="title">ProEva: Project Monitoring System</h2>
+                    <h2 class="title">ProEva: Project Management System</h2>
                     <input type="submit" class="btn-1" value="LOGIN" id="sign-up-btn" />
                 </form>
 
@@ -171,7 +171,7 @@
         <hr class="heading-line">
         <img class="CPDO" src="images/CPDO.png">
         <p class="about-us">The <b>City Planning and Development Office (CPDO)</b> of Santa Rosa City, Laguna, is dedicated to ensuring that 
-            urban development aligns with the city’s long-term goals of sustainability and progress. The <b>Project Monitoring System </b> is a 
+            urban development aligns with the city’s long-term goals of sustainability and progress. The <b>Project Management System </b> is a 
             vital tool used by CPDO to track and assess the implementation of various city 
             development projects. This system allows for monitoring, data collection, and analyze of project 
             performance, ensuring that resources are efficiently allocated, timelines are adhered to, and outcomes meet the 

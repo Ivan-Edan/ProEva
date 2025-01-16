@@ -35,6 +35,7 @@
                     </select>
             </div>
                 <div class="container-8">
+                <div class="table-responsive">
                     <table id="archiveTable" class="table ">
                         <thead>
                             <tr>
@@ -48,7 +49,7 @@
                             <!-- Additional rows can be added dynamically through JavaScript -->
                         </tbody>
                     </table>
-
+                    </div>
                     <!-- Numbered Pagination Buttons -->
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center" id="pagination-container"></ul>
