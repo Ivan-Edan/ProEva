@@ -395,7 +395,7 @@ document.querySelectorAll('[id^="downloadExcel"]').forEach((button) => {
             alert('Unable to download Excel: Missing data fields.');
             return;
         }
-
+ 
         // Get values from hidden inputs
         const formType = formTypeInput.value.trim();
         const submissionId = submissionIdInput.value.trim();
