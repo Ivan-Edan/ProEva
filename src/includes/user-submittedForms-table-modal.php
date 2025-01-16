@@ -15,8 +15,8 @@
                     <h6><b>Project Details</b></h6>
                     <div class="row mb-3">
                         <div class="col-sm-6">
-                            <label class="form-label">Program / Project Title:</label>
-                            <input type="text" id="projectTitleForm1" class="form-control">
+                            <label class="form-label" >Program / Project Title: </label>
+                            <input type="text" id="projectTitleForm1" class="form-control" readonly>
                         </div>
                         <div class="col-sm-4">
                             <label class="form-label">Implementing Agency:</label>
@@ -138,7 +138,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>n>
-                <button type="button" id="updateForm1" class="btn btn-primary">Update</button>
+              <!--   <button type="button" id="updateForm1" class="btn btn-primary">Update</button> -->
             </div>
         </div>
     </div>
@@ -164,7 +164,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label class="form-label">Program / Project Title:</label>
-                            <input type="text" id="projectTitleForm2" class="form-control">
+                            <input type="text" id="projectTitleForm2" class="form-control" readonly>
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Implementing Agency:</label>
@@ -289,7 +289,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm2" class="btn btn-success">Download as Excel</button>
-                <button type="button" id="updateForm2" class="btn btn-primary">Update</button>
+                <!-- <button type="button" id="updateForm2" class="btn btn-primary">Update</button> -->
             </div>
         </div>
     </div>
@@ -316,7 +316,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label class="form-label">Program / Project Title:</label>
-                            <input type="text" id="projectTitleForm3" class="form-control">
+                            <input type="text" id="projectTitleForm3" class="form-control" readonly>
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Implementing Agency:</label>
@@ -401,7 +401,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" id="downloadExcelForm3" class="btn btn-success">Download as Excel</button>
-                <button type="button" id="updateForm3" class="btn btn-primary">Update</button>
+               <!--  <button type="button" id="updateForm3" class="btn btn-primary">Update</button> -->
             </div>
         </div>
     </div>
@@ -425,8 +425,8 @@
                     <h6><b>Project Details</b></h6>
                     <div class="row mb-3">
                         <div class="col-sm-6">
-                            <label class="form-label">Program / Project Title:</label>
-                            <input type="text" id="projectTitleForm4" class="form-control">
+                            <label class="form-label">Program / Project Title: </label>
+                            <input type="text" id="projectTitleForm4" class="form-control"readonly>
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Implementing Agency:</label>
@@ -473,7 +473,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm4" class="btn btn-success">Download as Excel</button>
-                <button type="button" id="updateForm4" class="btn btn-primary">Update</button>
+               <!-- <button type="button" id="updateForm4" class="btn btn-primary">Update</button>-->
             </div>
         </div>
     </div>
