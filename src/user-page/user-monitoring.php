@@ -775,7 +775,7 @@ $(document).ready(function() {
         event.preventDefault();  // Prevent default form submission
 
         var formData = new FormData(this); // Create FormData object from the form
-
+        console.log(formData)
         // Send the form data via Ajax
         $.ajax({
             url: 'user-page/functions/addProject.php',
@@ -784,6 +784,7 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
+            console.log(response)
                 var data = JSON.parse(response); // Parse the JSON response from the server
 
                 if (data.status === 'success') {

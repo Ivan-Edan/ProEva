@@ -51,7 +51,7 @@ try {
 
                         -- Output Indicators (Pre-aggregated)
                         (SELECT GROUP_CONCAT(oi.output_indicator ORDER BY oi.output_indicator_position SEPARATOR ', ')
-                        FROM UserOutputIndicator oi
+                        FROM useroutputindicator oi
                         WHERE oi.details_id = ipr.details_id) AS output_indicators,
 
                         -- Monthly Targets (Pre-aggregated)
@@ -73,30 +73,30 @@ try {
 
                         -- Target Outputs (Pre-aggregated)
                         (SELECT GROUP_CONCAT(to1.Target_output ORDER BY to1.Target_output_id SEPARATOR ', ')
-                        FROM UserTargetOutput to1
+                        FROM usertargetoutput to1
                         WHERE to1.details_id = ipr.details_id) AS target_outputs,
 
                         -- Project Validation
                         pv.submitted_designation,
                         pv.submitted_by
 
-                    FROM InitialProjectReport ipr
+                    FROM initialprojectreport ipr
 
                     -- Joins (One-to-One relationships)
-                    LEFT JOIN UserProjectTitle pt ON ipr.project_id = pt.project_id
-                    LEFT JOIN UserImplementingAgency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
-                    LEFT JOIN UserSector sc ON ipr.sector_id = sc.sector_id
-                    LEFT JOIN UserModeOfImplementation mi ON ipr.mode_of_implementation_id = mi.mode_of_implementation_id
-                    LEFT JOIN UserLocation loc ON ipr.location_id = loc.location_id
-                    LEFT JOIN UserTotalCost tc ON ipr.total_cost_id = tc.total_cost_id
-                    LEFT JOIN UserSDateEDate sd ON ipr.s_date_e_date_id = sd.s_date_e_date_id
-                    LEFT JOIN UserFundAgency fa ON ipr.fund_agency_id = fa.fund_agency_id
-                    LEFT JOIN UserFundSource fs ON ipr.fund_source_id = fs.fund_source_id
-                    LEFT JOIN UserTargetEmployee te ON ipr.target_employee_id = te.target_employee_id
-                    LEFT JOIN UserCompDetails cd ON ipr.comp_details_id = cd.comp_details_id
-                    LEFT JOIN UserYearTargets yt ON ipr.year_targets_id = yt.year_targets_id
-                    LEFT JOIN UserRemarks r ON ipr.remarks_id = r.remarks_id
-                    LEFT JOIN UserProjectValidation pv ON ipr.project_validation_id = pv.project_validation_id
+                    LEFT JOIN userprojecttitle pt ON ipr.project_id = pt.project_id
+                    LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+                    LEFT JOIN usersector sc ON ipr.sector_id = sc.sector_id
+                    LEFT JOIN usermodeofimplementation mi ON ipr.mode_of_implementation_id = mi.mode_of_implementation_id
+                    LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
+                    LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
+                    LEFT JOIN usersdateedate sd ON ipr.s_date_e_date_id = sd.s_date_e_date_id
+                    LEFT JOIN userfundagency fa ON ipr.fund_agency_id = fa.fund_agency_id
+                    LEFT JOIN userfundsource fs ON ipr.fund_source_id = fs.fund_source_id
+                    LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.target_employee_id
+                    LEFT JOIN usercompdetails cd ON ipr.comp_details_id = cd.comp_details_id
+                    LEFT JOIN useryeartargets yt ON ipr.year_targets_id = yt.year_targets_id
+                    LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
+                    LEFT JOIN userprojectvalidation pv ON ipr.project_validation_id = pv.project_validation_id
                 WHERE ipr.details_id = ?
         ",
         'form2' => "
@@ -168,7 +168,7 @@ try {
                 LEFT JOIN userimplementingagency ia ON ex.implementing_agency_id = ia.implementing_agency_id
                 LEFT JOIN usersector sc ON ex.sector_id = sc.sector_id -- Sector table join
                 LEFT JOIN userlocation loc ON ex.location_id = loc.location_id -- Location table join
-                LEFT JOIN UserForm3AddiDetails fd ON ex.Addi_form3_details_id = fd.Addi_form3_details_id
+                LEFT JOIN userform3addidetails fd ON ex.Addi_form3_details_id = fd.Addi_form3_details_id
                 LEFT JOIN userprojectvalidation pv ON ex.project_validation_id = pv.project_validation_id
                 WHERE ex.form3_id = ?
         ",

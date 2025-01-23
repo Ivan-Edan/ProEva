@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $actions_to_be_taken = $_POST['user_actions_to_be_taken_3'];
 
         $stmt = $conn->prepare("
-            INSERT INTO UserForm3AddiDetails (findings, typology, issue_status, reasons, actions_taken, actions_to_be_taken) 
+            INSERT INTO userform3addidetails (findings, typology, issue_status, reasons, actions_taken, actions_to_be_taken) 
             VALUES (?, ?, ?, ?, ?, ?)
         ");
         $stmt->bind_param("ssssss", $findings, $typology, $issue_status, $reasons, $actions_taken, $actions_to_be_taken);
@@ -53,14 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // 3. Insert into UserImplementingAgency
         $implementing_agency = $_POST['user_implementing_agency_1'];
-        $stmt = $conn->prepare("INSERT INTO UserImplementingAgency (implementing_agency) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO userimplementingagency (implementing_agency) VALUES (?)");
         $stmt->bind_param("s", $implementing_agency);
         $stmt->execute();
         $implementing_agency_id = $conn->insert_id;
 
         // 4. Insert into UserSector
         $sector = $_POST['user_sector_1'];
-        $stmt = $conn->prepare("INSERT INTO UserSector (sector) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO usersector (sector) VALUES (?)");
         $stmt->bind_param("s", $sector);
         $stmt->execute();
         $sector_id = $conn->insert_id;
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $city_municipality = $_POST['user_city_1'];
         $barangay = $_POST['user_barangay_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserLocation (location, city, barangay) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO userlocation (location, city, barangay) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $location, $city_municipality, $barangay);
         $stmt->execute();
         $location_id = $conn->insert_id;
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // 6. Insert into UserProjectExptRprt
         $stmt = $conn->prepare("
-            INSERT INTO UserProjectExptRprt (project_id, implementing_agency_id, sector_id, location_id, addi_form3_details_id, user_id,project_validation_id) 
+            INSERT INTO userprojectexptrprt (project_id, implementing_agency_id, sector_id, location_id, addi_form3_details_id, user_id,project_validation_id) 
             VALUES (?, ?, ?, ?, ?, ?,?)
         ");
         $stmt->bind_param(

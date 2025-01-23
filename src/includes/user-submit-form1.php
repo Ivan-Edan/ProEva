@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Insert data into related tables and get foreign keys
             // Check if project title and year combination already exists
-            $stmt = $conn->prepare("SELECT project_id FROM UserProjectTitle WHERE project_title = ? AND project_year = ?");
+            $stmt = $conn->prepare("SELECT project_id FROM userprojecttitle WHERE project_title = ? AND project_year = ?");
             $stmt->bind_param("si", $project_title, $project_year);
             $stmt->execute();
             $stmt->store_result();
@@ -63,19 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // If no duplicate, proceed to insert into UserProjectTitle
-            $stmt = $conn->prepare("INSERT INTO UserProjectTitle (project_title, project_year) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO userprojecttitle (project_title, project_year) VALUES (?, ?)");
             $stmt->bind_param("si", $project_title, $project_year);
             $stmt->execute();
             $project_id = $conn->insert_id; // Retrieve the inserted project ID
 
             // 2. Insert into `UserImplementingAgency`
-            $stmt = $conn->prepare("INSERT INTO UserImplementingAgency (implementing_agency) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO userimplementingagency (implementing_agency) VALUES (?)");
             $stmt->bind_param("s", $implementing_agency);
             $stmt->execute();
             $implementing_agency_id = $conn->insert_id;
 
             // insert into usercompdetails
-            $stmt = $conn->prepare("INSERT INTO Usercompdetails (comp_details) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO usercompdetails (comp_details) VALUES (?)");
             $stmt->bind_param("s", $comp_details);
             $stmt->execute();
             $comp_details_id = $conn->insert_id; // Get the inserted ID
@@ -95,62 +95,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $project_validation_id = $conn->insert_id; // Get the inserted ID
 
             // 3. Insert into `UserFundSource`
-            $stmt = $conn->prepare("INSERT INTO UserFundSource (fund_source) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO userfundsource (fund_source) VALUES (?)");
             $stmt->bind_param("s", $fund_source);
             $stmt->execute();
             $fund_source_id = $conn->insert_id;
 
             // 4. Insert into `UserFundAgency`
-            $stmt = $conn->prepare("INSERT INTO UserFundAgency (fund_agency) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO userfundagency (fund_agency) VALUES (?)");
             $stmt->bind_param("s", $fund_agency);
             $stmt->execute();
             $fund_agency_id = $conn->insert_id;
 
             // 5. Insert into `UserModeOfImplementation`
-            $stmt = $conn->prepare("INSERT INTO UserModeOfImplementation (mode_of_implementation) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO usermodeofimplementation (mode_of_implementation) VALUES (?)");
             $stmt->bind_param("s", $mode_of_implementation);
             $stmt->execute();
             $mode_of_implementation_id = $conn->insert_id;
 
             // 6. Insert into `UserSector`
-            $stmt = $conn->prepare("INSERT INTO UserSector (sector) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO usersector (sector) VALUES (?)");
             $stmt->bind_param("s", $sector);
             $stmt->execute();
             $sector_id = $conn->insert_id;
 
             // 7. Insert into `UserTotalCost`
-            $stmt = $conn->prepare("INSERT INTO UserTotalCost (total_cost) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO usertotalcost (total_cost) VALUES (?)");
             $stmt->bind_param("d", $total_cost);
             $stmt->execute();
             $total_cost_id = $conn->insert_id;
 
             // 8. Insert into `UserSDateEDate`
-            $stmt = $conn->prepare("INSERT INTO UserSDateEDate (start_date, end_date) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO usersdateedate (start_date, end_date) VALUES (?, ?)");
             $stmt->bind_param("ss", $start_date, $end_date);
             $stmt->execute();
             $s_date_e_date_id = $conn->insert_id;
 
             // 9. Insert into `UserLocation`
-            $stmt = $conn->prepare("INSERT INTO UserLocation (location, city, barangay) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO userlocation (location, city, barangay) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $location, $city, $barangay);
             $stmt->execute();
             $location_id = $conn->insert_id;
 
             // 10. Insert into `UserRemarks`
-            $stmt = $conn->prepare("INSERT INTO UserRemarks (remarks) VALUES (?)");
+            $stmt = $conn->prepare("INSERT INTO userremarks (remarks) VALUES (?)");
             $stmt->bind_param("s", $remarks);
             $stmt->execute();
             $remarks_id = $conn->insert_id;
 
             // 11. Insert into `UserTargetEmployee`
-            $stmt = $conn->prepare("INSERT INTO UserTargetEmployee (male, female) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO usertargetemployee (male, female) VALUES (?, ?)");
             $stmt->bind_param("ii", $male, $female);
             $stmt->execute();
             $target_employee_id = $conn->insert_id;
 
-            // 12. Insert into `InitialProjectReport`
+            // 12. Insert into `initialprojectreport`
             $stmt = $conn->prepare("
-                INSERT INTO InitialProjectReport 
+                INSERT INTO initialprojectreport 
                 (project_id, implementing_agency_id, fund_source_id, fund_agency_id, mode_of_implementation_id, 
                 sector_id, total_cost_id, s_date_e_date_id, location_id, target_employee_id, remarks_id, user_id,comp_details_id, year_targets_id,project_validation_id) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $position = $output_indicator['position'] ?? $index + 1;
 
                     if ($output_text) { // Ensure there's valid output text
-                        $stmt = $conn->prepare("INSERT INTO UserOutputIndicator (output_indicator, output_indicator_position, details_id) VALUES (?, ?, ?)");
+                        $stmt = $conn->prepare("INSERT INTO useroutputindicator (output_indicator, output_indicator_position, details_id) VALUES (?, ?, ?)");
                         $stmt->bind_param("sii", $output_text, $position, $details_id);
                         $stmt->execute();
                     }
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($target_outputs) && is_array($target_outputs)) {
                 foreach ($target_outputs as $target_output) {
                     if ($target_output) { // Ensure there's valid target output text
-                        $stmt = $conn->prepare("INSERT INTO UserTargetOutput (target_output, details_id) VALUES (?, ?)");
+                        $stmt = $conn->prepare("INSERT INTO usertargetoutput (target_output, details_id) VALUES (?, ?)");
                         $stmt->bind_param("si", $target_output, $details_id);
                         $stmt->execute();
                     }
@@ -224,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Only insert if at least one of the values is provided
                     if ($position !== null || $start_date !== null || $end_date !== null || $financial_target !== null || $physical_target_percent !== null) {
                         $stmt = $conn->prepare("
-                            INSERT INTO UserMtyTarget (mty_target_position, period_start, period_end, financial_target, physical_target_percent, details_id)
+                            INSERT INTO usermtytarget (mty_target_position, period_start, period_end, financial_target, physical_target_percent, details_id)
                             VALUES (?, ?, ?, ?, ?, ?)");
                         $stmt->bind_param("issdii", 
                             $position, 

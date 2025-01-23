@@ -54,7 +54,7 @@ if (isset($_POST['projectName'], $_POST['startDate'], $_POST['endDate'], $_POST[
         // Insert into user_mainproject
         $addProject = "INSERT INTO `user_mainproject` (`projectName`, `startDate`, `endDate`, `projectCost`, `fundSource`, `fundAgency`, `status`, `project_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         if ($stmt = $conn->prepare($addProject)) {
-            $stmt->bind_param("ssssssss", $projName, $startDate, $endDate, $projCost, $fundSource, $fundAgency, $status, $proj);
+            $stmt->bind_param("sssssssi", $projName, $startDate, $endDate, $projCost, $fundSource, $fundAgency, $status, $proj);
             $stmt->execute();
             $mainId = $conn->insert_id; // Get the ID of the inserted project
             $stmt->close();

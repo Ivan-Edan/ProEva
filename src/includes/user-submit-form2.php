@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $obligations = $_POST['user_obligations_2'];
         $disbursements = $_POST['user_disbursements_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserFinancialStatus (appropriations, allotment, obligations, disbursements) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO userfinancialstatus(appropriations, allotment, obligations, disbursements) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("dddd", $appropriations, $allotment, $obligations, $disbursements);
         $stmt->execute();
         $financial_status_id = $conn->insert_id;
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 2. Insert into UserOutputIndicator
         $output_indicator = $_POST['user_output_indicator_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserOutputIndicator (output_indicator) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO useroutputindicator (output_indicator) VALUES (?)");
         $stmt->bind_param("s", $output_indicator);
         $stmt->execute();
         $output_indicator_id = $conn->insert_id;
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $actual_owpa = $_POST['user_actual_owpa_2'];
         $slippage = $_POST['user_slippage_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserPhysAccomplishments (target_owpa, actual_owpa, slippage, output_indicator_id) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO userphysaccomplishments (target_owpa, actual_owpa, slippage, output_indicator_id) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("dddi", $target_owpa, $actual_owpa, $slippage, $output_indicator_id);
         $stmt->execute();
         $phys_accomplishment_id = $conn->insert_id;
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target_date = $_POST['user_target_to_date_2'];
         $actual_date = $_POST['user_actual_to_date_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserAddiDetails (end_project_target, target_date, actual_date) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO useraddidetails (end_project_target, target_date, actual_date) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $end_project_target, $target_date, $actual_date);
         $stmt->execute();
         $addi_details_id = $conn->insert_id;
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $start_date = $_POST['user_start_date_2'];
         $end_date = $_POST['user_end_date_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserSDateEDate (start_date, end_date) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO usersdateedate (start_date, end_date) VALUES (?, ?)");
         $stmt->bind_param("ss", $start_date, $end_date);
         $stmt->execute();
         $s_date_e_date_id = $conn->insert_id;
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $male = $_POST['user_male_2'];
         $female = $_POST['user_female_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserTargetEmployee (male, female) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO usertargetemployee (male, female) VALUES (?, ?)");
         $stmt->bind_param("ii", $male, $female);
         $stmt->execute();
         $target_employee_id = $conn->insert_id;
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 8. Insert into UserImplementingAgency
         $implementing_agency = $_POST['user_implementing_agency_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserImplementingAgency (implementing_agency) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO userimplementingagency (implementing_agency) VALUES (?)");
         $stmt->bind_param("s", $implementing_agency);
         $stmt->execute();
         $implementing_agency_id = $conn->insert_id;
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 9. Insert into UserFundSource
         $fund_source = $_POST['user_fund_source_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserFundSource (fund_source) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO userfundsource (fund_source) VALUES (?)");
         $stmt->bind_param("s", $fund_source);
         $stmt->execute();
         $fund_source_id = $conn->insert_id;
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 10. Insert into UserFundAgency
         $fund_agency = $_POST['user_funding_agency_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserFundAgency (fund_agency) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO userfundagency (fund_agency) VALUES (?)");
         $stmt->bind_param("s", $fund_agency);
         $stmt->execute();
         $fund_agency_id = $conn->insert_id;
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 11. Insert into UserTotalCost
         $total_cost = $_POST['user_total_cost_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserTotalCost (total_cost) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO usertotalcost (total_cost) VALUES (?)");
         $stmt->bind_param("d", $total_cost);
         $stmt->execute();
         $total_cost_id = $conn->insert_id;
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 12. Insert into UserRemarks
         $remarks = $_POST['user_remarks_2'];
 
-        $stmt = $conn->prepare("INSERT INTO UserRemarks (remarks) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO userremarks (remarks) VALUES (?)");
         $stmt->bind_param("s", $remarks);
         $stmt->execute();
         $remarks_id = $conn->insert_id;
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // 13. Insert final report into UserPhysFinAccompReport
         $stmt = $conn->prepare("
-            INSERT INTO UserPhysFinAccompReport (
+            INSERT INTO userphysfinaccompreport (
                 project_id, s_date_e_date_id, fund_agency_id, fund_source_id, 
                 total_cost_id, financial_status_id, Phys_Accomplishment_id, 
                 Addi_Details_id, Target_employee_id, remarks_id, user_id,implementing_agency_id,project_validation_id

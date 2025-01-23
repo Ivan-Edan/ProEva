@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fetchQuery->bind_result($spi, $status, $issue_details, $pv, $ev);
         $fetchQuery->fetch();
         $fetchQuery->close();
-    
+
         $details[] = [
             'spi' => $spi,
             'status' => $status,
@@ -65,26 +65,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
 
         echo json_encode($details);
-
         exit;
     }
 
     // Prepare the command for the Python script
-    $command = "py spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";
-
-    // Execute the command and capture the output
+    $command = "python3 spi_calculator.py  $start $end $totalCost $appropriations $targetOWPA $actualOWPA $slippage $finding $typology $issueStatus $reasons $actionTaken $actionToBeTaken $projectName";    // Execute the command and capture the output
     $output = shell_exec($command);
 
-    preg_match('/Project Name: (.*?)\nSPI: (.*?)\nStatus: (.*?)\nIssue Details: (.*?)\nPV: (.*?)\nEV: (.*)/s', $output, $matches);
-
-    $spi = (float)trim($matches[2] ?? '0');
-    $status = trim($matches[3] ?? '');
-    $issue_details = trim($matches[4] ?? '');
-    $pv = (float)trim($matches[5] ?? '0');
-    $ev = (float)trim($matches[6] ?? '0');
-    
-    if ($output === null) {
+    if ($output === null || !is_string($output)) {
         echo json_encode(['error' => 'Failed to execute the Python script.']);
+        exit;
+    }
+
+    if (preg_match('/Project Name: (.*?)\nSPI: (.*?)\nStatus: (.*?)\nIssue Details: (.*?)\nPV: (.*?)\nEV: (.*)/s', $output, $matches)) {
+        $spi = (float)trim($matches[2] ?? '0');
+        $status = trim($matches[3] ?? '');
+        $issue_details = trim($matches[4] ?? '');
+        $pv = (float)trim($matches[5] ?? '0');
+        $ev = (float)trim($matches[6] ?? '0');
+    } else {
+        echo json_encode(['error' => 'Failed to parse Python script output.']);
         exit;
     }
 
@@ -108,9 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insertQuery->close();
     }
 
-    // Return details to the front end
     echo json_encode($details);
 } else {
     echo json_encode(['error' => 'Invalid request method']);
 }
 ?>
+message.txt
+5 KB

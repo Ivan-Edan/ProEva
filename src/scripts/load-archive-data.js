@@ -536,6 +536,8 @@ function handleAdminForm5Modal(formData, submissionId, formType) {
 }
 
 function handleAdminForm6Modal(formData, submissionId, formType) {
+    document.getElementById('adminform6SubmissionId').value = submissionId;
+    document.getElementById('adminform6Type').value = formType;
     document.getElementById('resolutionNumberAdminForm6').value = formData.resolution_number || '';
     document.getElementById('resolutionTitleAdminForm6').value = formData.resolution_title || '';
     document.getElementById('dateApprovedAdminForm6').value = formData.date_approved || '';

@@ -1034,6 +1034,8 @@
     </div>
 </div>
 <div class="modal fade" id="adminForm6Modal" tabindex="-1" aria-labelledby="adminForm6ModalLabel" aria-hidden="true">
+<input type="hidden" id="adminform6SubmissionId">
+<input type="hidden" id="adminform6Type">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

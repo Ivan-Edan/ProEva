@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //$approvedBy = $_POST['user_approved_by_1'];
         //$approvedDate = $_POST['user_approval_date_1'];
 
-        $stmt = $conn->prepare("INSERT INTO UserProjectValidation (/*submitted_by,*/ submitted_by,submitted_designation /*submitted_date, approved_by, approved_date*/) VALUES (?,?/* ?, ?, ?, ?*/)");
+        $stmt = $conn->prepare("INSERT INTO userprojectvalidation (/*submitted_by,*/ submitted_by,submitted_designation /*submitted_date, approved_by, approved_date*/) VALUES (?,?/* ?, ?, ?, ?*/)");
         $stmt->bind_param("ss", /*$submittedBy,*/ $submitted_by,$submitted_designation /*$submittedDate,*/  /*$approvedBy,$approvedDate*/ );
         $stmt->execute();
         $project_validation_id = $conn->insert_id; // Store the inserted ID for later use
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $observeResults = $_POST['user_observed_results_4'];
 
         // Insert into UserProjectResult table
-        $stmt = $conn->prepare("INSERT INTO UserProjectResult (project_id, implementing_agency_id, project_validation_id, objectives, result_indicator, observe_results,user_id) VALUES (?,?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO userprojectresult (project_id, implementing_agency_id, project_validation_id, objectives, result_indicator, observe_results,user_id) VALUES (?,?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("iiisssi", $project_id, $implementing_agency_id, $project_validation_id, $objectives, $resultIndicator, $observeResults,$user_id);
         $stmt->execute();
 
