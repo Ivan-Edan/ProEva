@@ -205,7 +205,7 @@ document.getElementById('project').addEventListener('change', function () {
             <div class="modal-content" style="border-radius: 10px; padding: 20px; height: 100%; overflow-y: auto;">
                 <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
-                    <h4 class="modal-title" style="font-weight: bold;">Project Title</h4>
+                    <h4 class="modal-title" style="font-weight: bold;">Task Title</h4>
                     <h6 class="modal-title" id="taskModalLabel" style="font-weight: normal;"></h6>
                 </div>
                 <div class="modal-body" style="text-align: left;">
@@ -222,7 +222,7 @@ document.getElementById('project').addEventListener('change', function () {
                     <p style="font-size: 20px;"><strong>Project Task Details</strong></p>
                     <p style="font-size: 15px;"><strong>Start Date:</strong> <span id="startDate"></span></p>
                     <p style="font-size: 15px;"><strong>End Date:</strong> <span id="endDate"></span></p>
-                    <p style="font-size: 15px;"><strong>Total Project Cost:</strong> <span id="totalCost"></span></p>
+                    <p style="font-size: 15px;"><strong>Total Task Cost:</strong> <span id="totalCost"></span></p>
                     <p style="font-size: 15px;"><strong>Fund Source:</strong> <span id="fundSource"></span></p>
                     <p style="font-size: 15px;"><strong>Funding Agency:</strong> <span id="fundingAgency"></span></p>
                     <hr style="border: 1px solid #27374D; width: 100%; margin: auto; margin-bottom: 10px;">
@@ -297,14 +297,13 @@ document.getElementById('project').addEventListener('change', function () {
 
                         <p style="font-size: 20px;"><strong>Status:</strong>
                             <select class="form-control statusDropdown" id="statusDropdown" name="statusDropdown">
-                                <option value="Done">Done</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Incoming">Incoming</option>
                             </select>
                         </p>
 
                         <div class="project-form">
-                            <p class="form-label">Project Name:</p>
+                            <p class="form-label">Task Name:</p>
                             <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Add Project Name">
 
                             <p class="form-label">Start Date:</p>
@@ -313,8 +312,9 @@ document.getElementById('project').addEventListener('change', function () {
                             <p class="form-label">End Date:</p>
                             <input type="date" class="form-control" id="endDate" name="endDate">
 
-                            <p class="form-label">Total Project Cost:</p>
-                            <input type="text" class="form-control" id="projectCost" name="projectCost" placeholder="Add Project Cost">
+                            <p class="form-label">Total Task Cost:</p>
+                            <input type="number" class="form-control" id="projectCost" name="projectCost" min="1000" placeholder="Add Project Cost">
+                            <small id="warningMessage" style="color: red; display: none;">Total cost must be at least 1000.</small>
 
                             <p class="form-label">Fund Source:</p>
                             <input type="text" class="form-control" id="fundSource" name="fundSource" placeholder="Add Fund Source">
@@ -378,14 +378,13 @@ document.getElementById('project').addEventListener('change', function () {
 
                         <p style="font-size: 20px;"><strong>Status:</strong>
                             <select class="form-control statusDropdown" id="statusDropdown" name="statusDropdown">
-                                <option value="Done">Done</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Incoming">Incoming</option>
                             </select>
                         </p>
 
                         <div class="project-form">
-                            <p class="form-label"><strong>Main Project Name:</strong></p>
+                            <p class="form-label"><strong>Main Task Name:</strong></p>
                             <select class="form-control" id="mainproject" name="mainproject">
                                 <option value="">Select Main Project</option>
                                 <?php
@@ -423,7 +422,7 @@ document.getElementById('project').addEventListener('change', function () {
                                 }
                             });
                             </script>
-                            <p class="form-label">Sub Project Name:</p>
+                            <p class="form-label">Sub Task Name:</p>
                             <input type="text" class="form-control" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
 
                             <p class="form-label">Start Date:</p>
@@ -432,8 +431,9 @@ document.getElementById('project').addEventListener('change', function () {
                             <p class="form-label">End Date:</p>
                             <input type="date" class="form-control" id="subEndDate" name="subEndDate">
 
-                            <p class="form-label">Total Project Cost:</p>
-                            <input type="text" class="form-control" id="subProjectCost" name="subProjectCost" placeholder="Add Project Cost">
+                            <p class="form-label">Total Task Cost:</p>
+                            <input type="number" class="form-control" id="subProjectCost" name="subProjectCost" min="1000" placeholder="Add Project Cost">
+                            <small id="warningMessage1" style="color: red; display: none;">Total cost must be at least 1000.</small>
 
                             <p class="form-label">Fund Source:</p>
                             <input type="text" class="form-control" id="subFundSource" name="subFundSource" placeholder="Add Fund Source">
@@ -851,5 +851,37 @@ $(document).ready(function() {
         location.reload();  // Reload the page
     });
 
+});
+</script>
+<script>
+$(document).ready(function () {
+    // Validate the input value for total cost
+    $('#projectCost').on('input', function () {
+        const value = $(this).val(); // Get the input value
+        const warningMessage = $('#warningMessage');
+        
+        // Check if the value is less than 1000
+        if (value && value < 1000) {
+            warningMessage.show(); // Show warning message
+        } else {
+            warningMessage.hide(); // Hide warning message
+        }
+    });
+});
+</script>
+<script>
+$(document).ready(function () {
+    // Validate the input value for total cost
+    $('#subProjectCost').on('input', function () {
+        const value = $(this).val(); // Get the input value
+        const warningMessage = $('#warningMessage1');
+        
+        // Check if the value is less than 1000
+        if (value && value < 1000) {
+            warningMessage.show(); // Show warning message
+        } else {
+            warningMessage.hide(); // Hide warning message
+        }
+    });
 });
 </script>
