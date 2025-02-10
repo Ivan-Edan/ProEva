@@ -67,10 +67,10 @@ require_once __DIR__ . '/../includes/config.php';
                 ?>
               </tbody>
             </table>
+            </div>
             <div id="pagination-controls" class="d-flex justify-content-center mt-3">
               <!-- Pagination buttons will be dynamically added here -->
             </div>
-          </div>
         </div>
       </div>
     </div>

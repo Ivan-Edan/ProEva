@@ -136,7 +136,7 @@ require_once __DIR__ . '/../includes/config.php';
     projectChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Total'], // Add 'Total' column
+            labels: ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4', 'Total'], // Add 'Total' column
             datasets: [
                 {
                     label: 'Appropriations',
@@ -334,7 +334,7 @@ function updateChart(data) {
           <div id="chart-container">
             <canvas id="spi-chart"></canvas>
           </div>
-          <h3 class="text-graph">Per Department Schedule Performance Index</h3>
+          <h3 class="text-graph">Per Project of the Department Overall Schedule Performance Index</h3>
         </div>
         <div class="container-6" style="height: auto;">
           <div class="d-flex justify-content-between align-items-start">

@@ -34,7 +34,7 @@ body{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin-bottom: 20px;
-    height: 500px;
+    height: 520px;
     overflow: hidden; 
     padding-top: 40px;
     padding-left: 20px;
@@ -99,7 +99,7 @@ body{
     white-space: nowrap; 
 }
 .table td {
-color: #585858;
+color: #0f0f0f;
 }
 .table thead th {
     background-color: #27374D;

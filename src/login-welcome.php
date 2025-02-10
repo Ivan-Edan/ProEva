@@ -91,6 +91,9 @@
                 <img src="<?php echo 'images/svg/user.svg'; ?>" />
                 <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your email" required />
             </div>
+            <p id="emailWarning" style="color: red; font-size: 12px; display: none;">
+                    Please enter a valid Gmail address (e.g., example@gmail.com) with no spaces.
+                </p>
             <div class="modal-buttons">
                 <input type="submit" value="Submit" class="btn" id="submitEmail" disabled />
                 <button type="button" class="btn cancel-btn" id="cancelEmail">Cancel</button>
@@ -98,6 +101,35 @@
         </form>
     </div>
 </div>
+
+<script>
+   const emailInput = document.getElementById("resetEmail");
+    const submitButton = document.getElementById("submitEmail");
+    const emailWarning = document.getElementById("emailWarning");
+
+    emailInput.addEventListener("input", () => {
+        const emailValue = emailInput.value.trim(); // Trim white spaces
+
+        // Only validate if the user has entered something
+        if (emailValue === "") {
+            emailWarning.style.display = "none"; // Hide warning for an empty field
+            submitButton.disabled = true; // Disable the button
+            return;
+        }
+
+        const isValidGmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(emailValue);
+
+        if (isValidGmail) {
+            submitButton.disabled = false; // Enable the button
+            emailWarning.style.display = "none"; // Hide warning
+        } else {
+            submitButton.disabled = true; // Keep button disabled
+            emailWarning.style.display = "block"; // Show warning
+        }
+    });
+
+</script>
+
 
 <!-- Password Reset Modal (Second Step) -->
 <div id="passwordResetModal" class="modal">

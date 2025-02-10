@@ -61,7 +61,7 @@ body {
 
 .table td {
     border-bottom: 0.5px solid #bebebe;
-    color: #585858;
+    color: #0f0f0f !important;
 }
 
 .table tbody tr:hover {
