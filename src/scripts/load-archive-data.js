@@ -593,9 +593,8 @@ function attachArchiveFormListeners() {
 }
 
 // Add event listeners for all "Download as Excel" buttons
-document.querySelectorAll('[id^="downloadExcel"]').forEach(button => {
+document.querySelectorAll('[id^="downloadExcel"]').forEach((button) => {
     button.addEventListener('click', function () {
-        // Get the closest modal to the button
         const modal = this.closest('.modal');
 
         if (!modal) {
@@ -604,70 +603,411 @@ document.querySelectorAll('[id^="downloadExcel"]').forEach(button => {
             return;
         }
 
-        // Find the hidden input fields within the same modal
         const submissionIdInput = modal.querySelector('[id$="SubmissionId"]');
         const formTypeInput = modal.querySelector('[id$="Type"]');
 
-        // Validate if the hidden inputs exist
         if (!formTypeInput || !submissionIdInput) {
-            console.error('Missing hidden input fields for form type or submission ID in modal:', modal.id);
+            console.error('Missing hidden input fields.');
             alert('Unable to download Excel: Missing data fields.');
             return;
         }
 
-        // Get values from hidden inputs
-        const formType = formTypeInput.value;
-        const submissionId = submissionIdInput.value;
+        const formType = formTypeInput.value.trim();
+        const submissionId = submissionIdInput.value.trim();
 
         if (!formType || !submissionId) {
-            console.error(`Invalid form type or submission ID: formType=${formType}, submissionId=${submissionId}`);
+            console.error(`Invalid data: formType=${formType}, submissionId=${submissionId}`);
             alert('Unable to download Excel: Invalid data.');
             return;
         }
 
         // Fetch form data and generate Excel
         fetch(`includes/get-form-data.php?formType=${formType}&submissionId=${submissionId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    console.log('Data fetched:', data);
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Fetched data:', data);
+
+                if (data.status === 'success' && data.data) {
                     const formData = data.data;
-                    
 
-                    const filteredData = Object.entries(formData).filter(([key]) => 
-                        !['submission_id', 'adminForm1_id','details_id','Form2_id','form3_id','form4_id	', 'adminForm2_id', 'adminForm3_id', 'adminForm4_id', 'adminForm5_id', 'adminForm6_id', 'adminForm7_id'].includes(key)
-                    );
-// Transform data into columns with headers at the top
-const headers = filteredData.map(([key]) => key); // Extract keys as headers
-const values = filteredData.map(([, value]) => value); // Extract corresponding values
+                    if (Object.keys(formData).length === 0) {
+                        console.warn('Form data is empty.');
+                        alert('No data found for this submission.');
+                        return;
+                    }
 
-// Create a 2D array with headers as the first row and values as the second row
-const sheetData = [headers, values];
+                    if (["form1", "form2", "form3", "form4", "adminform1", "adminform2", "adminform3", "adminform4", "adminform5", "adminform6", "adminform7"].includes(formType)) {
+                        generateWorksheetForForms(formData, submissionId, formType);
+                    } else {
+                        const filteredData = Object.entries(formData).filter(([key]) => 
+                            !['submission_id', 'adminForm1_id', 'details_id', 'Form2_id', 'form3_id', 'form4_id', 'adminForm2_id', 'adminForm3_id', 'adminForm4_id', 'adminForm5_id', 'adminForm6_id', 'adminForm7_id'].includes(key)
+                        );
 
+                        if (filteredData.length === 0) {
+                            console.warn('Filtered data is empty.');
+                            alert('No valid data fields found for the Excel export.');
+                            return;
+                        }
 
-////////////////////////////////////////////////////////
-                    // Create a new workbook and add data
-                    const workbook = XLSX.utils.book_new();
-                    const worksheet = XLSX.utils.json_to_sheet(sheetData);
-                    XLSX.utils.book_append_sheet(workbook, worksheet, `${formType} Data`);
+                        console.log('Filtered data:', filteredData);
 
-                    // Trigger download
-                    const fileName = `${formType}_Submission_${submissionId}.xlsx`;
-                    XLSX.writeFile(workbook, fileName);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 500); // Delay for a smoother user experience
+                        const headers = filteredData.map(([key]) => key);
+                        const values = filteredData.map(([, value]) => value);
+                        const sheetData = [headers, values];
+
+                        let worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+                        worksheet['!sheetView'] = [{ showGridLines: false }];
+
+                        const workbook = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(workbook, worksheet, `${formType} Data`);
+
+                        const fileName = `${formType}_Submission_${submissionId}.xlsx`;
+                        XLSX.writeFile(workbook, fileName);
+                    }
+
+                    setTimeout(() => window.location.reload(), 500);
                 } else {
-                    alert('Unable to fetch form data. Please try again.');
+                    alert('Unable to fetch form data.');
                     console.error('Error fetching data:', data.message);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error fetching data:', error);
                 alert('An error occurred while processing the request.');
             });
     });
 });
+
+async function generateWorksheetForForms(data, submissionId, formType) {
+    const templatePath = `includes/excel/${formType.toUpperCase()}.xlsx`;
+
+    try {
+        const response = await fetch(templatePath);
+        if (!response.ok) throw new Error("Excel template not found.");
+        const arrayBuffer = await response.arrayBuffer();
+
+        const workbook = new ExcelJS.Workbook();
+        await workbook.xlsx.load(arrayBuffer);
+        const worksheet = workbook.worksheets[0];
+
+        const today = new Date();
+        let userSelectedMonth = today.getMonth(); // Current month (0 = Jan, 11 = Dec)
+        let userSelectedYear = today.getFullYear(); // Current year
+        
+        // Function to determine the quarter dynamically
+        const getQuarterInfo = (month) => {
+            if (month >= 0 && month <= 2) return "First Quarter";  // Jan - Mar
+            if (month >= 3 && month <= 5) return "Second Quarter"; // Apr - Jun
+            if (month >= 6 && month <= 8) return "Third Quarter";  // Jul - Sep
+            return "Fourth Quarter";  // Oct - Dec
+        };
+        
+        // Get dynamic quarter
+        const quarter = getQuarterInfo(userSelectedMonth);
+        
+        // Get current month name dynamically
+        const currentMonth = new Date(userSelectedYear, userSelectedMonth, 1).toLocaleString("en-US", { month: "long" });
+        
+        // Define form values dynamically
+        const formValues = {
+            form1: `CY ${userSelectedYear}`,
+            form4: `As of ${currentMonth} ${userSelectedYear}`,
+            form3: `As of ${currentMonth} ${userSelectedYear}`,
+            form2: `As of ${currentMonth} ${userSelectedYear}`,
+            adminform1: `As of ${currentMonth} ${userSelectedYear} (${quarter})`,
+            adminform2: `As of ${currentMonth} ${userSelectedYear} (${quarter})`,
+            adminform3: `As of ${currentMonth} ${userSelectedYear} (${quarter})`,
+            adminform4: `As of ${currentMonth} ${userSelectedYear} (${quarter})`,
+            adminform5: `In ${userSelectedYear}`,
+            adminform6: `Resolutions Passed in ${userSelectedYear}`,
+            adminform7: `In ${userSelectedYear}`
+        };
+        
+        // Assign value dynamically if formType exists
+        if (formValues[formType]) {
+            worksheet.getCell("B5").value = formValues[formType];
+        }
+        
+        // Special case for form3 and form2 (A3 instead of B5)
+        if (formType === "form3" || formType === "form2") {
+            worksheet.getCell("A3").value = formValues[formType];
+        }
+               
+
+        const cellMappings = {
+            "form1": {
+                "B12": "project_title",
+                "C8": "implementing_agency",
+                "H12": "sector",
+                "F12": "mode_of_implementation",
+                "I12": "location",
+                "J12": "city",
+                "K12": "barangay",
+
+                // Cost & Dates
+                "G12": "total_cost",
+                "L12": "start_date",
+                "M12": "end_date",
+
+                // Funding Information
+                "E12": "fund_agency",
+                "D12": "fund_source",
+
+                // Target Employment
+                "O12": "male",
+                "P12": "female",
+
+                // Additional Details
+                "C12": "comp_details",
+                "S12": "year_financial_target",
+                "T12": "year_phy_target_percent",
+                "N12": "remarks",
+
+                // Output Indicators
+                "Q12": "output_indicators",
+
+                // Monthly Targets (Dynamic row handling)
+                "S13": "mt_financial_targets",
+                "T13": "mt_physical_targets",
+
+                // Target Outputs (Dynamic column handling)
+                "U13": "target_outputs",
+
+                // Project Validation
+                "C31": "submitted_designation",
+                "C30": "submitted_by"
+            },
+            "form2": {
+                "B9": "project_title",
+                "A5": "implementing_agency", 
+                "H9": "appropriations",
+                "I9": "allotment",
+                "J9": "obligations",
+                "K9": "disbursements",
+                "L9": "target_owpa",
+                "M9": "actual_owpa",
+                "N9": "slippage",
+                "O9": "output_indicator",
+                "P9": "end_project_target",
+                "Q9": "target_date",
+                "R9": "actual_date",
+                "S9": "male",
+                "T9": "female",
+                "U9": "remarks",
+                "C12": "submitted_designation",
+                "C11": "submitted_by",
+                "C9": "start_date",
+                "D9": "end_date",
+                "E9": "fund_source",
+                "F9": "fund_agency",
+                "G9": "total_cost"
+            },
+            "form3": {
+                "A9": "project_title",
+                "C9": "sector",
+                "D9": "location",
+                "B9": "implementing_agency",
+                "B5": "implementing_agency",
+                "E9": "city",
+                "F9": "barangay",
+                "G9": "findings",
+                "H9": "typology",
+                "I9": "issue_status",
+                "J9": "reasons",
+                "K9": "actions_taken",
+                "L9": "actions_to_be_taken",
+                "B12": "submitted_designation",
+                "B11": "submitted_by"
+            },
+            "form4": {
+                "B12": "project_title",
+                "C8": "implementing_agency",
+                "D12": "objectives",
+                "E12": "result_indicator",
+                "G12": "observe_results",
+                "C24": "submitted_designation",
+                "C23": "submitted_by"
+            },
+            "adminform1": {
+                "B10": "project_title",
+                "C10": "implementing_agency",
+                "D10": "start_date",
+                "E10": "end_date",
+                "F10": "sector",
+                "G10": "fund_source",
+                "H10": "funding_agency",
+                "I10": "total_project_cost",
+                "J10": "appropriations",
+                "K10": "allotment",
+                "L10": "obligations",
+                "M10": "disbursements",
+                "N10": "funding_support",
+                "O10": "fund_utilization",
+                "P10": "target_owpa",
+                "Q10": "actual_owpa",
+                "R10": "slippage",
+                "S10": "male",
+                "T10": "female",
+                "U10": "remarks",
+                "C27": "submitted_by",
+                "C28": "designation_office",
+                "M29": "submission_date",
+                "C29": "created_at"
+            },
+            "adminform2": {
+                "B10": "project_title",
+                "D10": "location",
+                "E10": "implementing_agency",
+                "F10": "fund_utilization",
+                "G10": "target_owpa",
+                "H10": "actual_owpa",
+                "I10": "slippage",
+                "J10": "issue_details",
+                "K10": "issue_typology",
+                "L10": "issue_status",
+                "M10": "source_of_information",
+                "N10": "action_taken",
+                "O10": "actions_to_be_taken",
+                "P10": "for_npmc_action",
+                "Q10": "requested_action_from_npmc",
+                "C27": "submitted_by",
+                "C28": "designation_office",
+                "J29": "submission_date",
+                "C29": "created_at"
+            },
+            "adminform3": {
+                "B9": "project_title",
+                "D9": "total_cost",
+                "E9": "location",
+                "F9": "implementing_agency",
+                "G9": "date_of_inspection",
+                "H9": "details_on_site_inspected",
+                "I9": "findings",
+                "K9": "issues",
+                "L9": "action_taken",
+                "M9": "actions_to_be_taken",
+                "C26": "submitted_by",
+                "C27": "designation_office",
+                "J28": "submission_date",
+                "C28": "created_at"
+            },
+            "adminform4": {
+                "B9": "project_title",
+                "D9": "issue_details",
+                "E9": "issue_typology",
+                "F9": "location",
+                "G9": "implementing_agency",
+                "H9": "date_of_meeting",
+                "I9": "concerned_agency",
+                "J9": "agreements_reached",
+                "C26": "submitted_by",
+                "C27": "designation_office",
+                "H28": "submission_date",
+                "C28": "created_at"
+            },
+            "adminform5": {
+                "B9": "training_title",
+                "D9": "training_objective",
+                "E9": "training_date",
+                "F9": "conducted_facilitated_attended",
+                "G9": "lead_office_unit",
+                "H9": "participating_offices",
+                "I9": "male",
+                "J9": "female",
+                "K9": "total",
+                "L9": "results_feedback",
+                "C26": "submitted_by",
+                "C27": "designation_office",
+                "H28": "submission_date",
+                "C28": "created_at"
+            },
+            "adminform6": {
+                "B10": "resolution_number",
+                "C10": "resolution_title",
+                "E10": "date_approved",
+                "F10": "resolution",
+                "H10": "resolution_link",
+                "D27": "submitted_by",
+                "D28": "designation_office",
+                "G29": "submission_date",
+                "D29": "created_at"
+            },
+            "adminform7": {
+                "B9": "project_title",
+                "D9": "location",
+                "E9": "implementing_agency",
+                "F9": "nature",
+                "G9": "details",
+                "H9": "strategies",
+                "I9": "responsible_entity",
+                "J9": "lesson_learned",
+                "C26": "submitted_by",
+                "C27": "designation_office",
+                "H28": "submission_date",
+                "C28": "created_at"
+            }
+        };
+
+        if (cellMappings[formType]) {
+            Object.entries(cellMappings[formType]).forEach(([cell, key]) => {
+                if (data[key]) {
+                    if (["mt_financial_targets", "mt_physical_targets"].includes(key)) {
+                        // Handle multiple values in separate rows
+                        const values = data[key].split(", ");
+                        values.forEach((value, index) => {
+                            const rowNumber = parseInt(cell.match(/\d+/)[0]);
+                            const columnLetter = cell.match(/[A-Z]+/)[0];
+                            const newCell = `${columnLetter}${rowNumber + index}`;
+                            worksheet.getCell(newCell).value = value;
+                        });
+                    } else if (key === "target_outputs") {
+                        // Handle multiple values in diagonal columns
+                        const values = data[key].split(", ");
+                        let columnCharCode = cell.charCodeAt(0); // Get ASCII code of 'U'
+                        let rowNumber = parseInt(cell.match(/\d+/)[0]);
+
+                        values.forEach((value, index) => {
+                            const newCell = `${String.fromCharCode(columnCharCode + index)}${rowNumber + index}`;
+                            worksheet.getCell(newCell).value = value;
+                        });
+                    } else {
+                        worksheet.getCell(cell).value = data[key];
+                    }
+                }
+            });
+        }
+        if (cellMappings[formType]) {
+            Object.entries(cellMappings[formType]).forEach(([cell, key]) => {
+                if (data[key]) {
+                    // Special case for "implementing_agency" in form2
+                    if (formType === "form2" && key === "implementing_agency") {
+                        worksheet.getCell(cell).value = `Implementing Agency: ${data[key]}`;
+                    } else {
+                        worksheet.getCell(cell).value = data[key];
+                    }
+                }
+            });
+        }
+        
+        const fileName = `${formType.toUpperCase()}_Submission_${submissionId}.xlsx`;
+        const buffer = await workbook.xlsx.writeBuffer();
+
+        const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    } catch (error) {
+        console.error("Error processing the Excel file:", error);
+        alert("Error processing the Excel file. Please check the template.");
+    }
+}
+
+
+
+
 
 
 
