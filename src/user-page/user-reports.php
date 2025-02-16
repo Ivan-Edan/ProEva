@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <br>
-                    <h5 class="text-graph">Per Department’s Project Financial Status Report (in PHP)</h5>
+                    <h5 class="text-graph">Per Project Financial Status Report (in PHP)</h5>
                 </div>
                 <br>
             </div>

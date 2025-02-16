@@ -138,7 +138,7 @@ fetchReports();
     projectChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Total'], // Add 'Total' column
+            labels: ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4', 'Total'], // Add 'Total' column
             datasets: [
                 {
                     label: 'Appropriations',
