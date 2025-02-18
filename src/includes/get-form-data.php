@@ -220,7 +220,6 @@ try {
         ",
         'adminform2' => "
             SELECT 
-                SELECT
                     adminForm2_id AS submission_id,
                     project_title,
                     location,
