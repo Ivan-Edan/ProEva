@@ -85,7 +85,6 @@ function loadForm1Logic() {
                             <div class="col-md-3">
                                 <label for="mode_implementation_${projectCount}">Mode of Implementation:</label>
                                 <select class="form-control" id="mode_implementation_${projectCount}" name="mode_of_implementation_${projectCount}">
-                                <div class="invalid-feedback"></div>
                                     <option value=" By administration"> By administration</option>
                                     <option value=" By Contract"> By Contract</option>
                                     <option value=" Implemented by the Development Partner/Funding Agency">Implemented by the Development Partner/Funding Agency</option>
@@ -95,7 +94,6 @@ function loadForm1Logic() {
                             <div class="col-md-3">
                                 <label for="sector_${projectCount}">Sector:</label>
                                 <select class="form-control" id="sector_${projectCount}" name="sector_${projectCount}" required>
-                                <div class="invalid-feedback"></div>
                                     <option value=" General Public Services"> General Public Services</option>
                                     <option value=" Social Services"> Social Services</option>
                                     <option value="Economic Services">Economic Services</option>
@@ -142,7 +140,6 @@ function loadForm1Logic() {
                             <div class="col-md-12">
                                 <label for="remarks_${projectCount}">Remarks:</label>
                                 <select class="form-control" id="remarks_${projectCount}" name="remarks_${projectCount}" required>
-                                <div class="invalid-feedback"></div>
                                     <option value=" Ongoing"> Ongoing</option>
                                     <option value=" Completed"> Completed</option>
                                 </select>
@@ -221,6 +218,8 @@ function loadForm1Logic() {
         
         projectFormsContainer.appendChild(projectForm);
 
+        attachYearTargetListeners(projectCount);
+
         submitButton.addEventListener('click', handleSubmit);
 
         // Attach Add Indicator functionality
@@ -236,7 +235,68 @@ function loadForm1Logic() {
         enforceNumberInput();
     }
     
+        // Function to calculate Year Financial Target (Sum) and Year Physical Target (Average)
+        function calculateYearTargets(projectCount) {
+            let financialTotal = 0;
+            let physicalTotal = 0;
+
+        
+            // Select inputs by 'name' instead of 'id'
+            let financialInputs = document.querySelectorAll(`[name="financial_target_${projectCount}[]"]`);
+            let physicalInputs = document.querySelectorAll(`[name="physical_target_percent_${projectCount}[]"]`);
+        
+            if (financialInputs.length === 0 && physicalInputs.length === 0) {
+                console.warn(`No financial/physical target inputs exist for projectCount: ${projectCount}`);
+                return;
+            }
+        
+            // Sum financial targets
+            financialInputs.forEach(input => {
+                let value = parseFloat(input.value) || 0;
+                financialTotal += value;
+            });
+        
+        // Sum physical targets
+            physicalInputs.forEach(input => {
+                let value = parseFloat(input.value);
+                if (!isNaN(value)) {
+                    physicalTotal += value;
+                }
+            });
+        
+            // Update Year Financial Target
+            let yearFinancialTarget = document.getElementById(`user_financial_targets_${projectCount}`);
+            if (yearFinancialTarget) {
+                yearFinancialTarget.value = financialTotal.toFixed(2);
+            }
+        
+            // Update Year Physical Target
+            let yearPhysicalTarget = document.getElementById(`user_physical_targets_${projectCount}`);
+            if (yearPhysicalTarget) {
+                yearPhysicalTarget.value = physicalTotal.toFixed(2);
+            }
+        }
+        
+
+        function attachYearTargetListeners(projectCount) {
+            let inputs = document.querySelectorAll(`[name="financial_target_${projectCount}[]"], [name="physical_target_percent_${projectCount}[]"]`);
+        
+            if (inputs.length === 0) {
+                console.warn(`No financial/physical target inputs found for projectCount: ${projectCount}`);
+                return; // Prevent errors if elements are missing
+            }
+        
+            inputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    console.log(`Value changed in: ${input.name}`); // Debug log
+                    calculateYearTargets(projectCount);
+                });
+            });
+        }
     
+
+
+
     /**
      * Function to attach Add Indicator functionality to a specific project
      */
@@ -411,31 +471,30 @@ function loadForm1Logic() {
                     }
                 });
     
-                // Collect Monthly Targets
-                const monthlyTargets = [];
-                const periodStarts = form.querySelectorAll(`[name="period_start_${index + 1}[]"]`);
-                const periodEnds = form.querySelectorAll(`[name="period_end_${index + 1}[]"]`);
-                const financialTargets = form.querySelectorAll(`[name="financial_target_${index + 1}[]"]`);
-                const physicalTargetPercents = form.querySelectorAll(`[name="physical_target_percent_${index + 1}[]"]`);
-    
-                for (let i = 0; i < periodStarts.length; i++) {
-                    const start = periodStarts[i]?.value || null;
-                    const end = periodEnds[i]?.value || null;
-                    const financial = parseFloat(financialTargets[i]?.value) || null;
-                    const physical = parseFloat(physicalTargetPercents[i]?.value) || null;
-    
-                    // Add to monthlyTargets only if at least one field is filled
-                    if (start || end || financial !== null || physical !== null) {
-                        monthlyTargets.push({
-                            position: i + 1,
-                            start: start,
-                            end: end,
-                            financial: financial,
-                            physical: physical,
-                        });
-                    }
+           // Collect Monthly Targets (Now Using Static Month Names)
+            const monthlyTargets = [];
+            const financialTargets = form.querySelectorAll(`[name="financial_target_${index + 1}[]"]`);
+            const physicalTargetPercents = form.querySelectorAll(`[name="physical_target_percent_${index + 1}[]"]`);
+            const monthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            for (let i = 0; i < financialTargets.length; i++) {
+                const financial = parseFloat(financialTargets[i]?.value) || null;
+                const physical = parseFloat(physicalTargetPercents[i]?.value) || null;
+
+                // Add to monthlyTargets only if at least one field is filled
+                if (financial !== null || physical !== null) {
+                    monthlyTargets.push({
+                        position: i + 1,
+                        month: monthLabels[i], // Use static month names
+                        financial: financial,
+                        physical: physical,
+                    });
                 }
-                formData['monthly_targets'] = monthlyTargets.length > 0 ? monthlyTargets : null; // Set to null if no valid entries
+            }
+
+            formData['monthly_targets'] = monthlyTargets.length > 0 ? monthlyTargets : null; // Set to null if no valid entries
+
+
     
                 // Collect Output Indicators
                 const outputIndicators = [];
@@ -532,19 +591,12 @@ function loadForm1Logic() {
     function generateTargetRow(projectCount, month, position, isQuarterEnd) {
         // Add a border style if it's the end of a quarter
         const borderStyle = isQuarterEnd ? 'border-bottom: 2px solid #ccc; padding-bottom: 16px;' : '';
-    
         return `
             <div class="row mb-3" style="${borderStyle}">
                 <div class="col-md-3">
-                    <label>Start ${month}:</label>
-                    <input type="date" class="form-control" name="period_start_${projectCount}[]" required>
+                    <label>Month:</label>
+                    <input type="text" class="form-control" value="${month}" readonly>
                     <input type="hidden" name="mty_target_position_${projectCount}[]" value="${position}">
-                    <div class="invalid-feedback"></div>
-                </div>
-                <div class="col-md-3">
-                    <label>End ${month}:</label>
-                    <input type="date" class="form-control" name="period_end_${projectCount}[]" required>
-                    <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-3">
                     <label>Financial Targets:</label>

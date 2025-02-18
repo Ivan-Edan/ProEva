@@ -1,7 +1,3 @@
-
-
-
-
     function enforceNumberInput() {
         const numberInputs = document.querySelectorAll('input[type="number"]');
         numberInputs.forEach((input) => {
@@ -435,20 +431,15 @@
             field.classList.remove('is-invalid');
         }
     
-        const startMonths = projectForm.querySelectorAll(`[name="period_start_${projectCount}[]"]`);
-        const endMonths = projectForm.querySelectorAll(`[name="period_end_${projectCount}[]"]`);
         const financialTargets = projectForm.querySelectorAll(`[name="financial_target_${projectCount}[]"]`);
         const physicalTargets = projectForm.querySelectorAll(`[name="physical_target_percent_${projectCount}[]"]`);
     
-        startMonths.forEach((startMonth, index) => {
-            const endMonth = endMonths[index];
+        startMonths.forEach((index) => {
             const financialTarget = financialTargets[index];
             const physicalTarget = physicalTargets[index];
     
             // Check if any of the fields in the current month are filled
             const isMonthFilled =
-                startMonth.value.trim() ||
-                endMonth.value.trim() ||
                 financialTarget.value.trim() ||
                 physicalTarget.value.trim();
     
@@ -456,26 +447,6 @@
             if (!isMonthFilled) {
                 return;
             }
-    
-            // Start Month Validation
-            if (!startMonth.value) {
-                displayError(startMonth, `Start Month is required.`);
-                errors.push(`Form ${projectCount}, Month ${index + 1}: Start Month is required.`);
-            } else {
-                clearError(startMonth);
-            }
-    
-            // End Month Validation
-            if (!endMonth.value) {
-                displayError(endMonth, `End Month is required.`);
-                errors.push(`Form ${projectCount}, Month ${index + 1}: End Month is required.`);
-            } else if (new Date(endMonth.value) <= new Date(startMonth.value)) {
-                displayError(endMonth, `End Month must be after Start Month.`);
-                errors.push(`Form ${projectCount}, Month ${index + 1}: End Month must be after Start Month.`);
-            } else {
-                clearError(endMonth);
-            }
-    
             // Financial Target Validation
             if (financialTarget && !isPositiveNumber(financialTarget.value)) {
                 displayError(financialTarget, `Financial Target must be a positive number.`);

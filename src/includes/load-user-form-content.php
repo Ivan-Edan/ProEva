@@ -76,6 +76,11 @@ try {
                         WHERE oi.details_id = ipr.details_id) AS output_positions,
 
                         -- Monthly Targets (Pre-aggregated)
+                        (SELECT GROUP_CONCAT(mt.mty_target_position ORDER BY mt.mty_target_id SEPARATOR ', ')
+                        FROM usermtytarget mt
+                        WHERE mt.details_id = ipr.details_id) AS mty_target_position,
+
+                        -- Monthly Targets (Pre-aggregated)
                         (SELECT GROUP_CONCAT(mt.period_start ORDER BY mt.mty_target_id SEPARATOR ', ')
                         FROM usermtytarget mt
                         WHERE mt.details_id = ipr.details_id) AS mt_period_starts,

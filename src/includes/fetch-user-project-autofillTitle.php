@@ -2,13 +2,17 @@
 include 'config.php'; // Database connection file
 
 header('Content-Type: application/json');
+session_start(); // Start the session
 
-if (isset($_GET['query'])) {
+if (isset($_GET['query']) && isset($_SESSION['user_id'])) {
     $input = $_GET['query'];
-    $searchTerm = "%$input%"; // Prepare the search term with wildcards
+    $userId = $_SESSION['user_id']; // Get the user ID from the session
 
     try {
-        // Join userprojecttitle with initialprojectreport and filter by status = 'approved'
+        // Prepare the search term for the LIKE query
+        $searchTerm = "%{$input}%";
+
+        // Join userprojecttitle with initialprojectreport and filter by status = 'approved' and user_id
         $stmt = $conn->prepare("
             SELECT userprojecttitle.project_title, userprojecttitle.project_year 
             FROM userprojecttitle 
@@ -16,15 +20,15 @@ if (isset($_GET['query'])) {
             ON userprojecttitle.project_id = initialprojectreport.project_id 
             WHERE userprojecttitle.project_title LIKE ? 
             AND initialprojectreport.status = 'approved' 
+            AND initialprojectreport.user_id = ? 
             LIMIT 10
         ");
-        $stmt->bind_param("s", $searchTerm);
+        $stmt->bind_param("si", $searchTerm, $userId); // Bind both search term and user ID
         $stmt->execute();
 
         $result = $stmt->get_result();
         $titles = [];
         while ($row = $result->fetch_assoc()) {
-            // Ensure both project_title and project_year are returned
             $titles[] = [
                 'project_title' => $row['project_title'],
                 'project_year' => $row['project_year']
@@ -36,6 +40,6 @@ if (isset($_GET['query'])) {
         echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => 'No query parameter provided.']);
+    echo json_encode(['error' => 'Missing query parameter or user ID.']);
 }
 ?>

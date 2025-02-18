@@ -1,6 +1,7 @@
 <?php
 
 // Include database configuration
+// Dito ginagawa yung pag fefetch ng data para ipadala sa excel (user)
 include 'config.php';
 
 // Set JSON response
