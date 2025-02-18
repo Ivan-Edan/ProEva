@@ -202,36 +202,57 @@ function openFormModal(submissionId, formType) {
                         </div>`;
                 });
 
-                // Dynamic Fields - Monthly Targets
                 const monthlyTargetsContainer = document.getElementById('monthlyTargetsContainer');
-                monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
-                const periodStarts = formData.mt_period_starts ? formData.mt_period_starts.split(', ') : [];
-                const periodEnds = formData.mt_period_ends ? formData.mt_period_ends.split(', ') : [];
-                const financialTargets = formData.mt_financial_targets ? formData.mt_financial_targets.split(', ') : [];
-                const physicalTargets = formData.mt_physical_targets ? formData.mt_physical_targets.split(', ') : [];
-                periodStarts.forEach((start, index) => {
-                    const end = periodEnds[index] || '';
-                    const financial = financialTargets[index] || '';
-                    const physical = physicalTargets[index] || '';
-                    monthlyTargetsContainer.innerHTML += `
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <label class="form-label">Start Date:</label>
-                                <input type="date" class="form-control" value="${start}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">End Date:</label>
-                                <input type="date" class="form-control" value="${end}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">Financial Target:</label>
-                                <input type="text" class="form-control" value="${financial}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">Physical Target (%):</label>
-                                <input type="text" class="form-control" value="${physical}" readonly>
-                            </div>
-                        </div>`;
+                if (!monthlyTargetsContainer) {
+                    console.error("monthlyTargetsContainer not found in the DOM!");
+                } else {
+                    monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
+                }
+                
+                const months = [
+                    'January', 'February', 'March', 'April', 'May', 'June', 
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                
+                // Ensure mt_financial_targets and mt_physical_targets are strings before processing
+                const financialTargetsRaw = formData.mt_financial_targets ? String(formData.mt_financial_targets) : '';
+                const physicalTargetsRaw = formData.mt_physical_targets ? String(formData.mt_physical_targets) : '';
+                
+                console.log("Financial Targets Raw:", financialTargetsRaw);
+                console.log("Physical Targets Raw:", physicalTargetsRaw);
+                
+                // Convert CSV string into an array and trim whitespace
+                const financialTargets = financialTargetsRaw.split(',').map(item => item.trim());
+                const physicalTargets = physicalTargetsRaw.split(',').map(item => item.trim());
+                
+                console.log("Processed Financial Targets:", financialTargets);
+                console.log("Processed Physical Targets:", physicalTargets);
+                
+                // Iterate through the months and only display those with values
+                months.forEach((month, index) => {
+                    const financial = financialTargets[index] && financialTargets[index] !== "" ? financialTargets[index] : null;
+                    const physical = physicalTargets[index] && physicalTargets[index] !== "" ? physicalTargets[index] : null;
+                
+                    if (financial !== null && physical !== null) {
+                        console.log(`Displaying: ${month} - Financial Target: ${financial}, Physical Target: ${physical}`);
+                
+                        if (monthlyTargetsContainer) {
+                            monthlyTargetsContainer.innerHTML += `
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-sm-3">
+                                        <label class="form-label">${month}:</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="form-label">Financial Target:</label>
+                                        <input type="text" class="form-control" value="${financial}" readonly>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="form-label">Physical Target (%):</label>
+                                        <input type="text" class="form-control" value="${physical}" readonly>
+                                    </div>
+                                </div>`;
+                        }
+                    }
                 });
 
                 // Dynamic Fields - Target Outputs (with numbering)
