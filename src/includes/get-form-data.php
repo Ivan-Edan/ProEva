@@ -19,86 +19,93 @@ try {
     $queries = [
         // User Forms
         'form1' => "
-                    SELECT
-                        -- Project Details
-                        ipr.details_id, -- Unique ID for each submission
-                        pt.project_title,
-                        ia.implementing_agency,
-                        sc.sector,
-                        mi.mode_of_implementation,
-                        loc.location,
-                        loc.city,
-                        loc.barangay,
+            SELECT
+                -- Project Details
+                ipr.details_id, -- Unique ID for each submission
+                pt.project_title,
+                ia.implementing_agency,
+                sc.sector,
+                mi.mode_of_implementation,
+                loc.location,
+                loc.city,
+                loc.barangay,
 
-                        -- Cost and Dates
-                        tc.total_cost,
-                        sd.start_date,
-                        sd.end_date,
+                -- Cost and Dates
+                tc.total_cost,
+                sd.start_date,
+                sd.end_date,
 
-                        -- Funding Information
-                        fa.fund_agency,
-                        fs.fund_source,
+                -- Funding Information
+                fa.fund_agency,
+                fs.fund_source,
 
-                        -- Target Employment
-                        te.male,
-                        te.female,
+                -- Target Employment
+                te.male,
+                te.female,
 
-                        -- Additional Details
-                        cd.comp_details,
-                        yt.year_financial_target,
-                        yt.year_phy_target_percent,
-                        r.remarks,
+                -- Additional Details
+                cd.comp_details,
+                yt.year_financial_target,
+                yt.year_phy_target_percent,
+                r.remarks,
 
-                        -- Output Indicators (Pre-aggregated)
-                        (SELECT GROUP_CONCAT(oi.output_indicator ORDER BY oi.output_indicator_position SEPARATOR ', ')
-                        FROM useroutputindicator oi
-                        WHERE oi.details_id = ipr.details_id) AS output_indicators,
+                -- Output Indicators (Pre-aggregated)
+                (SELECT GROUP_CONCAT(oi.output_indicator ORDER BY oi.output_indicator_position SEPARATOR ', ')
+                FROM useroutputindicator oi
+                WHERE oi.details_id = ipr.details_id) AS output_indicators,
 
-                        -- Monthly Targets (Pre-aggregated)
-                        (SELECT GROUP_CONCAT(mt.period_start ORDER BY mt.mty_target_id SEPARATOR ', ')
-                        FROM usermtytarget mt
-                        WHERE mt.details_id = ipr.details_id) AS mt_period_starts,
+                -- Monthly Targets (Pre-aggregated)
+                (SELECT GROUP_CONCAT(mt.period_start ORDER BY mt.mty_target_id SEPARATOR ', ')
+                FROM usermtytarget mt
+                WHERE mt.details_id = ipr.details_id) AS mt_period_starts,
 
-                        (SELECT GROUP_CONCAT(mt.period_end ORDER BY mt.mty_target_id SEPARATOR ', ')
-                        FROM usermtytarget mt
-                        WHERE mt.details_id = ipr.details_id) AS mt_period_ends,
+                (SELECT GROUP_CONCAT(mt.period_end ORDER BY mt.mty_target_id SEPARATOR ', ')
+                FROM usermtytarget mt
+                WHERE mt.details_id = ipr.details_id) AS mt_period_ends,
 
-                        (SELECT GROUP_CONCAT(mt.financial_target ORDER BY mt.mty_target_id SEPARATOR ', ')
-                        FROM usermtytarget mt
-                        WHERE mt.details_id = ipr.details_id) AS mt_financial_targets,
+                (SELECT GROUP_CONCAT(mt.financial_target ORDER BY mt.mty_target_id SEPARATOR ', ')
+                FROM usermtytarget mt
+                WHERE mt.details_id = ipr.details_id) AS mt_financial_targets,
 
-                        (SELECT GROUP_CONCAT(mt.physical_target_percent ORDER BY mt.mty_target_id SEPARATOR ', ')
-                        FROM usermtytarget mt
-                        WHERE mt.details_id = ipr.details_id) AS mt_physical_targets,
+                (SELECT GROUP_CONCAT(mt.physical_target_percent ORDER BY mt.mty_target_id SEPARATOR ', ')
+                FROM usermtytarget mt
+                WHERE mt.details_id = ipr.details_id) AS mt_physical_targets,
 
-                        -- Target Outputs (Pre-aggregated)
-                        (SELECT GROUP_CONCAT(to1.Target_output ORDER BY to1.Target_output_id SEPARATOR ', ')
-                        FROM usertargetoutput to1
-                        WHERE to1.details_id = ipr.details_id) AS target_outputs,
+                -- Target Outputs (Pre-aggregated)
+                (SELECT GROUP_CONCAT(to1.Target_output ORDER BY to1.Target_output_id SEPARATOR ', ')
+                FROM usertargetoutput to1
+                WHERE to1.details_id = ipr.details_id) AS target_outputs,
 
-                        -- Project Validation
-                        pv.submitted_designation,
-                        pv.submitted_by
+                -- Project Validation
+                pv.submitted_designation,
+                pv.submitted_by,
 
-                    FROM initialprojectreport ipr
+                -- Approved By & Approved Date (Only Date)
+                ipr.approved_by,
+                DATE(ipr.approved_date) AS approved_date,
 
-                    -- Joins (One-to-One relationships)
-                    LEFT JOIN userprojecttitle pt ON ipr.project_id = pt.project_id
-                    LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
-                    LEFT JOIN usersector sc ON ipr.sector_id = sc.sector_id
-                    LEFT JOIN usermodeofimplementation mi ON ipr.mode_of_implementation_id = mi.mode_of_implementation_id
-                    LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
-                    LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
-                    LEFT JOIN usersdateedate sd ON ipr.s_date_e_date_id = sd.s_date_e_date_id
-                    LEFT JOIN userfundagency fa ON ipr.fund_agency_id = fa.fund_agency_id
-                    LEFT JOIN userfundsource fs ON ipr.fund_source_id = fs.fund_source_id
-                    LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.target_employee_id
-                    LEFT JOIN usercompdetails cd ON ipr.comp_details_id = cd.comp_details_id
-                    LEFT JOIN useryeartargets yt ON ipr.year_targets_id = yt.year_targets_id
-                    LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
-                    LEFT JOIN userprojectvalidation pv ON ipr.project_validation_id = pv.project_validation_id
-                WHERE ipr.details_id = ?
-        ",
+                -- Created Date (Only Date)
+                DATE(ipr.created_at) AS created_date
+
+            FROM initialprojectreport ipr
+
+            -- Joins (One-to-One relationships)
+            LEFT JOIN userprojecttitle pt ON ipr.project_id = pt.project_id
+            LEFT JOIN userimplementingagency ia ON ipr.implementing_agency_id = ia.implementing_agency_id
+            LEFT JOIN usersector sc ON ipr.sector_id = sc.sector_id
+            LEFT JOIN usermodeofimplementation mi ON ipr.mode_of_implementation_id = mi.mode_of_implementation_id
+            LEFT JOIN userlocation loc ON ipr.location_id = loc.location_id
+            LEFT JOIN usertotalcost tc ON ipr.total_cost_id = tc.total_cost_id
+            LEFT JOIN usersdateedate sd ON ipr.s_date_e_date_id = sd.s_date_e_date_id
+            LEFT JOIN userfundagency fa ON ipr.fund_agency_id = fa.fund_agency_id
+            LEFT JOIN userfundsource fs ON ipr.fund_source_id = fs.fund_source_id
+            LEFT JOIN usertargetemployee te ON ipr.target_employee_id = te.target_employee_id
+            LEFT JOIN usercompdetails cd ON ipr.comp_details_id = cd.comp_details_id
+            LEFT JOIN useryeartargets yt ON ipr.year_targets_id = yt.year_targets_id
+            LEFT JOIN userremarks r ON ipr.remarks_id = r.remarks_id
+            LEFT JOIN userprojectvalidation pv ON ipr.project_validation_id = pv.project_validation_id
+            WHERE ipr.details_id = ?"
+        ,
         'form2' => "
                 SELECT
                         pt.project_title,
@@ -123,7 +130,13 @@ try {
                         sed.end_date,
                         fsr.fund_source,
                         fa.fund_agency,
-                        tc.total_cost -- Newly added fields
+                        tc.total_cost, -- Newly added fields
+                        -- Approved By & Approved Date (Only Date)
+                        fp.approved_by,
+                        DATE(fp.approved_date) AS approved_date,
+
+                        -- Created Date (Only Date)
+                        DATE(fp.created_at) AS created_date
                     FROM userphysfinaccompreport fp
                     LEFT JOIN userprojecttitle pt ON fp.project_id = pt.project_id
                     LEFT JOIN userimplementingagency ia ON fp.implementing_agency_id = ia.implementing_agency_id
@@ -141,7 +154,7 @@ try {
                 WHERE fp.form2_id = ?
         ",
         'form3' => "
-               SELECT
+            SELECT
                     pt.project_title,
                     ia.implementing_agency,
                     sc.sector AS sector, -- Sector name from sector table
@@ -161,7 +174,14 @@ try {
         
                     -- Project Validation
                     pv.submitted_designation,
-                    pv.submitted_by
+                    pv.submitted_by,
+
+                    -- Approved By & Approved Date (Only Date)
+                    ex.approved_by,
+                    DATE(ex.approved_date) AS approved_date,
+
+                    -- Created Date (Only Date)
+                    DATE(ex.created_at) AS created_date
         
                 FROM userprojectexptrprt ex
                 LEFT JOIN userprojecttitle pt ON ex.project_id = pt.project_id
@@ -180,7 +200,14 @@ try {
                     pr.result_indicator,
                     pr.observe_results,
                     pv.submitted_designation,
-                    pv.submitted_by
+                    pv.submitted_by,
+                    
+                    -- Approved By & Approved Date (Only Date)
+                    pr.approved_by,
+                    DATE(pr.approved_date) AS approved_date,
+
+                    -- Created Date (Only Date)
+                    DATE(pr.created_at) AS created_date
                 FROM userprojectresult pr
                 LEFT JOIN userprojecttitle pt ON pr.project_id = pt.project_id
                 LEFT JOIN userimplementingagency ia ON pr.implementing_agency_id = ia.implementing_agency_id
@@ -213,8 +240,7 @@ try {
                     remarks,
                     submitted_by,
                     designation_office,
-                    submission_date,
-                    created_at
+                    submission_date
                 FROM adminform1
                 WHERE adminForm1_id = ? 
         ",
@@ -238,8 +264,7 @@ try {
                     requested_action_from_npmc,
                     submitted_by,
                     designation_office,
-                    submission_date,
-                    created_at
+                    submission_date
                 FROM adminform2
                 WHERE adminForm2_id = ?
         ",
@@ -258,8 +283,7 @@ try {
                         actions_to_be_taken,
                         submitted_by,
                         designation_office,
-                        submission_date,
-                        created_at
+                        submission_date
                     FROM adminform3
                     WHERE adminForm3_id = ?
     ",
@@ -276,8 +300,7 @@ try {
                         agreements_reached,
                         submitted_by,
                         designation_office,
-                        submission_date,
-                        created_at
+                        submission_date
                     FROM adminform4
                     WHERE adminForm4_id = ?
     ",
@@ -296,8 +319,7 @@ try {
                     af.results_feedback,
                     af.submitted_by,
                     af.designation_office,
-                    af.submission_date,
-                    af.created_at
+                    af.submission_date
                 FROM adminform5 af
                 WHERE af.adminForm5_id = ?
         ",
@@ -311,8 +333,7 @@ try {
                     resolution_link,
                     submitted_by,
                     designation_office,
-                    submission_date,
-                    created_at
+                    submission_date
                 FROM adminform6
                 WHERE adminForm6_id = ?
 ",
@@ -329,8 +350,7 @@ try {
                     lesson_learned,
                     submitted_by,
                     designation_office,
-                    submission_date,
-                    created_at
+                    submission_date
                 FROM adminform7
                 WHERE adminForm7_id = ?
         ",
