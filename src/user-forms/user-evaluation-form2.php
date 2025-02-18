@@ -43,7 +43,15 @@
                         </div>
                         <div class="col-md-2">
                             <label for="fundSource">Fund Source:</label>
-                            <input type="text" class="form-control" id="fundSource" name="user_fund_source_1">
+                            <select id="fundSource" class="form-control" name="user_fund_source_1">
+                                    <option value="ODA Loan">ODA Loan</option>
+                                    <option value="ODA Grant">ODA Grant</option>
+                                    <option value="Oda loan and Grant">Oda loan and Grant</option>
+                                    <option value="LFP">LFP</option>
+                                    <option value="PPP">PPP</option>
+                                    <option value="NTA">NTA</option>
+                                    <option value="Local Development Fund">Local Development Fund</option>
+                            </select>
                         </div>
                         <div class="col-md-2">
                             <label for="fundingAgency">Funding Agency:</label>
