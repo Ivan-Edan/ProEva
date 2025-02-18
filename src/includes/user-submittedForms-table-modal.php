@@ -137,7 +137,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>n>
+                <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>
               <!--   <button type="button" id="updateForm1" class="btn btn-primary">Update</button> -->
             </div>
         </div>
@@ -478,4 +478,4 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
