@@ -203,35 +203,3 @@ function updatePhilippineTimeDateAndDay() {
 updatePhilippineTimeDateAndDay();
 // Update every second
 setInterval(updatePhilippineTimeDateAndDay, 1000);
-document.addEventListener("DOMContentLoaded", function () {
-    function checkTableData() {
-        const tableBody = document.getElementById("table-body");
-
-        // Remove existing placeholder if present
-        const existingPlaceholder = document.querySelector(".no-data-placeholder");
-        if (existingPlaceholder) {
-            existingPlaceholder.remove();
-        }
-
-        // If no rows exist, add the placeholder inside tbody
-        if (tableBody.children.length === 0) {
-            const placeholderRow = document.createElement("tr");
-            placeholderRow.innerHTML = `
-                <td colspan="5" class="text-center">
-                    <div class="no-data-placeholder">
-                        <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
-                        <p style="font-weight: 500;">There are no data available to compute.</p>
-                    </div>
-                </td>
-            `;
-            tableBody.appendChild(placeholderRow);
-        }
-    }
-
-    // Run on initial load
-    checkTableData();
-
-    // Observe table changes
-    const observer = new MutationObserver(checkTableData);
-    observer.observe(document.getElementById("table-body"), { childList: true });
-});
