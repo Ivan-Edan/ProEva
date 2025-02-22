@@ -3,7 +3,7 @@ session_start();
 require 'includes/config.php';
 
 $ip_address = $_SERVER['REMOTE_ADDR'];
-$lockout_time = 100; // 15 minutes in seconds
+$lockout_time = 900; // 15 minutes in seconds
 $max_attempts = 3;
 
 // Count failed login attempts

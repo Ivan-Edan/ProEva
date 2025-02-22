@@ -59,6 +59,20 @@ if ($page == 'admin-monitoring-chart') {
         } else {
             echo "Page not found.";
         } ?>
+        <!-- Logout Confirmation Modal -->
+        <div class="modal fade exitModals" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <img src="images/illustration/warning.png" class="icon-modal" alt="Warning Icon">
+                    <h5 class="text-modal">Are you sure you want to Logout this account?</h5>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="includes/logout.php" class="btn btn-danger">Exit</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
     </main>
 </div>
 

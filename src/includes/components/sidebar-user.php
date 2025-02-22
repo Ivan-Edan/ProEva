@@ -40,6 +40,8 @@
     </ul>
     <!-- Logout Button -->
     <div class="logout-container text-center mt-auto py-3">
-        <a class="text-white" href="includes/logout.php"><img src="images/svg/log-out.svg" alt="Logout Icon" class="nav-icon"> Logout</a>
+        <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target=".exitModals">
+            <img src="images/svg/log-out.svg" alt="Logout Icon" class="nav-icon"> Logout
+        </a>
     </div>
 </nav>

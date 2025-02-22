@@ -47,13 +47,27 @@ $pagePath = "user-page/{$page}.php";
     <button class="hamburger-button">&#9776;</button> 
 </header>
 <div class="container-fluid">
-        <?php include 'includes/components/sidebar-user.php'; ?>
+    <?php include 'includes/components/sidebar-user.php'; ?>
         <main class="col-12 col-md-9 col-lg-10 ms-md-auto px-4 main-content">
             <?php if (file_exists($pagePath)) {
                 include $pagePath;
             } else {
                 echo "Page not found.";
             } ?>
+            <!-- Logout Confirmation Modal -->
+            <div class="modal fade exitModals" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <img src="images/illustration/warning.png" style="height: 30vh; width: 45vh; display: flex; justify-content: center; align-items: center; margin: 0 auto;" alt="Warning Icon">
+                        <h5 style="padding-top: -60px; text-align: center; margin-bottom: 10px;">Are you sure you want to Logout this account?</h5>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-secondary" style="background-color: #2c3e50 !important; border-color: #2c3e50; margin-right: 10px;" data-bs-dismiss="modal">Cancel</button>
+                            <a href="includes/logout.php" class="btn btn-danger">Exit</a>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
         </main>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
