@@ -40,44 +40,41 @@ $(document).ready(function () {
     }
 
   // If form is valid, submit via AJAX
-$.ajax({
-  type: "POST",
-  url: "login.php",
-  data: $(this).serialize(),
-  dataType: "json",
-  success: function(response) {
-    // Clear previous error messages and border styles
-    $(".error-message").remove();
-    $(".input-field").removeClass("border-danger border-success");
-    $(".input-field-password").removeClass("border-danger border-success");
-
-    if (response.error) {
-      $(".sign-up-form").append("<p class='error-message'>" + response.error + "</p>");
-      
-      // Check the exact error message and apply border-danger accordingly
-      if (response.error === "Invalid email and password combination. Please try again.") {
-        // Both email and password are incorrect
-        $(".input-field").addClass("border-danger");
-        $(".input-field-password").addClass("border-danger");
-      } else if (response.error.includes("email")) {
-        // Only email is incorrect
-        $(".input-field").addClass("border-danger");
-      } else if (response.error.includes("password")) {
-        // Only password is incorrect
-        $(".input-field-password").addClass("border-danger");
+  $.ajax({
+    type: "POST",
+    url: "login.php",
+    data: $(this).serialize(),
+    dataType: "json",
+    success: function(response) {
+      $(".error-message").remove();
+      $(".input-field").removeClass("border-danger border-success");
+      $(".input-field-password").removeClass("border-danger border-success");
+  
+      if (response.error) {
+        $(".input-field-password").after("<p class='error-message'>" + response.error + "</p>");
+  
+        // Apply border-danger styling based on the error type
+        if (response.error.includes("email")) {
+          $(".input-field").addClass("border-danger");
+        }
+        if (response.error.includes("password")) {
+          $(".input-field-password").addClass("border-danger");
+        }
+      } else if (response.redirect) {
+        $(".input-field-password").after("<p class='success-message'>Login successful! Redirecting to homepage...</p>");
+        $(".input-field").addClass("border-success");
+        $(".input-field-password").addClass("border-success");
+        setTimeout(function () {
+          window.location.href = response.redirect;
+        }, 1500);
       }
-    } else if (response.redirect) {
-      // Clear all error messages and apply success border styles
-      $(".sign-up-form").append("<p class='success-message'>Login successful! Redirecting...</p>");
-      $(".input-field").addClass("border-success");
-      $(".input-field-password").addClass("border-success");
-      window.location.href = response.redirect;
+    },
+    error: function(xhr, status, error) {
+      $(".error-message").remove();
+      $(".input-field-password").after("<p class='error-message'>An unexpected error occurred. Please try again later.</p>");
     }
-  },
-  error: function() {
-    $(".sign-up-form").append("<p class='error-message'>An error occurred. Please try again.</p>");
-  }
-});
+  });
+  
 
 
   });
@@ -292,4 +289,75 @@ cancelResetForm.addEventListener("click", function() {
   document.getElementById('submitEmail').disabled = true; // Disable the submit button
 });
 
+//Forgot Password email validation
+document.addEventListener("DOMContentLoaded", () => {
+  const emailInput = document.getElementById("resetEmail");
+  const submitButton = document.getElementById("submitEmail");
+  const emailWarning = document.getElementById("emailWarning");
 
+  emailInput.addEventListener("input", () => {
+      const emailValue = emailInput.value.trim();
+      const isValidGmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(emailValue);
+
+      if (emailValue === "") {
+          emailWarning.style.display = "none";
+          submitButton.disabled = true;
+      } else if (isValidGmail) {
+          emailWarning.style.display = "none";
+          submitButton.disabled = false;
+      } else {
+          emailWarning.style.display = "block";
+          submitButton.disabled = true;
+      }
+  });
+});
+
+// Email Modal Input Validation
+const resetEmailInput = document.getElementById('resetEmail');
+const submitEmailButton = document.getElementById('submitEmail');
+
+resetEmailInput.addEventListener('input', function() {
+    if (resetEmailInput.value.trim() === "") {
+        submitEmailButton.disabled = true;
+    } else {
+        submitEmailButton.disabled = false;
+    }
+});
+
+// Password Reset Modal Input Validation
+const newPasswordInput = document.getElementById('newPassword');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const submitResetFormButton = document.getElementById('submitResetForm');
+
+function toggleSubmitButton() {
+    if (newPasswordInput.value.trim() === "" || confirmPasswordInput.value.trim() === "") {
+        submitResetFormButton.disabled = true;
+    } else {
+        submitResetFormButton.disabled = false;
+    }
+}
+
+newPasswordInput.addEventListener('input', toggleSubmitButton);
+confirmPasswordInput.addEventListener('input', toggleSubmitButton);
+
+// Ensure the modal is hidden when the page loads
+    $(document).ready(function() {
+        $("#aboutModal").hide(); // Hide modal initially
+
+        // Show the About Modal when About button is clicked
+        $(".btn.transparent.about-btn").on("click", function() {
+            $("#aboutModal").fadeIn();
+        });
+
+        // Close the modal when the close button is clicked
+        $("#closeAboutModal").on("click", function() {
+            $("#aboutModal").fadeOut();
+        });
+
+        // Close modal if clicked outside of modal content
+        $(window).on("click", function(event) {
+            if ($(event.target).is("#aboutModal")) {
+                $("#aboutModal").fadeOut();
+            }
+        });
+    });

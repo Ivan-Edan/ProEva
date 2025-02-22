@@ -164,4 +164,56 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error fetching project stats:', error));
 });
 
-  
+// No data
+function checkIfNoProjects() {
+    const projectDropdown = document.getElementById("mainprojectDropdown");
+    const noProjectMessage = document.getElementById("no-project-message");
+    const projectDetails = document.getElementById("project-details");
+
+    // Check if there are any options beyond "Select Project"
+    if (projectDropdown.options.length <= 1) {
+        noProjectMessage.style.display = "block"; // Show "no data" message
+        projectDetails.style.display = "none"; // Hide project details
+    } else {
+        noProjectMessage.style.display = "none"; // Hide "no data" message
+    }
+}
+
+function handleProjectSelection() {
+    const projectDropdown = document.getElementById("mainprojectDropdown");
+    const noProjectMessage = document.getElementById("no-project-message");
+    const projectDetails = document.getElementById("project-details");
+
+    if (projectDropdown.value === "") {
+        projectDetails.style.display = "none"; // Hide project details
+        noProjectMessage.style.display = "block"; // Show "no data" message
+    } else {
+        projectDetails.style.display = "block"; // Show project details
+        noProjectMessage.style.display = "none"; // Hide "no data" message
+    }
+}
+
+// Run check on page load
+document.addEventListener("DOMContentLoaded", checkIfNoProjects);
+
+// Add event listener for dropdown changes
+document.getElementById("mainprojectDropdown").addEventListener("change", handleProjectSelection);
+
+
+function checkIfNoData() {
+    const tableBody = document.getElementById("table-body");
+    const noDataMessage = document.getElementById("no-data-message");
+
+    if (tableBody.children.length === 0) {
+        noDataMessage.style.display = "block"; // Show "No Data" message
+    } else {
+        noDataMessage.style.display = "none"; // Hide "No Data" message
+    }
+}
+
+// Run function on page load
+document.addEventListener("DOMContentLoaded", checkIfNoData);
+
+// Observe changes in the table body to automatically check if data exists
+const observer = new MutationObserver(checkIfNoData);
+observer.observe(document.getElementById("table-body"), { childList: true });

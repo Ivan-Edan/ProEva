@@ -37,9 +37,9 @@ require_once __DIR__ . '/../includes/config.php';
                   <span>Department</span>
                 </th>
                 <th class="text-center">Sector</th>
-                <th>Budget</th>
-                <th class="text-start">Start Date</th>
-                <th class="text-start">End Date</th>
+                <th class="text-center">Budget</th>
+                <th class="text-center">Start Date</th>
+                <th class="text-center">End Date</th>
                 <th>Completed Task</th>
                 <th>In Progress Task</th>
               </tr>

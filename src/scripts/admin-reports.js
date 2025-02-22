@@ -130,8 +130,8 @@ $(document).ready(function () {
                   // Loop through the data and add rows to the table
                   $.each(data.projects, function (index, project) {
                       let row = '<tr>';
-                      row += '<td class="text-center truncate" title="' + project.project_title + '">' + project.project_title + '</td>';
-                      row += '<td class="text-end truncate" title="' + project.department_name + '">' + project.department_name + '</td>';                      
+                      row += '<td class="text-center" title="' + project.project_title + '">' + project.project_title + '</td>';
+                      row += '<td class="text-end" title="' + project.department_name + '">' + project.department_name + '</td>';                      
                       row += '<td class="text-center">' + project.sector + '</td>';
                       row += '<td>' + project.total_cost + '</td>';
                       row += '<td>' + formatDate(project.start_date) + '</td>';

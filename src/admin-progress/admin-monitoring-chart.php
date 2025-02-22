@@ -488,15 +488,9 @@ if ($result->num_rows > 0) {
     background-color: #f9f9f9;
 }
 
-/* Styling for the placeholder */
-.select-container .form-control option:first-child {
-    color: #999;
-    font-style: italic;
-}
-
 .icon-modal-success{
-    height: 30vh;
-    width: 30vh;
+    height: 300px !important;
+    width: 380px !important;
     display: flex;
     justify-content: center;
     align-items: center;

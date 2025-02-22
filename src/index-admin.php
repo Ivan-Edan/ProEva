@@ -6,7 +6,6 @@ $timeout_duration = 1800;
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    // User is not logged in, redirect to login
     header("Location: login-welcome.php");
     exit();
 }
