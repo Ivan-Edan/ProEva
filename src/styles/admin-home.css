@@ -1,9 +1,9 @@
 
 /* Dashboard container */
 .dashboard-container {
-    max-width: 1500px; /* Ensure content is centered and fits within max width */
+    max-width: 1500px; 
     margin: 0 auto;
-    padding: 0 15px; /* Adjust padding for small screens */
+    padding: 0 15px;
 }
 
 /* Greeting box styles */
@@ -13,8 +13,8 @@
     padding: 20px;
     margin-bottom: 50px!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure the greeting box takes up full width within container */
-    display: flex; /* Use flexbox for alignment */
+    width: 100%; 
+    display: flex; 
     align-items: center;
 }
 /* Greeting text styles */
@@ -67,9 +67,9 @@
     padding: 20px;
     box-shadow:inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 auto;           /* Allow items to grow and shrink */
-    min-width: 200px;         /* Ensure minimum width for readability */
-    box-sizing: border-box;  /* Include padding and borders in width calculation */
+    flex: 1 1 auto;           
+    min-width: 200px;        
+    box-sizing: border-box;  
 }
 .stat-box-1 {
     background-color: #27374D;
@@ -77,9 +77,9 @@
     padding: 15px;
     box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 auto;           /* Allow items to grow and shrink */
-    min-width: 200px;         /* Ensure minimum width for readability */
-    box-sizing: border-box;  /* Include padding and borders in width calculation */
+    flex: 1 1 auto;           
+    min-width: 200px;         
+    box-sizing: border-box; 
 }
 .no-data{
     width: 250px;
@@ -95,16 +95,16 @@
 .stat-content {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space items evenly */
+    justify-content: space-between; 
     width: 100%;
-    margin: 0 10px;             /* Add margin to prevent touching */
-    box-sizing: border-box;     /* Include padding and borders in width calculation */
+    margin: 0 10px;            
+    box-sizing: border-box;    
 }
 /* Stat content styles */
 .stat-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center;
     width: 100%;
 }
 
@@ -189,11 +189,11 @@
     padding-top: 40px;
     box-shadow:inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    min-height: 600px; /* Minimum height for larger screens */
-    max-height: calc(100vh - 60px); /* Adjust height to fit within viewport, subtract header height if needed */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+    min-height: 600px; 
+    max-height: calc(100vh - 60px);
+    overflow-y: auto; 
     display: flex;
-    flex-direction: column; /* Stack inner box vertically */
+    flex-direction: column; 
 }
 
 .projects-inner-box {
@@ -206,80 +206,75 @@
 
 #projectChart {
     width: 100%;
-    height: 500px; /* Set a default height */
-    min-height: 300px; /* Ensure it doesn't shrink too small */
-    max-height: 700px; /* Cap the maximum height */
+    height: 500px;
+    min-height: 300px; 
+    max-height: 700px;
     overflow: auto;
     transition: height 0.3s ease, width 0.3s ease;
 }
 
 .dropdown {
-    display: flex; /* Make dropdown a flex container */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    align-items: center; 
 
 }
 
 .dropdown .btn-secondary.dropdown-toggle {
-    border-radius: 25px; /* Adjust if needed */
+    border-radius: 25px; 
     background-color: #27374D;
     width: 250px;
-    /* Add a specific width to match the dropdown button */
 }
 
 .dropdown-menu {
-    padding: 0.5rem; /* Adjust padding as needed */
-    /* Set width to match the button */
-    max-width: 250px; /* Ensure this matches or exceeds the button width */
+    padding: 0.5rem; 
+    max-width: 250px; 
 }
 
 .dropdown-item {
-    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    padding: 0.5rem 1rem; 
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
 .dropdown-menu > li:last-child > a {
-    border-bottom: none; /* Remove bottom border from the last item */
+    border-bottom: none; 
 }
-
 
 /* Adjust the width of the dropdown to match the button */
 .dropdown-menu {
-    width: 100%; /* Full width of the dropdown container */
-    box-sizing: border-box; /* Ensure padding is included in the width */
+    width: 100%; 
+    box-sizing: border-box;
 }
-
 
 @media (max-width: 1160px) {
     .project-stats-container {
-        flex-direction: column; /* Stack items vertically */
-        flex-wrap: nowrap;      /* Prevent wrapping */
-        gap: 20px;              /* Adjust gap between items */
+        flex-direction: column; 
+        flex-wrap: nowrap;      
+        gap: 20px;             
     }
 
     .stat-box {
-        flex: 1 1 auto;        /* Allow items to grow and shrink */
-      /* Remove min-width constraint */
+        flex: 1 1 auto;       
     }
 }
 /* Media queries for responsiveness */
 @media (max-width: 770px) {
     .project-stats-container {
         flex-direction: column; 
-        flex-wrap: nowrap; /* Prevent wrapping on small screens */
+        flex-wrap: nowrap; 
     }
 
     .stat-box {
-        flex: 1 1 auto;        /* Allow items to grow and shrink */
-        max-width: none;       /* Remove max-width constraint */
+        flex: 1 1 auto;       
+        max-width: none;      
         min-width: auto;
-        margin: 10px 0;    /* Remove min-width constraint */
+        margin: 10px 0;  
     }
 }
 
 @media (max-width: 500px) {
     .projects-outer-box {
-        height: auto; /* Allow outer container to adjust height */
+        height: auto; 
     }
 
     .greeting-box {
@@ -288,6 +283,6 @@
 }
 
 .dropdown-menu {
-    max-height: 300px; /* Adjust the height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 300px; 
+    overflow-y: auto;
 }

@@ -23,7 +23,7 @@ if (isset($_GET['project_id'])) {
                     upfr.project_id = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i', $project_id); // Bind the project_id parameter
+        $stmt->bind_param('i', $project_id);
         $stmt->execute();
         $result = $stmt->get_result();
 

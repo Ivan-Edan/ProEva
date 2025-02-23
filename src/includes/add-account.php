@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssi", $email, $hashedPassword, $role, $validDepartmentId);
 
     if ($stmt->execute()) {
-        $userId = $stmt->insert_id; // Get the last inserted user ID
+        $userId = $stmt->insert_id;
 
         // Now insert data into the `users_info` table
         $stmtInfo = $conn->prepare("INSERT INTO users_info (user_id, first_name, middle_name, last_name, suffix, role, department_id, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");

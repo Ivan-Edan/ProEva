@@ -1,10 +1,8 @@
-
-
 /* Dashboard container */
 .dashboard-container {
-    max-width: 1500px; /* Ensure content is centered and fits within max width */
+    max-width: 1500px; 
     margin: 0 auto;
-    padding: 0 15px; /* Adjust padding for small screens */
+    padding: 0 15px;
 }
 
 /* Greeting box styles */
@@ -14,8 +12,8 @@
     padding: 20px;
     margin-bottom: 50px!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure the greeting box takes up full width within container */
-    display: flex; /* Use flexbox for alignment */
+    width: 100%; 
+    display: flex;
     align-items: center;
 }
 /* Greeting text styles */
@@ -69,9 +67,9 @@
     padding: 15px;
     box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 auto;           /* Allow items to grow and shrink */
-    min-width: 200px;         /* Ensure minimum width for readability */
-    box-sizing: border-box;  /* Include padding and borders in width calculation */
+    flex: 1 1 auto;         
+    min-width: 200px;        
+    box-sizing: border-box; 
 }
 .stat-box-1 {
     background-color: #27374D;
@@ -79,9 +77,9 @@
     padding: 15px;
     box-shadow: inset 0 0 0 1px #BBBBBB, 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 auto;           /* Allow items to grow and shrink */
-    min-width: 200px;         /* Ensure minimum width for readability */
-    box-sizing: border-box;  /* Include padding and borders in width calculation */
+    flex: 1 1 auto;           
+    min-width: 200px;        
+    box-sizing: border-box;  
 }
 .no-data{
     width: 250px;
@@ -96,7 +94,7 @@
 .stat-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center; 
     width: 100%;
 }
 
@@ -173,34 +171,33 @@
 
 @media (max-width: 1160px) {
     .project-stats-container {
-        flex-direction: column; /* Stack items vertically */
-        flex-wrap: nowrap;      /* Prevent wrapping */
-        gap: 20px;              /* Adjust gap between items */
+        flex-direction: column; 
+        flex-wrap: nowrap;      
+        gap: 20px;            
     }
 
     .stat-box, .stat-box-1 {
-        flex: 1 1 auto;        /* Allow items to grow and shrink */
-      /* Remove min-width constraint */
+        flex: 1 1 auto;        
     }
 }
 /* Media queries for responsiveness */
 @media (max-width: 770px) {
     .project-stats-container {
         flex-direction: column; 
-        flex-wrap: nowrap; /* Prevent wrapping on small screens */
+        flex-wrap: nowrap; 
     }
 
     .stat-box, .stat-box-1{
-        flex: 1 1 auto;        /* Allow items to grow and shrink */
-        max-width: none;       /* Remove max-width constraint */
+        flex: 1 1 auto;      
+        max-width: none;      
         min-width: auto;
-        margin: 10px 0;    /* Remove min-width constraint */
+        margin: 10px 0;    
     }
 }
 
 @media (max-width: 500px) {
     .projects-outer-box {
-        height: auto; /* Allow outer container to adjust height */
+        height: auto; 
     }
 
     .greeting-box {
@@ -281,7 +278,7 @@
     font-size: 17px;
     line-height: 1.6;
     color: #555;
-    white-space: pre-wrap; /* Maintains line breaks and spaces */
+    white-space: pre-wrap; 
 }
 
 /* Bold styling for any bold text */
@@ -463,29 +460,28 @@
 
 /* Customize the scrollbar */
 .table-responsive::-webkit-scrollbar {
-    height: 8px; /* Adjust the height for horizontal scrollbars */
+    height: 8px; 
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Track color */
-    border-radius: 10px; /* Smooth corners */
+    background: #f1f1f1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1; /* Thumb color */
-    border-radius: 10px; /* Smooth corners */
+    background: #c1c1c1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1; /* Thumb color on hover */
+    background: #a1a1a1; 
 }
 
 /* For non-WebKit browsers (fallback styles) */
 .table-responsive {
-    scrollbar-color: #c1c1c1 #f1f1f1; /* Thumb color Track color */
-    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #c1c1c1 #f1f1f1; 
+    scrollbar-width: thin; 
 }
-
 
 /* Center pagination buttons */
 .pagination {
@@ -551,7 +547,7 @@
     }
 
     .table th, .table td {
-        padding: 15px; /* Adjust padding for smaller screens */
+        padding: 15px;
         font-size: 7px;
     }
 }

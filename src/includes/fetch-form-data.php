@@ -1,10 +1,10 @@
 <?php
-include 'config.php'; // Include your database configuration
+include 'config.php'; 
 
 header('Content-Type: application/json');
 
-$formType = $_GET['formType'] ?? ''; // Retrieve the form type (e.g., 'form1', 'form2', etc.)
-$formId = $_GET['formId'] ?? ''; // Retrieve the form ID passed from the frontend
+$formType = $_GET['formType'] ?? ''; 
+$formId = $_GET['formId'] ?? '';
 
 $response = [];
 
@@ -91,12 +91,12 @@ $query = "SELECT " . implode(', ', $formConfig['fields']) . " FROM {$formConfig[
 $stmt = $conn->prepare($query);
 
 if ($stmt) {
-    $stmt->bind_param('i', $formId); // Bind the form ID as an integer
+    $stmt->bind_param('i', $formId);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $response = $result->fetch_assoc(); // Fetch the single row data as an associative array
+        $response = $result->fetch_assoc();
     } else {
         $response = ['error' => 'No data found for the specified form and ID.'];
     }
@@ -106,5 +106,5 @@ if ($stmt) {
     $response = ['error' => 'Failed to prepare the database query.'];
 }
 
-echo json_encode($response); // Return the response as JSON
+echo json_encode($response);
 ?>

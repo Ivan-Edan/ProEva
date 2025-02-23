@@ -1,12 +1,12 @@
 <?php
-// Include database configuration
+
 include 'config.php';
 
-// Check if the request method is DELETE
+
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     // Get user ID from the query string
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $userId = intval($_GET['id']); // Ensure user ID is an integer
+        $userId = intval($_GET['id']); 
 
         // Begin a transaction to ensure both deletes succeed or fail together
         $conn->begin_transaction();

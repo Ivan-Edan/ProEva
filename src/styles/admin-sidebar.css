@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 html, body {
-    height: 100%; /* Ensure full height */
-    margin: 0; /* Remove default margins */
-    overflow: hidden; /* Prevent body scrolling */
+    height: 100%; 
+    margin: 0; 
+    overflow: hidden;
     font-family: Montserrat, sans-serif;
     background-color: #F5F5F5;
 }
@@ -15,14 +15,14 @@ body {
 header {
     position: fixed;
     top: 0;
-    left: 345px; /* Sidebar width */
-    width: calc(100% - 345px); /* Remaining width */
+    left: 345px; 
+    width: calc(100% - 345px); 
     height: 60px;
     display: flex;
     align-items: center;
     padding-left: 10px;
-    z-index: 1000; /* Ensure it stays on top */
-    transition: left 0.3s ease, width 0.3s ease; /* Smooth transition */
+    z-index: 1000; 
+    transition: left 0.3s ease, width 0.3s ease; 
 }
 
 .hamburger-button {
@@ -31,25 +31,25 @@ header {
     font-size: 30px;
     color: #2e3b4e;
     cursor: pointer;
-    z-index: 1001; /* Ensure it’s on top */
+    z-index: 1001; 
     position: absolute;
-    top: 15px; /* Adjust as needed */
-    left: 15px; /* Adjust as needed */
+    top: 15px; 
+    left: 15px; 
 }
 
 .sidebar-admin .hamburger-button {
     color: white;
-    top: 20px; /* Adjust as needed */
-    left: 20px; /* Adjust as needed */
+    top: 20px; 
+    left: 20px;
 }
 
 header .hamburger-button {
-    display: none; /* Hidden by default */
+    display: none; 
 }
 
 .sidebar-admin {
-    width: 345px; /* Default width */
-    height: 100vh; /* Full viewport height */
+    width: 345px; 
+    height: 100vh; 
     background-color: #2e3b4e;
     color: white;
     position: fixed;
@@ -58,13 +58,13 @@ header .hamburger-button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s ease; /* Smooth transition */
-    z-index: 1000; /* Ensure it stays on top */
+    transition: transform 0.3s ease; 
+    z-index: 1000; 
     overflow: hidden;
 }
 
 .sidebar-admin.hidden {
-    transform: translateX(-345px); /* Hide off-screen */
+    transform: translateX(-345px);
 }
 
 
@@ -72,18 +72,18 @@ header .hamburger-button {
     display: flex;
     align-items: center;
     padding: 20px;
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column; 
     margin-top: auto;
 }
 
 .logo-circle {
-    background-color: #DDE6ED; /* Circle background */
-    border-radius: 50%; /* Circular */
-    padding: 10px; /* Space around logo */
+    background-color: #DDE6ED; 
+    border-radius: 50%; 
+    padding: 10px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 180px; /* Circle size */
+    width: 180px; 
     height: 180px;
     margin-top: 50px;
     box-sizing: border-box;
@@ -104,7 +104,7 @@ header .hamburger-button {
 
 
 .logout-container {
-    width: 55%; /* Match sidebar width */
+    width: 55%; 
     background-color: #2e3b4e;
     text-align: center;
     padding: 20px 0;
@@ -122,22 +122,22 @@ header .hamburger-button {
 }
 
 .main-content {
-    margin-left: 345px; /* Sidebar width */
+    margin-left: 345px; 
     padding: 80px 20px 20px;
     transition: margin-left 0.3s ease;
     height: 100vh;
     overflow-y: auto;
-    width: calc(100% - 345px); /* Adjust width when sidebar is visible */
+    width: calc(100% - 345px); 
 }
 
 .sidebar-admin.hidden + .main-content {
-    margin-left: 0; /* Adjust margin when sidebar is hidden */
-    width: 100%; /* Fill screen */
+    margin-left: 0; 
+    width: 100%; 
 }
 
 .sidebar-admin.hidden + header {
     left: 0;
-    width: 100%; /* Fill screen */
+    width: 100%; 
 }
 
 /* Responsive adjustments */
@@ -162,27 +162,26 @@ header .hamburger-button {
 
 
 .nav {
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 0; /* Remove any default padding */
-    margin: 0; /* Remove any default margin */
+    overflow-y: auto; 
+    padding: 0; 
+    margin: 0; 
     flex-wrap: nowrap !important;
 }
 
 .nav-link {
     display: block;
-    width: 100%; /* Ensure full width of the container */
-    overflow: hidden; /* Prevent overflow of child elements */
+    width: 100%; 
+    overflow: hidden; 
 }
 
 .nav-link.active {
-    background-color: #9DB2BF; /* Background color for active link */
-    color: white; /* Ensure the text color is white */
+    background-color: #9DB2BF; 
+    color: white; 
     width: 345px;
 }
 
 .nav-link.active .nav-icon {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    /* Ensures the icon remains white */
 }
 
 .nav-icon {
@@ -194,9 +193,9 @@ header .hamburger-button {
 
 
 .nav-link .nav-icon {
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
-    margin-top: 7px; /* Increase space above the icon */
+    width: 24px;
+    height: 24px;
+    margin-top: 7px;
     margin-bottom: 7px; 
     margin-left: 30px;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);

@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; // Include database connection
+include 'config.php'; 
 
 $projectId = $_GET['project_id'];
 
@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    echo json_encode($row); // Return project details as JSON
+    echo json_encode($row); 
 } else {
     echo json_encode([]);
 }

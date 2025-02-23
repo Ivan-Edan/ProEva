@@ -16,9 +16,9 @@ try {
         }
         echo json_encode($departments);
     } else {
-        echo json_encode([]); // Empty array if no data found
+        echo json_encode([]);
     }
 } catch (Exception $e) {
-    echo json_encode(['error' => $e->getMessage()]); // Return error message if any exception occurs
+    echo json_encode(['error' => $e->getMessage()]);
 }
 ?>

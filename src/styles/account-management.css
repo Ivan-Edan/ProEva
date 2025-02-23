@@ -100,16 +100,16 @@ input[type="text"] {
 
 .search-icon {
     position: absolute;
-    left: 10px; /* Adjust as needed */
+    left: 10px; 
     top: 50%;
     transform: translateY(-50%);
-    width: 20px; /* Adjust the size as needed */
-    height: 20px; /* Adjust the size as needed */
-    pointer-events: none; /* Allows clicks to pass through the icon */
+    width: 20px; 
+    height: 20px; 
+    pointer-events: none; 
 }
 
 .search-input {
-    padding-left: 40px; /* Leave space for the icon */
+    padding-left: 40px;
     border-radius: 30px;
     border: 0.5px solid #D6D6D6;
     font-size: 15px;
@@ -123,8 +123,8 @@ button.btn {
     background-color: #27374D;
     border-color: #b4b4b4 !important;
     color: white;
-    padding: 0 15px; /* Adjust padding to fit button text */
-    margin-left: 10px; /* Space between search input and button */
+    padding: 0 15px; 
+    margin-left: 10px; 
 }
 
 button.btn:hover {
@@ -339,27 +339,27 @@ h6 {
 
 /* Customize the scrollbar */
 .table-responsive::-webkit-scrollbar {
-    height: 8px; /* Adjust the height for horizontal scrollbars */
+    height: 8px;
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Track color */
-    border-radius: 10px; /* Smooth corners */
+    background: #f1f1f1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1; /* Thumb color */
-    border-radius: 10px; /* Smooth corners */
+    background: #c1c1c1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1; /* Thumb color on hover */
+    background: #a1a1a1; 
 }
 
 /* For non-WebKit browsers (fallback styles) */
 .table-responsive {
-    scrollbar-color: #c1c1c1 #f1f1f1; /* Thumb color Track color */
-    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #c1c1c1 #f1f1f1; 
+    scrollbar-width: thin;
 }
 .btn-danger{
     background-color: red !important;
