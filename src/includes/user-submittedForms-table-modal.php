@@ -1,4 +1,3 @@
-
 <!-- Modal for Form 1 -->
 <div class="modal fade" id="form1Modal" tabindex="-1" aria-labelledby="form1ModalLabel" aria-hidden="true">
 <input type="hidden" id="form1SubmissionId">
@@ -138,7 +137,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm1" class="btn btn-success">Download as Excel</button>
-              <!--   <button type="button" id="updateForm1" class="btn btn-primary">Update</button> -->
+                <button type="button" id="updateForm1" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -401,7 +400,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" id="downloadExcelForm3" class="btn btn-success">Download as Excel</button>
-               <!--  <button type="button" id="updateForm3" class="btn btn-primary">Update</button> -->
+            <button type="button" id="updateForm3" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -473,7 +472,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm4" class="btn btn-success">Download as Excel</button>
-               <!-- <button type="button" id="updateForm4" class="btn btn-primary">Update</button>-->
+                <button type="button" id="updateForm4" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>

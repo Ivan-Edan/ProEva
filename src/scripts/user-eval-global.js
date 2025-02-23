@@ -138,6 +138,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     attachFormSubmitListener(formType);
+                        // === Disable Previous Dates After Form is Loaded ===
+                    function disablePastDates() {
+                        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+                        const startDate = document.querySelector('[name="user_start_date_2"]');
+                        const endDate = document.querySelector('[name="user_end_date_2"]');
+
+                        if (startDate) {
+                            startDate.setAttribute('min', today);
+                        }
+
+                        if (startDate && endDate) {
+                            startDate.addEventListener('change', function () {
+                                endDate.setAttribute('min', startDate.value);
+                            });
+                        }
+                    }
+
+                    // Call disablePastDates when the form loads
+                    disablePastDates();
                 })
                 .catch((error) => {
                     console.error("Error loading form:", error);

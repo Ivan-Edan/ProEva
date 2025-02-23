@@ -123,6 +123,19 @@ function enableProjectTitleAutofill() {
     projectTitleInput.parentNode.style.position = 'relative';
     projectTitleInput.parentNode.appendChild(suggestionsContainer);
 
+    // Select all form fields except project title
+    const formFields = document.querySelectorAll(".form-control:not(#projectTitle)");
+
+    // Function to disable all fields except project title
+    function disableFields(state) {
+        formFields.forEach(field => {
+            field.disabled = state;
+        });
+    }
+
+    // Initially disable all fields
+    disableFields(true);
+
     projectTitleInput.addEventListener('input', function () {
         const query = projectTitleInput.value.trim();
         if (query.length > 1) {
@@ -133,6 +146,7 @@ function enableProjectTitleAutofill() {
 
                     if (data.length === 0) {
                         suggestionsContainer.innerHTML = '<li class="autocomplete-item">No matches found</li>';
+                        disableFields(true); // Keep fields disabled if no match
                         return;
                     }
 
@@ -142,22 +156,28 @@ function enableProjectTitleAutofill() {
                         const displayText = `${project_title} (${project_year})`;
 
                         const suggestionItem = document.createElement('li');
-                        suggestionItem.className = 'autocomplete-item'; // Apply the class
+                        suggestionItem.className = 'autocomplete-item';
                         suggestionItem.textContent = displayText;
 
                         suggestionItem.addEventListener('click', () => {
-                            projectTitleInput.value = displayText; // Show selected title
-                            hiddenProjectTitle.value = project_title; // Store title
-                            hiddenProjectYear.value = project_year; // Store year
+                            projectTitleInput.value = displayText; // Set only title
+                            hiddenProjectTitle.value = project_title;
+                            hiddenProjectYear.value = project_year;
                             suggestionsContainer.innerHTML = ''; // Clear dropdown
+
+                            disableFields(false); // Enable fields after selection
                         });
 
                         suggestionsContainer.appendChild(suggestionItem);
                     });
                 })
-                .catch(err => console.error('Error fetching titles:', err));
+                .catch(err => {
+                    console.error('Error fetching titles:', err);
+                    disableFields(true); // Disable fields on error
+                });
         } else {
             suggestionsContainer.innerHTML = '';
+            disableFields(true); // Disable fields if input is empty
         }
     });
 
@@ -166,6 +186,34 @@ function enableProjectTitleAutofill() {
         if (!projectTitleInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
             suggestionsContainer.innerHTML = '';
         }
+    });
+
+    // Handle manual changes (when user types instead of clicking)
+    projectTitleInput.addEventListener("change", function () {
+        const selectedTitle = projectTitleInput.value.trim();
+        if (!selectedTitle) {
+            disableFields(true); // Disable fields if input is cleared
+            return;
+        }
+
+        fetch(`includes/fetch-user-project-autofillTitle.php?query=${encodeURIComponent(selectedTitle)}`)
+            .then(response => response.json())
+            .then(data => {
+                const matchedProject = data.find(p => p.project_title === selectedTitle);
+                if (matchedProject) {
+                    hiddenProjectTitle.value = matchedProject.project_title;
+                    hiddenProjectYear.value = matchedProject.project_year;
+                    disableFields(false); // Enable fields if valid title is selected
+                } else {
+                    hiddenProjectTitle.value = "";
+                    hiddenProjectYear.value = "";
+                    disableFields(true); // Keep fields disabled if no match
+                }
+            })
+            .catch(err => {
+                console.error("Error validating project title:", err);
+                disableFields(true);
+            });
     });
 }
 
