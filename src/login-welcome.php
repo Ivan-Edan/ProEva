@@ -30,7 +30,7 @@
                         <img src="<?php echo 'images/landing-pic.png'; ?>" class="landing-image" alt="">
                     </div>
                     <h2 class="title">ProEva: Project Management System</h2>
-                    <input type="submit" class="btn-1" value="LOGIN" id="sign-up-btn" />
+                    <button type="button" class="btn-1" id="sign-up-btn">LOGIN</button>
                 </form>
 
                 <!-- Login Form -->
@@ -89,11 +89,11 @@
             <label class="label-field-2" for="email">Email</label>
             <div class="input-field">
                 <img src="<?php echo 'images/svg/user.svg'; ?>" />
-                <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your email" required />
+                <input type="email" id="resetEmail" name="resetEmail" placeholder="Enter your gmail address" required />
             </div>
             <p id="emailWarning" style="color: red; font-size: 12px; display: none;">
-                    Please enter a valid Gmail address (e.g., example@gmail.com) with no spaces.
-                </p>
+                Please enter a valid email address (e.g., example@gmail.com).
+            </p>
             <div class="modal-buttons">
                 <input type="submit" value="Submit" class="btn" id="submitEmail" disabled />
                 <button type="button" class="btn cancel-btn" id="cancelEmail">Cancel</button>
@@ -101,35 +101,6 @@
         </form>
     </div>
 </div>
-
-<script>
-   const emailInput = document.getElementById("resetEmail");
-    const submitButton = document.getElementById("submitEmail");
-    const emailWarning = document.getElementById("emailWarning");
-
-    emailInput.addEventListener("input", () => {
-        const emailValue = emailInput.value.trim(); // Trim white spaces
-
-        // Only validate if the user has entered something
-        if (emailValue === "") {
-            emailWarning.style.display = "none"; // Hide warning for an empty field
-            submitButton.disabled = true; // Disable the button
-            return;
-        }
-
-        const isValidGmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(emailValue);
-
-        if (isValidGmail) {
-            submitButton.disabled = false; // Enable the button
-            emailWarning.style.display = "none"; // Hide warning
-        } else {
-            submitButton.disabled = true; // Keep button disabled
-            emailWarning.style.display = "block"; // Show warning
-        }
-    });
-
-</script>
-
 
 <!-- Password Reset Modal (Second Step) -->
 <div id="passwordResetModal" class="modal">
@@ -163,38 +134,6 @@
     </div>
 </div>
 
-
-<script>
-    // Email Modal Input Validation
-    const resetEmailInput = document.getElementById('resetEmail');
-    const submitEmailButton = document.getElementById('submitEmail');
-
-    resetEmailInput.addEventListener('input', function() {
-        if (resetEmailInput.value.trim() === "") {
-            submitEmailButton.disabled = true;
-        } else {
-            submitEmailButton.disabled = false;
-        }
-    });
-
-    // Password Reset Modal Input Validation
-    const newPasswordInput = document.getElementById('newPassword');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const submitResetFormButton = document.getElementById('submitResetForm');
-
-    function toggleSubmitButton() {
-        if (newPasswordInput.value.trim() === "" || confirmPasswordInput.value.trim() === "") {
-            submitResetFormButton.disabled = true;
-        } else {
-            submitResetFormButton.disabled = false;
-        }
-    }
-
-    newPasswordInput.addEventListener('input', toggleSubmitButton);
-    confirmPasswordInput.addEventListener('input', toggleSubmitButton);
-</script>
-
-
 <!-- Modal about us-->
 <div id="aboutModal" class="modalAbout">
     <div class="modal-content">
@@ -202,11 +141,11 @@
         <h2 class="title page">About Us</h2>
         <hr class="heading-line">
         <img class="CPDO" src="images/CPDO.png">
-        <p class="about-us">The <b>City Planning and Development Office (CPDO)</b> of Santa Rosa City, Laguna, is dedicated to ensuring that 
-            urban development aligns with the city’s long-term goals of sustainability and progress. The <b>Project Management System </b> is a 
-            vital tool used by CPDO to track and assess the implementation of various city 
-            development projects. This system allows for monitoring, data collection, and analyze of project 
-            performance, ensuring that resources are efficiently allocated, timelines are adhered to, and outcomes meet the 
+        <p class="about-us">The <b>City Planning and Development Office (CPDO)</b> of Santa Rosa City, Laguna, is dedicated to ensuring that
+            urban development aligns with the city’s long-term goals of sustainability and progress. The <b>Project Management System </b> is a
+            vital tool used by CPDO to track and assess the implementation of various city
+            development projects. This system allows for monitoring, data collection, and analyze of project
+            performance, ensuring that resources are efficiently allocated, timelines are adhered to, and outcomes meet the
             strategic objectives for the city's growth and development.</p>
     </div>
 </div>
@@ -271,30 +210,6 @@
         toggleConfirmPassword.src = type === "password" ? "images/svg/eye.svg" : "images/svg/eye-slash.svg";
     });
 </script>
-<script>
-    // Ensure the modal is hidden when the page loads
-    $(document).ready(function() {
-        $("#aboutModal").hide(); // Hide modal initially
-
-        // Show the About Modal when About button is clicked
-        $(".btn.transparent.about-btn").on("click", function() {
-            $("#aboutModal").fadeIn();
-        });
-
-        // Close the modal when the close button is clicked
-        $("#closeAboutModal").on("click", function() {
-            $("#aboutModal").fadeOut();
-        });
-
-        // Close modal if clicked outside of modal content
-        $(window).on("click", function(event) {
-            if ($(event.target).is("#aboutModal")) {
-                $("#aboutModal").fadeOut();
-            }
-        });
-    });
-</script>
-
 
 </body>
 </html>
