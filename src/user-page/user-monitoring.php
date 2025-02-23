@@ -24,34 +24,32 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-2">
                     <span class="title">Project Gantt Chart</span>
                     <div class="select-container"> 
-    <select class="form-control project" id="project" name="project">
-        <option value="0">Project List</option>
-        <?php
-        // Prepare the SQL query to fetch approved projects
-        $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
-                                FROM initialprojectreport ip
-                                JOIN userprojecttitle pt
-                                ON ip.project_id = pt.project_id
-                                WHERE ip.user_id = ? AND ip.status = 'approved'");
-        $stmt->bind_param("i", $user_id); // Bind the user_id parameter
-        $stmt->execute(); // Execute the query
-        $result = $stmt->get_result(); // Get the result set
-        
-        if (mysqli_num_rows($result) > 0) {
-            // Loop through the results and populate the dropdown
-            while ($row = mysqli_fetch_assoc($result)) {
-                $projId1 = htmlspecialchars($row['project_id']); // Sanitize output
-                $projName1 = htmlspecialchars($row['project_title']); // Sanitize output
-                echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
-            }
-        } else {
-            // Display a message if no approved projects are found
-            echo "<option value=''>No Approved Projects Found!</option>";
-        }
-        ?>
-    </select>
-</div>
+                        <select class="form-control project" id="project" name="project">
+                            <?php
+                            // Prepare the SQL query to fetch approved projects
+                            $stmt = $conn->prepare("SELECT pt.project_title, ip.project_id
+                                                    FROM initialprojectreport ip
+                                                    JOIN userprojecttitle pt
+                                                    ON ip.project_id = pt.project_id
+                                                    WHERE ip.user_id = ? AND ip.status = 'approved'");
+                            $stmt->bind_param("i", $user_id); // Bind the user_id parameter
+                            $stmt->execute(); // Execute the query
+                            $result = $stmt->get_result(); // Get the result set
 
+                            if (mysqli_num_rows($result) > 0) {
+                                // Loop through the results and populate the dropdown
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $projId1 = htmlspecialchars($row['project_id']); // Sanitize output
+                                    $projName1 = htmlspecialchars($row['project_title']); // Sanitize output
+                                    echo "<option value='$projId1' data-id='$user_id'>$projName1</option>";
+                                }
+                            } else {
+                                // Display a message if no approved projects are found
+                                echo "<option value=''>No Approved Projects Found!</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="container-3" style="height: fit-content;">
@@ -644,68 +642,64 @@ document.getElementById('project').addEventListener('change', function () {
 </script>
 
 <script>
-    // Add event listener to the select dropdown
-    document.getElementById('project').addEventListener('change', function() {
-        // Get the selected value
-        const selectedValue = this.value;
-        // Update the input field value
-        document.getElementById('project1').value = selectedValue;
-    });
-
-    // Add event listener to the select dropdown
-    document.getElementById('project').addEventListener('change', function() {
-        // Get the selected value
-        const selectedValue = this.value;
-        // Update the input field value
-        document.getElementById('project2').value = selectedValue;
-    });
-
-    // JavaScript to update the project title dynamically
-    document.getElementById('project').addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
+    document.addEventListener('DOMContentLoaded', function() {
+        const projectDropdown = document.getElementById('project');
         const projectTitleElement = document.querySelector('.project-title');
+        const ganttChartBody = document.getElementById('gantt-chart-body');
 
-        if (selectedOption.value === "0" || selectedOption.value === "") {
-            projectTitleElement.textContent = ""; // Clear the title if no valid project is selected
-        } else {
-            projectTitleElement.textContent = selectedOption.text; // Display the selected project's name
+        // Set the initial selected value to "1" if it exists
+        if (projectDropdown.querySelector('option[value="1"]')) {
+            projectDropdown.value = "1";
         }
-    });
 
-    document.getElementById('project').addEventListener('change', function() {
-        const selectedProjectId = this.value;
-        const selectedOption = this.options[this.selectedIndex];
-        const userId = selectedOption.getAttribute('data-id'); // Retrieve the user_id from the selected option's data-id attribute
+        function updateFields() {
+            const selectedValue = projectDropdown.value;
+            const selectedOption = projectDropdown.options[projectDropdown.selectedIndex];
+            const userId = selectedOption.getAttribute('data-id');
 
-        if (selectedProjectId && selectedProjectId !== "0" && userId) {
-            fetch('user-page/graph.php', {
+            // Update input fields
+            document.getElementById('project1').value = selectedValue;
+            document.getElementById('project2').value = selectedValue;
+
+            // Update the project title
+            projectTitleElement.textContent = selectedValue === "0" || selectedValue === "" ? "" : selectedOption.text;
+
+            // Fetch and update Gantt chart if a valid project is selected
+            if (selectedValue && selectedValue !== "0" && userId) {
+                fetch('user-page/graph.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `project_id=${selectedProjectId}&user_id=${userId}` // Send project_id and user_id in the request body
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `project_id=${selectedValue}&user_id=${userId}`
                 })
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('gantt-chart-body').innerHTML = data;
+                    ganttChartBody.innerHTML = data;
+
                     // Add event listener after updating the DOM
                     document.querySelectorAll('.main-task, .subtasks-name').forEach(item => {
                         item.addEventListener('click', function() {
-                            var projectType = this.getAttribute('data-type'); // Get project type (main or sub)
-                            if (projectType === 'main') {
-                                loadScript('scripts/user-monitoring.js');
-                            } else if (projectType === 'sub') {
-                                loadScript('scripts/user-monitoring-sub.js');
-                            }
+                            const projectType = this.getAttribute('data-type');
+                            loadScript(projectType === 'main' ? 'scripts/user-monitoring.js' : 'scripts/user-monitoring-sub.js');
                         });
                     });
                 })
-                .catch(error => console.error('Error:', error));
-        } else {
-            document.getElementById('gantt-chart-body').innerHTML = '<p>Please select a valid project.</p>';
+                .catch(error => {
+                    console.error('Error:', error);
+                    ganttChartBody.innerHTML = '<p>Failed to load data.</p>';
+                });
+            } else {
+                ganttChartBody.innerHTML = '<p>Please select a valid project.</p>';
+            }
         }
+
+        // Listen for dropdown changes
+        projectDropdown.addEventListener('change', updateFields);
+
+        // Trigger update for initial load
+        updateFields();
     });
 </script>
+
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">

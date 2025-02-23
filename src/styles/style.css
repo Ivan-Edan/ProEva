@@ -657,3 +657,7 @@ input:-internal-autofill-selected {
   margin-left: auto;
   margin-right: auto;
 }
+.success-message{
+  color: green;
+  font-weight: 400;
+}
