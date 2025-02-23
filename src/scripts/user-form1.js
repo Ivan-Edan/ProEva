@@ -227,6 +227,7 @@ function loadForm1Logic() {
 
         // Attach Remove button functionality
         attachRemoveButton(formId);
+        disablePreviousDates();
     }
 
     // Automatically add one project form when Form 1 is loaded
@@ -234,6 +235,27 @@ function loadForm1Logic() {
         createProjectForm();
         enforceNumberInput();
     }
+
+    function disablePreviousDates() {
+        const today = new Date().toISOString().split('T')[0];
+        
+        document.querySelectorAll('input[name^="start_date_"]').forEach((startDateInput) => {
+            startDateInput.setAttribute('min', today);
+            
+            const projectCount = startDateInput.name.match(/start_date_(\d+)/)?.[1];
+            if (projectCount) {
+                const endDateInput = document.querySelector(`input[name="end_date_${projectCount}"]`);
+                
+                if (endDateInput) {
+                    startDateInput.addEventListener('change', function () {
+                        endDateInput.setAttribute('min', this.value);
+                    });
+                }
+            }
+        });
+    }
+    
+    
     
         // Function to calculate Year Financial Target (Sum) and Year Physical Target (Average)
         function calculateYearTargets(projectCount) {

@@ -258,59 +258,58 @@ function handleForm1Modal(formData, submissionId, formType) {
     } else {
         monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
     }
-    
+
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June', 
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
-    
-    // Get the target position from formData (Make sure it's a valid number)
-    const targetPosition = formData.mty_target_position ? parseInt(formData.mty_target_position, 10) : 1;
-    console.log("Target Position from DB:", targetPosition);
-    
-    // Ensure mt_financial_targets and mt_physical_targets are strings before processing
-    const financialTargetsRaw = formData.mt_financial_targets ? String(formData.mt_financial_targets).trim() : '';
-    const physicalTargetsRaw = formData.mt_physical_targets ? String(formData.mt_physical_targets).trim() : '';
-    
-    // Convert CSV string into an array and trim whitespace
-    const financialTargets = financialTargetsRaw ? financialTargetsRaw.split(',').map(item => item.trim()) : [];
-    const physicalTargets = physicalTargetsRaw ? physicalTargetsRaw.split(',').map(item => item.trim()) : [];
-    
+
+    // Ensure mty_position is an array and adjust indexes (assuming it's zero-based)
+    const mty_target_position = formData.mty_target_position ? formData.mty_target_position.split(',').map(num => parseInt(num.trim(), 10) - 1) : [];
+    const financialTargetsRaw = formData.mt_financial_targets ? String(formData.mt_financial_targets) : '';
+    const physicalTargetsRaw = formData.mt_physical_targets ? String(formData.mt_physical_targets) : '';
+
+    console.log("Financial Targets Raw:", financialTargetsRaw);
+    console.log("Physical Targets Raw:", physicalTargetsRaw);
+    console.log("mty_target_position:", mty_target_position);
+
+    const financialTargets = financialTargetsRaw.split(',').map(item => item.trim());
+    const physicalTargets = physicalTargetsRaw.split(',').map(item => item.trim());
+
     console.log("Processed Financial Targets:", financialTargets);
     console.log("Processed Physical Targets:", physicalTargets);
-    
-    // Start populating the targets based on targetPosition
-    for (let i = 0; i < financialTargets.length; i++) {
-        const monthIndex = targetPosition - 1 + i; // Adjust the index based on DB position
-    
-        if (monthIndex >= months.length) break; // Prevent overflow beyond December
-    
-        const month = months[monthIndex];
-        const financial = financialTargets[i] && financialTargets[i] !== "N/A" ? financialTargets[i] : null;
-        const physical = physicalTargets[i] && physicalTargets[i] !== "N/A" ? physicalTargets[i] : null;
-    
-        if (financial !== null || physical !== null) {
-            console.log(`Displaying: ${month} - Financial Target: ${financial || 'N/A'}, Physical Target: ${physical || 'N/A'}`);
-    
-            if (monthlyTargetsContainer) {
-                monthlyTargetsContainer.innerHTML += `
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-sm-3">
-                            <label class="form-label">${month}:</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="form-label">Financial Target:</label>
-                            <input type="text" class="form-control" value="${financial || 'N/A'}" readonly>
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="form-label">Physical Target (%):</label>
-                            <input type="text" class="form-control" value="${physical || 'N/A'}" readonly>
-                        </div>
-                    </div>`;
+
+    // Iterate through the mty_position values instead of all months
+    mty_target_position.forEach((pos, i) => {
+        if (pos >= 0 && pos < months.length) {
+            const month = months[pos];
+            const financial = financialTargets[i] && financialTargets[i] !== "" ? financialTargets[i] : null;
+            const physical = physicalTargets[i] && physicalTargets[i] !== "" ? physicalTargets[i] : null;
+
+            if (financial !== null && physical !== null) {
+                console.log(`Displaying: ${month} - Financial Target: ${financial}, Physical Target: ${physical}`);
+
+                if (monthlyTargetsContainer) {
+                    monthlyTargetsContainer.innerHTML += `
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-sm-3">
+                                <label class="form-label">${month}:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">Financial Target:</label>
+                                <input type="text" class="form-control" value="${financial}" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">Physical Target (%):</label>
+                                <input type="text" class="form-control" value="${physical}" readonly>
+                            </div>
+                        </div>`;
+                }
             }
+        } else {
+            console.warn(`Invalid month position: ${pos + 1}`);
         }
-    }
-    
+    });
                 
 
     // Dynamic Fields - Target Outputs (with numbering)

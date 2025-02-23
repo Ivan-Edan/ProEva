@@ -208,52 +208,59 @@ function openFormModal(submissionId, formType) {
                 } else {
                     monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
                 }
-                
+
                 const months = [
                     'January', 'February', 'March', 'April', 'May', 'June', 
                     'July', 'August', 'September', 'October', 'November', 'December'
                 ];
-                
-                // Ensure mt_financial_targets and mt_physical_targets are strings before processing
+
+                // Ensure mty_position is an array and adjust indexes (assuming it's zero-based)
+                const mty_target_position = formData.mty_target_position ? formData.mty_target_position.split(',').map(num => parseInt(num.trim(), 10) - 1) : [];
                 const financialTargetsRaw = formData.mt_financial_targets ? String(formData.mt_financial_targets) : '';
                 const physicalTargetsRaw = formData.mt_physical_targets ? String(formData.mt_physical_targets) : '';
-                
+
                 console.log("Financial Targets Raw:", financialTargetsRaw);
                 console.log("Physical Targets Raw:", physicalTargetsRaw);
-                
-                // Convert CSV string into an array and trim whitespace
+                console.log("mty_target_position:", mty_target_position);
+
                 const financialTargets = financialTargetsRaw.split(',').map(item => item.trim());
                 const physicalTargets = physicalTargetsRaw.split(',').map(item => item.trim());
-                
+
                 console.log("Processed Financial Targets:", financialTargets);
                 console.log("Processed Physical Targets:", physicalTargets);
-                
-                // Iterate through the months and only display those with values
-                months.forEach((month, index) => {
-                    const financial = financialTargets[index] && financialTargets[index] !== "" ? financialTargets[index] : null;
-                    const physical = physicalTargets[index] && physicalTargets[index] !== "" ? physicalTargets[index] : null;
-                
-                    if (financial !== null && physical !== null) {
-                        console.log(`Displaying: ${month} - Financial Target: ${financial}, Physical Target: ${physical}`);
-                
-                        if (monthlyTargetsContainer) {
-                            monthlyTargetsContainer.innerHTML += `
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-sm-3">
-                                        <label class="form-label">${month}:</label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label class="form-label">Financial Target:</label>
-                                        <input type="text" class="form-control" value="${financial}" readonly>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label class="form-label">Physical Target (%):</label>
-                                        <input type="text" class="form-control" value="${physical}" readonly>
-                                    </div>
-                                </div>`;
+
+                // Iterate through the mty_position values instead of all months
+                mty_target_position.forEach((pos, i) => {
+                    if (pos >= 0 && pos < months.length) {
+                        const month = months[pos];
+                        const financial = financialTargets[i] && financialTargets[i] !== "" ? financialTargets[i] : null;
+                        const physical = physicalTargets[i] && physicalTargets[i] !== "" ? physicalTargets[i] : null;
+
+                        if (financial !== null && physical !== null) {
+                            console.log(`Displaying: ${month} - Financial Target: ${financial}, Physical Target: ${physical}`);
+
+                            if (monthlyTargetsContainer) {
+                                monthlyTargetsContainer.innerHTML += `
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-sm-3">
+                                            <label class="form-label">${month}:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label">Financial Target:</label>
+                                            <input type="text" class="form-control" value="${financial}" readonly>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label">Physical Target (%):</label>
+                                            <input type="text" class="form-control" value="${physical}" readonly>
+                                        </div>
+                                    </div>`;
+                            }
                         }
+                    } else {
+                        console.warn(`Invalid month position: ${pos + 1}`);
                     }
                 });
+
 
                 // Dynamic Fields - Target Outputs (with numbering)
                 const targetOutputsContainer = document.getElementById('targetOutputsContainer');
@@ -268,6 +275,15 @@ function openFormModal(submissionId, formType) {
                             </div>
                         </div>`;
                 });
+                // Get update button
+                const updateButton = document.getElementById('updateForm1');
+
+                // Check if formData.status is 'rejected'
+                if (formData.status === 'rejected') {
+                    updateButton.disabled = false;  // Enable update button
+                } else {
+                    updateButton.disabled = true;   // Disable update button
+                }
 
                 // Show modal for Form 1
                 const modal = new bootstrap.Modal(document.getElementById('form1Modal'));
@@ -314,6 +330,15 @@ function openFormModal(submissionId, formType) {
                 // Project Validation
                 document.getElementById('designationForm2').value = formData.submitted_designation || '';
                 document.getElementById('submittedByForm2').value = formData.submitted_by || '';
+                // Get update button
+                const updateButton = document.getElementById('updateForm2');
+
+                // Check if formData.status is 'rejected'
+                if (formData.status === 'rejected') {
+                    updateButton.disabled = false;  // Enable update button
+                } else {
+                    updateButton.disabled = true;   // Disable update button
+                }
                     // Show modal for Form 2
                     const modal = new bootstrap.Modal(document.getElementById('form2Modal'));
                     modal.show();
@@ -342,7 +367,16 @@ function openFormModal(submissionId, formType) {
                     // Project Validation
                     document.getElementById('submittedDesignationForm3').value = formData.submitted_designation || '';
                     document.getElementById('submittedByForm3').value = formData.submitted_by || '';
-                
+
+                    // Get update button
+                    const updateButton = document.getElementById('updateForm3');
+
+                    // Check if formData.status is 'rejected'
+                    if (formData.status === 'rejected') {
+                        updateButton.disabled = false;  // Enable update button
+                    } else {
+                        updateButton.disabled = true;   // Disable update button
+                    }
                     // Show Form 3 modal
                     const modal = new bootstrap.Modal(document.getElementById('form3Modal'));
                     modal.show();
@@ -363,6 +397,18 @@ function openFormModal(submissionId, formType) {
                     // Project Validation
                     document.getElementById('submittedDesignationForm4').value = formData.submitted_designation || '';
                     document.getElementById('submittedByForm4').value = formData.submitted_by || '';
+
+                    
+                    // Get update button
+                    const updateButton = document.getElementById('updateForm4');
+
+                    // Check if formData.status is 'rejected'
+                    if (formData.status === 'rejected') {
+                        updateButton.disabled = false;  // Enable update button
+                    } else {
+                        updateButton.disabled = true;   // Disable update button
+                    }
+                
 
                     // Show Form 4 modal
                     const modal = new bootstrap.Modal(document.getElementById('form4Modal'));
@@ -652,3 +698,53 @@ async function generateWorksheetForForms(data, submissionId, formType) {
         alert("Error processing the Excel file. Please check the template.");
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("updateForm1").addEventListener("click", function () {
+        const submissionId = document.getElementById("form1SubmissionId").value;
+
+        // Collect the form data (excluding project title)
+        const formData = new FormData();
+        formData.append("submissionId", submissionId);
+        formData.append("implementingAgency", document.getElementById("implementingAgencyForm1").value);
+        formData.append("sector", document.getElementById("sectorForm1").value);
+        formData.append("modeOfImplementation", document.getElementById("modeOfImplementationForm1").value);
+        formData.append("location", document.getElementById("locationForm1").value);
+        formData.append("city", document.getElementById("cityForm1").value);
+        formData.append("barangay", document.getElementById("barangayForm1").value);
+        formData.append("totalCost", document.getElementById("totalCostForm1").value);
+        formData.append("startDate", document.getElementById("startDateForm1").value);
+        formData.append("endDate", document.getElementById("endDateForm1").value);
+        formData.append("fundAgency", document.getElementById("fundAgencyForm1").value);
+        formData.append("fundSource", document.getElementById("fundSourceForm1").value);
+        formData.append("male", document.getElementById("maleForm1").value);
+        formData.append("female", document.getElementById("femaleForm1").value);
+        formData.append("financialTargets", document.getElementById("financialTargetsForm1").value);
+        formData.append("physicalTargets", document.getElementById("physicalTargetsForm1").value);
+        formData.append("compDetails", document.getElementById("compDetailsForm1").value);
+        formData.append("remarks", document.getElementById("remarksForm1").value);
+        formData.append("submittedDesignation", document.getElementById("submittedDesignationForm1").value);
+        formData.append("submittedBy", document.getElementById("submittedByForm1").value);
+
+        // AJAX Request to update the form
+        fetch("includes/update-form1.php", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("Form updated successfully!");
+                // Close the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById("form1Modal"));
+                modal.hide();
+                // Refresh the table/list to show updated status
+                location.reload();
+            } else {
+                alert("Error updating form: " + data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+});

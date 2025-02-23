@@ -194,38 +194,64 @@ function openFormModal(submissionId, formType) {
                         </div>`;
                 });
 
-                // Dynamic Fields - Monthly Targets
                 const monthlyTargetsContainer = document.getElementById('monthlyTargetsContainer');
-                monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
-                const periodStarts = formData.mt_period_starts ? formData.mt_period_starts.split(', ') : [];
-                const periodEnds = formData.mt_period_ends ? formData.mt_period_ends.split(', ') : [];
-                const financialTargets = formData.mt_financial_targets ? formData.mt_financial_targets.split(', ') : [];
-                const physicalTargets = formData.mt_physical_targets ? formData.mt_physical_targets.split(', ') : [];
-                periodStarts.forEach((start, index) => {
-                    const end = periodEnds[index] || '';
-                    const financial = financialTargets[index] || '';
-                    const physical = physicalTargets[index] || '';
-                    monthlyTargetsContainer.innerHTML += `
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <label class="form-label">Start Date:</label>
-                                <input type="date" class="form-control" value="${start}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">End Date:</label>
-                                <input type="date" class="form-control" value="${end}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">Financial Target:</label>
-                                <input type="text" class="form-control" value="${financial}" readonly>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">Physical Target (%):</label>
-                                <input type="text" class="form-control" value="${physical}" readonly>
-                            </div>
-                        </div>`;
-                });
+                if (!monthlyTargetsContainer) {
+                    console.error("monthlyTargetsContainer not found in the DOM!");
+                } else {
+                    monthlyTargetsContainer.innerHTML = ''; // Clear existing rows
+                }
 
+                const months = [
+                    'January', 'February', 'March', 'April', 'May', 'June', 
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+
+                // Ensure mty_position is an array and adjust indexes (assuming it's zero-based)
+                const mty_target_position = formData.mty_target_position ? formData.mty_target_position.split(',').map(num => parseInt(num.trim(), 10) - 1) : [];
+                const financialTargetsRaw = formData.mt_financial_targets ? String(formData.mt_financial_targets) : '';
+                const physicalTargetsRaw = formData.mt_physical_targets ? String(formData.mt_physical_targets) : '';
+
+                console.log("Financial Targets Raw:", financialTargetsRaw);
+                console.log("Physical Targets Raw:", physicalTargetsRaw);
+                console.log("mty_target_position:", mty_target_position);
+
+                const financialTargets = financialTargetsRaw.split(',').map(item => item.trim());
+                const physicalTargets = physicalTargetsRaw.split(',').map(item => item.trim());
+
+                console.log("Processed Financial Targets:", financialTargets);
+                console.log("Processed Physical Targets:", physicalTargets);
+
+                // Iterate through the mty_position values instead of all months
+                mty_target_position.forEach((pos, i) => {
+                    if (pos >= 0 && pos < months.length) {
+                        const month = months[pos];
+                        const financial = financialTargets[i] && financialTargets[i] !== "" ? financialTargets[i] : null;
+                        const physical = physicalTargets[i] && physicalTargets[i] !== "" ? physicalTargets[i] : null;
+
+                        if (financial !== null && physical !== null) {
+                            console.log(`Displaying: ${month} - Financial Target: ${financial}, Physical Target: ${physical}`);
+
+                            if (monthlyTargetsContainer) {
+                                monthlyTargetsContainer.innerHTML += `
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-sm-3">
+                                            <label class="form-label">${month}:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label">Financial Target:</label>
+                                            <input type="text" class="form-control" value="${financial}" readonly>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label">Physical Target (%):</label>
+                                            <input type="text" class="form-control" value="${physical}" readonly>
+                                        </div>
+                                    </div>`;
+                            }
+                        }
+                    } else {
+                        console.warn(`Invalid month position: ${pos + 1}`);
+                    }
+                });
                 // Dynamic Fields - Target Outputs (with numbering)
                 const targetOutputsContainer = document.getElementById('targetOutputsContainer');
                 targetOutputsContainer.innerHTML = ''; // Clear existing rows

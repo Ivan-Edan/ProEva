@@ -409,7 +409,7 @@
     
         return errors;
     }
-    function validateMonthlyTargets(projectForm, projectCount) {
+    /*function validateMonthlyTargets(projectForm, projectCount) {
         const errors = [];
     
         // Helper functions to display and clear error messages
@@ -465,7 +465,7 @@
         });
     
         return errors;
-    }
+    }*/
     
     function validateSubmissionSection(projectForm, projectCount) {
         const errors = [];
@@ -518,7 +518,7 @@ function validateForm(projectForm, projectCount) {
     errors = errors.concat(validateAdditionalDetailsSection(projectForm, projectCount));
     errors = errors.concat(validateTargetEmploymentSection(projectForm, projectCount));
     errors = errors.concat(validateYearFinancialTargets(projectForm, projectCount));
-    errors = errors.concat(validateMonthlyTargets(projectForm, projectCount));
+    //errors = errors.concat(validateMonthlyTargets(projectForm, projectCount));
     errors = errors.concat(validateSubmissionSection(projectForm, projectCount));
 
     return errors;
