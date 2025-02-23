@@ -1,13 +1,10 @@
-
-
 /* Main content styling */
-
 .forms-container {
-    background-color: #FFFFFF; /* White background color for the forms container */
-    border-radius: 25px !important; /* Curved corners */
-    padding: 20px; /* Padding inside the forms container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to simulate depth */
-    border: 1px solid #ddd; /* Optional: subtle border to enhance the container look */
+    background-color: #FFFFFF;
+    border-radius: 25px !important; 
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd; 
 }
 
 /* Card and list group styling */
@@ -23,27 +20,27 @@
 
 /* Customize the scrollbar */
 .table-responsive::-webkit-scrollbar {
-    height: 8px; /* Adjust the height for horizontal scrollbars */
+    height: 8px;
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Track color */
-    border-radius: 10px; /* Smooth corners */
+    background: #f1f1f1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1; /* Thumb color */
-    border-radius: 10px; /* Smooth corners */
+    background: #c1c1c1;
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1; /* Thumb color on hover */
+    background: #a1a1a1;
 }
 
 /* For non-WebKit browsers (fallback styles) */
 .table-responsive {
-    scrollbar-color: #c1c1c1 #f1f1f1; /* Thumb color Track color */
-    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
 }
 
 
@@ -78,17 +75,17 @@
 }
 
 .heading-container {
-    background-color: #f8f9fa; /* Light background color */
-    border-radius: 15px; /* Curved corners */
-    padding: 20px; /* Padding around the heading */
-    text-align: center; /* Center the text */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-    margin-bottom: 20px; /* Spacing below the container */
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px; 
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .heading-container h1 {
-    margin: 0; /* Remove default margin */
-    font-weight: bold; /* Make the text bold */
+    margin: 0;
+    font-weight: bold;
 }
 
 .pagination-container {
@@ -111,13 +108,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px; /* Circle size */
-    height: 36px; /* Circle size */
-    border-radius: 50%; /* Makes it circular */
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%; 
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    color: #333; /* Default text color */
+    color: #333; 
     background-color: transparent;
     border: 1px solid transparent;
     transition: all 0.3s ease;
@@ -125,13 +122,13 @@
 
 .pagination li a:hover {
     color: #fff;
-    background-color: #1f3044; /* Hover background color */
+    background-color: #1f3044; 
 }
 
 .pagination li.active a {
     color: #fff;
-    background-color: #1f3044; /* Active button background color */
-    pointer-events: none; /* Disable clicking on active page */
+    background-color: #1f3044; 
+    pointer-events: none;
 }
 
 
@@ -198,14 +195,14 @@
 
 /* Header Container */
 #quarter-container {
-    background-color: #1f3247; /* Dark background */
-    padding: 10px 20px; /* Padding adjustments */
+    background-color: #1f3247;
+    padding: 10px 20px; 
     border-radius: 5px;
 }
 
 /* Flex container for dropdown */
 .filter-container {
-    margin-right: 10px; /* Space between dropdown and label */
+    margin-right: 10px;
 }
 
 /* Quarter Label Styling */
@@ -218,7 +215,7 @@
 
 /* Modal Header */
 .modal-header {
-    background-color: #243c5a; /* Dark blue header */
+    background-color: #243c5a;
     color: white;
     font-weight: bold;
 }
@@ -226,7 +223,7 @@
 /* Section Titles */
 .modal-body h6 {
     font-weight: bold;
-    color: #243c5a; /* Matching dark blue */
+    color: #243c5a;
     margin-bottom: 10px;
 }
 
@@ -249,27 +246,27 @@
 
 /* Add styles for the form list items */
 #form-list .list-group-item {
-    cursor: pointer; /* Change cursor to indicate clickable items */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Hover effect */
 #form-list .list-group-item:hover {
-    background-color: #004085; /* Change background color on hover */
-    color: #fff; /* Change text color on hover */
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    background-color: #004085;
+    color: #fff; 
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .heading-container {
-        padding: 15px; /* Adjust padding for smaller screens */
+        padding: 15px; 
     }
 }
 
 @media screen and (max-width: 576px) {
     .heading-container {
-        padding: 10px; /* Further adjust padding for very small screens */
+        padding: 10px;
     }
 }

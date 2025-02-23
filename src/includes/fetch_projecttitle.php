@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'config.php'; // Include your database connection file
+require 'config.php'; 
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401); // Unauthorized
+    http_response_code(401);
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }
@@ -42,12 +42,12 @@ if ($result_department->num_rows > 0) {
                 'project_title' => $row['project_title']
             ];
         }
-        echo json_encode($projects); // Return the list of project titles
+        echo json_encode($projects); 
     } else {
-        echo json_encode([]); // No projects found for this department
+        echo json_encode([]); 
     }
 } else {
-    http_response_code(404); // User department not found
+    http_response_code(404);
     echo json_encode(["error" => "User department not found"]);
 }
 

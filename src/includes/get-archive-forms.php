@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 
 try {
     // Capture and validate input parameters
-    $formType = isset($_GET['formType']) ? $_GET['formType'] : 'all'; // Default to 'all'
+    $formType = isset($_GET['formType']) ? $_GET['formType'] : 'all';
     $query = '';
 
     // Handle 'all' form types or specific form types
@@ -305,7 +305,7 @@ try {
     if (count($data) > 0) {
         echo json_encode(['status' => 'success', 'data' => $data]);
     } else {
-        echo json_encode(['status' => 'success', 'data' => []]); // Return empty data
+        echo json_encode(['status' => 'success', 'data' => []]);
     }
 
 } catch (Exception $e) {

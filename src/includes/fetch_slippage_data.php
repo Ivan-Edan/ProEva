@@ -30,7 +30,7 @@ try {
 
     // Prepare and bind parameters
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $department_id); // Bind the department ID as an integer
+    $stmt->bind_param("i", $department_id);
 
     // Execute the statement and get the result
     $stmt->execute();
@@ -53,10 +53,10 @@ try {
             // Check if the slippage is positive or negative
             if ($slippageValue >= 0) {
                 $positiveSlippage[] = $slippageValue;
-                $negativeSlippage[] = 0; // For negative slippage, we put 0
+                $negativeSlippage[] = 0; 
             } else {
-                $positiveSlippage[] = 0; // For positive slippage, we put 0
-                $negativeSlippage[] = abs($slippageValue); // Store absolute value of negative slippage
+                $positiveSlippage[] = 0; 
+                $negativeSlippage[] = abs($slippageValue); 
             }
         }
     }

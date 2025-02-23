@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'config.php'; // Include your database connection file
+require 'config.php'; 
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401); // Unauthorized
+    http_response_code(401); 
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }
@@ -15,7 +15,7 @@ $user_id = $_SESSION['user_id'];
 // Get pagination and status parameters
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $status = isset($_GET['status']) ? $_GET['status'] : '';
-$itemsPerPage = 5; // Adjust number of items per page
+$itemsPerPage = 5;
 
 // Calculate the offset
 $offset = ($page - 1) * $itemsPerPage;
@@ -88,7 +88,7 @@ if ($result_department->num_rows > 0) {
         'totalPages' => $totalPages
     ]);
 } else {
-    http_response_code(404); // Not found
+    http_response_code(404);
     echo json_encode(["error" => "User department not found"]);
 }
 

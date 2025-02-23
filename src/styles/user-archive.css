@@ -25,12 +25,12 @@ body {
     padding-top: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    width: 100%; /* Ensures the container is fluid and shrinks */
+    width: 100%; 
 }
 
 .table {
-    width: 100%;  /* Ensure table takes up 100% of container width */
-    table-layout: auto;  /* Auto layout to allow columns to resize based on content */
+    width: 100%;  
+    table-layout: auto;
     margin: 0;
     border-collapse: separate;
     border-spacing: 0;
@@ -118,10 +118,9 @@ body {
     border-radius: 50px;
 }
 
-
 /* Modal Header */
 .modal-header {
-    background-color: #243c5a; /* Dark blue header */
+    background-color: #243c5a; 
     color: white;
     font-weight: bold;
 }
@@ -129,7 +128,7 @@ body {
 /* Section Titles */
 .modal-body h6 {
     font-weight: bold;
-    color: #243c5a; /* Matching dark blue */
+    color: #243c5a; 
     margin-bottom: 10px;
 }
 
@@ -147,17 +146,17 @@ body {
 
 /* Buttons in Modal Footer */
 .modal-footer {
-    justify-content: center; /* Center-align buttons */
+    justify-content: center;
 }
 
 .modal-footer button {
-    min-width: 100px; /* Equal button width */
+    min-width: 100px; 
     padding: 10px 20px;
     font-size: 14px;
 }
 /* Flex container for dropdown */
 .filter-container {
-    margin-right: 10px; /* Space between dropdown and label */
+    margin-right: 10px; 
 }
 
 /* Dropdown Styling */
@@ -194,7 +193,7 @@ body {
     }
 
     .table th, .table td {
-        padding: 15px; /* Adjust padding for smaller screens */
+        padding: 15px;
         font-size: 7px;
     }
 }

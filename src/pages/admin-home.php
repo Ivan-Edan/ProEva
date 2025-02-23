@@ -16,12 +16,12 @@ if (isset($_SESSION['user_id'])) {
         $user = $result->fetch_assoc();
         $fullName = htmlspecialchars($user['first_name'] . ' ' . $user['last_name']);
     } else {
-        $fullName = 'User'; // Fallback name if not found
+        $fullName = 'User';
     }
 
     $stmt->close();
 } else {
-    $fullName = 'Guest'; // Fallback name for not logged-in users
+    $fullName = 'Guest'; 
 }
 
 // Fetch the count of admin accounts
@@ -136,63 +136,6 @@ $conn->close();
                     </li>
                     <!-- Dynamic departments will be inserted here -->
                 </ul>
-                <script>
-                    // Fetch departments and populate dropdown
-                    fetch('includes/fetch_departments.php')
-                        .then(response => response.json())
-                        .then(data => {
-                            const departmentList = document.getElementById('departmentList');
-                            const searchField = document.getElementById('searchField');
-
-                            // Function to render the department items
-                            function renderDepartments(departments) {
-                                // Clear previous list items (not the search input)
-                                const listItems = departmentList.querySelectorAll('li:not(:first-child)');
-                                listItems.forEach(item => item.remove());
-
-                                // Add department items based on filtered departments
-                                if (departments.length > 0) {
-                                    departments.forEach(department => {
-                                        const li = document.createElement('li');
-                                        const a = document.createElement('a');
-                                        a.classList.add('dropdown-item');
-                                        a.href = '#';
-                                        a.textContent = department.name; 
-                                        li.appendChild(a);
-                                        departmentList.appendChild(li);
-                                    });
-                                } else {
-                                    // If no departments are found, show a "No Results" message
-                                    const li = document.createElement('li');
-                                    li.textContent = 'No departments found.';
-                                    departmentList.appendChild(li);
-                                }
-                            }
-
-                            // Function to filter the departments based on the search query
-                            function filterDepartments(query) {
-                                // Filter departments based on the search query
-                                const filteredDepartments = data.filter(department =>
-                                    department.name.toLowerCase().includes(query.toLowerCase())
-                                );
-
-                                // Render the filtered departments
-                                renderDepartments(filteredDepartments);
-                            }
-
-                            // Initial render of all departments
-                            renderDepartments(data);
-
-                            // Search Function: Listen for input and filter departments
-                            searchField.addEventListener('input', function() {
-                                const query = this.value;
-                                filterDepartments(query); 
-                            });
-                        })
-                        .catch(error => console.error('Error fetching departments:', error));
-                        
-                </script>
-
             </div>
             <!-- Inner Container for Projects Table -->
             <div class="projects-inner-box">
@@ -206,9 +149,7 @@ $conn->close();
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Link for Line Chart, Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-    <!-- Link to your custom JS -->
     <script src="scripts/admin-home.js"></script>
 </body>
 

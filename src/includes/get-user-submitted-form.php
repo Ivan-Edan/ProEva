@@ -135,7 +135,7 @@ try {
     $data = [];
     while ($row = $result->fetch_assoc()) {
         $data[] = [
-            'submission_id' => $row['submission_id'], // Include submission ID for modal fetching
+            'submission_id' => $row['submission_id'],
             'project_name' => $row['project_title'] . ' (' . $row['project_year'] . ')',
             'form_type' => $row['form_type'],
             'status' => $row['status'],
