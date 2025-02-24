@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'config.php'; // Your database connection file
+include 'config.php';
 
 // Get logged-in user ID
-$user_id = $_SESSION['user_id']; // Assuming session stores user ID
+$user_id = $_SESSION['user_id'];
 
 // Initialize task counts
 $projectCounts = [
@@ -34,7 +34,7 @@ $result = $stmt->get_result();
 
 // Fetch results
 while ($row = $result->fetch_assoc()) {
-    $status = strtolower($row['status']); // Ensure lowercase for consistency
+    $status = strtolower($row['status']);
     if ($status == 'approved') {
         $projectCounts['accepted'] = $row['count'];
     } elseif ($status == 'rejected') {

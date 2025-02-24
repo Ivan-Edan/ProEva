@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php'; // Include database connection
+include 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
     die(json_encode(["error" => "User not logged in"]));
@@ -34,7 +34,7 @@ $sql = "SELECT i.project_id, u.project_title, up.user_id, up.project_id AS phys_
         ORDER BY u.project_title"; 
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("iii", $userId, $departmentId, $userId); // Bind user_id and department_id
+$stmt->bind_param("iii", $userId, $departmentId, $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -45,5 +45,5 @@ if ($result->num_rows > 0) {
     }
 }
 
-echo json_encode($projects); // Return projects as a JSON response
+echo json_encode($projects);
 ?>

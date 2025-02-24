@@ -3,7 +3,7 @@
 include 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $userId = $_GET['id'];  // Get user ID from query string
+    $userId = $_GET['id'];
 
     // Get JSON input and decode it
     $input = file_get_contents('php://input');

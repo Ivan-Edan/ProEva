@@ -1,18 +1,18 @@
 <?php
-include 'config.php'; // Database connection file
+include 'config.php'; 
 
 header('Content-Type: application/json');
-session_start(); // Start the session
+session_start();
 
 if (isset($_GET['query']) && isset($_SESSION['user_id'])) {
     $input = $_GET['query'];
-    $userId = $_SESSION['user_id']; // Get the user ID from the session
+    $userId = $_SESSION['user_id']; 
 
     try {
-        // Prepare the search term for the LIKE query
+
         $searchTerm = "%{$input}%";
 
-        // Join userprojecttitle with initialprojectreport and filter by status = 'approved' and user_id
+
         $stmt = $conn->prepare("
             SELECT userprojecttitle.project_title, userprojecttitle.project_year 
             FROM userprojecttitle 
@@ -23,7 +23,7 @@ if (isset($_GET['query']) && isset($_SESSION['user_id'])) {
             AND initialprojectreport.user_id = ? 
             LIMIT 10
         ");
-        $stmt->bind_param("si", $searchTerm, $userId); // Bind both search term and user ID
+        $stmt->bind_param("si", $searchTerm, $userId);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -35,7 +35,7 @@ if (isset($_GET['query']) && isset($_SESSION['user_id'])) {
             ];
         }
 
-        echo json_encode($titles); // Return results as JSON
+        echo json_encode($titles);
     } catch (Exception $e) {
         echo json_encode(['error' => $e->getMessage()]);
     }

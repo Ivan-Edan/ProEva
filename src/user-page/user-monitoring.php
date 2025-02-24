@@ -23,7 +23,7 @@ $user_id = $_SESSION['user_id'];
                 <div class="container-1">Project Monitoring</div>
                 <div class="container-2">
                     <span class="title">Project Gantt Chart</span>
-                    <div class="select-container"> 
+                    <div class="select-container">
                         <select class="form-control project" id="project" name="project">
                             <?php
                             // Prepare the SQL query to fetch approved projects
@@ -84,75 +84,79 @@ $user_id = $_SESSION['user_id'];
                 <br>
                 <div class="container-7">Project Backlog</div>
                 <div class="container-8 position-relative">
-                <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
-                    <button type="button" class="btn btn-primary mb-2 mainProject">
-                        <i class="fas fa-plus"></i> Add Main Task Details
-                    </button>
-                    <button type="button" class="btn btn-secondary subProject">
-                        <i class="fas fa-plus"></i> Add Sub Task Details
-                    </button>
+                    <div class="button-container position-absolute d-flex flex-column" style="top: 20px; right: 30px;">
+                        <button type="button" class="btn btn-primary mb-2 mainProject">
+                            <i class="fas fa-plus"></i> Add Main Task Details
+                        </button>
+                        <button type="button" class="btn btn-secondary subProject">
+                            <i class="fas fa-plus"></i> Add Sub Task Details
+                        </button>
+                    </div>
+                    <br><br><br>
+                    <div class="row">
+                        <!-- Done Projects Card -->
+                        <div class="col-md-12 mt-4">
+                            <div class="card" style="background-color: #F8F8F8;">
+                                <div class="card-body">
+                                    <div class="card card-head">
+                                        <div class="card-title">
+                                            <p class="card-text">Task Done</p>
+                                        </div>
+                                    </div>
+                                    <p class="card-text-detail-no-data">No Done Project Found!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- In Progress Projects Card -->
+                        <div class="col-md-12 mt-4">
+                            <div class="card" style="background-color: #F8F8F8;">
+                                <div class="card-body">
+                                    <div class="card card-head">
+                                        <div class="card-title">
+                                            <p class="card-text">Task In Progress</p>
+                                        </div>
+                                    </div>
+                                    <p class="card-text-detail-no-data">No In Progress Project Found!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Incoming Projects Card -->
+                        <div class="col-md-12 mt-4">
+                            <div class="card" style="background-color: #F8F8F8;">
+                                <div class="card-body">
+                                    <div class="card card-head">
+                                        <div class="card-title">
+                                            <p class="card-text">Task Incoming</p>
+                                        </div>
+                                    </div>
+                                    <p class="card-text-detail-no-data">No Incoming Project Found!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br><br><br>
-                <div class="row">
-                    <!-- Done Projects Card -->
-                    <div class="col-md-12 mt-4">
-                        <div class="card" style="background-color: #F8F8F8;">
-                            <div class="card-body">
-                                <div class="card card-head">
-                                    <div class="card-title">
-                                        <p class="card-text">Task Done</p>
-                                    </div>
-                                </div>
-                                <p class="card-text-detail-no-data">No Done Project Found!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- In Progress Projects Card -->
-                    <div class="col-md-12 mt-4">
-                        <div class="card" style="background-color: #F8F8F8;">
-                            <div class="card-body">
-                                <div class="card card-head">
-                                    <div class="card-title">
-                                        <p class="card-text">Task In Progress</p>
-                                    </div>
-                                </div>
-                                <p class="card-text-detail-no-data">No In Progress Project Found!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Incoming Projects Card -->
-                    <div class="col-md-12 mt-4">
-                        <div class="card" style="background-color: #F8F8F8;">
-                            <div class="card-body">
-                                <div class="card card-head">
-                                    <div class="card-title">
-                                        <p class="card-text">Task Incoming</p>
-                                    </div>
-                                </div>
-                                <p class="card-text-detail-no-data">No Incoming Project Found!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
     </div>
     <script>
-document.getElementById('project').addEventListener('change', function () {
-    const projectId = this.value;
+        document.getElementById('project').addEventListener('change', function() {
+            const projectId = this.value;
 
-    if (projectId !== '0') {
-        fetch('includes/fetch_backlogs.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ project_id: projectId }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Update Task Done Section
-                const taskDoneContainer = document.querySelector('.col-md-12.mt-4:nth-child(1) .card-body');
-                taskDoneContainer.innerHTML = `
+            if (projectId !== '0') {
+                fetch('includes/fetch_backlogs.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            project_id: projectId
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update Task Done Section
+                        const taskDoneContainer = document.querySelector('.col-md-12.mt-4:nth-child(1) .card-body');
+                        taskDoneContainer.innerHTML = `
                     <div class="card card-head">
                         <div class="card-title">
                             <p class="card-text">Task Done</p>
@@ -164,9 +168,9 @@ document.getElementById('project').addEventListener('change', function () {
                             : "<p class='card-text-detail-no-data'>No Done Project Found!</p>"
                     }`;
 
-                // Update Task In Progress Section
-                const inProgressContainer = document.querySelector('.col-md-12.mt-4:nth-child(2) .card-body');
-                inProgressContainer.innerHTML = `
+                        // Update Task In Progress Section
+                        const inProgressContainer = document.querySelector('.col-md-12.mt-4:nth-child(2) .card-body');
+                        inProgressContainer.innerHTML = `
                     <div class="card card-head">
                         <div class="card-title">
                             <p class="card-text">Task In Progress</p>
@@ -178,9 +182,9 @@ document.getElementById('project').addEventListener('change', function () {
                             : "<p class='card-text-detail-no-data'>No In Progress Project Found!</p>"
                     }`;
 
-                // Update Task Incoming Section
-                const incomingContainer = document.querySelector('.col-md-12.mt-4:nth-child(3) .card-body');
-                incomingContainer.innerHTML = `
+                        // Update Task Incoming Section
+                        const incomingContainer = document.querySelector('.col-md-12.mt-4:nth-child(3) .card-body');
+                        incomingContainer.innerHTML = `
                     <div class="card card-head">
                         <div class="card-title">
                             <p class="card-text">Task Incoming</p>
@@ -191,11 +195,11 @@ document.getElementById('project').addEventListener('change', function () {
                             ? data.incoming.map(task => `<p class='card-text-detail'>${task.projectName}</p>`).join('')
                             : "<p class='card-text-detail-no-data'>No Incoming Project Found!</p>"
                     }`;
-            })
-            .catch(error => console.error('Error fetching backlog data:', error));
-    }
-});
-</script>
+                    })
+                    .catch(error => console.error('Error fetching backlog data:', error));
+            }
+        });
+    </script>
 
     <!-- Modal -->
     <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
@@ -356,7 +360,6 @@ document.getElementById('project').addEventListener('change', function () {
                         <button type="submit" class="btn btn-primary submitBtn" id="submitBtn" name="submitBtn" style="background-color: #27374D; border-radius: 25px; width: 150px; border-color: #27374D; margin-left: 10px;">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -402,23 +405,23 @@ document.getElementById('project').addEventListener('change', function () {
                             </select>
 
                             <script>
-                            document.getElementById('project').addEventListener('change', function() {
-                                var selectedProjectId = this.value;
-                                var mainProjectDropdown = document.getElementById('mainproject');
-                                var mainProjectOptions = mainProjectDropdown.getElementsByTagName('option');
+                                document.getElementById('project').addEventListener('change', function() {
+                                    var selectedProjectId = this.value;
+                                    var mainProjectDropdown = document.getElementById('mainproject');
+                                    var mainProjectOptions = mainProjectDropdown.getElementsByTagName('option');
 
-                                // Loop through all options and hide those that do not match the selected project_id
-                                for (var i = 0; i < mainProjectOptions.length; i++) {
-                                    var option = mainProjectOptions[i];
-                                    var projectId = option.getAttribute('data-project-id');
+                                    // Loop through all options and hide those that do not match the selected project_id
+                                    for (var i = 0; i < mainProjectOptions.length; i++) {
+                                        var option = mainProjectOptions[i];
+                                        var projectId = option.getAttribute('data-project-id');
 
-                                    if (selectedProjectId === "0" || selectedProjectId === projectId) {
-                                        option.style.display = ''; // Show the option
-                                    } else {
-                                        option.style.display = 'none'; // Hide the option
+                                        if (selectedProjectId === "0" || selectedProjectId === projectId) {
+                                            option.style.display = ''; // Show the option
+                                        } else {
+                                            option.style.display = 'none'; // Hide the option
+                                        }
                                     }
-                                }
-                            });
+                                });
                             </script>
                             <p class="form-label">Sub Task Name:</p>
                             <input type="text" class="form-control" id="subProjectName" name="subProjectName" placeholder="Add Sub Project Name">
@@ -478,45 +481,45 @@ document.getElementById('project').addEventListener('change', function () {
             </div>
         </div>
     </div>
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon" style="width: 100px;">
-                <h5 class="text-modal">The task has been updated successfully.</h5>
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="images/illustration/successful.png" class="icon-modal-success" alt="Success Icon" style="width: 100px;">
+                    <h5 class="text-modal">The task has been updated successfully.</h5>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    document.getElementById('submitGantt').addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent default form submission
+    <script>
+        document.getElementById('submitGantt').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        // Simulate a successful submission (you can replace this with actual AJAX or form handling logic)
-        setTimeout(() => {
-            // Hide the current modal
-            const taskModal = bootstrap.Modal.getInstance(document.getElementById('taskModal'));
-            if (taskModal) {
-                taskModal.hide();
-            }
+            // Simulate a successful submission (you can replace this with actual AJAX or form handling logic)
+            setTimeout(() => {
+                // Hide the current modal
+                const taskModal = bootstrap.Modal.getInstance(document.getElementById('taskModal'));
+                if (taskModal) {
+                    taskModal.hide();
+                }
 
-            // Show the success modal
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-        }, 500); // Delay to simulate processing
-    });
+                // Show the success modal
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            }, 500); // Delay to simulate processing
+        });
 
-    // Add an event listener to refresh the page when the success modal is hidden
-    const successModalElement = document.getElementById('successModal');
-    successModalElement.addEventListener('hidden.bs.modal', function () {
-        location.reload(); // Refresh the page
-    });
-</script>
+        // Add an event listener to refresh the page when the success modal is hidden
+        const successModalElement = document.getElementById('successModal');
+        successModalElement.addEventListener('hidden.bs.modal', function() {
+            location.reload(); // Refresh the page
+        });
+    </script>
 
     <!-- Include JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -667,26 +670,28 @@ document.getElementById('project').addEventListener('change', function () {
             // Fetch and update Gantt chart if a valid project is selected
             if (selectedValue && selectedValue !== "0" && userId) {
                 fetch('user-page/graph.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `project_id=${selectedValue}&user_id=${userId}`
-                })
-                .then(response => response.text())
-                .then(data => {
-                    ganttChartBody.innerHTML = data;
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `project_id=${selectedValue}&user_id=${userId}`
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        ganttChartBody.innerHTML = data;
 
-                    // Add event listener after updating the DOM
-                    document.querySelectorAll('.main-task, .subtasks-name').forEach(item => {
-                        item.addEventListener('click', function() {
-                            const projectType = this.getAttribute('data-type');
-                            loadScript(projectType === 'main' ? 'scripts/user-monitoring.js' : 'scripts/user-monitoring-sub.js');
+                        // Add event listener after updating the DOM
+                        document.querySelectorAll('.main-task, .subtasks-name').forEach(item => {
+                            item.addEventListener('click', function() {
+                                const projectType = this.getAttribute('data-type');
+                                loadScript(projectType === 'main' ? 'scripts/user-monitoring.js' : 'scripts/user-monitoring-sub.js');
+                            });
                         });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        ganttChartBody.innerHTML = '<p>Failed to load data.</p>';
                     });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    ganttChartBody.innerHTML = '<p>Failed to load data.</p>';
-                });
             } else {
                 ganttChartBody.innerHTML = '<p>Please select a valid project.</p>';
             }
@@ -763,119 +768,119 @@ document.getElementById('project').addEventListener('change', function () {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    // Handle form submission using Ajax
-    $('form').on('submit', function(event) {
-        event.preventDefault();  // Prevent default form submission
+    $(document).ready(function() {
+        // Handle form submission using Ajax
+        $('form').on('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        var formData = new FormData(this); // Create FormData object from the form
-        console.log(formData)
-        // Send the form data via Ajax
-        $.ajax({
-            url: 'user-page/functions/addProject.php',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-            console.log(response)
-                var data = JSON.parse(response); // Parse the JSON response from the server
+            var formData = new FormData(this); // Create FormData object from the form
+            console.log(formData)
+            // Send the form data via Ajax
+            $.ajax({
+                url: 'user-page/functions/addProject.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response)
+                    var data = JSON.parse(response); // Parse the JSON response from the server
 
-                if (data.status === 'success') {
-                    // Show the success modal for main task
-                    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                    successModal.show();
-
-                    // Optionally, clear the form fields if needed
-                    $('form')[0].reset();
-                } else if (data.status === 'invalid_year') {
-                    // Show the invalid year modal
-                    var invalidModal = new bootstrap.Modal(document.getElementById('sinvalidModal'));
-                    invalidModal.show();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX error:', status, error);
-                alert('There was an error with the request.');
-            }
-        });
-    });
-
-    // Handle sub-task form submission using Ajax
-    $('#submitBtn1').off('click').on('click', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        var formData = new FormData($('#taskModalSub form')[0]); // Get form data
-
-        $.ajax({
-            url: 'user-page/functions/addSubProject.php', // Endpoint for form submission
-            type: 'POST',
-            data: formData,
-            processData: false, // Prevent jQuery from transforming data into a query string
-            contentType: false, // Prevent jQuery from setting content type automatically
-            success: function(response) {
-                console.log(response);
-
-                try {
-                    const data = JSON.parse(response); // Parse the JSON response
-                    if (data.status === "success") {
-                        // Show success modal for sub-task
-                        var successModal = new bootstrap.Modal(document.getElementById('successsubModal'));
+                    if (data.status === 'success') {
+                        // Show the success modal for main task
+                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                         successModal.show();
 
-                        // Optionally, clear the form fields after successful submission
-                        $('#taskModalSub form')[0].reset();
-                    } else {
-                        alert('Failed to add subtask: ' + data.message);
+                        // Optionally, clear the form fields if needed
+                        $('form')[0].reset();
+                    } else if (data.status === 'invalid_year') {
+                        // Show the invalid year modal
+                        var invalidModal = new bootstrap.Modal(document.getElementById('sinvalidModal'));
+                        invalidModal.show();
                     }
-                } catch (e) {
-                    alert('Error parsing the server response');
-                    console.error(e);
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    alert('There was an error with the request.');
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX error: ', status, error);
-                alert('Failed to submit data.');
+            });
+        });
+
+        // Handle sub-task form submission using Ajax
+        $('#submitBtn1').off('click').on('click', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var formData = new FormData($('#taskModalSub form')[0]); // Get form data
+
+            $.ajax({
+                url: 'user-page/functions/addSubProject.php', // Endpoint for form submission
+                type: 'POST',
+                data: formData,
+                processData: false, // Prevent jQuery from transforming data into a query string
+                contentType: false, // Prevent jQuery from setting content type automatically
+                success: function(response) {
+                    console.log(response);
+
+                    try {
+                        const data = JSON.parse(response); // Parse the JSON response
+                        if (data.status === "success") {
+                            // Show success modal for sub-task
+                            var successModal = new bootstrap.Modal(document.getElementById('successsubModal'));
+                            successModal.show();
+
+                            // Optionally, clear the form fields after successful submission
+                            $('#taskModalSub form')[0].reset();
+                        } else {
+                            alert('Failed to add subtask: ' + data.message);
+                        }
+                    } catch (e) {
+                        alert('Error parsing the server response');
+                        console.error(e);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error: ', status, error);
+                    alert('Failed to submit data.');
+                }
+            });
+        });
+
+        // Refresh the page when the close button is clicked on any success modal
+        $('#successModal .btn-close, #successsubModal .btn-close').on('click', function() {
+            location.reload(); // Reload the page
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Validate the input value for total cost
+        $('#projectCost').on('input', function() {
+            const value = $(this).val(); // Get the input value
+            const warningMessage = $('#warningMessage');
+
+            // Check if the value is less than 1000
+            if (value && value < 1000) {
+                warningMessage.show(); // Show warning message
+            } else {
+                warningMessage.hide(); // Hide warning message
             }
         });
     });
-
-    // Refresh the page when the close button is clicked on any success modal
-    $('#successModal .btn-close, #successsubModal .btn-close').on('click', function() {
-        location.reload();  // Reload the page
-    });
-
-});
 </script>
 <script>
-$(document).ready(function () {
-    // Validate the input value for total cost
-    $('#projectCost').on('input', function () {
-        const value = $(this).val(); // Get the input value
-        const warningMessage = $('#warningMessage');
-        
-        // Check if the value is less than 1000
-        if (value && value < 1000) {
-            warningMessage.show(); // Show warning message
-        } else {
-            warningMessage.hide(); // Hide warning message
-        }
+    $(document).ready(function() {
+        // Validate the input value for total cost
+        $('#subProjectCost').on('input', function() {
+            const value = $(this).val(); // Get the input value
+            const warningMessage = $('#warningMessage1');
+
+            // Check if the value is less than 1000
+            if (value && value < 1000) {
+                warningMessage.show(); // Show warning message
+            } else {
+                warningMessage.hide(); // Hide warning message
+            }
+        });
     });
-});
-</script>
-<script>
-$(document).ready(function () {
-    // Validate the input value for total cost
-    $('#subProjectCost').on('input', function () {
-        const value = $(this).val(); // Get the input value
-        const warningMessage = $('#warningMessage1');
-        
-        // Check if the value is less than 1000
-        if (value && value < 1000) {
-            warningMessage.show(); // Show warning message
-        } else {
-            warningMessage.hide(); // Hide warning message
-        }
-    });
-});
 </script>

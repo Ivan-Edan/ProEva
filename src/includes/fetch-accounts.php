@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
         $rowsHtml .= '</tr>';
     }
 } else {
-    $rowsHtml .= '<tr><td colspan="7" class="text-center">No accounts found.</td></tr>'; // Removed suffix from column count
+    $rowsHtml .= '<tr><td colspan="7" class="text-center">No accounts found.</td></tr>'; 
 }
 
 echo json_encode(['totalRows' => $totalRows, 'html' => $rowsHtml]);

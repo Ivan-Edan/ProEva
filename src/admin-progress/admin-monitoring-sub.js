@@ -11,9 +11,9 @@ $(document).ready(function() {
 
         // If there is only one comment, photo, or full name, ensure they are still handled properly
         if (commentArray.length === 1 && commentArray[0] !== '') {
-            commentArray = [commentArray[0]]; // Wrap the single comment into an array
-            photoArray = [photoArray[0] || '']; // Wrap the single photo into an array (if exists)
-            fullnameArray = [fullnameArray[0] || '']; // Wrap the single full name into an array (if exists)
+            commentArray = [commentArray[0]]; 
+            photoArray = [photoArray[0] || '']; 
+            fullnameArray = [fullnameArray[0] || ''];
         }
 
         // Loop through each comment and photo and create corresponding HTML
@@ -33,8 +33,8 @@ $(document).ready(function() {
         });
 
         // Insert the generated HTML into the modal
-        $('#previewContainers').html(commentHtml); // Display the comments
-        $('#previewContainersImage').html(photoHtml); // Display the photos
+        $('#previewContainers').html(commentHtml); 
+        $('#previewContainersImage').html(photoHtml);
     }
 
     $('.subtasks-name').click(function() {

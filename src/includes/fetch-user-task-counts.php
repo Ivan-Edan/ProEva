@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'config.php'; // Include your database connection file
+require 'config.php';
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401); // Unauthorized
+    http_response_code(401);
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }
@@ -77,7 +77,7 @@ if ($result_department->num_rows > 0) {
         'task_counts' => $task_counts
     ]);
 } else {
-    http_response_code(404); // Not found
+    http_response_code(404);
     echo json_encode(["error" => "User department not found"]);
 }
 

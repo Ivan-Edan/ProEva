@@ -4,7 +4,7 @@ require_once 'config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newPassword = trim($_POST['newPassword']);
     $confirmPassword = trim($_POST['confirmPassword']);
-    $email = trim($_POST['email']);  // You might need a token or something for verification
+    $email = trim($_POST['email']);
 
     if ($newPassword !== $confirmPassword) {
         echo json_encode(['status' => 'error', 'message' => 'Passwords do not match.']);

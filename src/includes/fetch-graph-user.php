@@ -23,7 +23,7 @@ if (isset($_GET['project_id'])) {
                        WHERE project_id = ? AND user_id = ?";
 
         $stmt_report = $conn->prepare($sql_report);
-        $stmt_report->bind_param('ii', $project_id, $user_id); // Bind both project_id and user_id
+        $stmt_report->bind_param('ii', $project_id, $user_id);
         $stmt_report->execute();
         $result_report = $stmt_report->get_result();
 
@@ -31,7 +31,7 @@ if (isset($_GET['project_id'])) {
         if ($result_report->num_rows > 0) {
             $row = $result_report->fetch_assoc();
             $financial_status_id = $row['financial_status_id'];
-            $created_at = $row['created_at']; // Fetch the created_at field
+            $created_at = $row['created_at'];
 
             // Now fetch the financial details from userfinancialstatus using the financial_status_id
             $sql_financial = "SELECT 
@@ -45,7 +45,7 @@ if (isset($_GET['project_id'])) {
                                 financial_status_id = ?";
 
             $stmt_financial = $conn->prepare($sql_financial);
-            $stmt_financial->bind_param('i', $financial_status_id); // Bind financial_status_id
+            $stmt_financial->bind_param('i', $financial_status_id); 
             $stmt_financial->execute();
             $result_financial = $stmt_financial->get_result();
 
@@ -58,10 +58,10 @@ if (isset($_GET['project_id'])) {
                         'allotment' => $row['allotment'],
                         'obligations' => $row['obligations'],
                         'disbursements' => $row['disbursements'],
-                        'created_at' => $created_at // Include created_at
+                        'created_at' => $created_at 
                     ];
                 }
-                echo json_encode($financialDetails); // Return the financial details for the logged-in user and project
+                echo json_encode($financialDetails);
             } else {
                 echo json_encode(['message' => 'No financial data found for this project.']);
             }

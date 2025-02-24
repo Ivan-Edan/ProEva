@@ -125,8 +125,8 @@
                             fetch('includes/fetch_departments.php')
                                 .then(response => response.json())
                                 .then(data => {
-                                    allDepartments = data; // Store fetched departments
-                                    populateDepartments(allDepartments); // Initially populate all departments
+                                    allDepartments = data; 
+                                    populateDepartments(allDepartments); 
                                 })
                                 .catch(error => console.error('Error fetching departments:', error));
 
@@ -162,7 +162,7 @@
                                     populateDepartments(adminDepartments);
                                 } else if (roleSelect.value === "User") {
                                     // Show all departments starting from index 2 for User
-                                    const userDepartments = allDepartments.slice(1); // Skip index 0 (assuming index 0 is for Admin)
+                                    const userDepartments = allDepartments.slice(1);
                                     populateDepartments(userDepartments);
                                 }
                             });

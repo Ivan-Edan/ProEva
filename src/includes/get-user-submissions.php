@@ -9,8 +9,8 @@ header('Content-Type: application/json');
 
 try {
     // Capture and validate input parameters
-    $formType = isset($_GET['formType']) ? $_GET['formType'] : 'all'; // Default to 'all'
-    $submissionId = isset($_GET['submissionId']) ? intval($_GET['submissionId']) : 0; // Ensure it's an integer
+    $formType = isset($_GET['formType']) ? $_GET['formType'] : 'all'; 
+    $submissionId = isset($_GET['submissionId']) ? intval($_GET['submissionId']) : 0; 
 
     // Initialize query
     $query = '';
@@ -124,11 +124,11 @@ try {
     $data = [];
     while ($row = $result->fetch_assoc()) {
         $data[] = [
-            'submission_id' => $row['submission_id'], // Ensure submission_id is included
+            'submission_id' => $row['submission_id'], 
             'project_name' => $row['project_title'] . ' (' . $row['project_year'] . ')',
             'department' => $row['department_name'],
             'date_submitted' => $row['date_submitted'],
-            'form_type' => $row['form_type'] // Form type
+            'form_type' => $row['form_type'] 
         ];
     }
 
@@ -136,7 +136,7 @@ try {
     if (count($data) > 0) {
         echo json_encode(['status' => 'success', 'data' => $data]);
     } else {
-        echo json_encode(['status' => 'success', 'data' => []]); // Return empty data
+        echo json_encode(['status' => 'success', 'data' => []]);
     }
 
 } catch (Exception $e) {

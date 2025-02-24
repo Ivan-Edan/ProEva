@@ -3,7 +3,6 @@ require_once __DIR__ . '/../includes/config.php';
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,7 @@ require_once __DIR__ . '/../includes/config.php';
   <link rel="icon" type="image/x-icon" href="<?php echo 'images/landing-pic.png'; ?>">
   <title>Reports Page</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles/admin-reports.css"> <!-- Your existing custom styles -->
+  <link rel="stylesheet" href="styles/admin-reports.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/feather-icons"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,308 +26,58 @@ require_once __DIR__ . '/../includes/config.php';
         <div class="container-1">Reports</div>
         <div class="container-2">Performance Reports</div>
         <div class="container-3">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="text-center">Project Name</th>
-                <th id="department-header">
-                  <span id="department-sort-icon" data-feather="chevron-up"></span>
-                  <span>Department</span>
-                </th>
-                <th class="text-center">Sector</th>
-                <th class="text-center">Budget</th>
-                <th class="text-center">Start Date</th>
-                <th class="text-center">End Date</th>
-                <th>Completed Task</th>
-                <th>In Progress Task</th>
-              </tr>
-            </thead>
-            <tbody id="project-data">
-              <!-- Data will be inserted here -->
-            </tbody>
-          </table>
-        </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">Project Name</th>
+                  <th id="department-header">
+                    <span id="department-sort-icon" data-feather="chevron-up"></span>
+                    <span>Department</span>
+                  </th>
+                  <th class="text-center">Sector</th>
+                  <th class="text-center">Budget</th>
+                  <th class="text-center">Start Date</th>
+                  <th class="text-center">End Date</th>
+                  <th>Completed Task</th>
+                  <th>In Progress Task</th>
+                </tr>
+              </thead>
+              <tbody id="project-data">
+                <!-- Data will be inserted here -->
+              </tbody>
+            </table>
+          </div>
           <div id="pagination" class="text-center">
             <!-- Pagination buttons will appear here -->
           </div>
         </div>
 
         <div class="container-4">
-  <!-- Dropdown Menu -->
-  <div class="dropdown d-flex justify-content-end mb-3">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="projectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      Project Title
-      <i data-feather="chevron-down" class="icon-edge"></i>
-    </button>
-    <ul class="dropdown-menu" id="projectList" aria-labelledby="projectDropdown">
-      <li>
-        <input type="text" class="form-control" id="searchField" placeholder="Search Project">
-      </li>
-    </ul>
-  </div>
+          <!-- Dropdown Menu -->
+          <div class="dropdown d-flex justify-content-end mb-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="projectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Project Title
+              <i data-feather="chevron-down" class="icon-edge"></i>
+            </button>
+            <ul class="dropdown-menu" id="projectList" aria-labelledby="projectDropdown">
+              <li>
+                <input type="text" class="form-control" id="searchField" placeholder="Search Project">
+              </li>
+            </ul>
+          </div>
 
-  <!-- Project Details Section -->
-  <div id="projectDetails">
-    <canvas id="projectChart"></canvas>
-    <div id="noDataMessage" style="display: none;">
-      <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
-      <p style="font-weight: 500;">There are no project data available to compute.</p>
-    </div>
-  </div>
+          <!-- Project Details Section -->
+          <div id="projectDetails">
+            <canvas id="projectChart"></canvas>
+            <div id="noDataMessage" style="display: none;">
+              <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
+              <p style="font-weight: 500;">There are no project data available to compute.</p>
+            </div>
+          </div>
 
-  <h5 class="text-graph">Per Department’s Project Financial Status Report (in PHP)</h5>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  let projectChart; // Declare globally
-
-  // Function to fetch project details and update the chart
-  function fetchProjectDetails(projectId) {
-    const chartElement = document.getElementById('projectChart');
-    const noDataElement = document.getElementById('noDataMessage');
-
-    chartElement.style.display = 'none';
-    noDataElement.style.display = 'none';
-
-    noDataElement.innerHTML = '<p>Loading data...</p>';
-    noDataElement.style.display = 'block';
-
-    fetch(`includes/fetch_project_details.php?project_id=${projectId}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log("Fetched Data: ", data);
-
-        noDataElement.style.display = 'none';
-
-        if (data.error || data.message) {
-          showNoDataMessage();
-        } else {
-          if (!projectChart) {
-            initializeChart();
-          }
-          updateChart(data);
-          chartElement.style.display = 'block';
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching project details:', error);
-        showNoDataMessage();
-      });
-  }
-
-  // Show "No Data" message
-  function showNoDataMessage() {
-    const chartElement = document.getElementById('projectChart');
-    const noDataElement = document.getElementById('noDataMessage');
-
-    chartElement.style.display = 'none';
-    noDataElement.style.display = 'block';
-    noDataElement.innerHTML = `
-      <img src="images/illustration/no-data.png" class="no-data" alt="no-data">
-      <p style="font-weight: 500;">There are no project data available to compute.</p>
-    `;
-  }
-
-  function initializeChart() {
-    const ctx = document.getElementById('projectChart').getContext('2d');
-    projectChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4', 'Total'], // Add 'Total' column
-            datasets: [
-                {
-                    label: 'Appropriations',
-                    data: [0, 0, 0, 0, 0], // Placeholder data
-                    borderColor: '#AEAEAE',
-                    backgroundColor: '#27374D',
-                    borderWidth: 1,
-                    fill: true,
-                    barThickness: 30,
-                    categoryPercentage: 0.5,
-                    barPercentage: 1.0
-                },
-                {
-                    label: 'Allotments',
-                    data: [0, 0, 0, 0, 0], // Placeholder data
-                    borderColor: '#9DB2BF',
-                    backgroundColor: '#9DB2BF',
-                    borderWidth: 1,
-                    fill: true,
-                    barThickness: 30,
-                    categoryPercentage: 0.5,
-                    barPercentage: 1.0
-                },
-                {
-                    label: 'Obligations',
-                    data: [0, 0, 0, 0, 0], // Placeholder data
-                    borderColor: '#5478A9',
-                    backgroundColor: '#5478A9',
-                    borderWidth: 1,
-                    fill: true,
-                    barThickness: 30,
-                    categoryPercentage: 0.5,
-                    barPercentage: 1.0
-                },
-                {
-                    label: 'Disbursements',
-                    data: [0, 0, 0, 0, 0], // Placeholder data
-                    borderColor: '#4BC0C0',
-                    backgroundColor: '#4BC0C0',
-                    borderWidth: 1,
-                    fill: true,
-                    barThickness: 30,
-                    categoryPercentage: 0.5,
-                    barPercentage: 1.0
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                duration: 800,
-                easing: 'easeInOutQuad',
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    align: 'start',
-                    labels: {
-                        boxWidth: 20,
-                        boxHeight: 20,
-                        padding: 10,
-                        usePointStyle: true,
-                        pointStyle: 'circle'
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                }
-            }
-        }
-    });
-}
-
-function updateChart(data) {
-    const quarterlyData = {
-        Q1: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
-        Q2: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
-        Q3: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 },
-        Q4: { appropriations: 0, allotments: 0, obligations: 0, disbursements: 0 }
-    };
-
-    data.forEach(item => {
-        const date = new Date(item.created_at);
-        const quarter = getQuarter(date);
-
-        if (!isNaN(item.appropriations)) quarterlyData[quarter].appropriations += parseFloat(item.appropriations);
-        if (!isNaN(item.allotment)) quarterlyData[quarter].allotments += parseFloat(item.allotment);
-        if (!isNaN(item.obligations)) quarterlyData[quarter].obligations += parseFloat(item.obligations);
-        if (!isNaN(item.disbursements)) quarterlyData[quarter].disbursements += parseFloat(item.disbursements);
-    });
-
-    // Calculate totals
-    const totals = {
-        appropriations: Object.values(quarterlyData).reduce((sum, q) => sum + q.appropriations, 0),
-        allotments: Object.values(quarterlyData).reduce((sum, q) => sum + q.allotments, 0),
-        obligations: Object.values(quarterlyData).reduce((sum, q) => sum + q.obligations, 0),
-        disbursements: Object.values(quarterlyData).reduce((sum, q) => sum + q.disbursements, 0)
-    };
-
-    // Update the chart data
-    projectChart.data.datasets[0].data = [
-        quarterlyData.Q1.appropriations, quarterlyData.Q2.appropriations,
-        quarterlyData.Q3.appropriations, quarterlyData.Q4.appropriations, totals.appropriations
-    ];
-    projectChart.data.datasets[1].data = [
-        quarterlyData.Q1.allotments, quarterlyData.Q2.allotments,
-        quarterlyData.Q3.allotments, quarterlyData.Q4.allotments, totals.allotments
-    ];
-    projectChart.data.datasets[2].data = [
-        quarterlyData.Q1.obligations, quarterlyData.Q2.obligations,
-        quarterlyData.Q3.obligations, quarterlyData.Q4.obligations, totals.obligations
-    ];
-    projectChart.data.datasets[3].data = [
-        quarterlyData.Q1.disbursements, quarterlyData.Q2.disbursements,
-        quarterlyData.Q3.disbursements, quarterlyData.Q4.disbursements, totals.disbursements
-    ];
-
-    projectChart.update();
-}
-
-
-  // Function to determine the quarter of a given date
-  function getQuarter(date) {
-    const month = date.getMonth() + 1; // Months are 0-indexed
-    if (month >= 1 && month <= 3) return 'Q1';
-    if (month >= 4 && month <= 6) return 'Q2';
-    if (month >= 7 && month <= 9) return 'Q3';
-    return 'Q4';
-  }
-
-  // Initialize chart with placeholder data when no project is selected
-  initializeChart();
-
-  // Fetch project titles and populate dropdown
-  fetch('includes/fetch_project_admintitle.php')
-    .then(response => response.json())
-    .then(data => {
-      const projectList = document.getElementById('projectList');
-      const searchField = document.getElementById('searchField');
-
-      function renderProjects(projects) {
-        const listItems = projectList.querySelectorAll('li:not(:first-child)');
-        listItems.forEach(item => item.remove());
-
-        if (projects.length > 0) {
-          projects.forEach(project => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.classList.add('dropdown-item');
-            a.href = '#';
-            a.textContent = project.project_title;
-            a.dataset.projectId = project.project_id;
-            li.appendChild(a);
-            projectList.appendChild(li);
-          });
-        } else {
-          const li = document.createElement('li');
-          li.textContent = 'No projects found.';
-          projectList.appendChild(li);
-        }
-      }
-
-      function filterProjects(query) {
-        const filteredProjects = data.filter(project =>
-          project.project_title.toLowerCase().includes(query.toLowerCase())
-        );
-        renderProjects(filteredProjects);
-      }
-
-      renderProjects(data);
-
-      searchField.addEventListener('input', function() {
-        const query = this.value;
-        filterProjects(query);
-      });
-
-      projectList.addEventListener('click', function(e) {
-        if (e.target && e.target.matches('a.dropdown-item')) {
-          const projectId = e.target.dataset.projectId;
-          fetchProjectDetails(projectId);
-        }
-      });
-    })
-    .catch(error => console.error('Error fetching projects:', error));
-</script>
+          <h5 class="text-graph">Per Department’s Project Financial Status Report (in PHP)</h5>
+        </div>
 
         <div class="container-5">
           <div id="chart-container">
@@ -462,6 +211,7 @@ function updateChart(data) {
   </div>
 
   <!-- Include JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts/admin-reports.js"></script>
   <script>
     let spiChartInstance;

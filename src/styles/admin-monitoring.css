@@ -142,39 +142,37 @@ body{
 
 /* Customize the scrollbar */
 .table-responsive::-webkit-scrollbar {
-    height: 8px; /* Adjust the height for horizontal scrollbars */
+    height: 8px; 
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Track color */
-    border-radius: 10px; /* Smooth corners */
+    background: #f1f1f1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1; /* Thumb color */
-    border-radius: 10px; /* Smooth corners */
+    background: #c1c1c1; 
+    border-radius: 10px; 
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1; /* Thumb color on hover */
+    background: #a1a1a1;
 }
 
 /* For non-WebKit browsers (fallback styles) */
 .table-responsive {
-    scrollbar-color: #c1c1c1 #f1f1f1; /* Thumb color Track color */
-    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #c1c1c1 #f1f1f1; 
+    scrollbar-width: thin; 
 }
 
-
-
-  /* Pagination button container */
+/* Pagination button container */
 #pagination-controls {
     display: flex;
     gap: 5px;
   }
   
-  /* Pagination buttons */
-  #pagination-controls .btn {
+/* Pagination buttons */
+#pagination-controls .btn {
     height: 40px;
     width: 40px;
     border: 1px solid #ffffff;
@@ -182,7 +180,7 @@ body{
     color: #232323;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
-  }
+}
   
   /* Hover effect for buttons */
   #pagination-controls .btn:hover {

@@ -1,11 +1,11 @@
 <?php
-include 'config.php'; // Adjust path to your config file if necessary
+include 'config.php'; 
 
-header('Content-Type: application/json'); // Return JSON response
+header('Content-Type: application/json'); 
 
 if (isset($_GET['query'])) {
-    $input = $_GET['query']; // Get user input
-    $searchTerm = "%$input%"; // Prepare for LIKE query
+    $input = $_GET['query']; 
+    $searchTerm = "%$input%";
 
     try {
         // Fetch approved project titles and years from the database
@@ -34,7 +34,7 @@ if (isset($_GET['query'])) {
             ];
         }
 
-        echo json_encode($titles); // Return results as JSON
+        echo json_encode($titles);
     } catch (Exception $e) {
         echo json_encode(['error' => $e->getMessage()]);
     }

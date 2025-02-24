@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'config.php'; // Include your database connection file
+require 'config.php';
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401); // Unauthorized
+    http_response_code(401);
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }
@@ -67,7 +67,7 @@ LEFT JOIN
     usersdateedate AS d ON r.s_date_e_date_id = d.s_date_e_date_id
 WHERE 
     r.user_id = ? AND u.department_id = ?
-LIMIT ?, ?"; // Using LIMIT and OFFSET
+LIMIT ?, ?"; 
 
     $stmt_reports = $conn->prepare($sql_reports);
     if (!$stmt_reports) {
@@ -92,7 +92,7 @@ LIMIT ?, ?"; // Using LIMIT and OFFSET
         'totalPages' => $totalPages
     ]);
 } else {
-    http_response_code(404); // Not found
+    http_response_code(404);
     echo json_encode(["error" => "User department not found"]);
 }
 
