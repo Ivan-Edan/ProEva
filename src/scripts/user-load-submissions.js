@@ -152,6 +152,7 @@ function openFormModal(submissionId, formType) {
                 // Populate Form 1 modal fields
 
                 // Project Details
+                document.getElementById('form1SubmissionId').value = formData.details_id; // Store details_id
                 document.getElementById('projectTitleForm1').value = formData.project_title || '';
                 document.getElementById('implementingAgencyForm1').value = formData.implementing_agency || '';
                 document.getElementById('sectorForm1').value = formData.sector || '';
@@ -197,7 +198,7 @@ function openFormModal(submissionId, formType) {
                         <div class="row mb-3">
                             <div class="col-sm-7">
                                 <label class="form-label">Output Indicator ${index + 1}.:</label>
-                                <input type="text" class="form-control" value="${indicator}" readonly>
+                                <input type="text" class="form-control" value="${indicator}" >
                             </div>
                         </div>`;
                 });
@@ -247,11 +248,11 @@ function openFormModal(submissionId, formType) {
                                         </div>
                                         <div class="col-sm-4">
                                             <label class="form-label">Financial Target:</label>
-                                            <input type="text" class="form-control" value="${financial}" readonly>
+                                            <input type="text" class="form-control" value="${financial}" >
                                         </div>
                                         <div class="col-sm-4">
                                             <label class="form-label">Physical Target (%):</label>
-                                            <input type="text" class="form-control" value="${physical}" readonly>
+                                            <input type="text" class="form-control" value="${physical}" >
                                         </div>
                                     </div>`;
                             }
@@ -271,7 +272,7 @@ function openFormModal(submissionId, formType) {
                         <div class="row mb-3">
                             <div class="col-sm-11">
                                 <label class="form-label">Target Output ${index + 1}.:</label>
-                                <input type="text" class="form-control" value="${output}" readonly>
+                                <input type="text" class="form-control" value="${output}" >
                             </div>
                         </div>`;
                 });
@@ -699,52 +700,110 @@ async function generateWorksheetForForms(data, submissionId, formType) {
     }
 }
 
+document.getElementById('updateForm1').addEventListener('click', function() {
+    const updateButton = this;
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("updateForm1").addEventListener("click", function () {
-        const submissionId = document.getElementById("form1SubmissionId").value;
+    if (updateButton.innerText === "Update") {
+        // Step 1: Enable Editing
+        document.querySelectorAll('#form1Modal input, #form1Modal textarea').forEach(input => {
+            input.removeAttribute('readonly');
+        });
 
-        // Collect the form data (excluding project title)
-        const formData = new FormData();
-        formData.append("submissionId", submissionId);
-        formData.append("implementingAgency", document.getElementById("implementingAgencyForm1").value);
-        formData.append("sector", document.getElementById("sectorForm1").value);
-        formData.append("modeOfImplementation", document.getElementById("modeOfImplementationForm1").value);
-        formData.append("location", document.getElementById("locationForm1").value);
-        formData.append("city", document.getElementById("cityForm1").value);
-        formData.append("barangay", document.getElementById("barangayForm1").value);
-        formData.append("totalCost", document.getElementById("totalCostForm1").value);
-        formData.append("startDate", document.getElementById("startDateForm1").value);
-        formData.append("endDate", document.getElementById("endDateForm1").value);
-        formData.append("fundAgency", document.getElementById("fundAgencyForm1").value);
-        formData.append("fundSource", document.getElementById("fundSourceForm1").value);
-        formData.append("male", document.getElementById("maleForm1").value);
-        formData.append("female", document.getElementById("femaleForm1").value);
-        formData.append("financialTargets", document.getElementById("financialTargetsForm1").value);
-        formData.append("physicalTargets", document.getElementById("physicalTargetsForm1").value);
-        formData.append("compDetails", document.getElementById("compDetailsForm1").value);
-        formData.append("remarks", document.getElementById("remarksForm1").value);
-        formData.append("submittedDesignation", document.getElementById("submittedDesignationForm1").value);
-        formData.append("submittedBy", document.getElementById("submittedByForm1").value);
+        updateButton.innerText = "Save Changes"; // Change button text
+    } else {
+        // Step 2: Collect Updated Data
+        const updatedData = {
+            details_id: document.getElementById('form1SubmissionId').value, // Use this for updating
+            project_title: document.getElementById('projectTitleForm1').value,
+            implementing_agency: document.getElementById('implementingAgencyForm1').value,
+            sector: document.getElementById('sectorForm1').value,
+            mode_of_implementation: document.getElementById('modeOfImplementationForm1').value,
+        
+            // Location
+            location: document.getElementById('locationForm1').value,
+            city: document.getElementById('cityForm1').value,
+            barangay: document.getElementById('barangayForm1').value,
+        
+            // Cost and Dates
+            total_cost: document.getElementById('totalCostForm1').value,
+            start_date: document.getElementById('startDateForm1').value,
+            end_date: document.getElementById('endDateForm1').value,
+        
+            // Funding Information
+            fund_agency: document.getElementById('fundAgencyForm1').value,
+            fund_source: document.getElementById('fundSourceForm1').value,
+        
+            // Employment Generated
+            male: document.getElementById('maleForm1').value,
+            female: document.getElementById('femaleForm1').value,
+        
+            // Financial and Physical Targets
+            year_financial_target: document.getElementById('financialTargetsForm1').value,
+            year_phy_target_percent: document.getElementById('physicalTargetsForm1').value,
+        
+            // Additional Details
+            comp_details: document.getElementById('compDetailsForm1').value,
+            remarks: document.getElementById('remarksForm1').value,
+        
+            // Project Validation
+            submitted_designation: document.getElementById('submittedDesignationForm1').value,
+            submitted_by: document.getElementById('submittedByForm1').value,
+        
+            // Dynamic Fields - Output Indicators
+            output_indicators: (() => {
+                const indicators = [];
+                document.querySelectorAll('#outputIndicatorsContainer input').forEach(input => {
+                    indicators.push(input.value);
+                });
+                return indicators.join(', ');
+            })(),
+        
+            // Dynamic Fields - Target Outputs
+            target_outputs: (() => {
+                const targets = [];
+                document.querySelectorAll('#targetOutputsContainer input').forEach(input => {
+                    targets.push(input.value);
+                });
+                return targets.join(', ');
+            })(),
+        
+            // Monthly Financial and Physical Targets
+            monthly_targets: (() => {
+                const targets = [];
+                document.querySelectorAll('#monthlyTargetsContainer .row').forEach(row => {
+                    const month = row.querySelector('label').textContent.replace(':', '').trim();
+                    const financial = row.querySelectorAll('input')[0].value;
+                    const physical = row.querySelectorAll('input')[1].value;
+                    targets.push({ month, financial, physical });
+                });
+                return targets;
+            })()
+        };
+        
+        console.log("Sending data:",updatedData);
+        
 
-        // AJAX Request to update the form
-        fetch("includes/update-form1.php", {
-            method: "POST",
-            body: formData,
+        // Step 3: Send Data to Backend via AJAX
+        fetch('includes/update-form1.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+
         })
         .then(response => response.json())
         .then(data => {
-            if (data.status === "success") {
+            if (data.success) {
                 alert("Form updated successfully!");
-                // Close the modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById("form1Modal"));
-                modal.hide();
-                // Refresh the table/list to show updated status
-                location.reload();
+                updateButton.innerText = "Update"; // Change button back
+                document.querySelectorAll('#form1Modal input, #form1Modal textarea').forEach(input => {
+                    input.setAttribute('readonly', true); // Make fields readonly again
+                });
             } else {
                 alert("Error updating form: " + data.message);
             }
         })
         .catch(error => console.error("Error:", error));
-    });
+    }
 });
