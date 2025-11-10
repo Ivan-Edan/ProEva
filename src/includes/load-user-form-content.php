@@ -163,6 +163,7 @@ try {
                         sed.start_date,
                         sed.end_date,
                         fsr.fund_source,
+                        fp.form2_id,
                         fa.fund_agency,
                         tc.total_cost -- Newly added fields
                     FROM userphysfinaccompreport fp

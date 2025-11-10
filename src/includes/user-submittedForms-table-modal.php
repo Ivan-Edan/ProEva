@@ -277,7 +277,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-6 col-form-label">Submitted Designation:</label>
                         <div class="col-sm-8">
-                            <input type="text" id="designationForm2" class="form-control" readonly>
+                            <input type="text" id="designationForm2" class="form-control" >
                         </div>
                     </div>
                     <label class="col-sm-4 col-form-label">Submitted By:</label>
@@ -288,7 +288,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="downloadExcelForm2" class="btn btn-success">Download as Excel</button>
-                <!-- <button type="button" id="updateForm2" class="btn btn-primary">Update</button> -->
+                <button type="button" id="updateForm2" class="btn btn-primary">Update</button> 
             </div>
         </div>
     </div>

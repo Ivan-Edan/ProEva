@@ -295,55 +295,56 @@ function openFormModal(submissionId, formType) {
 
                 // Handle Form 2
                 if (formType === 'form2') {
-                // Populate Form 2 modal fields
-                document.getElementById('projectTitleForm2').value = formData.project_title || '';
-                document.getElementById('implementingAgencyForm2').value = formData.implementing_agency || '';
+                    // Populate Form 2 modal fields
+                    document.getElementById('form2SubmissionId').value = formData.form2_id; // Store details_id
+                    document.getElementById('projectTitleForm2').value = formData.project_title || '';
+                    document.getElementById('implementingAgencyForm2').value = formData.implementing_agency || '';
 
-                // Implementation Schedule
-                document.getElementById('startDateForm2').value = formData.start_date || '';
-                document.getElementById('endDateForm2').value = formData.end_date || '';
-                document.getElementById('fundSourceForm2').value = formData.fund_source || '';
-                document.getElementById('fundAgencyForm2').value = formData.fund_agency || '';
-                document.getElementById('totalCostForm2').value = formData.total_cost || '';
+                    // Implementation Schedule
+                    document.getElementById('startDateForm2').value = formData.start_date || '';
+                    document.getElementById('endDateForm2').value = formData.end_date || '';
+                    document.getElementById('fundSourceForm2').value = formData.fund_source || '';
+                    document.getElementById('fundAgencyForm2').value = formData.fund_agency || '';
+                    document.getElementById('totalCostForm2').value = formData.total_cost || '';
 
-                // Financial Status
-                document.getElementById('appropriationsForm2').value = formData.appropriations || '';
-                document.getElementById('allotmentForm2').value = formData.allotment || '';
-                document.getElementById('obligationsForm2').value = formData.obligations || '';
-                document.getElementById('disbursementsForm2').value = formData.disbursements || '';
+                    // Financial Status
+                    document.getElementById('appropriationsForm2').value = formData.appropriations || '';
+                    document.getElementById('allotmentForm2').value = formData.allotment || '';
+                    document.getElementById('obligationsForm2').value = formData.obligations || '';
+                    document.getElementById('disbursementsForm2').value = formData.disbursements || '';
 
-                // Physical Accomplishment
-                document.getElementById('targetOwpaForm2').value = formData.target_owpa || '';
-                document.getElementById('actualOwpaForm2').value = formData.actual_owpa || '';
-                document.getElementById('slippageForm2').value = formData.slippage || '';
-                document.getElementById('outputIndicatorForm2').value = formData.output_indicator || '';
+                    // Physical Accomplishment
+                    document.getElementById('targetOwpaForm2').value = formData.target_owpa || '';
+                    document.getElementById('actualOwpaForm2').value = formData.actual_owpa || '';
+                    document.getElementById('slippageForm2').value = formData.slippage || '';
+                    document.getElementById('outputIndicatorForm2').value = formData.output_indicator || '';
 
-                // Additional Details
-                document.getElementById('endProjectTargetForm2').value = formData.end_project_target || '';
-                document.getElementById('targetDateForm2').value = formData.target_date || '';
-                document.getElementById('actualDateForm2').value = formData.actual_date || '';
-                document.getElementById('remarksForm2').value = formData.remarks || '';
+                    // Additional Details
+                    document.getElementById('endProjectTargetForm2').value = formData.end_project_target || '';
+                    document.getElementById('targetDateForm2').value = formData.target_date || '';
+                    document.getElementById('actualDateForm2').value = formData.actual_date || '';
+                    document.getElementById('remarksForm2').value = formData.remarks || '';
 
-                // Employment Generated
-                document.getElementById('maleForm2').value = formData.male || '';
-                document.getElementById('femaleForm2').value = formData.female || '';
+                    // Employment Generated
+                    document.getElementById('maleForm2').value = formData.male || '';
+                    document.getElementById('femaleForm2').value = formData.female || '';
 
-                // Project Validation
-                document.getElementById('designationForm2').value = formData.submitted_designation || '';
-                document.getElementById('submittedByForm2').value = formData.submitted_by || '';
-                // Get update button
-                const updateButton = document.getElementById('updateForm2');
+                    // Project Validation
+                    document.getElementById('designationForm2').value = formData.submitted_designation || '';
+                    document.getElementById('submittedByForm2').value = formData.submitted_by || '';
+                    // Get update button
+                    const updateButton = document.getElementById('updateForm2');
 
-                // Check if formData.status is 'rejected'
-                if (formData.status === 'rejected') {
-                    updateButton.disabled = false;  // Enable update button
-                } else {
-                    updateButton.disabled = true;   // Disable update button
-                }
-                    // Show modal for Form 2
-                    const modal = new bootstrap.Modal(document.getElementById('form2Modal'));
-                    modal.show();
-                }
+                    // Check if formData.status is 'rejected'
+                    if (formData.status === 'rejected') {
+                        updateButton.disabled = false;  // Enable update button
+                    } else {
+                        updateButton.disabled = true;   // Disable update button
+                    }
+                        // Show modal for Form 2
+                        const modal = new bootstrap.Modal(document.getElementById('form2Modal'));
+                        modal.show();
+                    }
 
                 // Handle Form 3
                 else if (formType === 'form3') {
@@ -802,6 +803,92 @@ document.getElementById('updateForm1').addEventListener('click', function() {
                 });
             } else {
                 alert("Error updating form: " + data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+});
+
+
+document.getElementById('updateForm2').addEventListener('click', function() {
+    const updateButton = this;
+
+    if (updateButton.innerText === "Update") {
+        // Step 1: Enable Editing
+        document.querySelectorAll('#form2Modal input, #form2Modal textarea').forEach(input => {
+            input.removeAttribute('readonly');
+        });
+
+        updateButton.innerText = "Save Changes"; // Change button text
+    } else {
+        // Step 2: Collect Updated Data
+        const updatedData = {
+            form2_id: document.getElementById('form2SubmissionId').value, // Use this for updating
+            
+            // Basic Project Details
+            project_title: document.getElementById('projectTitleForm2').value,
+            implementing_agency: document.getElementById('implementingAgencyForm2').value,
+            
+            // Financial Status
+            appropriations: document.getElementById('appropriationsForm2').value,
+            allotment: document.getElementById('allotmentForm2').value,
+            obligations: document.getElementById('obligationsForm2').value,
+            disbursements: document.getElementById('disbursementsForm2').value,
+
+            // Physical Accomplishments
+            target_owpa: document.getElementById('targetOwpaForm2').value,
+            actual_owpa: document.getElementById('actualOwpaForm2').value,
+            slippage: document.getElementById('slippageForm2').value,
+            output_indicator: document.getElementById('outputIndicatorForm2').value,
+        
+            // Additional Details
+            end_project_target: document.getElementById('endProjectTargetForm2').value,
+            target_date: document.getElementById('targetDateForm2').value,
+            actual_date: document.getElementById('actualDateForm2').value,
+
+            // Employment Generated
+            male: document.getElementById('maleForm2').value,
+            female: document.getElementById('femaleForm2').value,
+
+            // Remarks
+            remarks: document.getElementById('remarksForm2').value,
+
+            // Project Validation
+            submitted_by: document.getElementById('submittedByForm2').value,
+            submitted_designation: document.getElementById('designationForm2').value,
+
+            // Start & End Dates
+            start_date: document.getElementById('startDateForm2').value,
+            end_date: document.getElementById('endDateForm2').value,
+
+            // Fund Source & Agency
+            fund_source: document.getElementById('fundSourceForm2').value,
+            fund_agency: document.getElementById('fundAgencyForm2').value,
+
+            // Total Cost
+            total_cost: document.getElementById('totalCostForm2').value
+        };
+
+        console.log("Sending Form 2 Data:", updatedData);
+
+        // Step 3: Send Data to Backend via AJAX
+        fetch('includes/update-form2.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Form 2 updated successfully!");
+                updateButton.innerText = "Update"; // Change button back
+                document.querySelectorAll('#form2Modal input, #form2Modal textarea').forEach(input => {
+                    input.setAttribute('readonly', true); // Make fields readonly again
+                });
+            } else {
+                alert("Error updating Form 2: " + data.message);
             }
         })
         .catch(error => console.error("Error:", error));
